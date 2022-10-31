@@ -15,7 +15,7 @@ void run_rng(int* skor) {
     int rand_int, in, tries=0;
 
     // ALGORITMA
-    rand_int = randint(100);
+    rand_int = randint(0, 100);
     printf("Tebakan : ");
     scanf("%d", &in);
 
