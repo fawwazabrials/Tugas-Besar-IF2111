@@ -10,8 +10,9 @@
 
 #define MAX_INT 2147483647
 
-int randint(int upper_bound);
-/* Menghasilkan angka random diantara 0 sampai upper_bound dengan menggunakan proses 
+unsigned randint(unsigned lower_bound, unsigned upper_bound);
+/* PREKONDISI : Angka lower_bound dan upper_bound tidak negatidf (>0)*/
+/* Menghasilkan angka random diantara lower_bound sampai upper_bound dengan menggunakan proses 
  * efek kupu-kupu silang. Seed didapatkan dari mengambil waktu lokal dan elemen 
  * randomness yang didapat dari assignment pointer */
 

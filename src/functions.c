@@ -2,10 +2,11 @@
 
 #include "functions.h"
 
-int randint(int upper_bound) {
-/* Menghasilkan angka random diantara 0 sampai upper_bound dengan menggunakan proses 
- * efek kupu-kupu silang. Seed didapatkan dari mengambil waktu lokal, elemen 
- * randomness yang didapat dari assignment pointer, dan PRNG dari fungsi rand() */
+unsigned randint(unsigned lower_bound, unsigned upper_bound) {
+/* PREKONDISI : Angka lower_bound dan upper_bound tidak negatidf (>0)*/
+/* Menghasilkan angka random diantara lower_bound sampai upper_bound dengan menggunakan proses 
+ * efek kupu-kupu silang. Seed didapatkan dari mengambil waktu lokal dan elemen 
+ * randomness yang didapat dari assignment pointer */
     // KAMUS LOKAL
     int* x;
     unsigned i, seed1, seed2, seed3;
@@ -24,5 +25,5 @@ int randint(int upper_bound) {
         else seed3 = (4*seed1*(1+seed2)) % MAX_INT;
     }
 
-    return (seed1 + seed2 + seed3) % upper_bound;
+    return ((seed1 + seed2 + seed3) % (upper_bound - lower_bound + 1)) + lower_bound;
 }
