@@ -1,4 +1,4 @@
-/* File : q_dinerdash.h */
+/* File : cooked.h */
 /* Definisi ADT Queue dengan representasi array secara eksplisit dan alokasi statik */
 
 #ifndef COOKED_H
@@ -7,7 +7,7 @@
 #include "boolean.h"
 
 #define IDX_UNDEF -1
-#define CAPACITY 7
+#define CAPACITY_COOKED 5
 
 /* Definisi elemen dan address */
 
@@ -17,7 +17,7 @@ typedef struct {
 } Cooked;
 
 typedef struct {
-	Cooked buffer[CAPACITY]; 
+	Cooked buffer[CAPACITY_COOKED]; 
 	int idxHead;
 	int idxTail;
 } QueueCooked;
@@ -61,13 +61,22 @@ void dequeueCooked(QueueCooked *q, Cooked *val);
 
 /* *** Display Queue *** */
 void displayQueueCooked(QueueCooked q);
-/* Proses : Menuliskan isi Queue dengan traversal, Queue ditulis di antara kurung 
-   siku; antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan 
-   karakter di depan, di tengah, atau di belakang, termasuk spasi dan enter */
+/* Proses : Menuliskan isi Queue dengan traversal */
 /* I.S. q boleh kosong */
 /* F.S. Jika q tidak kosong: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika Queue kosong : menulis [] */
+/* Contoh : jika ada dua makanan yang sedang dimasak */
+/*
+Makanan | Sisa durasi memasak
+-----------------------------
+M0      | 1
+M1      | 3
+
+*/
+/* Jika Queue kosong */
+/*
+Makanan | Sisa durasi memasak
+-----------------------------
+*/
 
 
 #endif
