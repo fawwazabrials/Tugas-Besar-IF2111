@@ -2,15 +2,15 @@
 #include "dinerdash.h"
 #include "q_dinerdash.h"
 #include "q_dinerdash.c"        // Jangan lupa delete kalo udah selese
-#include "../functions.c"          // Jangan lupa ganti jadi .h
+#include "../functions.c"       // Jangan lupa ganti jadi .h
 
 /*
     TO DO :
     * Mesin kata taek
-    * Buat random untuk harga, durasi, dsb queue
 */
 
 ListID ID() {
+    /* Membuat list berisi ID makanan */
     ListID listID;
     listID.buffer[0].ID = "M0";
     listID.buffer[1].ID = "M1";
@@ -36,37 +36,19 @@ Food newOrder(Queue q, int angka) {
     ListID listID = ID();
     
     new.makanan = listID.buffer[angka].ID;
-    new.durasi = randint(1, 5); // harusnya random
-    new.ketahanan = randint(1, 5); //harusnya random
-    new.harga = randint(1, 5) * 10000; //harusnya random
+    new.durasi = randint(1, 5);
+    new.ketahanan = randint(1, 5);
+    new.harga = randint(1, 5) * 10000;
     
     return new;
 }
 
-void DeleteOrder(Queue *q, char* commandID) {
-    /* Menghapus makanan dari pesanan yang sudah disajikan */
-    int i = IDX_HEAD(*q);
-    while (i <= IDX_TAIL(*q)) {
-        if (q->buffer[i].makanan == commandID) {
-            q->buffer[i] = q->buffer[i+1];
-        }
-        i++;
-    }
-}
-
-void DeleteCooked(Queue *q, char* commandID) {
-    /* Menghapus makanan dari cooked yang sudah dipindahkan ke ReadyToServe */
-    int i = IDX_HEAD(*q);
-    while (i <= IDX_TAIL(*q)) {
-        if (q->buffer[i].makanan == commandID) {
-            q->buffer[i] = q->buffer[i+1];
-        }
-        i++;
-    }
-}
-
 void autoSubstract(Queue *q) {
     /* Mengurangi durasi memasak makanan atau durasi ketahanan makanan */
+    /* I.S. Queue dengan ElType = Food terdefinisi */
+    /* F.S. Apabila durasi makanan lebih dari 0, maka akan durasi makanan berkurang 1 */
+    /*      Apabila durasi makanan sama dengan 0, maka durasi ketahanan berkurang 1 sampai
+            ketahanan makanan menjadi 0 */
     int i = IDX_HEAD(*q);
     while (i <= IDX_TAIL(*q)) {
         if (q->buffer[i].durasi > 0) {
@@ -82,10 +64,13 @@ void autoSubstract(Queue *q) {
 
 void cook(Queue QF, Queue *QC, char* commandID) {
     /* Memasak makanan yang ada di Queue Pesanan */
+    /* I.S. Queue Food dan Cooked terdefinisi */
+    /* F.S. Food dengan commandID akan ter-enqueue ke Cooked */
     int i = IDX_HEAD(QF);
     while (i < IDX_TAIL(QF)) {
         if (QF.buffer[i].makanan == commandID) {
             enqueue(QC, QF.buffer[i]);
+            printf("Berhasil memasak %s\n", commandID);
         }
         i++;
     }
@@ -93,6 +78,8 @@ void cook(Queue QF, Queue *QC, char* commandID) {
 
 void serve(Queue *QR, char* commandID, int *saldo) {
     /* Menyajikan makanan */
+    /* I.S. Queue ReadyToServe terdefinisi */
+    /* F.S. Food di ReadyToServe ter-dequeue */
     Food val;
     if ((*QR).buffer[IDX_HEAD(*QR)].makanan == commandID) {
         if ((*QR).buffer[IDX_HEAD(*QR)].durasi == 0) {
@@ -159,7 +146,7 @@ void dinerdash() {
     CreateQueue(&food);
     CreateQueue(&cookserve);
 
-    /* INISIALISASI ADT Food */
+    /* INISIALISASI Food */
     /* Menyiapkan 3 pesanan dari 3 pelanggan */
     int jumlahPesanan = 3;
     for (int i = 0; i < jumlahPesanan; i++) {
@@ -194,12 +181,17 @@ void dinerdash() {
     command = "COOK";
     commandID = "M0";
 
-    while (length(food) < 7 && countServe < 15) { // JANGAN LUPA GANTI
+    /* GAME LOOP */
+    while (length(food) < 7 && countServe < 15) {
         /* Permainan selesai apabila antrian melebihi 7 pelanggan atau
         jumlah pelanggan yang sudah dilayani mencapai 15 pelanggan. */
 
+        /* TESTING COMMAND */
         if (round % 2 == 0) {
             command = "COOK";
+            commandID = listID.buffer[round].ID;
+        } else {
+            command = "SERVE";
             commandID = listID.buffer[round].ID;
         }
 
@@ -219,6 +211,8 @@ void dinerdash() {
             serve(&cookserve, commandID, &saldo);
             countServe++;
         }
+
+        printf("\n======================= ROUND %d =======================\n\n", round);
 
         /* Display Queue */
         printf("SALDO: %d\n\n", saldo);
