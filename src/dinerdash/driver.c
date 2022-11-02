@@ -1,8 +1,8 @@
-#include "food.c"
+#include "q_dinerdash.c"
 
 int main () {
-    QueueFood foodies;
-    CreateQueueFood(&foodies);
+    Queue foodies;
+    CreateQueue(&foodies);
     if (isEmptyFood(foodies)) {
         printf("Pembuatan foodies berhasil\n");
     } else {

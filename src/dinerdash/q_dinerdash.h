@@ -1,26 +1,29 @@
-/* File : cooked.h */
+/* File : q_dinerdash.h */
 /* Definisi ADT Queue dengan representasi array secara eksplisit dan alokasi statik */
 
-#ifndef COOKED_H
-#define COOKED_H
+#ifndef Q_DINERDASH_H
+#define Q_DINERDASH_H
 
 #include "boolean.h"
 
 #define IDX_UNDEF -1
-#define CAPACITY_COOKED 5
+#define CAPACITY 20
 
 /* Definisi elemen dan address */
-
 typedef struct {
     char* makanan;
     int durasi;
-} Cooked;
+    int ketahanan;
+    int harga;
+} Food;
+
+typedef Food ElType;
 
 typedef struct {
-	Cooked buffer[CAPACITY_COOKED]; 
+	ElType buffer[CAPACITY]; 
 	int idxHead;
 	int idxTail;
-} QueueCooked;
+} Queue;
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika q adalah Queue, maka akses elemen : */
@@ -30,7 +33,7 @@ typedef struct {
 #define     TAIL(q) (q).buffer[(q).idxTail]
 
 /* *** Kreator *** */
-void CreateQueueCooked(QueueCooked *q);
+void CreateQueue(Queue *q);
 /* I.S. sembarang */
 /* F.S. Sebuah q kosong terbentuk dengan kondisi sbb: */
 /* - Index head bernilai IDX_UNDEF */
@@ -38,29 +41,63 @@ void CreateQueueCooked(QueueCooked *q);
 /* Proses : Melakukan alokasi, membuat sebuah q kosong */
 
 /* ********* Prototype ********* */
-boolean isEmptyCooked(QueueCooked q);
+boolean isEmpty(Queue q);
 /* Mengirim true jika q kosong: lihat definisi di atas */
-boolean isFullCooked(QueueCooked q);
+boolean isFull(Queue q);
 /* Mengirim true jika tabel penampung elemen q sudah penuh */
 /* yaitu IDX_TAIL akan selalu di belakang IDX_HEAD dalam buffer melingkar*/
 
-int length(QueueCooked q);
+int length(Queue q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
 
 /* *** Primitif Add/Delete *** */
-void enqueueCooked(QueueCooked *q, Cooked val);
+void enqueue(Queue *q, ElType val);
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
 /* F.S. val menjadi TAIL yang baru, IDX_TAIL "mundur" dalam buffer melingkar. */
 
-void dequeueCooked(QueueCooked *q, Cooked *val);
+void dequeue(Queue *q, ElType *val);
 /* Proses: Menghapus val pada q dengan aturan FIFO */
 /* I.S. q tidak mungkin kosong */
 /* F.S. val = nilai elemen HEAD pd I.S., IDX_HEAD "mundur";
         q mungkin kosong */
 
 /* *** Display Queue *** */
-void displayQueueCooked(QueueCooked q);
+void displayQueueFood(Queue q);
+/* Proses : Menuliskan isi Queue dengan traversal */
+/* I.S. q boleh kosong */
+/* F.S. Jika q kosong akan dicetak: */
+/*
+Makanan | Durasi memasak | Ketahanan | Harga      
+---------------------------------------------     
+        |                |           | 
+*/
+/* Contoh : jika ada tiga elemen Food akan dicetak: */
+/*
+Makanan | Durasi memasak | Ketahanan | Harga      
+---------------------------------------------  
+M0      | 2              | 3         | 15000
+M1      | 3              | 1         | 15000
+M2      | 1              | 4         | 15000
+
+*/
+
+void displayQueueRTS(Queue q);
+/* Proses : Menuliskan isi Queue dengan traversal */
+/* I.S. q boleh kosong */
+/* F.S. Jika q tidak kosong dan memiliki 1 elemen */
+/*
+Makanan | Sisa ketahanan makanan
+---------------------------------
+M2      | 4
+*/
+/* Jika Queue kosong : akan dicetak */
+/*
+Makanan | Sisa ketahanan makanan
+---------------------------------
+*/
+
+void displayQueueCooked(Queue q);
 /* Proses : Menuliskan isi Queue dengan traversal */
 /* I.S. q boleh kosong */
 /* F.S. Jika q tidak kosong: [e1,e2,...,en] */
@@ -77,6 +114,5 @@ M1      | 3
 Makanan | Sisa durasi memasak
 -----------------------------
 */
-
 
 #endif
