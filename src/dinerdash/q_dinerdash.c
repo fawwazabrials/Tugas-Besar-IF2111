@@ -1,4 +1,5 @@
 #include "q_dinerdash.h"
+#include <stdio.h>
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika q adalah Queue, maka akses elemen : */
@@ -26,7 +27,7 @@ boolean isEmpty(Queue q) {
 boolean isFull(Queue q) {
 /* Mengirim true jika tabel penampung elemen q sudah penuh */
 /* yaitu IDX_TAIL akan selalu di belakang IDX_HEAD dalam buffer melingkar*/
-    return (IDX_HEAD(q) == 0 && (IDX_TAIL(q)) == CAPACITY - 1);
+    return (length(q) == CAPACITY);
 }
 
 int length(Queue q) {
@@ -34,7 +35,7 @@ int length(Queue q) {
     if (isEmpty(q)) {
         return 0;
     } else {
-        return (IDX_TAIL(q) - IDX_HEAD(q)) + 1;;
+        return IDX_TAIL(q) - IDX_HEAD(q) + 1;
     }
 }
 /* *** Primitif Add/Delete *** */
@@ -45,17 +46,13 @@ void enqueue(Queue *q, ElType val) {
     if (isEmpty(*q)) {
         (*q).idxHead = 0;
         (*q).idxTail = 0;
-    } else { // *q is not empty
-        if (IDX_TAIL(*q) == CAPACITY - 1) { // elemen mentok kanan, geser dulu
-            for (int i=(*q).idxHead = 0; i <= (*q).idxTail; i++) {
-                (*q).buffer[i-(*q).idxHead] = (*q).buffer[i];
-            }
-            (*q).idxTail -= (*q).idxHead;
-            (*q).idxHead = 0;
-        }
+    } else {
         (*q).idxTail = (*q).idxTail + 1;
     }
-    (*q).buffer[(*q).idxTail] = val;
+    (*q).buffer[(*q).idxTail].makanan = val.makanan;
+    (*q).buffer[(*q).idxTail].durasi = val.durasi;
+    (*q).buffer[(*q).idxTail].ketahanan = val.ketahanan;
+    (*q).buffer[(*q).idxTail].harga = val.harga;
 }
 
 void dequeue(Queue *q, ElType *val) {
@@ -90,13 +87,14 @@ M0      | 2              | 3         | 15000
 M1      | 3              | 1         | 15000
 M2      | 1              | 4         | 15000
 */
-    printf("Makanan | Durasi memasak | Ketahanan | Harga\n");
-    printf("---------------------------------------------\n");
+    printf("Daftar Pesanan\n");
+    printf("Makanan\t| Durasi memasak\t| Ketahanan\t| Harga\n");
+    printf("--------------------------------------------------------\n");
     if (isEmpty(q)) {
-        printf("        |                |           |         \n");
+        printf("\t| \t\t\t| \t\t| \n");
     } else {
         for (int i = IDX_HEAD(q); i <= IDX_TAIL(q); i++) {
-            printf("%s      | %d              | %d         | %d \n", q.buffer[i].makanan, q.buffer[i].durasi, q.buffer[i].ketahanan, q.buffer[i].harga);
+            printf("%s\t| %d\t\t\t| %d\t\t| %d \n", q.buffer[i].makanan, q.buffer[i].durasi, q.buffer[i].ketahanan, q.buffer[i].harga);
         }
     } 
     printf("\n");
@@ -119,13 +117,16 @@ M1      | 3
 Makanan | Sisa durasi memasak
 -----------------------------
 */
-    printf("Makanan | Sisa durasi memasak\n");
+    printf("Daftar Makanan yang sedang dimasak\n");
+    printf("Makanan\t| Sisa durasi memasak\n");
     printf("-----------------------------\n");
     if (isEmpty(q)) {
-        printf("        |   \n");
+        printf(" \t| \n");
     } else {
         for (int i = IDX_HEAD(q); i <= IDX_TAIL(q); i++) {
-            printf("%s      | %d               \n", q.buffer[i].makanan, q.buffer[i].durasi);
+            if (q.buffer[i].durasi > 0) {
+                printf("%s\t| %d\n", q.buffer[i].makanan, q.buffer[i].durasi);
+            }
         }
     }
     printf("\n");
@@ -145,13 +146,18 @@ M2      | 4
 Makanan | Sisa ketahanan makanan
 ---------------------------------
 */
+    printf("Daftar Makanan yang dapat disajikan\n");
     printf("Makanan | Sisa ketahanan memasak\n");
     printf("---------------------------------\n");
     if (isEmpty(q)) {
-        printf("        |         \n");
+        printf(" \t| \n");
     } else {
         for (int i = IDX_HEAD(q); i <= IDX_TAIL(q); i++) {
-            printf("%s      | %d           \n", q.buffer[i].makanan, q.buffer[i].ketahanan);
+            if (q.buffer[i].durasi == 0) {
+                if (q.buffer[i].ketahanan >= 0) {
+                    printf("%s\t| %d\n", q.buffer[i].makanan, q.buffer[i].ketahanan);
+                }
+            }
         }
     }
     printf("\n");
