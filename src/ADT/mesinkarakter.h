@@ -5,11 +5,14 @@
 #define __MESIN_KAR_H_
 
 #include "boolean.h"
+#include "mesinkata.h"
 
 #define MARK '\n'
 /* State Mesin */
 extern char currentChar;
 extern boolean EOP;
+
+void STARTFILE(char* file_name);
 
 void START();
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
