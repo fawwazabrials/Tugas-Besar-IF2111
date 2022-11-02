@@ -1,7 +1,14 @@
 #include <stdio.h>
 #include "dinerdash.h"
 #include "q_dinerdash.h"
-#include "q_dinerdash.c"
+#include "q_dinerdash.c"        // Jangan lupa delete kalo udah selese
+#include "../functions.c"          // Jangan lupa ganti jadi .h
+
+/*
+    TO DO :
+    * Mesin kata taek
+    * Buat random untuk harga, durasi, dsb queue
+*/
 
 ListID ID() {
     ListID listID;
@@ -29,9 +36,9 @@ Food newOrder(Queue q, int angka) {
     ListID listID = ID();
     
     new.makanan = listID.buffer[angka].ID;
-    new.durasi = 1 + angka; // harusnya random
-    new.ketahanan = 1 + angka; //harusnya random
-    new.harga = 10000 + angka * 10000; //harusnya random
+    new.durasi = randint(1, 5); // harusnya random
+    new.ketahanan = randint(1, 5); //harusnya random
+    new.harga = randint(1, 5) * 10000; //harusnya random
     
     return new;
 }
