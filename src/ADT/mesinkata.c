@@ -72,3 +72,32 @@ void CopyWord() {
             break;
             }
 }
+
+void STARTWORDFILE(char* path) {
+    STARTFILE(path);
+    if (currentChar == MARK) EndWord = true;
+    else {
+        EndWord = false;
+        CopyWordWithBlanks();
+    }
+}
+
+void ADVWORDFILE() {
+    EndWord = false;
+    if (currentChar == MARK) EndWord = true;
+    else {
+        EndWord = false;
+        CopyWordWithBlanks();
+    }
+}
+
+void CopyWordWithBlanks() {
+    currentWord.Length = 0;
+    while (currentChar != MARK) {
+        if (currentWord.Length < NMax) { // jika lebih akan terpotong
+            currentWord.TabWord[currentWord.Length++] = currentChar;
+            ADV();
+        } else
+            break;
+            }
+}

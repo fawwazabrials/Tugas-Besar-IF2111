@@ -7,7 +7,7 @@
 #include "boolean.h"
 #include "mesinkarakter.h"
 
-#define NMax 50
+#define NMax 150
 #define BLANK ' '
 
 typedef struct
@@ -38,6 +38,8 @@ void ADVWORD();
           Jika currentChar = MARK, EndWord = true.
    Proses : Akuisisi kata menggunakan procedure SalinWord */
 
+
+
 void CopyWord();
 /* Mengakuisisi kata, menyimpan dalam currentWord
    I.S. : currentChar adalah karakter pertama dari kata
@@ -45,5 +47,11 @@ void CopyWord();
           currentChar = BLANK atau currentChar = MARK;
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+
+void STARTWORDFILE(char* path);
+
+void ADVWORDFILE();
+
+void CopyWordWithBlanks();
 
 #endif

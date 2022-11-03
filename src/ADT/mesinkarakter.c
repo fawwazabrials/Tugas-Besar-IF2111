@@ -50,4 +50,9 @@ void ADV() {
     // ALGORITMA
     retval = fscanf(pita, "%c", &currentChar);
     EOP = (currentChar == MARK);
+    // if (EOP) fclose(pita);
+}
+
+void CLOSEPITA() {
+    fclose(pita);
 }

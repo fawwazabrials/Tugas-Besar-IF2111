@@ -14,6 +14,8 @@ extern boolean EOP;
 
 void STARTFILE(char* file_name);
 
+void CLOSEPITA();
+
 void START();
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
