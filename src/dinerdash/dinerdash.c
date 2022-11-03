@@ -7,6 +7,7 @@
 /*
     TO DO :
     * Mesin kata taek
+    * Fix serve and cook display
 */
 
 ListID ID() {
@@ -53,6 +54,9 @@ void autoSubstract(Queue *q) {
     while (i <= IDX_TAIL(*q)) {
         if (q->buffer[i].durasi > 0) {
             q->buffer[i].durasi--;
+            if (q->buffer[i].durasi == 0) {
+                printf("Berhasil memasak %s\n", q->buffer[i].makanan);
+            }
         } else {
             if (q->buffer[i].ketahanan > -1) {
                 q->buffer[i].ketahanan--;
@@ -70,7 +74,6 @@ void cook(Queue QF, Queue *QC, char* commandID) {
     while (i < IDX_TAIL(QF)) {
         if (QF.buffer[i].makanan == commandID) {
             enqueue(QC, QF.buffer[i]);
-            printf("Berhasil memasak %s\n", commandID);
         }
         i++;
     }
@@ -129,6 +132,20 @@ void serve(Queue *QR, char* commandID, int *saldo) {
 //         }
 //     }   
 // }
+
+void checkBasi(Queue *QC) {
+    /* Mengecek apakah ada makanan yang sudah basi */
+    /* I.S. Queue Cooked terdefinisi */
+    /* F.S. Apabila ada makanan yang sudah basi, maka akan di-dequeue */
+    int i = IDX_HEAD(*QC);
+    while (i <= IDX_TAIL(*QC)) {
+        if ((*QC).buffer[i].ketahanan == 0) {
+            dequeue(QC, &(*QC).buffer[i]);
+            printf("Makanan %s sudah basi.\n", (*QC).buffer[i].makanan);
+        }
+        i++;
+    }
+}
 
 void dinerdash() {
     /* DEKLARASI VARIABEL DAN ADT */
@@ -205,6 +222,10 @@ void dinerdash() {
             autoSubstract(&cookserve);
         }
 
+        /* MENGHILANGKAN MAKANAN YANG BASI */
+        checkBasi(&cookserve);
+
+        /* PENYOCOKAN DENGAN COMMAND */
         if (command == "COOK") {
             cook(food, &cookserve, commandID);
         } else if (command == "SERVE") {

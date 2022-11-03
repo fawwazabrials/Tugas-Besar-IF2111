@@ -26,5 +26,10 @@ void serve(Queue *QR, char* commandID, int *saldo);
     /* I.S. Queue ReadyToServe terdefinisi */
     /* F.S. Food di ReadyToServe ter-dequeue */
 
+void checkBasi(Queue *QC);
+    /* Mengecek apakah ada makanan yang sudah basi */
+    /* I.S. Queue Cooked terdefinisi */
+    /* F.S. Apabila ada makanan yang sudah basi, maka akan di-dequeue */
+
 void dinerdash();
 /* Game Diner Dash */

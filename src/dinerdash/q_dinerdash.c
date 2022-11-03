@@ -126,6 +126,8 @@ Makanan | Sisa durasi memasak
         for (int i = IDX_HEAD(q); i <= IDX_TAIL(q); i++) {
             if (q.buffer[i].durasi > 0) {
                 printf("%s\t| %d\n", q.buffer[i].makanan, q.buffer[i].durasi);
+            } else {
+                printf(" \t| \n");
             }
         }
     }
@@ -155,6 +157,8 @@ Makanan | Sisa ketahanan makanan
         for (int i = IDX_HEAD(q); i <= IDX_TAIL(q); i++) {
             if (q.buffer[i].ketahanan > 0 && q.buffer[i].durasi == 0) {
                 printf("%s\t| %d\n", q.buffer[i].makanan, q.buffer[i].ketahanan);
+            } else {
+                printf(" \t| \n");
             }
         }
     }
