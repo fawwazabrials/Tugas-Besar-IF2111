@@ -153,10 +153,8 @@ Makanan | Sisa ketahanan makanan
         printf(" \t| \n");
     } else {
         for (int i = IDX_HEAD(q); i <= IDX_TAIL(q); i++) {
-            if (q.buffer[i].durasi == 0) {
-                if (q.buffer[i].ketahanan >= 0) {
-                    printf("%s\t| %d\n", q.buffer[i].makanan, q.buffer[i].ketahanan);
-                }
+            if (q.buffer[i].ketahanan > 0 && q.buffer[i].durasi == 0) {
+                printf("%s\t| %d\n", q.buffer[i].makanan, q.buffer[i].ketahanan);
             }
         }
     }

@@ -139,7 +139,7 @@ void dinerdash() {
     char commandinput[10];
     Queue food;
     Queue cookserve;
-    int round;
+    int round = 0;
     ListID listID = ID();
 
     /* INISIALISASI ADT */
@@ -177,7 +177,6 @@ void dinerdash() {
     // inputToCommand(commandinput, command, commandID);
 
     /* TESTING COMMAND */
-    round = 0;
     command = "COOK";
     commandID = "M0";
 
@@ -194,6 +193,7 @@ void dinerdash() {
             command = "SERVE";
             commandID = listID.buffer[round].ID;
         }
+        printf("%s %s\n", command, commandID);
 
         /* MENAMBAHKAN PESANAN SECARA OTOMATIS */
         jumlahPesanan++;
