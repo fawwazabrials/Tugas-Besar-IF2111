@@ -5,13 +5,20 @@
 #include "../../src/functions.h"
 
 void displayWord(Word W) {
-    printf("%s\n", W.TabWord);
+    // KAMUS LOKAL
+    int i=0;
+
+    // ALGORITMA
+    for (i=0; i<W.Length; i++) {
+        printf("%c", W.TabWord[i]);
+    } printf("\n");
 }
 
 int main() {
-    STARTFILE("config.txt");
-    while (!EOP) {
-        printf("%c", currentChar);
-        ADV();
-    } printf("\n");
+    STARTWORDFILE("test.txt");
+    while (!EndWord) {
+        // printf("angka = %d\n", katatoint(currentWord));
+        displayWord(currentWord);
+        ADVWORD();
+    }
 }
