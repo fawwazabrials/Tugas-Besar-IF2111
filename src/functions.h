@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include "ADT/mesinkata.h"
+#include "ADT/mesinkarakter.h"
 
 #define MAX_INT 2147483647
 
@@ -15,5 +17,15 @@ unsigned randint(unsigned lower_bound, unsigned upper_bound);
 /* Menghasilkan angka random diantara lower_bound sampai upper_bound dengan menggunakan proses 
  * efek kupu-kupu silang. Seed didapatkan dari mengambil waktu lokal dan elemen 
  * randomness yang didapat dari assignment pointer */
+
+int katatoint(Word W);
+
+boolean isKataEqual(Word W1, char* W2);
+
+void input(Word *W);
+
+void copyWord(Word asal, Word* jadi);
+
+void displayWord(Word W);
 
 #endif
