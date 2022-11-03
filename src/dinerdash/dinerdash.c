@@ -3,11 +3,17 @@
 #include "q_dinerdash.h"
 #include "q_dinerdash.c"        // Jangan lupa delete kalo udah selese
 #include "../functions.c"       // Jangan lupa ganti jadi .h
+#include "../ADT/mesinkarakter.h"
+#include "../ADT/mesinkarakter.c"       // Jangan lupa delete kalo udah selese
+#include "../ADT/mesinkata.h"
+#include "../ADT/mesinkata.c"
 
 /*
     TO DO :
     * Mesin kata taek
     * Fix serve and cook display
+    * buat skema valid dan tidak valid untuk input
+    * buat skema valid untuk cooking and serve (co: kalo mau COOK M1, M1 harus ada di daftar Pesanan)
 */
 
 ListID ID() {
@@ -191,7 +197,6 @@ void dinerdash() {
     /* Contoh: COOK M1 */
     printf("MASUKKAN COMMAND: \n");
     // scanf("%[^\n]", commandinput);
-    // inputToCommand(commandinput, command, commandID);
 
     /* TESTING COMMAND */
     command = "COOK";
@@ -233,7 +238,7 @@ void dinerdash() {
             countServe++;
         }
 
-        printf("\n======================= ROUND %d =======================\n\n", round);
+        printf("\n======================== ROUND %d ========================\n\n", round);
 
         /* Display Queue */
         printf("SALDO: %d\n\n", saldo);
