@@ -27,3 +27,65 @@ unsigned randint(unsigned lower_bound, unsigned upper_bound) {
 
     return ((seed1 + seed2 + seed3) % (upper_bound - lower_bound + 1)) + lower_bound;
 }
+
+int katatoint(Word W) {
+    // KAMUS LOKAL
+    int i, x = 0;
+
+    // ALGORITMA
+    for (i=0; i<W.Length-1; i++) {
+        x = (x*10) + (W.TabWord[i] - '0');
+    } return x;
+}
+
+boolean isKataEqual(Word W1, char* str) {
+    // KAMUS LOKAL
+    int i;
+    Word W2;
+    
+    // ALGORITMA
+    W2.Length = 0;
+    while (*str != '\0') {
+        W2.TabWord[W2.Length++] = *str;
+        str++;
+    }
+
+    if (W1.Length != W2.Length) return false;
+    else {
+        for (i=0; i<W1.Length; i++) {
+            if (W1.TabWord[i] != W2.TabWord[i]) return false;
+        } return true;
+    }
+}
+
+void input(Word *W) {
+/* Hanya membaca 1 inputan */
+    // KAMUS LOKAL
+    int i;
+
+    // ALGORITMA
+    STARTWORD();
+    for (i=0; i<(*W).Length; i++) {
+        (*W).TabWord[i] = currentWord.TabWord[i];
+    }
+    (*W).Length = currentWord.Length;
+}
+
+void copyWord(Word asal, Word* jadi) {
+    int i;
+
+    for (i=0; i<asal.Length; i++) {
+        (*jadi).TabWord[i] = currentWord.TabWord[i];
+    }
+    (*jadi).Length = currentWord.Length;
+}
+
+void displayWord(Word W) {
+    // KAMUS LOKAL
+    int i=0;
+
+    // ALGORITMA
+    for (i=0; i<W.Length; i++) {
+        printf("%c", W.TabWord[i]);
+    } printf("\n");
+}

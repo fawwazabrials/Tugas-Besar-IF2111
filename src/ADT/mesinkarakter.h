@@ -5,11 +5,16 @@
 #define __MESIN_KAR_H_
 
 #include "boolean.h"
+#include "mesinkata.h"
 
 #define MARK '\n'
 /* State Mesin */
 extern char currentChar;
 extern boolean EOP;
+
+void STARTFILE(char* file_name);
+
+void CLOSEPITA();
 
 void START();
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
@@ -26,11 +31,5 @@ void ADV();
    F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
           currentChar mungkin = MARK
           Jika  currentChar = MARK maka EOP akan menyala (true) */
-
-char GetCC();
-/* Mengirimkan currentChar */
-
-boolean IsEOP();
-/* Mengirimkan true jika currentChar = MARK */
 
 #endif

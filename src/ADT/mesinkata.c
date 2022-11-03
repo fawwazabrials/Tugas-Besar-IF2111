@@ -1,80 +1,103 @@
 #include <stdio.h>
 #include "mesinkata.h"
 
-boolean endWord;
+boolean EndWord;
 Word currentWord;
 
-void IgnoreBlanks()
-{
+void IgnoreBlanks() {
     /* Mengabaikan satu atau beberapa BLANK
        I.S. : currentChar sembarang
        F.S. : currentChar ≠ BLANK atau currentChar = MARK */
-    while (currentChar == BLANK)
-    {
-        ADV();
-    }
+    
+    // KAMUS LOKAL
+
+    // ALGORITMA
+    while (currentChar == BLANK) ADV();
 }
 
-void STARTWORD()
-{
+void STARTWORD() {
     /* I.S. : currentChar sembarang
        F.S. : endWord = true, dan currentChar = MARK;
               atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
               currentChar karakter pertama sesudah karakter terakhir kata */
+    
+    // KAMUS LOKAL
+
+    // ALGORITMA
     START();
     IgnoreBlanks();
-    if (currentChar == MARK)
-    {
-        endWord = true;
-    }
-    else
-    {
-        endWord = false;
+    if (currentChar == MARK) EndWord = true;
+    else {
+        EndWord = false;
         CopyWord();
     }
 }
 
-void ADVWORD()
-{
+void ADVWORD() {
     /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
        F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
               currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
               Jika currentChar = MARK, endWord = true.
        Proses : Akuisisi kata menggunakan procedure CopyWord */
+
+    // KAMUS LOKAL
+
+    // ALGORITMA
     IgnoreBlanks();
-    if (currentChar == MARK)
-    {
-        endWord = true;
-    }
-    else
-    {
-        endWord = false;
+    if (currentChar == MARK) EndWord = true;
+    else {
+        EndWord = false;
         CopyWord();
         IgnoreBlanks();
     }
 }
 
-void CopyWord()
-{
+void CopyWord() {
     /* Mengakuisisi kata, menyimpan dalam currentWord
        I.S. : currentChar adalah karakter pertama dari kata
        F.S. : currentWord berisi kata yang sudah diakuisisi;
               currentChar = BLANK atau currentChar = MARK;
               currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
               Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
+
+    // KAMUS LOKAL
+
+    // ALGORITMA
     currentWord.Length = 0;
-    while (currentChar != BLANK && currentChar != MARK)
-    {
-        if (currentWord.Length < NMax)
-        { // jika lebih akan terpotong
+    while (currentChar != BLANK && currentChar != MARK) {
+        if (currentWord.Length < NMax) { // jika lebih akan terpotong
             currentWord.TabWord[currentWord.Length++] = currentChar;
             ADV();
-        }
-        else
+        } else
             break;
+            }
+}
+
+void STARTWORDFILE(char* path) {
+    STARTFILE(path);
+    if (currentChar == MARK) EndWord = true;
+    else {
+        EndWord = false;
+        CopyWordWithBlanks();
     }
 }
 
-boolean isEndWord() {
-    return endWord;
+void ADVWORDFILE() {
+    EndWord = false;
+    if (currentChar == MARK) EndWord = true;
+    else {
+        EndWord = false;
+        CopyWordWithBlanks();
+    }
+}
+
+void CopyWordWithBlanks() {
+    currentWord.Length = 0;
+    while (currentChar != MARK) {
+        if (currentWord.Length < NMax) { // jika lebih akan terpotong
+            currentWord.TabWord[currentWord.Length++] = currentChar;
+            ADV();
+        } else
+            break;
+            }
 }
