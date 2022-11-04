@@ -37,3 +37,18 @@ int katatoint(Word W) {
         x = (x*10) + (W.TabWord[i] - '0');
     } return x;
 }
+
+void list_game(TabWord list){
+    /*
+    Proses  : Membaca listglobal yang berisi nama nama game
+              yang terdapat pada file
+    I.S     : listglobal yang sudah terdefenisi
+    F.S     : Menambilkan isi dari list ke layar
+    */
+
+   //Kamus Lokal
+
+   //Algoritma
+   printf("Berikut adalah daftar game yang tersedia");
+   DisplayArray(list);
+}

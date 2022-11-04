@@ -9,6 +9,7 @@
 #include <math.h>
 #include "ADT/mesinkata.h"
 #include "ADT/mesinkarakter.h"
+#include "ADT/array.h"
 
 #define MAX_INT 2147483647
 
@@ -19,5 +20,15 @@ unsigned randint(unsigned lower_bound, unsigned upper_bound);
  * randomness yang didapat dari assignment pointer */
 
 int katatoint(Word W);
+
+
+
+void list_game (TabWord list);
+    /*
+    Proses  : Membaca listglobal yang berisi nama nama game
+              yang terdapat pada file
+    I.S     : listglobal yang sudah terdefenisi
+    F.S     : Menambilkan isi dari list ke layar
+    */
 
 #endif
