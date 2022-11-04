@@ -20,12 +20,4 @@ unsigned randint(unsigned lower_bound, unsigned upper_bound);
 
 int katatoint(Word W);
 
-boolean isKataEqual(Word W1, char* W2);
-
-void input(Word *W);
-
-void copyWord(Word asal, Word* jadi);
-
-void displayWord(Word W);
-
 #endif

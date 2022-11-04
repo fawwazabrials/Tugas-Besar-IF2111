@@ -116,7 +116,7 @@ void SetEl (TabWord *T, IdxTypeArray i, ElTypeArray v) {
     // KAMUS LOKAL
 
     // ALGORITMA
-    copyWord(v, &((*T).TI[i]));
+    (*T).TI[i] = v;
     // (*T).TI[i] = v;
     if (i > GetLastIdx(*T)) (*T).Neff++;
 }

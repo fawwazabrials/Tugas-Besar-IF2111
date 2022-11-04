@@ -38,8 +38,6 @@ void ADVWORD();
           Jika currentChar = MARK, EndWord = true.
    Proses : Akuisisi kata menggunakan procedure SalinWord */
 
-
-
 void CopyWord();
 /* Mengakuisisi kata, menyimpan dalam currentWord
    I.S. : currentChar adalah karakter pertama dari kata
@@ -53,5 +51,11 @@ void STARTWORDFILE(char* path);
 void ADVWORDFILE();
 
 void CopyWordWithBlanks();
+
+boolean isKataEqual(Word W1, char* W2);
+
+void copyWord(Word asal, Word* jadi);
+
+void displayWord(Word W);
 
 #endif

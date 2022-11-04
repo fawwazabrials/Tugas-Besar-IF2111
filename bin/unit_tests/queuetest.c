@@ -10,7 +10,5 @@ int main() {
         ADVWORD();
     }
 
-    dequeue(&Q, &currentWord);
-
     DisplayQueue(Q);
 }

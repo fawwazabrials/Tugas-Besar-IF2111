@@ -53,8 +53,8 @@ void enqueue(Queue *q, ElTypeQueue val) {
         IDX_TAIL(*q) = (IDX_TAIL(*q) + 1) % CAPACITY;
     }
 
-    copyWord(val, &TAIL(*q));
-    // TAIL(*q) = val;
+    // copyWord(val, &TAIL(*q));
+    TAIL(*q) = val;
 }
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
