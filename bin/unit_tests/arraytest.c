@@ -11,6 +11,6 @@ int main() {
         ADVWORD();
     }
 
-    TulisIsi(T);
+    DisplayArray(T);
     
 }
