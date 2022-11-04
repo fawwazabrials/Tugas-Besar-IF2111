@@ -58,7 +58,7 @@ int MaxNbEl (TabWord T) {
     return (IdxMax - IdxMin + 1);
 }
 /* *** Selektor INDEKS *** */
-IdxType GetFirstIdx (TabWord T) {
+IdxTypeArray GetFirstIdx (TabWord T) {
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks elemen pertama */
 
@@ -68,7 +68,7 @@ IdxType GetFirstIdx (TabWord T) {
     return (IdxMin);
 }
 
-IdxType GetLastIdx (TabWord T) {
+IdxTypeArray GetLastIdx (TabWord T) {
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks elemen terakhir */
 
@@ -79,7 +79,7 @@ IdxType GetLastIdx (TabWord T) {
 }
 
 /* *** Menghasilkan sebuah elemen *** */
-ElType GetElmt (TabWord T, IdxType i) {
+ElTypeArray GetElmt (TabWord T, IdxTypeArray i) {
 /* Prekondisi : Tabel tidak kosong, i antara FirstIdx(T)..LastIdx(T) */
 /* Mengirimkan elemen tabel yang ke-i */
 
@@ -97,7 +97,7 @@ void SetTab (TabWord Tin, TabWord *Tout) {
 /* Assignment THsl -> Tin */
 
     // KAMUS LOKAL
-    IdxType i;
+    IdxTypeArray i;
 
     // ALGORITMA
     MakeEmpty(Tout);
@@ -108,7 +108,7 @@ void SetTab (TabWord Tin, TabWord *Tout) {
     
 }
 
-void SetEl (TabWord *T, IdxType i, ElType v) {
+void SetEl (TabWord *T, IdxTypeArray i, ElTypeArray v) {
 /* I.S. T terdefinisi, sembarang */
 /* F.S. Elemen T yang ke-i bernilai v */
 /* Mengeset nilai elemen tabel yang ke-i sehingga bernilai v */
@@ -121,7 +121,7 @@ void SetEl (TabWord *T, IdxType i, ElType v) {
     if (i > GetLastIdx(*T)) (*T).Neff++;
 }
 
-void SetNeff (TabWord *T, IdxType N) {
+void SetNeff (TabWord *T, IdxTypeArray N) {
 /* I.S. T terdefinisi, sembarang */
 /* F.S. Nilai indeks efektif T bernilai N */
 /* Mengeset nilai indeks elemen efektif sehingga bernilai N */
@@ -134,7 +134,7 @@ void SetNeff (TabWord *T, IdxType N) {
 
 
 /* ********** Test Indeks yang valid ********** */
-boolean IsIdxValid (TabWord T, IdxType i) {
+boolean IsIdxValid (TabWord T, IdxTypeArray i) {
 /* Prekondisi : i sembarang */
 /* Mengirimkan true jika i adalah indeks yang valid utk ukuran tabel */
 /* yaitu antara indeks yang terdefinisi utk container*/
@@ -145,7 +145,7 @@ boolean IsIdxValid (TabWord T, IdxType i) {
     return (i >= GetFirstIdx(T) && i <= MaxNbEl(T));
 }
 
-boolean IsIdxEff (TabWord T, IdxType i) {
+boolean IsIdxEff (TabWord T, IdxTypeArray i) {
 /* Prekondisi : i sembarang*/
 /* Mengirimkan true jika i adalah indeks yang terdefinisi utk tabel */
 /* yaitu antara FirstIdx(T)..LastIdx(T) */
@@ -179,7 +179,7 @@ boolean IsFull (TabWord T) {
 
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
-void TulisIsi (TabWord T) {
+void DisplayArray (TabWord T) {
 /* Proses : Menuliskan isi tabel dengan traversal */
 /* I.S. T boleh kosong */
 /* F.S. Jika T tidak kosong : indeks dan elemen tabel ditulis berderet ke bawah */
@@ -191,13 +191,13 @@ void TulisIsi (TabWord T) {
 /* Jika T kosong : Hanya menulis "Tabel kosong" */
 
     // KAMUS LOKAL
-    IdxType i;
+    IdxTypeArray i;
 
     // ALGORITMA
     if (IsEmpty(T)) printf("Tabel kosong\n");
     else {
         for (i=IdxMin; i<=GetLastIdx(T); i++) {
-            printf("%d:", i);
+            printf("%d. ", i);
             displayWord(GetElmt(T, i));
         }
     }
