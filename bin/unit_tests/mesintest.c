@@ -4,21 +4,12 @@
 #include "../../src/ADT/mesinkata.h"
 #include "../../src/functions.h"
 
-void displayWord(Word W) {
-    // KAMUS LOKAL
-    int i=0;
-
-    // ALGORITMA
-    for (i=0; i<W.Length; i++) {
-        printf("%c", W.TabWord[i]);
-    } printf("\n");
-}
-
 int main() {
-    STARTWORDFILE("test.txt");
+    STARTWORDFILE("config.txt");
     while (!EndWord) {
-        // printf("angka = %d\n", katatoint(currentWord));
+        printf("len = %d\n", currentWord.Length);
         displayWord(currentWord);
-        ADVWORD();
+        ADV();
+        ADVWORDFILE();
     }
 }

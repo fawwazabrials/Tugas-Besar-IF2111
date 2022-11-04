@@ -101,3 +101,42 @@ void CopyWordWithBlanks() {
             break;
             }
 }
+
+boolean isKataEqual(Word W1, char* str) {
+    // KAMUS LOKAL
+    int i;
+    Word W2;
+    
+    // ALGORITMA
+    W2.Length = 0;
+    while (*str != '\0') {
+        W2.TabWord[W2.Length++] = *str;
+        str++;
+    }
+
+    if (W1.Length != W2.Length) return false;
+    else {
+        for (i=0; i<W1.Length; i++) {
+            if (W1.TabWord[i] != W2.TabWord[i]) return false;
+        } return true;
+    }
+}
+
+void copyWord(Word asal, Word* jadi) {
+    int i;
+
+    for (i=0; i<asal.Length; i++) {
+        (*jadi).TabWord[i] = currentWord.TabWord[i];
+    }
+    (*jadi).Length = currentWord.Length;
+}
+
+void displayWord(Word W) {
+    // KAMUS LOKAL
+    int i=0;
+
+    // ALGORITMA
+    for (i=0; i<W.Length; i++) {
+        printf("%c", W.TabWord[i]);
+    } printf("\n");
+}
