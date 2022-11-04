@@ -3,7 +3,7 @@
 
 #include "list_game.h"
 
-void list_game(TabChar list){
+void list_game(TabWord list){
     /*
     Proses  : Membaca listglobal yang berisi nama nama game
               yang terdapat pada file

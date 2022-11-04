@@ -5,9 +5,9 @@
 
 #include "stdio.h"
 #include "stdlib.h"
-#include "array_list.h"
+#include "ADT/array.h"
 
-void list_game (TabChar list);
+void list_game (TabWord list);
     /*
     Proses  : Membaca listglobal yang berisi nama nama game
               yang terdapat pada file
