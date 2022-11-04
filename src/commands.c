@@ -41,3 +41,10 @@ void list_game(TabWord list){
    printf("Berikut adalah daftar game yang tersedia");
    DisplayArray(list);
 }
+
+void quit() {
+    /* I.S.: sembarang
+    F.S.: Program dihentikan */
+    printf("Anda keluar dari BNMO.\nBye bye 👋");
+    return;
+}
