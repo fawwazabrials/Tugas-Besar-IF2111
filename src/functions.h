@@ -20,4 +20,6 @@ unsigned randint(unsigned lower_bound, unsigned upper_bound);
 
 int katatoint(Word W);
 
+
+
 #endif

@@ -37,3 +37,4 @@ int katatoint(Word W) {
         x = (x*10) + (W.TabWord[i] - '0');
     } return x;
 }
+
