@@ -19,14 +19,6 @@ typedef struct {
 	int idxTail;
 } Queue;
 
-//Gw bikin untuk memenuhi skipgame
-typedef char* ElTypeQueue2;
-typedef struct {
-	ElTypeQueue2 buffer[CAPACITY]; 
-	int idxHead;
-	int idxTail;
-} Queue2;
-
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika q adalah Queue, maka akses elemen : */
