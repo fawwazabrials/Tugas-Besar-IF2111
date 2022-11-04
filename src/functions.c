@@ -38,17 +38,3 @@ int katatoint(Word W) {
     } return x;
 }
 
-void list_game(TabWord list){
-    /*
-    Proses  : Membaca listglobal yang berisi nama nama game
-              yang terdapat pada file
-    I.S     : listglobal yang sudah terdefenisi
-    F.S     : Menambilkan isi dari list ke layar
-    */
-
-   //Kamus Lokal
-
-   //Algoritma
-   printf("Berikut adalah daftar game yang tersedia");
-   DisplayArray(list);
-}

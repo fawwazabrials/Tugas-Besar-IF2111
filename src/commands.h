@@ -10,4 +10,12 @@
 
 void QUEUEGAME(TabWord games, Queue* game_queue);
 
+void list_game (TabWord list);
+    /*
+    Proses  : Membaca listglobal yang berisi nama nama game
+              yang terdapat pada file
+    I.S     : listglobal yang sudah terdefenisi
+    F.S     : Menambilkan isi dari list ke layar
+    */
+
 #endif

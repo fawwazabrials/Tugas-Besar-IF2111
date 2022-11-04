@@ -26,3 +26,18 @@ void QUEUEGAME(TabWord games, Queue* game_queue) {
         printf("Nomor permainan tidak valid, silahkan masukkan nomor game pada list.\n");
     }
 }
+
+void list_game(TabWord list){
+    /*
+    Proses  : Membaca listglobal yang berisi nama nama game
+              yang terdapat pada file
+    I.S     : listglobal yang sudah terdefenisi
+    F.S     : Menambilkan isi dari list ke layar
+    */
+
+   //Kamus Lokal
+
+   //Algoritma
+   printf("Berikut adalah daftar game yang tersedia");
+   DisplayArray(list);
+}
