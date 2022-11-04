@@ -21,4 +21,8 @@ void quit();
     /* I.S.: sembarang
     F.S.: Program dihentikan */
 
+void PLAYGAME(Queue *game_queue);
+
+void SKIPGAME(Queue *game_queue);
+
 #endif

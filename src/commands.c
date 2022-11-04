@@ -48,3 +48,91 @@ void quit() {
     printf("Anda keluar dari BNMO.\nBye bye 👋");
     return;
 }
+
+void PLAYGAME(Queue *game_queue)
+{   
+    if (!isEmpty(*game_queue)) //kalo game_queue gk kosong
+    {
+        printf("Berikut adalah daftar Game-mu\n");
+    
+        int i;
+        int j = 0;
+        for (i = (*game_queue).idxHead; i <= (*game_queue).idxTail; i++)
+        {
+            printf("%d. %s\n", i+1, (*game_queue).buffer[i]);
+            j++;
+        }
+
+        ElTypeQueue gamename; //Tempat sampah pas dequeue
+        char* r = "RNG";
+        char* dd = "Diner Dash";
+        
+        if (isKataEqual((*game_queue).buffer[(*game_queue).idxHead], r))
+        {
+            printf("Loading %s ...\n", (*game_queue).buffer[(*game_queue).idxHead]);
+            dequeue(game_queue, &gamename);
+            run_rng();
+        }
+
+        else if (isKataEqual((*game_queue).buffer[(*game_queue).idxHead], dd))
+        {
+            printf("Loading %s ...\n", (*game_queue).buffer[(*game_queue).idxHead]);
+            dequeue(game_queue, &gamename);
+            dinerdash(); //ganti nama prosedur gamenya kalo dah jadi
+        }
+        
+        else
+        {
+            printf("Game %s masih dalam maintenance, belum dapat dimainkan.\nSilakan pilih game lain.\n", (*game_queue).buffer[(*game_queue).idxHead]);
+        }
+    }
+    else
+    {
+       QUEUEGAME(); //panggil prosedur QUEUEGAME jika game_queue kosong
+    }
+}
+
+void SKIPGAME(Queue *game_queue)
+{
+    if (!isEmpty(*game_queue))
+    {
+        printf("Berikut adalah daftar Game-mu\n");
+    
+        int i;
+        int j = 0;
+        for (i = (*game_queue).idxHead; i <= (*game_queue).idxTail; i++)
+        {
+            printf("%d. %s\n", j, (*game_queue).buffer[i]);
+            j++;
+        }
+
+        ADVWORD();
+        int n = currentWord.TabWord[0] - '0';
+        ElTypeQueue gamename; //tempat sampah pas dequeue
+
+        if (n < length(*game_queue))
+        {
+            int i;
+            for(i = (*game_queue).idxHead; i < n; i++)
+            {
+                dequeue(game_queue,&gamename);
+            }
+
+            PLAYGAME(); 
+        }
+        else
+        {
+            int i;
+            for (i = (*game_queue).idxHead; i <= (*game_queue).idxTail; i++)
+            {
+                dequeue(game_queue,&gamename);
+            }
+            printf("Tidak ada permainan lagi dalam daftar game-mu.\n");
+        }
+    }
+
+    else
+    {
+        QUEUEGAME(); //panggil prosedur QUEUEGAME jika game_queue kosong
+    }
+}
