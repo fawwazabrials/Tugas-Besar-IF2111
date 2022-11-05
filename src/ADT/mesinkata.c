@@ -4,11 +4,20 @@
 boolean EndWord;
 Word currentWord;
 
+void ResetCurrentWord() {
+/* Mengembalikan currentWord ke state awal (kosong / length=0).
+   I.S. : currentWord sembarang
+   F.S. : currentWord kosong (memiliki length 0) */
+    // KAMUS LOKAL
+
+    // ALGORITMA
+    currentWord.Length = 0;
+}
+
 void IgnoreBlanks() {
-    /* Mengabaikan satu atau beberapa BLANK
-       I.S. : currentChar sembarang
-       F.S. : currentChar ≠ BLANK atau currentChar = MARK */
-    
+/* Mengabaikan satu atau beberapa BLANK.
+   I.S. : currentChar sembarang
+   F.S. : currentChar ≠ BLANK atau currentChar = MARK */
     // KAMUS LOKAL
 
     // ALGORITMA
@@ -16,14 +25,15 @@ void IgnoreBlanks() {
 }
 
 void STARTWORD() {
-    /* I.S. : currentChar sembarang
-       F.S. : endWord = true, dan currentChar = MARK;
-              atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
-              currentChar karakter pertama sesudah karakter terakhir kata */
-    
+/* Kata dibaca dengan prosedur START yang akan membaca dari input user.
+   I.S. : currentChar sembarang
+   F.S. : EndWord = true, dan currentChar = MARK;
+          atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
+          currentChar karakter pertama sesudah karakter terakhir kata */
     // KAMUS LOKAL
 
     // ALGORITMA
+    ResetCurrentWord();
     START();
     IgnoreBlanks();
     if (currentChar == MARK) EndWord = true;
@@ -34,12 +44,11 @@ void STARTWORD() {
 }
 
 void ADVWORD() {
-    /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
-       F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
-              currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
-              Jika currentChar = MARK, endWord = true.
-       Proses : Akuisisi kata menggunakan procedure CopyWord */
-
+/* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
+   F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
+          currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
+          Jika currentChar = MARK, EndWord = true.
+   Proses : Akuisisi kata menggunakan procedure SalinWord */
     // KAMUS LOKAL
 
     // ALGORITMA
@@ -53,13 +62,12 @@ void ADVWORD() {
 }
 
 void CopyWord() {
-    /* Mengakuisisi kata, menyimpan dalam currentWord
-       I.S. : currentChar adalah karakter pertama dari kata
-       F.S. : currentWord berisi kata yang sudah diakuisisi;
-              currentChar = BLANK atau currentChar = MARK;
-              currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
-              Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
-
+/* Mengakuisisi kata, menyimpan dalam currentWord.
+   I.S. : currentChar adalah karakter pertama dari kata
+   F.S. : currentWord berisi kata yang sudah diakuisisi;
+          currentChar = BLANK atau currentChar = MARK;
+          currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+          Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
     // KAMUS LOKAL
 
     // ALGORITMA
@@ -74,6 +82,16 @@ void CopyWord() {
 }
 
 void STARTWORDFILE(char* path) {
+/* Kata dibaca dengan prosedur STARTFILE() yang akan membaca dari file pada path, 
+   akuisisi kata menggunakan CopyWordWithBlanks.
+   I.S. : currentChar sembarang
+   F.S. : EndWord = true, dan currentChar = MARK;
+          atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
+          currentChar karakter pertama sesudah karakter terakhir kata */
+    // KAMUS LOKAL
+
+    // ALGORITMA
+    ResetCurrentWord();
     STARTFILE(path);
     if (currentChar == MARK) EndWord = true;
     else {
@@ -83,6 +101,14 @@ void STARTWORDFILE(char* path) {
 }
 
 void ADVWORDFILE() {
+/* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
+   F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
+          currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
+          Jika currentChar = MARK, EndWord = true.
+   Proses : Akuisisi kata menggunakan procedure CopyWordWithBlanks */
+    // KAMUS LOKAL
+
+    // ALGORITMA
     EndWord = false;
     if (currentChar == MARK) EndWord = true;
     else {
@@ -92,6 +118,15 @@ void ADVWORDFILE() {
 }
 
 void CopyWordWithBlanks() {
+/* Mengakuisisi kata dengan membolehkan blanks, menyimpan dalam currentWord.
+   I.S. : currentChar adalah karakter pertama dari kata
+   F.S. : currentWord berisi kata yang sudah diakuisisi;
+          currentChar = BLANK atau currentChar = MARK;
+          currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+          Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+    // KAMUS LOKAL
+
+    // ALGORITMA
     currentWord.Length = 0;
     while (currentChar != MARK) {
         if (currentWord.Length < NMax) { // jika lebih akan terpotong
@@ -100,4 +135,60 @@ void CopyWordWithBlanks() {
         } else
             break;
             }
+}
+
+void STARTLINE() {
+/* Membaca satu line dari user, dengan membolehkan spasi.
+   I.S. : currentChar sembarang
+   F.S. : EndWord = true, dan currentChar = MARK;
+          atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
+          currentChar karakter pertama sesudah karakter terakhir kata */
+    // KAMUS LOKAL
+
+    // ALGORITMA
+    ResetCurrentWord();
+    START();
+    if (currentChar == MARK) EndWord = true;
+    else {
+        EndWord = false;
+        CopyWordWithBlanks();
+    }
+}
+
+boolean isKataEqual(Word W1, Word W2) {
+/* Mengembalikan true bila Word W1 sama dengan Word W2. */
+    // KAMUS LOKAL
+    int i;
+    
+    // ALGORITMA
+    if (W1.Length != W2.Length) return false;
+    else {
+        for (i=0; i<W1.Length; i++) {
+            if (W1.TabWord[i] != W2.TabWord[i]) return false;
+        } return true;
+    }
+}
+
+boolean isKataInt(Word W) {
+/* Mengembalikan true apabila seluruh isi Word berupa numerik */
+    // KAMUS LOKAL
+    int i;
+
+    // ALGORITMA
+    for (i=0; i<W.Length; i++) {
+        if (!(W.TabWord[i] >= '0' && W.TabWord[i] <= '9')) return false;
+    } return true;
+}
+
+void displayWord(Word W) {
+/* Menampilkan isi Word ke layar.
+   I.S. : sembarang
+   F.S. : Seluruh isi dalam Word telah ditampilkan pada layar */
+    // KAMUS LOKAL
+    int i=0;
+
+    // ALGORITMA
+    for (i=0; i<W.Length; i++) {
+        printf("%c", W.TabWord[i]);
+    } printf("\n");
 }

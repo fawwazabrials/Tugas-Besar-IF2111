@@ -5,18 +5,19 @@
 #define QUEUE_H
 
 #include "boolean.h"
+#include "mesinkata.h"
+#include "../functions.h"
 
 #define IDX_UNDEF -1
-#define CAPACITY 3
+#define CAPACITY 100
 
 /* Definisi elemen dan address */
-typedef int ElType;
+typedef Word ElTypeQueue;
 typedef struct {
-	ElType buffer[CAPACITY]; 
+	ElTypeQueue buffer[CAPACITY]; 
 	int idxHead;
 	int idxTail;
 } Queue;
-
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika q adalah Queue, maka akses elemen : */
@@ -44,19 +45,19 @@ int length(Queue q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
 
 /* *** Primitif Add/Delete *** */
-void enqueue(Queue *q, ElType val);
+void enqueue(Queue *q, ElTypeQueue val);
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
 /* F.S. val menjadi TAIL yang baru, IDX_TAIL "mundur" dalam buffer melingkar. */
 
-void dequeue(Queue *q, ElType *val);
+void dequeue(Queue *q, ElTypeQueue *val);
 /* Proses: Menghapus val pada q dengan aturan FIFO */
 /* I.S. q tidak mungkin kosong */
 /* F.S. val = nilai elemen HEAD pd I.S., IDX_HEAD "mundur";
         q mungkin kosong */
 
 /* *** Display Queue *** */
-void displayQueue(Queue q);
+void DisplayQueue(Queue q);
 /* Proses : Menuliskan isi Queue dengan traversal, Queue ditulis di antara kurung 
    siku; antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan 
    karakter di depan, di tengah, atau di belakang, termasuk spasi dan enter */

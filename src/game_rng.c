@@ -5,19 +5,20 @@
 
 /* TODO : ubah parameter ke ADT score waktu udh dibuat */
 
-void run_rng(int* skor) {
+void run_rng() {
 /* PROSES : Sistem akan men-generate angka random dan pemain harus menebak angka tersebut. 
  *          Tiap kali input, sistem akan mencetak ke layar apakah tebakan lebih besar, 
  *          lebih kecil, atau sudah benar. Angka random akan berada diantara 0 - 100 (inklusif)
  * I.S : skor sembarang 
  * F.S : skor diisi skor dari pemain hasil permainan, skor diitung dengan rumus 100 - 5*tries */
     // KAMUS LOKAL
+    Word temp1, temp2;
     int rand_int, in, tries=0;
 
     // ALGORITMA
     rand_int = randint(0, 100);
     printf("Tebakan : ");
-    scanf("%d", &in);
+    scan("%d", &temp1, &temp2, &in);
 
     while (rand_int != in) {
         if (in > rand_int) printf("Lebih kecil\n");
@@ -27,5 +28,5 @@ void run_rng(int* skor) {
         scanf("%d", &in);
     }
 
-    *skor = 100 - 5*tries;
+    printf("Skor-mu adalah %d\n", 100 - 5*tries);
 }

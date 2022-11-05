@@ -12,12 +12,12 @@
 #define IdxUndef -999 /* indeks tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
-typedef int IdxType;
-typedef Word ElType;
+typedef int IdxTypeArray;
+typedef Word ElTypeArray;
 
 typedef struct
 	{
-		ElType TI [IdxMax-IdxMin+1]; /* memori tempat penyimpan elemen (container) */
+		ElTypeArray TI [IdxMax-IdxMin+1]; /* memori tempat penyimpan elemen (container) */
 		int Neff; /* banyaknya elemen efektif */
 	} TabWord;
 
@@ -48,14 +48,14 @@ int NbElmt (TabWord T);
 int MaxNbEl (TabWord T);
 /* Mengirimkan maksimum elemen yang dapat ditampung oleh tabel */
 /* *** Selektor INDEKS *** */
-IdxType GetFirstIdx (TabWord T);
+IdxTypeArray GetFirstIdx (TabWord T);
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks elemen pertama */
-IdxType GetLastIdx (TabWord T);
+IdxTypeArray GetLastIdx (TabWord T);
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks elemen terakhir */
 /* *** Menghasilkan sebuah elemen *** */
-ElType GetElmt (TabWord T, IdxType i);
+ElTypeArray GetElmt (TabWord T, IdxTypeArray i);
 /* Prekondisi : Tabel tidak kosong, i antara FirstIdx(T)..LastIdx(T) */
 /* Mengirimkan elemen tabel yang ke-i */
 
@@ -65,21 +65,21 @@ void SetTab (TabWord Tin, TabWord *Tout);
 /* I.S. Tin terdefinisi, sembarang */
 /* F.S. Tout berisi salinan Tin */
 /* Assignment THsl -> Tin */
-void SetEl (TabWord *T, IdxType i, ElType v);
+void SetEl (TabWord *T, IdxTypeArray i, ElTypeArray v);
 /* I.S. T terdefinisi, sembarang */
 /* F.S. Elemen T yang ke-i bernilai v */
 /* Mengeset nilai elemen tabel yang ke-i sehingga bernilai v */
-void SetNeff (TabWord *T, IdxType N);
+void SetNeff (TabWord *T, IdxTypeArray N);
 /* I.S. T terdefinisi, sembarang */
 /* F.S. Nilai indeks efektif T bernilai N */
 /* Mengeset nilai indeks elemen efektif sehingga bernilai N */
 
 /* ********** Test Indeks yang valid ********** */
-boolean IsIdxValid (TabWord T, IdxType i);
+boolean IsIdxValid (TabWord T, IdxTypeArray i);
 /* Prekondisi : i sembarang */
 /* Mengirimkan true jika i adalah indeks yang valid utk ukuran tabel */
 /* yaitu antara indeks yang terdefinisi utk container*/
-boolean IsIdxEff (TabWord T, IdxType i);
+boolean IsIdxEff (TabWord T, IdxTypeArray i);
 /* Prekondisi : i sembarang*/
 /* Mengirimkan true jika i adalah indeks yang terdefinisi utk tabel */
 /* yaitu antara FirstIdx(T)..LastIdx(T) */
@@ -93,7 +93,7 @@ boolean IsFull (TabWord T);
 /* Mengirimkan true jika tabel T penuh, mengirimkan false jika tidak */
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
-void TulisIsi (TabWord T);
+void DisplayArray (TabWord T);
 /* Proses : Menuliskan isi tabel dengan traversal */
 /* I.S. T boleh kosong */
 /* F.S. Jika T tidak kosong : indeks dan elemen tabel ditulis berderet ke bawah */
