@@ -18,4 +18,26 @@ BNMO (dibaca: Binomo) adalah sebuah robot game milik Indra dan Doni yang membant
 | 18221087     | Willy Frans Farel Sijabat  |
 | 18221101     | Ilmagita Nariswari         |
 
+## Setup program
+Pastikan di komputer anda dapat menjalankan fungsi ```make```. Untuk OS Unix tidak perlu men-setup apapun. Untuk OS Windows dapat menonton video dibawah :
+https://www.youtube.com/watch?v=a3ejgWLqelQ
+
 ## Cara Menjalankan Program
+- Pindah ke directory /bin
+    ``` 
+    cd bin
+    ```
+- Jalankan Makefile
+    ```
+    make # %config_name%
+
+    # Tersedia beberapa konfigurasi Makefile :
+    # 1. Program utama : main
+    # 2. Program tests : game, commands, array, queue, mesin
+    ```
+    
+- Jalankan program yang telah tercompile
+    ``` 
+    a.exe   # bila anda menggunakan windows 
+    ./a     # bila anda menggunakan non-Windows (MacOS, Ubuntu)    
+    ```

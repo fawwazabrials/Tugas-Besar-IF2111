@@ -5,11 +5,17 @@
 #include "../../src/functions.h"
 
 int main() {
-    STARTWORDFILE("config.txt");
-    while (!EndWord) {
-        printf("len = %d\n", currentWord.Length);
-        displayWord(currentWord);
-        ADV();
-        ADVWORDFILE();
+    Word command1, command2;
+    int inputint;
+
+    printf("ENTER COMMAND : ");
+    scan("%c %c %d", &command1, &command2, &inputint);
+    while (!ValidateCommand(command1, "")) {
+        printf("command1 adalah : "); displayWord(command1);
+        printf("command2 adalah : "); displayWord(command2);
+        printf("inputint adalah : %d\n", inputint);
+
+        printf("ENTER COMMAND : ");
+        scan("%c %c %d", &command1, &command2, &inputint);
     }
 }
