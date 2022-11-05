@@ -10,10 +10,10 @@
 
 /*
     TO DO :
-    * Mesin kata taek
-    * Fix serve and cook display
     * buat skema valid dan tidak valid untuk input
     * buat skema valid untuk cooking and serve (co: kalo mau COOK M1, M1 harus ada di daftar Pesanan)
+    * fix urutan looping
+    * fix cook
 */
 
 ListID ID() {
@@ -72,72 +72,36 @@ void autoSubstract(Queue *q) {
     }
 }
 
-void cook(Queue QF, Queue *QC, char* commandID) {
+void cooking(Queue QF, Queue *QC, char* commandID) {
     /* Memasak makanan yang ada di Queue Pesanan */
     /* I.S. Queue Food dan Cooked terdefinisi */
     /* F.S. Food dengan commandID akan ter-enqueue ke Cooked */
     int i = IDX_HEAD(QF);
     while (i < IDX_TAIL(QF)) {
-        if (QF.buffer[i].makanan == commandID) {
+        if (sameString(QF.buffer[i].makanan, commandID)) {
             enqueue(QC, QF.buffer[i]);
         }
         i++;
     }
 }
 
-void serve(Queue *QR, char* commandID, int *saldo) {
+void serving(Queue *QS, char* commandID, int *saldo) {
     /* Menyajikan makanan */
     /* I.S. Queue ReadyToServe terdefinisi */
     /* F.S. Food di ReadyToServe ter-dequeue */
     Food val;
-    if ((*QR).buffer[IDX_HEAD(*QR)].makanan == commandID) {
-        if ((*QR).buffer[IDX_HEAD(*QR)].durasi == 0) {
-            dequeue(QR, &val);
+    if (sameString((*QS).buffer[IDX_HEAD(*QS)].makanan, commandID)) {
+        if ((*QS).buffer[IDX_HEAD(*QS)].durasi == 0) {
+            dequeue(QS, &val);
             printf("Berhasil menyajikan makanan %s\n", val.makanan);
             *saldo = *saldo + val.harga;
         } else {
             printf("%s belum selesai dimasak\n", commandID);
         }
     } else {
-        printf("%s belum bisa disajikan karena %s belum selesai\n", commandID, HEAD(*QR));
+        printf("%s belum bisa disajikan karena %s belum selesai\n", commandID, HEAD(*QS));
     }
 }
-
-// void inputToCommand(char* input, char* command, char* commandID) {
-//     /* Memisahkan input menjadi command dan commandID */
-//     char COOK[4] = "COOK";
-//     char SERVE[5] = "SERVE";
-//     boolean isCook = true;
-//     boolean isServe = true;
-//     int i = 0;
-//     if (input[i] == 'C') {
-//         while (i < 4 && isCook) {
-//             if (*(input + i) != COOK[i]) {
-//                 isCook = false;
-//             }
-//             i++;
-//         }
-//         if (isCook) {
-//             command = "COOK";
-//             for (int i = 0; i < 3; i++) {
-//                 *(commandID + i) = *(input + 5 + i);
-//             }
-//         }
-//     } else if (input[i] == 'S') {
-//         while (i < 5 && isServe) {
-//             if (*(input + i) != SERVE[i]) {
-//                 isServe = false;
-//             }
-//             i++;
-//         }
-//         if (isServe) {
-//             command = "SERVE";
-//             for (int i = 0; i < 3; i++) {
-//                 *(commandID + i) = *(input + 6 + i);
-//             }
-//         }
-//     }   
-// }
 
 void checkBasi(Queue *QC) {
     /* Mengecek apakah ada makanan yang sudah basi */
@@ -153,21 +117,47 @@ void checkBasi(Queue *QC) {
     }
 }
 
+void moveToServe(Queue *QC, Queue *QS) {
+    /* Memindahkan makanan yang sudah dimasak ke Queue ReadyToServe */
+    /* I.S. Queue Cooked dan ReadyToServe terdefinisi */
+    /* F.S. Apabila ada makanan yang sudah selesai dimasak, maka akan di-enqueue ke ReadyToServe */
+    int i = IDX_HEAD(*QC);
+    if (! isEmpty(*QC)) {
+        while (i <= IDX_TAIL(*QC)) {
+            Food val;
+            if ((*QC).buffer[i].durasi == 0) {
+                val = (*QC).buffer[i];
+                enqueue(QS, val);
+                dequeue(QC, &val);
+            }
+            i++;
+        }
+    }
+
+}
+
 void dinerdash() {
     /* DEKLARASI VARIABEL DAN ADT */
     int saldo = 0;
     int countServe = 0;
-    char* command;
-    char* commandID;
-    char commandinput[10];
+    char* inputCommand = (char*) malloc(100 * sizeof(char));
+    char* commandInput = (char*) malloc(100 * sizeof(char));
+    char* commandIDInput = (char*) malloc(100 * sizeof(char));
+    char* command = (char*) malloc(100 * sizeof(char));
+    char* commandID = (char*) malloc(100 * sizeof(char));
     Queue food;
-    Queue cookserve;
+    Queue cook;
+    Queue serve;
     int round = 0;
     ListID listID = ID();
+    Word inputWord;
+    Word placeholder1;
+    int placeholder2;
 
     /* INISIALISASI ADT */
     CreateQueue(&food);
-    CreateQueue(&cookserve);
+    CreateQueue(&cook);
+    CreateQueue(&serve);
 
     /* INISIALISASI Food */
     /* Menyiapkan 3 pesanan dari 3 pelanggan */
@@ -190,32 +180,29 @@ void dinerdash() {
     /* Display Queue */
     printf("SALDO: %d\n\n", saldo);
     displayQueueFood(food);
-    displayQueueCooked(cookserve);
-    displayQueueRTS(cookserve);
+    displayQueueCooked(cook);
+    displayQueueRTS(serve);
 
     /* Masukkin command dengan Mesin Kata */
     /* Contoh: COOK M1 */
     printf("MASUKKAN COMMAND: \n");
-    // scanf("%[^\n]", commandinput);
-
-    /* TESTING COMMAND */
-    command = "COOK";
-    commandID = "M0";
+    scan("%s", &inputWord, &placeholder1, &placeholder2);
+    inputCommand = WordToString(inputWord);
+    separateSpace(inputCommand, command, commandID);
 
     /* GAME LOOP */
-    while (length(food) < 7 && countServe < 15) {
+    while (length(food) <= 7 && countServe <= 15) {
         /* Permainan selesai apabila antrian melebihi 7 pelanggan atau
         jumlah pelanggan yang sudah dilayani mencapai 15 pelanggan. */
 
         /* TESTING COMMAND */
-        if (round % 2 == 0) {
-            command = "COOK";
-            commandID = listID.buffer[round].ID;
-        } else {
-            command = "SERVE";
-            commandID = listID.buffer[round].ID;
-        }
-        printf("%s %s\n", command, commandID);
+        // if (round % 2 == 0) {
+        //     command = "COOK";
+        //     commandID = listID.buffer[round].ID;
+        // } else {
+        //     command = "SERVE";
+        //     commandID = listID.buffer[round].ID;
+        // }
 
         /* MENAMBAHKAN PESANAN SECARA OTOMATIS */
         jumlahPesanan++;
@@ -223,18 +210,24 @@ void dinerdash() {
         enqueue(&food, new);
 
         /* PENGURANGAN DURASI MEMASAK DAN KETAHANAN MAKANAN */
-        if (! isEmpty(cookserve)) {
-            autoSubstract(&cookserve);
+        if (! isEmpty(cook)) {
+            autoSubstract(&cook);
+        }
+        if ( ! isEmpty(serve)) {
+            autoSubstract(&serve);
         }
 
+        /* MEMINDAHKAN MAKANAN DARI COOK KE SERVE APABILA DURASI = 0 */
+        moveToServe(&cook, &serve);
+
         /* MENGHILANGKAN MAKANAN YANG BASI */
-        checkBasi(&cookserve);
+        checkBasi(&serve);
 
         /* PENYOCOKAN DENGAN COMMAND */
-        if (command == "COOK") {
-            cook(food, &cookserve, commandID);
-        } else if (command == "SERVE") {
-            serve(&cookserve, commandID, &saldo);
+        if (sameString(command, "COOK")) {
+            cooking(food, &cook, commandID);
+        } else if (sameString(command, "SERVE")) {
+            serving(&serve, commandID, &saldo);
             countServe++;
         }
 
@@ -243,20 +236,23 @@ void dinerdash() {
         /* Display Queue */
         printf("SALDO: %d\n\n", saldo);
         displayQueueFood(food);
-        displayQueueCooked(cookserve);
-        displayQueueRTS(cookserve);
+        displayQueueCooked(cook);
+        // displayQueueFood(cook); // Debugging
+        displayQueueRTS(serve);
+        // displayQueueFood(serve); // Debugging
 
         /* Input Command */
         printf("MASUKKAN COMMAND: \n");
-        // scanf("%[^\n]", commandinput);
-        // inputToCommand(commandinput, command, commandID);
+        scan("%s", &inputWord, &placeholder1, &placeholder2);
+        inputCommand = WordToString(inputWord);
+        separateSpace(inputCommand, command, commandID);
 
-        /* TESTING */
+        /* PENAMBAHAN BABAK */
         round++;
     }
 
     /* GAME OVER */
-    if (length(food) >= 7) {
+    if (length(food) > 7) {
         printf("Game Over! Antrian pelanggan sudah melebihi 7 orang.\n");
     } else if (countServe >= 15) {
         printf("Game Over! Jumlah pelanggan yang sudah dilayani sudah mencapai 15 orang.\n");
