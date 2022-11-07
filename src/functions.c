@@ -120,4 +120,13 @@ boolean ValidateCommand(Word W1, char* str) {
     return isKataEqual(W1, W2);
 }
 
-
+char* WordToString(Word W) {
+    /* Membuat string dari Word */
+    char *s = (char*) malloc (W.Length * sizeof(char));
+    int i;
+    for (i = 0; i < W.Length && W.TabWord[i] != '\0'; i++) {
+        *(s+i) = W.TabWord[i];
+    }
+    *(s + i) = '\0';
+    return s;
+}
