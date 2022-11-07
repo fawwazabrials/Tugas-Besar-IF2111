@@ -10,10 +10,10 @@
 
 /*
     TO DO :
-    * buat skema valid dan tidak valid untuk input
     * buat skema valid untuk cooking and serve (co: kalo mau COOK M1, M1 harus ada di daftar Pesanan)
-    * fix urutan looping
-    * fix cook
+    * BUAT FUNGSI DELETE DI QUEUE (BUKAN CUMAN UNTUK HEAD)
+    * * FIX DEQUEUE IN SERVE
+
 */
 
 ListID ID() {
@@ -85,7 +85,7 @@ void cooking(Queue QF, Queue *QC, char* commandID) {
     }
 }
 
-void serving(Queue *QS, char* commandID, int *saldo) {
+void serving(Queue *QS, Queue *QF, char* commandID, int *saldo) {
     /* Menyajikan makanan */
     /* I.S. Queue ReadyToServe terdefinisi */
     /* F.S. Food di ReadyToServe ter-dequeue */
@@ -95,6 +95,18 @@ void serving(Queue *QS, char* commandID, int *saldo) {
             dequeue(QS, &val);
             printf("Berhasil menyajikan makanan %s\n", val.makanan);
             *saldo = *saldo + val.harga;
+
+            // Dequeue from Food 
+            dequeue(QF, &val);
+
+            // Search and Delete from Food (Treating it like a normal array)
+            // int i = IDX_HEAD(*QF);
+            // while (i <= IDX_TAIL(*QF)) {
+            //     if (sameString((*QF).buffer[i].makanan, commandID)) {
+            //         ForceDeleteAt(QF, i);
+            //     }
+            //     i++;
+            // }
         } else {
             printf("%s belum selesai dimasak\n", commandID);
         }
@@ -108,13 +120,16 @@ void checkBasi(Queue *QC) {
     /* I.S. Queue Cooked terdefinisi */
     /* F.S. Apabila ada makanan yang sudah basi, maka akan di-dequeue */
     int i = IDX_HEAD(*QC);
-    while (i <= IDX_TAIL(*QC)) {
-        if ((*QC).buffer[i].ketahanan == 0) {
-            dequeue(QC, &(*QC).buffer[i]);
-            printf("Makanan %s sudah basi.\n", (*QC).buffer[i].makanan);
+    if (! isEmpty(*QC)) {
+        while (i <= IDX_TAIL(*QC)) {
+            if ((*QC).buffer[i].ketahanan == 0) {
+                dequeue(QC, &(*QC).buffer[i]);
+                printf("Makanan %s sudah basi.\n", (*QC).buffer[i].makanan);
+            }
+            i++;
         }
-        i++;
     }
+
 }
 
 void moveToServe(Queue *QC, Queue *QS) {
@@ -189,16 +204,19 @@ void dinerdash() {
     scan("%s", &inputWord, &placeholder1, &placeholder2);
     inputCommand = WordToString(inputWord);
     separateSpace(inputCommand, command, commandID);
+    
+    while (! sameString(command, "COOK") && ! sameString(command, "SERVE")) {
+        printf("Command tidak valid.\n");
+        printf("MASUKKAN COMMAND: \n");
+        scan("%s", &inputWord, &placeholder1, &placeholder2);
+        inputCommand = WordToString(inputWord);
+        separateSpace(inputCommand, command, commandID);
+    }
 
     /* GAME LOOP */
     while (length(food) <= 7 && countServe <= 15) {
         /* Permainan selesai apabila antrian melebihi 7 pelanggan atau
         jumlah pelanggan yang sudah dilayani mencapai 15 pelanggan. */
-
-        /* MENAMBAHKAN PESANAN SECARA OTOMATIS */
-        jumlahPesanan++;
-        Food new = newOrder(food, jumlahPesanan-1);
-        enqueue(&food, new);
 
         /* PENGURANGAN DURASI MEMASAK DAN KETAHANAN MAKANAN */
         if (! isEmpty(cook)) {
@@ -207,6 +225,11 @@ void dinerdash() {
         if ( ! isEmpty(serve)) {
             autoSubstract(&serve);
         }
+
+        /* MENAMBAHKAN PESANAN SECARA OTOMATIS */
+        jumlahPesanan++;
+        Food new = newOrder(food, jumlahPesanan-1);
+        enqueue(&food, new);
 
         /* MEMINDAHKAN MAKANAN DARI COOK KE SERVE APABILA DURASI = 0 */
         moveToServe(&cook, &serve);
@@ -218,7 +241,7 @@ void dinerdash() {
         if (sameString(command, "COOK")) {
             cooking(food, &cook, commandID);
         } else if (sameString(command, "SERVE")) {
-            serving(&serve, commandID, &saldo);
+            serving(&serve, &food, commandID, &saldo);
             countServe++;
         }
 
@@ -235,6 +258,14 @@ void dinerdash() {
         scan("%s", &inputWord, &placeholder1, &placeholder2);
         inputCommand = WordToString(inputWord);
         separateSpace(inputCommand, command, commandID);
+
+        while (! sameString(command, "COOK") && ! sameString(command, "SERVE")) {
+            printf("Command tidak valid.\n");
+            printf("MASUKKAN COMMAND: \n");
+            scan("%s", &inputWord, &placeholder1, &placeholder2);
+            inputCommand = WordToString(inputWord);
+            separateSpace(inputCommand, command, commandID);
+        }
 
         /* PENAMBAHAN BABAK */
         round++;

@@ -69,6 +69,18 @@ void dequeue(Queue *q, ElType *val) {
     }
 }
 
+void ForceDeleteAt(Queue *q, int i) {
+    int j = IDX_TAIL(*q);
+    while (i <= j) {
+		q->buffer[i] = q->buffer[i+1];
+		i++;
+	}
+    IDX_TAIL(*q)--;
+    if (IDX_TAIL(*q) < 0) {
+        IDX_TAIL(*q) == CAPACITY;
+    }
+}
+
 /* *** Display Queue *** */
 void displayQueueFood(Queue q) {
 /* Proses : Menuliskan isi Queue dengan traversal */

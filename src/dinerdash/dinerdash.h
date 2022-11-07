@@ -16,12 +16,12 @@ void autoSubstract(Queue *q);
     /*      Apabila durasi makanan sama dengan 0, maka durasi ketahanan berkurang 1 sampai
             ketahanan makanan menjadi 0 */
 
-void cook(Queue QF, Queue *QC, char* commandID);
+void cooking(Queue QF, Queue *QC, char* commandID);
     /* Memasak makanan yang ada di Queue Pesanan */
     /* I.S. Queue Food dan Cooked terdefinisi */
     /* F.S. Food dengan commandID akan ter-enqueue ke Cooked */
 
-void serve(Queue *QR, char* commandID, int *saldo);
+void serving(Queue *QR, Queue *QF, char* commandID, int *saldo);
     /* Menyajikan makanan */
     /* I.S. Queue ReadyToServe terdefinisi */
     /* F.S. Food di ReadyToServe ter-dequeue */
