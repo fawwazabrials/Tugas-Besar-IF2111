@@ -25,4 +25,8 @@ void PLAYGAME(Queue *game_queue);
 
 void SKIPGAME(Queue *game_queue);
 
+void CREATEGAME(TabWord *T);
+
+void help();
+
 #endif

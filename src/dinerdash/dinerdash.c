@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include "dinerdash.h"
 #include "q_dinerdash.h"
-#include "q_dinerdash.c"        // Jangan lupa delete kalo udah selese
-#include "../functions.c"       // Jangan lupa ganti jadi .h
+#include "q_dinerdash.c"                // Jangan lupa delete kalo udah selese
+#include "../functions.c"               // Jangan lupa ganti jadi .h
 #include "../ADT/mesinkarakter.h"
 #include "../ADT/mesinkarakter.c"       // Jangan lupa delete kalo udah selese
 #include "../ADT/mesinkata.h"
-#include "../ADT/mesinkata.c"
+#include "../ADT/mesinkata.c"           // Jangan lupa delete kalo udah selese
 
 /*
     TO DO :
@@ -204,6 +204,8 @@ void dinerdash() {
     scan("%s", &inputWord, &placeholder1, &placeholder2);
     inputCommand = WordToString(inputWord);
     separateSpace(inputCommand, command, commandID);
+
+    /* VALIDASI INPUT COMMAND */
     
     while (! sameString(command, "COOK") && ! sameString(command, "SERVE")) {
         printf("Command tidak valid.\n");
@@ -259,6 +261,7 @@ void dinerdash() {
         inputCommand = WordToString(inputWord);
         separateSpace(inputCommand, command, commandID);
 
+        /* VALIDASI INPUT COMMAND */
         while (! sameString(command, "COOK") && ! sameString(command, "SERVE")) {
             printf("Command tidak valid.\n");
             printf("MASUKKAN COMMAND: \n");
