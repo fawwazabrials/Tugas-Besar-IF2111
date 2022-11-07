@@ -195,15 +195,6 @@ void dinerdash() {
         /* Permainan selesai apabila antrian melebihi 7 pelanggan atau
         jumlah pelanggan yang sudah dilayani mencapai 15 pelanggan. */
 
-        /* TESTING COMMAND */
-        // if (round % 2 == 0) {
-        //     command = "COOK";
-        //     commandID = listID.buffer[round].ID;
-        // } else {
-        //     command = "SERVE";
-        //     commandID = listID.buffer[round].ID;
-        // }
-
         /* MENAMBAHKAN PESANAN SECARA OTOMATIS */
         jumlahPesanan++;
         Food new = newOrder(food, jumlahPesanan-1);
@@ -237,9 +228,7 @@ void dinerdash() {
         printf("SALDO: %d\n\n", saldo);
         displayQueueFood(food);
         displayQueueCooked(cook);
-        // displayQueueFood(cook); // Debugging
         displayQueueRTS(serve);
-        // displayQueueFood(serve); // Debugging
 
         /* Input Command */
         printf("MASUKKAN COMMAND: \n");
@@ -254,8 +243,10 @@ void dinerdash() {
     /* GAME OVER */
     if (length(food) > 7) {
         printf("Game Over! Antrian pelanggan sudah melebihi 7 orang.\n");
+        printf("Saldo akhir Anda adalah %d.\n", saldo);
     } else if (countServe >= 15) {
         printf("Game Over! Jumlah pelanggan yang sudah dilayani sudah mencapai 15 orang.\n");
+        printf("Saldo akhir Anda adalah %d.\n", saldo);
     }
 }
 
