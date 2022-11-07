@@ -202,3 +202,16 @@ void DisplayArray (TabWord T) {
         }
     }
 }
+
+void InsertLast (TabWord *T, ElTypeArray X) {
+    /* Memasukkan elemen ke akhir array */
+    /* I.S. T terdefinisi */
+    /* F.S. Apabila tidak penuh, T bertambah satu elemen di akhir */
+    if (IsEmpty(*T)) {
+        T->TI[IdxMin] = X;
+    } else {
+        int idxLast = GetLastIdx(*T);
+        T->TI[idxLast + 1] = X;
+        T->Neff++;
+    }
+}
