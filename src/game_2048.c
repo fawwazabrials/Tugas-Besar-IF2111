@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "ADT/matriks.h"
 #include "game_2048.h"
 
 /* TODO : 1. Kalo ada 2 2 2 2 itu kecombine langsung jadi 8 0 0 0, harusnya 4 4 0 0
@@ -7,141 +8,72 @@
           3. Random 4 blom ada cuma 2 doang
           4. Ubah ke ADT Matriks?? */
 
-boolean isFullMatriks(int mat[4][4]) {
-    // KAMUS LOKAL
-    int i, j;
-
-    // ALGORITMA
-    for (i=0; i<4; i++) {
-        for (j=0; j<4; j++) {
-            if (mat[i][j] == 0) return false;
-        }
-    } return true;
-}
-
-void displayMatriks(int mat[4][4]) {
-    // KAMUS LOKAL
-    int i, j;
-
-    // ALGORITMA
-    for (i=0; i<4; i++) {
-        for (j=0; j<4; j++) {
-            printf("%6d\t", mat[i][j]);
-        } printf("\n");
-    }
-}
+// cd /d/ITB/"Semester 3"/Alstrukdat/Tugas-Besar-IF2111/bin
 
 void run_2048() {
     // KAMUS LOKAL
-    int mat[4][4], i, j, x, point_i, point_j, maxi=-1;
-    Word command1, command2;
-    int kode;
+    // Variabel untuk game
+    Matriks board;
+    int i, point_i, point_j, score=0;
     boolean wrong = false, loop = true;
 
+    // Variabel placeholder untuk input
+    Word kode, command2;
+    int inputint;
+    
+
     // ALGORITMA
-    // createEmpty
-    for (i=0; i<4; i++) {
-        for (j=0; j<4; j++) {
-            mat[i][j] = 0;
-        }
-    }
+    MakeMatriks(4, 4, &board);
 
-    while (!isFullMatriks(mat) && loop) {
-        point_i = randint(0, 3);
-        point_j = randint(0, 3);
-        while (mat[point_i][point_j] != 0) {
-            // printf("nilai = %d", mat[point_i][point_j]);
-            point_i = randint(0, 3);
-            point_j = randint(0, 3);
-        }
-
-        mat[point_i][point_j] = 2;
-        system("clear");
+    while (!isMatriksFull(board) && loop) {
+        // clearScreen();
         if (wrong) printf("Masukkan kode yang benar!");
-        printf("\n\n");
-        displayMatriks(mat);
-        printf("(W) Atas\t(A) Kiri\t(S) Bawah\t(D) Kanan\n\nENTER COMMAND : ");
-        scan("%c", &command1, &command2, &kode);
+        else { // GENERATE NEW RANDOM NUMBER ON POINT
+            point_i = randint(0, 3); point_j = randint(0, 3);
+            while (Elmt(board, point_i, point_j) != 0) {
+                point_i = randint(0, 3); point_j = randint(0, 3);
+            }
 
-        if (ValidateCommand(command1, "D")) { // kanan
-            for (i=0; i<4; i++) {
-                for (x=3; x>0; x--) {
-                    for (j=3; j>0; j--) {
-                        if (mat[i][j] == 0) {
-                            mat[i][j] = mat[i][j-1];
-                            mat[i][j-1] = 0;
-                        }
-                        if (mat[i][j-1] == mat[i][j]) {
-                            mat[i][j] += mat[i][j-1];
-                            if (mat[i][j] > maxi) maxi = mat[i][j];
-                            mat[i][j-1] = 0;
-                        }
-                    }
-                }
-                wrong = false;
-            }
-        } else if (ValidateCommand(command1, "A")) {
-            // kiri
-            for (i=0; i<4; i++) {
-                for (x=3; x>0; x--) {
-                    for (j=0; j<3; j++) {
-                        if (mat[i][j] == 0) {
-                            mat[i][j] = mat[i][j+1];
-                            mat[i][j+1] = 0;
-                        }
-                        if (mat[i][j+1] == mat[i][j]) {
-                            mat[i][j] += mat[i][j+1];
-                            if (mat[i][j] > maxi) maxi = mat[i][j];
-                            mat[i][j+1] = 0;
-                        }
-                    }
-                }
-                wrong = false;
-            }
-        } else if (ValidateCommand(command1, "W")) {
-            // atas
-            for (j=0; j<4; j++) {
-                for (x=3; x>0; x--) {
-                    for (i=0; i<3; i++) {
-                        if (mat[i][j] == 0) {
-                            mat[i][j] = mat[i+1][j];
-                            mat[i+1][j] = 0;
-                        }
-                        if (mat[i+1][j] == mat[i][j]) {
-                            mat[i][j] += mat[i+1][j];
-                            if (mat[i][j] > maxi) maxi = mat[i][j];
-                            mat[i+1][j] = 0;
-                        }
-                    }
-                }
-                wrong = false;
-            }
-        } else if (ValidateCommand(command1, "S")) {
-            // bawah
-            for (j=0; j<4; j++) {
-                for (x=3; x>0; x--) {
-                    for (i=3; i>0; i--) {
-                        if (mat[i][j] == 0) {
-                            mat[i][j] = mat[i-1][j];
-                            mat[i-1][j] = 0;
-                        }
-                        if (mat[i-1][j] == mat[i][j]) {
-                            mat[i][j] += mat[i-1][j];
-                            if (mat[i][j] > maxi) maxi = mat[i][j];
-                            mat[i-1][j] = 0;
-                        }
-                    }
-                }
-                wrong = false;
-            }
-        } 
-        if (ValidateCommand(command1, "QUIT")) {
-            loop = false;
+            if (randint(0, 100) % 20 == 0) Elmt(board,point_i,point_j) = 4;
+            else Elmt(board,point_i,point_j) = 2;
         }
-        else {
-            wrong = true;
+
+        // Display game info ke player
+        // clearScreen();
+        printf("\n\n"); displayMatriks(board);
+        printf("(W) Atas  (A) Kiri  (S) Bawah  (D) Kanan\n\nENTER COMMAND : ");
+        scan("%c", &kode, &command2, &inputint);
+
+        // printf("kode = ");
+        // displayWord(kode);
+
+        // Main algo buat gamenya
+        wrong = false;
+        if (ValidateCommand(kode, "W")) {
+            for (i=0; i<board.NKolEff-1; i++) {
+                geserMatriksAtas(&board, false);
+                geserMatriksAtas(&board, true);
+            }
         }
+        else if (ValidateCommand(kode, "A")) {
+            for (i=0; i<board.NKolEff-1; i++) {
+                geserMatriksKiri(&board, false);
+                geserMatriksKiri(&board, true);
+            }
+        }
+        else if (ValidateCommand(kode, "S")) {
+            for (i=0; i<board.NKolEff-1; i++) {
+                geserMatriksBawah(&board, false);
+                geserMatriksBawah(&board, true);
+            }
+        }
+        else if (ValidateCommand(kode, "D")) {
+            for (i=0; i<board.NKolEff-1; i++) {
+                geserMatriksKanan(&board, false);
+                geserMatriksKanan(&board, true);
+            }
+        }
+        else if (ValidateCommand(kode, "QUIT")) loop = false;
+        else wrong = true;
     }
-
-    printf("Skor-mu adalah %d!\n", maxi);
 }
