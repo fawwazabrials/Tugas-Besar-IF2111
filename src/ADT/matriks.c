@@ -61,9 +61,26 @@ int maxInMatriks(Matriks M) {
         for (j=0; j<NKolEff(M); j++) {
             if (Elmt(M, i, j) > maxi) maxi = Elmt(M, i, j);
         }
-    }
+    } return maxi;
 }
 
+void copyMatriks(Matriks in, Matriks* out) {
+/* Menyalin seluruh isi Matriks in ke Matriks out.
+   I.S. : in dan out sembarang 
+   F.S. : in dan out memiliki isi yang sama */
+    // KAMUS LOKAL
+    int i, j;
+
+    // ALGORITMA
+
+    MakeMatriks(in.NBrsEff, in.NKolEff, out);
+    for (i=0; i<in.NBrsEff; i++) {
+        for (j=0; j<in.NKolEff; j++) {
+        
+            Elmt(*out, i, j) = Elmt(in, i, j);
+        }
+    }
+}
 
 void displayMatriks(Matriks M) {
 /* Mencetak Matriks ke layar dalam bentuk kotak sebagai tambilan game 2048. 
@@ -83,7 +100,7 @@ void displayMatriks(Matriks M) {
 
 
 /************************* PRIMITIF MATRIKS UNTUK 2048 *************************/
-void geserMatriksKanan(Matriks* M, boolean merge) {
+void geserMatriksKanan(Matriks* M, int* score, boolean merge) {
 /* Menggeser seluruh isi matriks ke kanan dengan bekas tempat elemen pergeseran menjadi 0. 
    I.F. : Sembarang
    F.S. : Seluruh elemen akan tergeser ke pojok kanan matriks, bila merge bernilai true maka 
@@ -102,13 +119,14 @@ void geserMatriksKanan(Matriks* M, boolean merge) {
 
             else if (!merge && Elmt(*M, i, j) == 0) {
                 Elmt(*M, i, j)  = Elmt(*M, i, j-1);
+                *score += Elmt(*M, i, j);
                 Elmt(*M, i, j-1)  = 0;
             }
         }
     }
 }
 
-void geserMatriksKiri(Matriks* M, boolean merge) {
+void geserMatriksKiri(Matriks* M, int* score, boolean merge) {
 /* Menggeser seluruh isi matriks ke kiri dengan bekas tempat elemen pergeseran menjadi 0. 
    I.F. : Sembarang
    F.S. : Seluruh elemen akan tergeser ke pojok kiri matriks, bila merge bernilai true maka 
@@ -122,18 +140,20 @@ void geserMatriksKiri(Matriks* M, boolean merge) {
         for (j=0; j<NKolEff(*M)-1; j++) {
             if (merge && Elmt(*M, i, j) == Elmt(*M, i, j+1)) {
                 Elmt(*M, i, j) += Elmt(*M, i, j+1);
+                *score += Elmt(*M, i, j);
                 Elmt(*M, i, j+1) = 0;
             }
 
             else if (!merge && Elmt(*M, i, j) == 0) {
                 Elmt(*M, i, j)  = Elmt(*M, i, j+1);
+                *score += Elmt(*M, i, j);
                 Elmt(*M, i, j+1)  = 0;
             }
         }
     }
 }
 
-void geserMatriksAtas(Matriks* M, boolean merge) {
+void geserMatriksAtas(Matriks* M, int* score, boolean merge) {
 /* Menggeser seluruh isi matriks ke atas dengan bekas tempat elemen pergeseran menjadi 0. 
    I.F. : Sembarang
    F.S. : Seluruh elemen akan tergeser ke pojok atas matriks, bila merge bernilai true maka 
@@ -152,13 +172,14 @@ void geserMatriksAtas(Matriks* M, boolean merge) {
 
             else if (!merge && Elmt(*M, i, j) == 0) {
                 Elmt(*M, i, j)  = Elmt(*M, i+1, j);
+                *score += Elmt(*M, i, j);
                 Elmt(*M, i+1, j)  = 0;
             }
         }
     }
 }
 
-void geserMatriksBawah(Matriks* M, boolean merge) {
+void geserMatriksBawah(Matriks* M, int* score, boolean merge) {
 /* Menggeser seluruh isi matriks ke bawah dengan bekas tempat elemen pergeseran menjadi 0. 
    I.F. : Sembarang
    F.S. : Seluruh elemen akan tergeser ke pojok bawah matriks, bila merge bernilai true maka 
@@ -177,6 +198,7 @@ void geserMatriksBawah(Matriks* M, boolean merge) {
 
             else if (!merge && Elmt(*M, i, j) == 0) {
                 Elmt(*M, i, j)  = Elmt(*M, i-1, j);
+                *score += Elmt(*M, i, j);
                 Elmt(*M, i-1, j)  = 0;
             }
         }
