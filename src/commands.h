@@ -26,7 +26,7 @@ void CREATEGAME(TabWord *T);
 
 void DELETEGAME(TabWord *gl, Queue gq);
 
-void SAVE(TabWord gl, char *filename);
+void SAVE(TabWord gl, Word filename);
 
 void help();
 
