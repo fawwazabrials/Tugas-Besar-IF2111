@@ -3,13 +3,6 @@
 #include "ADT/matriks.h"
 #include "game_2048.h"
 
-/* TODO : 1. Kalo ada 2 2 2 2 itu kecombine langsung jadi 8 0 0 0, harusnya 4 4 0 0
-          2. Kalo user gak ngeinput, tetep muncul nilai baru
-          3. Random 4 blom ada cuma 2 doang
-          4. Ubah ke ADT Matriks?? */
-
-// cd /d/ITB/"Semester 3"/Alstrukdat/Tugas-Besar-IF2111/bin
-
 void run_2048() {
     // KAMUS LOKAL
     // Variabel untuk game
@@ -26,7 +19,7 @@ void run_2048() {
     MakeMatriks(4, 4, &board);
 
     while (!isMatriksFull(board) && loop) {
-        // clearScreen();
+        clearScreen();
         if (wrong) printf("Masukkan kode yang benar!");
         else { // GENERATE NEW RANDOM NUMBER ON POINT
             point_i = randint(0, 3); point_j = randint(0, 3);
@@ -39,13 +32,9 @@ void run_2048() {
         }
 
         // Display game info ke player
-        // clearScreen();
         printf("\n\n"); displayMatriks(board);
         printf("(W) Atas  (A) Kiri  (S) Bawah  (D) Kanan\n\nENTER COMMAND : ");
         scan("%c", &kode, &command2, &inputint);
-
-        // printf("kode = ");
-        // displayWord(kode);
 
         // Main algo buat gamenya
         wrong = false;
