@@ -153,7 +153,7 @@ void DELETEGAME (TabWord *gl, Queue gq) {
         if ((ph2<=4)||(isInQueue(gq,gl.TI[ph2]))) {
             printf("Game gagal dihapus.\n");
         } else {
-            arrWordDel(gl,ph2);
+            DeleteAt(gl,ph2);
             printf("Game berhasil dihapus.\n");
         }
     } else {
