@@ -1,4 +1,3 @@
-#include "q_dinerdash.h"
 #include "q_dinerdash.c"
 #include <stdio.h>
 

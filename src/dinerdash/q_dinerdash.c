@@ -38,6 +38,7 @@ int length(Queue q) {
         return IDX_TAIL(q) - IDX_HEAD(q) + 1;
     }
 }
+
 /* *** Primitif Add/Delete *** */
 void enqueue(Queue *q, ElType val) {
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
@@ -70,14 +71,23 @@ void dequeue(Queue *q, ElType *val) {
 }
 
 void ForceDeleteAt(Queue *q, int i) {
-    int j = IDX_TAIL(*q);
-    while (i <= j) {
-		q->buffer[i] = q->buffer[i+1];
-		i++;
-	}
-    IDX_TAIL(*q)--;
-    if (IDX_TAIL(*q) < 0) {
-        IDX_TAIL(*q) == CAPACITY;
+/* Menghapus elemen array secara paksa (bukan dequeue) */
+/* I.S. Queue  terdefinisi dan tidak kosong */
+/* F.S. Elemen Queue ke-i terhapus */
+    Food val;
+    if (i == IDX_HEAD(*q)) {
+        dequeue(q, &val);
+    } else {
+        int j = IDX_TAIL(*q);
+        val = q->buffer[i];
+        while (i <= j) {
+            q->buffer[i] = q->buffer[i+1];
+            i++;
+        }
+        IDX_TAIL(*q)--;
+        if (IDX_TAIL(*q) < 0) {
+            IDX_TAIL(*q) == CAPACITY-1;
+        }
     }
 }
 

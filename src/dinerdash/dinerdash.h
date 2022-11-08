@@ -9,6 +9,12 @@ typedef struct {
     IDMakanan buffer[15];
 } ListID;
 
+ListID ID();
+    /* Membuat list berisi ID makanan */
+
+Food newOrder(Queue q, int angka);
+    /* Membuat Food baru untuk pesanan dengan increment */
+
 void autoSubstract(Queue *q);
     /* Mengurangi durasi memasak makanan atau durasi ketahanan makanan */
     /* I.S. Queue dengan ElType = Food terdefinisi */
@@ -30,6 +36,14 @@ void checkBasi(Queue *QC);
     /* Mengecek apakah ada makanan yang sudah basi */
     /* I.S. Queue Cooked terdefinisi */
     /* F.S. Apabila ada makanan yang sudah basi, maka akan di-dequeue */
+
+void moveToServe(Queue *QC, Queue *QS);
+    /* Memindahkan makanan yang sudah dimasak ke Queue ReadyToServe */
+    /* I.S. Queue Cooked dan ReadyToServe terdefinisi */
+    /* F.S. Apabila ada makanan yang sudah selesai dimasak, maka akan di-enqueue ke ReadyToServe */
+
+boolean IsIn(Queue q, char* X);
+/* Mengirimkan true apabila ada elemen X pada queue ber-ElType makanan. */
 
 void dinerdash();
 /* Game Diner Dash */

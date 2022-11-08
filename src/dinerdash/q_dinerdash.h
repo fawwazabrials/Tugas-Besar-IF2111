@@ -62,6 +62,11 @@ void dequeue(Queue *q, ElType *val);
 /* F.S. val = nilai elemen HEAD pd I.S., IDX_HEAD "mundur";
         q mungkin kosong */
 
+void ForceDeleteAt(Queue *q, int i);
+/* Menghapus elemen array secara paksa (bukan dequeue) */
+/* I.S. Queue  terdefinisi dan tidak kosong */
+/* F.S. Elemen Queue ke-i terhapus */
+
 /* *** Display Queue *** */
 void displayQueueFood(Queue q);
 /* Proses : Menuliskan isi Queue dengan traversal */
