@@ -46,13 +46,6 @@ void list_game(TabWord list){
    DisplayArray(list);
 }
 
-void quit() {
-    /* I.S.: sembarang
-    F.S.: Program dihentikan */
-    printf("Anda keluar dari BNMO.\nBye bye 👋");
-    return;
-}
-
 void PLAYGAME(TabWord games, Queue *game_queue)
 {   
     if (!isEmpty(*game_queue)) //kalo game_queue gk kosong
@@ -146,6 +139,48 @@ void CREATEGAME(TabWord *T) {
     scan("%s", &CCommand, &ph1, &ph2);
     InsertLast(T, CCommand);
     printf("Game berhasil ditambahkan\n");
+}
+
+void DELETEGAME (TabWord *gl, Queue gq) {
+    list_game(*gl); // Cetak daftar game
+    // Input
+    printf("\n");
+    printf("Masukkan nomor game yang akan dihapus: ");
+    scan("%d", &CCommand, &ph1, &ph2);
+    printf("\n");
+    // Proses
+    if (isIdxEff(*gl,ph2)) {
+        if ((ph2<=4)||(isInQueue(gq,gl.TI[ph2]))) {
+            printf("Game gagal dihapus.\n");
+        } else {
+            DeleteAt(gl,ph2);
+            printf("Game berhasil dihapus.\n");
+        }
+    } else {
+        printf("Nomor game yang dimasukkan tidak valid.\n");
+    }
+    return;
+}
+
+void SAVE(TabWord gl, Word filename) {
+    char a[351] = "../data/";
+    int i,j;
+    for (i=0;i<filename.Length;i++) {
+        a[8+i] = filename.TabWord[i];
+        a[9+i] = "\0";
+    }
+    char saveLine[51] = {0};
+    FILE *saveFile = fopen(a,"w");
+    for (i=0;i<gl.Neff;i++) {
+        for (j=0;i<gl.TI[i].Length;j++) {
+            saveLine[j] = gl.TI[i].TabWord[j];
+            saveLine[j+1] = 0;
+        }
+        fputs(saveLine,saveFile);fputc('\n',saveFile);
+    }
+    fclose(saveFile);
+    printf("Save file berhasil disimpan.\n");
+    return;
 }
 
 void help() {

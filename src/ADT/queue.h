@@ -44,6 +44,9 @@ boolean isFull(Queue q);
 int length(Queue q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
 
+boolean isInQueue(Queue q, Word w);
+// Mengirimkan apakah Word w terdapat di dalam queue
+
 /* *** Primitif Add/Delete *** */
 void enqueue(Queue *q, ElTypeQueue val);
 /* Proses: Menambahkan val pada q dengan aturan FIFO */

@@ -52,4 +52,7 @@ void clearScreen();
    I.S. : Sembarang, command line bisa memiliki isi atau kosong 
    F.S. : Command line kosong */
 
+char* concatString(char* str1, char* str2);
+/* Menggabungkan 2 buah string menjadi 1 string, mengembalikan pointer ke string hasil gabungan */
+
 #endif

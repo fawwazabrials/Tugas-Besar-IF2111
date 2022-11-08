@@ -215,3 +215,10 @@ void InsertLast (TabWord *T, ElTypeArray X) {
         T->Neff++;
     }
 }
+
+void DeleteAt (TabWord *T, int id) {
+    for (int i=id;i<T->Neff-1;i++) {
+        T->TI[i] = T->TI[i+1];
+    }
+    T->Neff--;
+}
