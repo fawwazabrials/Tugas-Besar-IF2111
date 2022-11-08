@@ -46,13 +46,6 @@ void list_game(TabWord list){
    DisplayArray(list);
 }
 
-void quit() {
-    /* I.S.: sembarang
-    F.S.: Program dihentikan */
-    printf("Anda keluar dari BNMO.\nBye bye 👋");
-    return;
-}
-
 void PLAYGAME(TabWord games, Queue *game_queue)
 {   
     if (!isEmpty(*game_queue)) //kalo game_queue gk kosong
