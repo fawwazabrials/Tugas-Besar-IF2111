@@ -121,7 +121,7 @@ boolean ValidateCommand(Word W1, char* str) {
 }
 
 char* WordToString(Word W) {
-    /* Membuat string dari Word */
+/* Membuat string dari Word */
     char *s = (char*) malloc (W.Length * sizeof(char));
     int i;
     for (i = 0; i < W.Length && W.TabWord[i] != '\0'; i++) {
@@ -129,6 +129,17 @@ char* WordToString(Word W) {
     }
     *(s + i) = '\0';
     return s;
+}
+
+
+void clearScreen() {
+/* Mengapus seluruh isi dari command line. Hanya berguna untuk OS Linux. 
+   I.S. : Sembarang, command line bisa memiliki isi atau kosong 
+   F.S. : Command line kosong */
+    // KAMUS LOKAL
+
+    // ALGORITMA
+    system("cls");
 }
 
 char* concatString(char* str1, char* str2) {
