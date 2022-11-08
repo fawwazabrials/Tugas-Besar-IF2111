@@ -104,4 +104,9 @@ void DisplayArray (TabWord T);
 */
 /* Jika T kosong : Hanya menulis "Tabel kosong" */
 
+/* INSERT & DELETE */
+void InsertLast (TabWord *T, ElTypeArray X); // Insert di akhir array
+
+void DeleteAt (TabWord *T, int id); // Hapus elemen array T pada indeks ke-id. Array tidak kosong
+
 #endif
