@@ -130,3 +130,11 @@ char* WordToString(Word W) {
     *(s + i) = '\0';
     return s;
 }
+
+char* concatString(char* str1, char* str2) {
+    /* Menggabungkan 2 string menjadi 1 string */
+    char* str = (char*) malloc ((strlen(str1) + strlen(str2) + 1) * sizeof(char));
+    strcpy(str, str1);
+    strcat(str, str2);
+    return str;
+}

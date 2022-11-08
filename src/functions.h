@@ -44,4 +44,6 @@ void scan(char* str, Word* W1, Word* W2, int* x);
 boolean ValidateCommand(Word W1, char* str);
 /* Membandingkan Word W1 dengan string str, mengembalikan true apabila W1 sama dengan str */
 
+char* concatString(char* str1, char* str2);
+/* Menggabungkan 2 buah string menjadi 1 string, mengembalikan pointer ke string hasil gabungan */
 #endif
