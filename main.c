@@ -64,6 +64,17 @@ int main() {
              * copas SAVE aja tapi di STARTWORDFILE() nama filenya diganti 
              * sesuai masukan user, masukan nama file ada di command2 */
             //fungsi load
+            char* str1 = "data/";
+            char *path = concatString(str1, WordToString(command2));
+
+            STARTWORDFILE(path);
+            len = katatoint(currentWord);
+            for (i = 1; i <= len; i++)
+            {
+                ADV();
+                ADVWORDFILE();
+                SetEl(&games, i, currentWord);
+            }
             printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
             working = true;
             printf("Create game(CREATE GAME) | Save your  data (save \"namafile\") | Help(HELP)\n");\
@@ -72,6 +83,7 @@ int main() {
             printf("ENTER COMMAND : ");
             scan("%c %c", &command1, &command2, &inputint);
         }
+        
         else if(ValidateCommand(command1, "HELP") && working){//INPUT ADALAH HELP
             //fungsi help
             printf("Create game(CREATE GAME) | Save your  data (save \"namafile\") | Help(HELP)\n");\
