@@ -24,6 +24,10 @@ void SKIPGAME(TabWord games, Queue *game_queue);
 
 void CREATEGAME(TabWord *T);
 
+void DELETEGAME(TabWord *gl, Queue &gq);
+
+void SAVE(TabWord gl, Queue);
+
 void help();
 
 #endif
