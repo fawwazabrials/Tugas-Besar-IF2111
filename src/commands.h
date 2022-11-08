@@ -12,7 +12,7 @@ void QUEUEGAME(TabWord games, Queue* game_queue);
 
 void list_game (TabWord list);
     /*
-    Proses  : Membaca listglobal yang berisi nama nama game
+    Proses  : Membaca listglobal yang berisi nama-nama game
               yang terdapat pada file
     I.S     : listglobal yang sudah terdefenisi
     F.S     : Menambilkan isi dari list ke layar
@@ -21,9 +21,9 @@ void quit();
     /* I.S.: sembarang
     F.S.: Program dihentikan */
 
-void PLAYGAME(Queue *game_queue);
+void PLAYGAME(TabWord games, Queue *game_queue);
 
-void SKIPGAME(Queue *game_queue);
+void SKIPGAME(TabWord games, Queue *game_queue);
 
 void CREATEGAME(TabWord *T);
 

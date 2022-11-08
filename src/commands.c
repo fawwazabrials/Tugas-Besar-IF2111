@@ -53,7 +53,7 @@ void quit() {
     return;
 }
 
-void PLAYGAME(Queue *game_queue)
+void PLAYGAME(TabWord games, Queue *game_queue)
 {   
     if (!isEmpty(*game_queue)) //kalo game_queue gk kosong
     {
@@ -71,14 +71,14 @@ void PLAYGAME(Queue *game_queue)
         char* r = "RNG";
         char* dd = "Diner Dash";
         
-        if (isKataEqual((*game_queue).buffer[(*game_queue).idxHead], r))
+        if (ValidateCommand((*game_queue).buffer[(*game_queue).idxHead], r))
         {
             printf("Loading %s ...\n", (*game_queue).buffer[(*game_queue).idxHead]);
             dequeue(game_queue, &gamename);
             run_rng();
         }
 
-        else if (isKataEqual((*game_queue).buffer[(*game_queue).idxHead], dd))
+        else if (ValidateCommand((*game_queue).buffer[(*game_queue).idxHead], dd))
         {
             printf("Loading %s ...\n", (*game_queue).buffer[(*game_queue).idxHead]);
             dequeue(game_queue, &gamename);
@@ -92,11 +92,11 @@ void PLAYGAME(Queue *game_queue)
     }
     else
     {
-       QUEUEGAME(); //panggil prosedur QUEUEGAME jika game_queue kosong
+       QUEUEGAME(games, game_queue); //panggil prosedur QUEUEGAME jika game_queue kosong
     }
 }
 
-void SKIPGAME(Queue *game_queue)
+void SKIPGAME(TabWord games, Queue *game_queue)
 {
     if (!isEmpty(*game_queue))
     {
@@ -122,7 +122,7 @@ void SKIPGAME(Queue *game_queue)
                 dequeue(game_queue,&gamename);
             }
 
-            PLAYGAME(); 
+            PLAYGAME(games, game_queue); 
         }
         else
         {
@@ -137,7 +137,7 @@ void SKIPGAME(Queue *game_queue)
 
     else
     {
-        QUEUEGAME(); //panggil prosedur QUEUEGAME jika game_queue kosong
+        QUEUEGAME(games, game_queue); //panggil prosedur QUEUEGAME jika game_queue kosong
     }
 }
 
