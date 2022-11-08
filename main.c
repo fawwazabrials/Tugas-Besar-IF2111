@@ -75,6 +75,7 @@ int main() {
                 ADVWORDFILE();
                 SetEl(&games, i, currentWord);
             }
+            
             printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
             working = true;
             printf("Create game(CREATE GAME) | Save your  data (save \"namafile\") | Help(HELP)\n");\
@@ -83,7 +84,7 @@ int main() {
             printf("ENTER COMMAND : ");
             scan("%c %c", &command1, &command2, &inputint);
         }
-        
+
         else if(ValidateCommand(command1, "HELP") && working){//INPUT ADALAH HELP
             //fungsi help
             printf("Create game(CREATE GAME) | Save your  data (save \"namafile\") | Help(HELP)\n");\
