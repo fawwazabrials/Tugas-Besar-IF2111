@@ -109,7 +109,7 @@ M0      | 2              | 3         | 15000
 M1      | 3              | 1         | 15000
 M2      | 1              | 4         | 15000
 */
-    printf("Daftar Pesanan\n");
+    printf("Daftar Pesanan\t\t\t  Banyaknya pesanan: %d\n", length(q));
     printf("Makanan\t| Durasi memasak\t| Ketahanan\t| Harga\n");
     printf("--------------------------------------------------------\n");
     if (isEmpty(q)) {

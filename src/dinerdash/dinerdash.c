@@ -11,7 +11,6 @@
 /*
     TO DO :
     * buat skema valid untuk cooking and serve (co: kalo mau COOK M1, M1 harus ada di daftar Pesanan)
-
 */
 
 ListID ID() {
@@ -94,9 +93,6 @@ void serving(Queue *QS, Queue *QF, char* commandID, int *saldo) {
             printf("Berhasil menyajikan makanan %s\n", val.makanan);
             *saldo = *saldo + val.harga;
 
-            // Dequeue from Food 
-            // dequeue(QF, &val);
-
             // Search and Delete from Food (Treating it like a normal array)
             int i = IDX_HEAD(*QF);
             while (i <= IDX_TAIL(*QF)) {
@@ -141,7 +137,8 @@ void moveToServe(Queue *QC, Queue *QS) {
             if ((*QC).buffer[i].durasi == 0) {
                 val = (*QC).buffer[i];
                 enqueue(QS, val);
-                dequeue(QC, &val);
+                // dequeue(QC, &val);
+                ForceDeleteAt(QC, i);
             }
             i++;
         }
@@ -216,7 +213,7 @@ void dinerdash() {
     separateSpace(inputCommand, command, commandID);
 
     /* VALIDASI INPUT COMMAND */
-    while (! sameString(command, "COOK") && ! sameString(command, "SERVE") && ! sameString(command, "SKIP") && ! IsIn(food, commandID)) {
+    while (! sameString(command, "COOK") && ! sameString(command, "SERVE") && ! sameString(command, "SKIP")) {
         printf("Command tidak valid.\n");
         printf("MASUKKAN COMMAND (COOK/SERVE/SKIP): \n");
         scan("%s", &inputWord, &placeholder1, &placeholder2);
@@ -255,7 +252,7 @@ void dinerdash() {
             serving(&serve, &food, commandID, &saldo);
             countServe++;
         } else if (sameString(command, "SKIP")) {
-            printf("ROUND KE-%d DI SKIP.\n");
+            printf("ROUND KE-%d DI SKIP.\n", round);
         }
 
         printf("\n======================== ROUND %d ========================\n\n", round);
@@ -266,6 +263,17 @@ void dinerdash() {
         displayQueueCooked(cook);
         displayQueueRTS(serve);
 
+        /* GAME OVER */
+        if (length(food) > 7) {
+            printf("Game Over! Antrian pelanggan sudah melebihi 7 orang.\n");
+            printf("Saldo akhir Anda adalah %d.\n", saldo);
+            break;
+        } else if (countServe >= 15) {
+            printf("Game Over! Jumlah pelanggan yang sudah dilayani sudah mencapai 15 orang.\n");
+            printf("Saldo akhir Anda adalah %d.\n", saldo);
+            break;
+        }
+
         /* Input Command */
         printf("MASUKKAN COMMAND (COOK/SERVE/SKIP): \n");
         scan("%s", &inputWord, &placeholder1, &placeholder2);
@@ -273,7 +281,7 @@ void dinerdash() {
         separateSpace(inputCommand, command, commandID);
 
         /* VALIDASI INPUT COMMAND */
-        while (! sameString(command, "COOK") && ! sameString(command, "SERVE") && ! sameString(command, "SKIP") && ! IsIn(food, commandID)) {
+        while (! sameString(command, "COOK") && ! sameString(command, "SERVE") && ! sameString(command, "SKIP")) {
             printf("Command tidak valid.\n");
             printf("MASUKKAN COMMAND (COOK/SERVE/SKIP): \n");
             scan("%s", &inputWord, &placeholder1, &placeholder2);
@@ -283,15 +291,6 @@ void dinerdash() {
 
         /* PENAMBAHAN BABAK */
         round++;
-    }
-
-    /* GAME OVER */
-    if (length(food) > 7) {
-        printf("Game Over! Antrian pelanggan sudah melebihi 7 orang.\n");
-        printf("Saldo akhir Anda adalah %d.\n", saldo);
-    } else if (countServe >= 15) {
-        printf("Game Over! Jumlah pelanggan yang sudah dilayani sudah mencapai 15 orang.\n");
-        printf("Saldo akhir Anda adalah %d.\n", saldo);
     }
 
 }
