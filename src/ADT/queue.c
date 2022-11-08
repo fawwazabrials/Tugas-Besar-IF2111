@@ -41,6 +41,16 @@ int length(Queue q) {
 }
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
 
+boolean isInQueue(Queue q, Word w) {
+    boolean r = false;
+    int i,j=IDX_HEAD(q);
+    for (i=0;i<length(q);i++) {
+        if (isKataEqual(q.buffer[j],w)) {r=true;}
+        j = (j+1) % CAPACITY;
+    }
+    return r;
+}
+
 /* *** Primitif Add/Delete *** */
 void enqueue(Queue *q, ElTypeQueue val) {
     // KAMUS LOKAL
