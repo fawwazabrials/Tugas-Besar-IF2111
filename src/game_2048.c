@@ -50,28 +50,26 @@ void run_2048() {
         // Main algo buat gamenya
         wrong = false;
         if (ValidateCommand(kode, "W")) {
-            for (i=0; i<board.NKolEff-1; i++) {
-                geserMatriksAtas(&board, false);
-                geserMatriksAtas(&board, true);
-            }
+            for (i=0; i<board.NKolEff; i++) geserMatriksAtas(&board, false);
+            geserMatriksAtas(&board, true);
+            for (i=0; i<board.NKolEff; i++) geserMatriksAtas(&board, false);
         }
         else if (ValidateCommand(kode, "A")) {
-            for (i=0; i<board.NKolEff-1; i++) {
-                geserMatriksKiri(&board, false);
-                geserMatriksKiri(&board, true);
-            }
+            for (i=0; i<board.NKolEff; i++) geserMatriksKiri(&board, false);
+            geserMatriksKiri(&board, true);
+            for (i=0; i<board.NKolEff; i++) geserMatriksKiri(&board, false);
+
         }
         else if (ValidateCommand(kode, "S")) {
-            for (i=0; i<board.NKolEff-1; i++) {
-                geserMatriksBawah(&board, false);
-                geserMatriksBawah(&board, true);
-            }
+            for (i=0; i<board.NKolEff; i++) geserMatriksBawah(&board, false);
+            geserMatriksBawah(&board, true);
+            for (i=0; i<board.NKolEff; i++) geserMatriksBawah(&board, false);
+
         }
         else if (ValidateCommand(kode, "D")) {
-            for (i=0; i<board.NKolEff-1; i++) {
-                geserMatriksKanan(&board, false);
-                geserMatriksKanan(&board, true);
-            }
+            for (i=0; i<board.NKolEff; i++) geserMatriksKanan(&board, false);
+            geserMatriksKanan(&board, true);
+            for (i=0; i<board.NKolEff; i++) geserMatriksKanan(&board, false);
         }
         else if (ValidateCommand(kode, "QUIT")) loop = false;
         else wrong = true;
