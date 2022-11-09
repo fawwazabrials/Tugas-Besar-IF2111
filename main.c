@@ -80,7 +80,7 @@ int main() {
                 list_game(games);
             }
             else if(ValidateCommand(command1,"DELETE") && ValidateCommand(command2,"GAME")){// INPUT ADALAH DELETE GAME
-                printf("delte game");
+                DELETEGAME(&games,antrian_game));
             }
             else if(ValidateCommand(command1,"QUEUE") && ValidateCommand(command2,"GAME")){// INPUT ADALAH QUEUE GAME
                 QUEUEGAME(games,&antrian_game);
@@ -92,7 +92,7 @@ int main() {
                 SKIPGAME(games,&antrian_game);
             }
             else if(ValidateCommand(command1,"SAVE")){// INPUT ADALAH SAVE
-                printf("save");
+                SAVE(games;command2);
             }
             else if(ValidateCommand(command1,"QUIT")){// INPUT ADALAH QUIT
                 loop = false;
