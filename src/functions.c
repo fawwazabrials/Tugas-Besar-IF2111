@@ -142,3 +142,54 @@ void clearScreen() {
     system("cls");
 }
 
+
+int lengthString(char *str) {
+    /* Mengembalikan panjang string */
+    /* I.S. str terdefinisi */
+    /* F.S. Mengembalikan panjang string */
+    int i = 0;
+    while (*str != '\0') {
+        i++;
+        str++;
+    }
+    return i;
+}
+
+boolean sameString(char* str1, char* str2) {
+    /* Mengembalikan true jika str1 dan str2 sama */
+    /* I.S. str1 dan str2 terdefinisi */
+    /* F.S. Mengembalikan true jika str1 dan str2 sama */
+    if (lengthString(str1) != lengthString(str2)) {
+        return false;
+    } else {
+        while (*str1 != '\0') {
+            if (*str1 != *str2) {
+                return false;
+            }
+            str1++;
+            str2++;
+        }
+        return true;
+    }
+}
+
+void separateSpace(char *str, char *str1, char *str2) {
+    /* Memisahkan string str menjadi dua string str1 dan str2 */
+    /* I.S. str terdefinisi, terdiri dari dua kata yang terpisahkan oleh spasi */
+    /* F.S. str1 dan str2 terdefinisi dan berisi kata yang telah dipisahkan */
+    int i = 0;
+    while (*str != ' ') {
+        *(str1 + i) = *str;
+        str++;
+        i++;
+    }
+    *(str1 + i) = '\0';
+    str++;
+    i = 0;
+    while (*str != '\0') {
+        *(str2 + i) = *str;
+        str++;
+        i++;
+    }
+    *(str2 + i) = '\0';
+}
