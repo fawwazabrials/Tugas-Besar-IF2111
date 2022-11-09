@@ -175,6 +175,7 @@ void dinerdash() {
     Word inputWord;
     Word placeholder1;
     int placeholder2;
+    boolean available;
 
     /* INISIALISASI ADT */
     CreateQueue(&food);
@@ -223,36 +224,40 @@ void dinerdash() {
 
     /* GAME LOOP */
     while (length(food) <= 7 && countServe <= 15) {
+        available = IsIn(food, commandID);
         /* Permainan selesai apabila antrian melebihi 7 pelanggan atau
         jumlah pelanggan yang sudah dilayani mencapai 15 pelanggan. */
 
-        /* MENAMBAHKAN PESANAN SECARA OTOMATIS */
-        jumlahPesanan++;
-        Food new = newOrder(food, jumlahPesanan-1);
-        enqueue(&food, new);
+        if (available) {
+            /* MENAMBAHKAN PESANAN SECARA OTOMATIS */
+            jumlahPesanan++;
+            Food new = newOrder(food, jumlahPesanan-1);
+            enqueue(&food, new);
 
-        /* PENGURANGAN DURASI MEMASAK DAN KETAHANAN MAKANAN */
-        if (! isEmpty(cook)) {
-            autoSubstract(&cook);
-        }
-        if ( ! isEmpty(serve)) {
-            autoSubstract(&serve);
-        }
+            /* PENGURANGAN DURASI MEMASAK DAN KETAHANAN MAKANAN */
+            if (! isEmpty(cook)) {
+                autoSubstract(&cook);
+            }
+            if ( ! isEmpty(serve)) {
+                autoSubstract(&serve);
+            }
 
-        /* MEMINDAHKAN MAKANAN DARI COOK KE SERVE APABILA DURASI = 0 */
-        moveToServe(&cook, &serve);
+            /* MEMINDAHKAN MAKANAN DARI COOK KE SERVE APABILA DURASI = 0 */
+            moveToServe(&cook, &serve);
 
-        /* MENGHILANGKAN MAKANAN YANG BASI */
-        checkBasi(&serve);
+            /* MENGHILANGKAN MAKANAN YANG BASI */
+            checkBasi(&serve);
 
-        /* PENYOCOKAN DENGAN COMMAND */
-        if (sameString(command, "COOK")) {
-            cooking(food, &cook, commandID);
-        } else if (sameString(command, "SERVE")) {
-            serving(&serve, &food, commandID, &saldo);
-            countServe++;
-        } else if (sameString(command, "SKIP")) {
-            printf("ROUND KE-%d DI SKIP.\n", round);
+            /* PENYOCOKAN DENGAN COMMAND */
+            if (sameString(command, "COOK")) {
+                cooking(food, &cook, commandID);
+            } else if (sameString(command, "SERVE")) {
+                serving(&serve, &food, commandID, &saldo);
+                countServe++;
+            } else if (sameString(command, "SKIP")) {
+                printf("ROUND KE-%d DI SKIP.\n", round);
+            }
+
         }
 
         printf("\n======================== ROUND %d ========================\n\n", round);
