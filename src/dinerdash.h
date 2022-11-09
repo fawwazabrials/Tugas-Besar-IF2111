@@ -1,5 +1,5 @@
-#include "boolean.h"
-#include "q_dinerdash.h"
+#include "ADT/boolean.h"
+#include "ADT/q_dinerdash.h"
 
 typedef struct {
     char* ID;

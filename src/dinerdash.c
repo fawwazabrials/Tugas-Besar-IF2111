@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include "dinerdash.h"
-#include "q_dinerdash.h"
-#include "q_dinerdash.c"                // Jangan lupa delete kalo udah selese
-#include "../functions.c"               // Jangan lupa ganti jadi .h
-#include "../ADT/mesinkarakter.h"
-#include "../ADT/mesinkarakter.c"       // Jangan lupa delete kalo udah selese
-#include "../ADT/mesinkata.h"
-#include "../ADT/mesinkata.c"           // Jangan lupa delete kalo udah selese
+#include "ADT/q_dinerdash.h"
+#include "ADT/q_dinerdash.c"                // Jangan lupa delete kalo udah selese
+#include "functions.c"               // Jangan lupa ganti jadi .h
+#include "ADT/mesinkarakter.h"
+#include "ADT/mesinkarakter.c"       // Jangan lupa delete kalo udah selese
+#include "ADT/mesinkata.h"
+#include "ADT/mesinkata.c"           // Jangan lupa delete kalo udah selese
 
 /*
     TO DO :
@@ -117,7 +117,8 @@ void checkBasi(Queue *QC) {
     if (! isEmpty(*QC)) {
         while (i <= IDX_TAIL(*QC)) {
             if ((*QC).buffer[i].ketahanan == -1) {
-                dequeue(QC, &(*QC).buffer[i]);
+                // dequeue(QC, &(*QC).buffer[i]);
+                ForceDeleteAt(QC, i);
                 printf("Makanan %s sudah basi.\n", (*QC).buffer[i].makanan);
             }
             i++;
@@ -260,6 +261,8 @@ void dinerdash() {
 
             /* PENAMBAHAN BABAK */
             round++;
+        } else {
+            printf("Makanan %s tidak tersedia.\nBabak tidak bertambah, silakan masukkan command lagi.\n", commandID);
         }
 
         printf("\n======================== ROUND %d ========================\n\n", round);
