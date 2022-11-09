@@ -139,7 +139,7 @@ void clearScreen() {
     // KAMUS LOKAL
 
     // ALGORITMA
-    system("cls");
+    system("clear");
 }
 
 
