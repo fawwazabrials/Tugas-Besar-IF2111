@@ -30,4 +30,5 @@ void SAVE(TabWord gl, Word filename);
 
 void help();
 
+void START (Word a,TabWord *T);
 #endif
