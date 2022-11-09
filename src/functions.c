@@ -139,7 +139,11 @@ void clearScreen() {
     // KAMUS LOKAL
 
     // ALGORITMA
-    system("clear");
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
 }
 
 
