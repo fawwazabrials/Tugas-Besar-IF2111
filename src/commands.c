@@ -58,7 +58,7 @@ void PLAYGAME(TabWord games, Queue *game_queue)
         {
             printf("%d. %s\n", i+1, (*game_queue).buffer[i]);
             j++;
-        }
+        } //displayequeue
 
         ElTypeQueue gamename; //Tempat sampah pas dequeue
         char* r = "RNG";
