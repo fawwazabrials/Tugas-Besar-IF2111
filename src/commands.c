@@ -172,7 +172,7 @@ void SAVE(TabWord gl, Word filename) {
     char saveLine[51] = {0};
     FILE *saveFile = fopen(a,"w");
     fprintf(saveFile,"%d\n",gl.Neff);
-    for (i=1;i<gl.Neff;i++) {
+    for (i=1;i<=gl.Neff;i++) {
         for (j=0;j<gl.TI[i].Length;j++) {
             saveLine[j] = gl.TI[i].TabWord[j];
             saveLine[j+1] = 0;
