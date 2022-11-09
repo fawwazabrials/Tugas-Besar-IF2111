@@ -51,36 +51,52 @@ void PLAYGAME(TabWord games, Queue *game_queue)
     if (!isEmpty(*game_queue)) //kalo game_queue gk kosong
     {
         printf("Berikut adalah daftar Game-mu\n");
-    
-        int i;
-        int j = 0;
-        for (i = (*game_queue).idxHead; i <= (*game_queue).idxTail; i++)
-        {
-            printf("%d. %s\n", i+1, (*game_queue).buffer[i]);
-            j++;
-        } //displayequeue
+
+        DisplayQueue(*game_queue);
 
         ElTypeQueue gamename; //Tempat sampah pas dequeue
-        char* r = "RNG";
-        char* dd = "Diner Dash";
         
-        if (ValidateCommand((*game_queue).buffer[(*game_queue).idxHead], r))
+        if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 1)
         {
-            printf("Loading %s ...\n", (*game_queue).buffer[(*game_queue).idxHead]);
+            printf("Loading RNG ...\n");
             dequeue(game_queue, &gamename);
             run_rng();
         }
 
-        else if (ValidateCommand((*game_queue).buffer[(*game_queue).idxHead], dd))
+        else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 2)
         {
-            printf("Loading %s ...\n", (*game_queue).buffer[(*game_queue).idxHead]);
+            printf("Loading Diner Dash ...\n");
             dequeue(game_queue, &gamename);
             dinerdash(); //ganti nama prosedur gamenya kalo dah jadi
+        }
+
+        else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 3)
+        {
+            printf("Game DINOSAUR IN EARTH masih dalam maintenance, belum dapat dimainkan.\nSilakan pilih game lain.\n");
+            dequeue(game_queue, &gamename);
+        }
+
+        else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 4)
+        {
+            printf("Game RISEWOMAN masih dalam maintenance, belum dapat dimainkan.\nSilakan pilih game lain.\n");
+            dequeue(game_queue, &gamename);
+        }
+        else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 5)
+        {
+            printf("Game EIFFEL TOWER masih dalam maintenance, belum dapat dimainkan.\nSilakan pilih game lain.\n");
+            dequeue(game_queue, &gamename);
+        }
+        
+        else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 6)
+        {
+            printf("Loading 2048 ...\n");
+            dequeue(game_queue, &gamename);
+            run_2048(); 
         }
         
         else
         {
-            printf("Game %s masih dalam maintenance, belum dapat dimainkan.\nSilakan pilih game lain.\n", (*game_queue).buffer[(*game_queue).idxHead]);
+            printf("gibran fasha\n");
         }
     }
     else
