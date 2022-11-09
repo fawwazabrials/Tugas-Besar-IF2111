@@ -62,12 +62,9 @@ int main() {
         else if (ValidateCommand(command1, "LOAD")) { // INPUT ADALAH LOAD
             /* TODO : Tulis kode buat LOAD diatas sini, sebenernya tinggal 
              * copas SAVE aja tapi di STARTWORDFILE() nama filenya diganti 
-             * sesuai masukan user, masukan nama file ada di command2 */
+             * sesuai masukan user, masukan path ada di command2 */
             //fungsi load
-            char* str1 = "data/";
-            char *path = concatString(str1, WordToString(command2));
-
-            STARTWORDFILE(path);
+            STARTWORDFILE(WordToString(command2));
             len = katatoint(currentWord);
             for (i = 1; i <= len; i++)
             {
