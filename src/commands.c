@@ -150,7 +150,7 @@ void DELETEGAME (TabWord *gl, Queue gq) {
     printf("\n");
     // Proses
     if (IsIdxEff(*gl,ph2)) {
-        if ((ph2<=5)||(isInQueue(gq,gl->TI[ph2]))) {
+        if ((ph2<=6)||(isInQueue(gq,gl->TI[ph2]))) {
             printf("Game gagal dihapus.\n");
         } else {
             DeleteAt(gl,ph2);
