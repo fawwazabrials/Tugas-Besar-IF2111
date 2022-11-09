@@ -258,6 +258,8 @@ void dinerdash() {
                 printf("ROUND KE-%d DI SKIP.\n", round);
             }
 
+            /* PENAMBAHAN BABAK */
+            round++;
         }
 
         printf("\n======================== ROUND %d ========================\n\n", round);
@@ -293,9 +295,6 @@ void dinerdash() {
             inputCommand = WordToString(inputWord);
             separateSpace(inputCommand, command, commandID);
         }
-
-        /* PENAMBAHAN BABAK */
-        round++;
     }
 
 }
