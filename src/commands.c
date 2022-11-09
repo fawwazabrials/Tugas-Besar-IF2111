@@ -149,8 +149,8 @@ void DELETEGAME (TabWord *gl, Queue gq) {
     scan("%d", &CCommand, &ph1, &ph2);
     printf("\n");
     // Proses
-    if (isIdxEff(*gl,ph2)) {
-        if ((ph2<=4)||(isInQueue(gq,gl.TI[ph2]))) {
+    if (IsIdxEff(*gl,ph2)) {
+        if ((ph2<=5)||(isInQueue(gq,gl->TI[ph2]))) {
             printf("Game gagal dihapus.\n");
         } else {
             DeleteAt(gl,ph2);
@@ -167,16 +167,17 @@ void SAVE(TabWord gl, Word filename) {
     int i,j;
     for (i=0;i<filename.Length;i++) {
         a[8+i] = filename.TabWord[i];
-        a[9+i] = "\0";
+        a[9+i] = '\0';
     }
     char saveLine[51] = {0};
     FILE *saveFile = fopen(a,"w");
-    for (i=0;i<gl.Neff;i++) {
-        for (j=0;i<gl.TI[i].Length;j++) {
+    fprintf(saveFile,"%d\n",gl.Neff);
+    for (i=1;i<gl.Neff;i++) {
+        for (j=0;j<gl.TI[i].Length;j++) {
             saveLine[j] = gl.TI[i].TabWord[j];
             saveLine[j+1] = 0;
         }
-        fputs(saveLine,saveFile);fputc('\n',saveFile);
+        fprintf(saveFile,"%s\n",saveLine);
     }
     fclose(saveFile);
     printf("Save file berhasil disimpan.\n");
