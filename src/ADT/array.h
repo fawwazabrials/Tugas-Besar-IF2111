@@ -58,6 +58,10 @@ IdxTypeArray GetLastIdx (TabWord T);
 ElTypeArray GetElmt (TabWord T, IdxTypeArray i);
 /* Prekondisi : Tabel tidak kosong, i antara FirstIdx(T)..LastIdx(T) */
 /* Mengirimkan elemen tabel yang ke-i */
+int GetElmtIdx (TabWord T, Word elmt);
+/* Prekondisi: bebas
+	Mengirimkan indeks elemen tabel pertama yang berisi sama dengan elmt.
+	Mengirimkan IdxUndef (-999) jika tidak ditemukan (hilang coy) */
 
 /* *** Selektor SET : Mengubah nilai TABEL dan elemen tabel *** */
 /* Untuk type private/limited private pada bahasa tertentu */

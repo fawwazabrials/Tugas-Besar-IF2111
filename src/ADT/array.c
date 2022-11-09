@@ -89,6 +89,16 @@ ElTypeArray GetElmt (TabWord T, IdxTypeArray i) {
     return (T.TI[i]);
 }
 
+int GetElmtIdx (TabWord T, Word elmt) {
+    /* Prekondisi: bebas
+       Mengirimkan indeks elemen tabel pertama yang berisi sama dengan elmt.
+       Mengirimkan IdxUndef (-999) jika tidak ditemukan (hilang coy) */
+    for (int i=1;i<=T.Neff;i++) {
+        if (isKataEqual(T.TI[i],elmt)) {return i;}
+    }
+    return IdxUndef;
+}
+
 /* *** Selektor SET : Mengubah nilai TABEL dan elemen tabel *** */
 /* Untuk type private/limited private pada bahasa tertentu */
 void SetTab (TabWord Tin, TabWord *Tout) {
