@@ -17,15 +17,16 @@ void list_game (TabWord list);
     I.S     : listglobal yang sudah terdefenisi
     F.S     : Menambilkan isi dari list ke layar
     */
-void quit();
-    /* I.S.: sembarang
-    F.S.: Program dihentikan */
 
 void PLAYGAME(TabWord games, Queue *game_queue);
 
 void SKIPGAME(TabWord games, Queue *game_queue);
 
 void CREATEGAME(TabWord *T);
+
+void DELETEGAME(TabWord *gl, Queue gq);
+
+void SAVE(TabWord gl, Word filename);
 
 void help();
 

@@ -89,6 +89,16 @@ ElTypeArray GetElmt (TabWord T, IdxTypeArray i) {
     return (T.TI[i]);
 }
 
+int GetElmtIdx (TabWord T, Word elmt) {
+    /* Prekondisi: bebas
+       Mengirimkan indeks elemen tabel pertama yang berisi sama dengan elmt.
+       Mengirimkan IdxUndef (-999) jika tidak ditemukan (hilang coy) */
+    for (int i=1;i<=T.Neff;i++) {
+        if (isKataEqual(T.TI[i],elmt)) {return i;}
+    }
+    return IdxUndef;
+}
+
 /* *** Selektor SET : Mengubah nilai TABEL dan elemen tabel *** */
 /* Untuk type private/limited private pada bahasa tertentu */
 void SetTab (TabWord Tin, TabWord *Tout) {
@@ -214,4 +224,11 @@ void InsertLast (TabWord *T, ElTypeArray X) {
         T->TI[idxLast + 1] = X;
         T->Neff++;
     }
+}
+
+void DeleteAt (TabWord *T, int id) {
+    for (int i=id;i<T->Neff-1;i++) {
+        T->TI[i] = T->TI[i+1];
+    }
+    T->Neff--;
 }
