@@ -166,3 +166,16 @@ void help() {
     printf("11. HELP \t\t: Mengeluarkan list ini.\n");
 
 }
+void START (Word a,TabWord *T){
+    int i,len;
+    
+    if (ValidateCommand(a, "START")) { // INPUT ADALAH START
+            STARTWORDFILE("config.txt");
+            len = katatoint(currentWord);
+            for (i=1; i<=len; i++) {
+                ADV();
+                ADVWORDFILE();
+                SetEl(&T, i, currentWord);
+            }
+    }
+}

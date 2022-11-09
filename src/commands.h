@@ -29,4 +29,5 @@ void CREATEGAME(TabWord *T);
 
 void help();
 
+void START (Word a,TabWord *T);
 #endif
