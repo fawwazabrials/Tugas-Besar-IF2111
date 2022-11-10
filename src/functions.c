@@ -33,7 +33,7 @@ int katatoint(Word W) {
     int i, x = 0;
 
     // ALGORITMA
-    if (isKataInt(W)) {
+    if (isKataInt(W) && W.Length > 0) {
         for (i=0; i<W.Length; i++) {
             x = (x*10) + (W.TabWord[i] - '0');
         } 

@@ -78,5 +78,5 @@ void run_2048() {
     }
 
     waktu_akhir = time(NULL);
-    printf("\n\nGAME OVER!\nSkor-mu adalah %d\nWaktu bermain %02d:%02d", score, (waktu_akhir-waktu_awal)/60, (waktu_akhir-waktu_awal)%60);
+    printf("\n\nGAME OVER!\nSkor-mu adalah %d\nWaktu bermain %02d:%02d\n\n", score, (waktu_akhir-waktu_awal)/60, (waktu_akhir-waktu_awal)%60);
 }

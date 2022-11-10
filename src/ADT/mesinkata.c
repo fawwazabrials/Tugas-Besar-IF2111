@@ -52,6 +52,7 @@ void ADVWORD() {
     // KAMUS LOKAL
 
     // ALGORITMA
+    ResetCurrentWord();
     IgnoreBlanks();
     if (currentChar == MARK) EndWord = true;
     else {
@@ -109,6 +110,7 @@ void ADVWORDFILE() {
     // KAMUS LOKAL
 
     // ALGORITMA
+    ResetCurrentWord();
     EndWord = false;
     if (currentChar == MARK) EndWord = true;
     else {
