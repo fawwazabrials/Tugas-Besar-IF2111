@@ -27,7 +27,7 @@ boolean isEmptyDD(Queue_DD q) {
 boolean isFullDD(Queue_DD q) {
 /* Mengirim true jika tabel penampung elemen q sudah penuh */
 /* yaitu IDX_TAIL_DD akan selalu di belakang IDX_HEAD_DD dalam buffer melingkar*/
-    return (lengthDD(q) == CAPACITY);
+    return (lengthDD(q) == CAPACITY_QUEUE_DD);
 }
 
 int lengthDD(Queue_DD q) {
@@ -86,7 +86,7 @@ void ForceDeleteAt(Queue_DD *q, int i) {
         }
         IDX_TAIL_DD(*q)--;
         if (IDX_TAIL_DD(*q) < 0) {
-            IDX_TAIL_DD(*q) == CAPACITY-1;
+            IDX_TAIL_DD(*q) == CAPACITY_QUEUE_DD-1;
         }
     }
 }

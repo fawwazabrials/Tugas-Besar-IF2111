@@ -7,7 +7,7 @@
 #include "boolean.h"
 
 #define IDX_UNDEF -1
-#define CAPACITY 20
+#define CAPACITY_QUEUE_DD 20
 
 /* Definisi elemen dan address */
 typedef struct {
@@ -20,7 +20,7 @@ typedef struct {
 typedef Food ElTypeQDD;
 
 typedef struct {
-	ElTypeQDD buffer[CAPACITY]; 
+	ElTypeQDD buffer[CAPACITY_QUEUE_DD]; 
 	int idxHeadQDD;
 	int idxTailQDD;
 } Queue_DD;
