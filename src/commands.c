@@ -42,7 +42,7 @@ void list_game(TabWord list){
    //Kamus Lokal
 
    //Algoritma
-   printf("Berikut adalah daftar game yang tersedia");
+   printf("Berikut adalah daftar game yang tersedia\n");
    DisplayArray(list);
 }
 
@@ -53,51 +53,46 @@ void PLAYGAME(TabWord games, Queue *game_queue)
         printf("Berikut adalah daftar Game-mu\n");
 
         DisplayQueue(*game_queue);
-
         ElTypeQueue gamename; //Tempat sampah pas dequeue
-        
         if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 1)
         {
             printf("Loading RNG ...\n");
-            dequeue(game_queue, &gamename);
             run_rng();
         }
 
         else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 2)
         {
             printf("Loading Diner Dash ...\n");
-            dequeue(game_queue, &gamename);
             dinerdash(); //ganti nama prosedur gamenya kalo dah jadi
         }
 
         else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 3)
         {
             printf("Game DINOSAUR IN EARTH masih dalam maintenance, belum dapat dimainkan.\nSilakan pilih game lain.\n");
-            dequeue(game_queue, &gamename);
         }
 
         else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 4)
         {
             printf("Game RISEWOMAN masih dalam maintenance, belum dapat dimainkan.\nSilakan pilih game lain.\n");
-            dequeue(game_queue, &gamename);
         }
         else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 5)
         {
             printf("Game EIFFEL TOWER masih dalam maintenance, belum dapat dimainkan.\nSilakan pilih game lain.\n");
-            dequeue(game_queue, &gamename);
         }
         
         else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 6)
         {
             printf("Loading 2048 ...\n");
-            dequeue(game_queue, &gamename);
             run_2048(); 
         }
         
         else
         {
+            printf("Loading "); displayWord(HEAD((*game_queue))); printf(" ... \n");
             run_random();
         }
+
+        dequeue(game_queue, &gamename);
     }
     else
     {
