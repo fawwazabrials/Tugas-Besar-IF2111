@@ -22,7 +22,7 @@ void run_2048() {
     waktu_awal = time(NULL);
 
     while (!isMatriksFull(board) && loop) {
-        clearScreen();
+        splashScreen();
         if (wrong) printf("Masukkan kode yang benar!");
         else { // GENERATE NEW RANDOM NUMBER ON POINT
             if (!undo) {
