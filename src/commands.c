@@ -111,13 +111,7 @@ void SKIPGAME(TabWord games, Queue *game_queue)
     {
         printf("Berikut adalah daftar Game-mu\n");
     
-        int i;
-        int j = 0;
-        for (i = (*game_queue).idxHead; i <= (*game_queue).idxTail; i++)
-        {
-            printf("%d. %s\n", j, (*game_queue).buffer[i]);
-            j++;
-        }
+        DisplayQueue(*game_queue);
 
         ADVWORD();
         int n = currentWord.TabWord[0] - '0';

@@ -19,8 +19,15 @@ void list_game (TabWord list);
     */
 
 void PLAYGAME(TabWord games, Queue *game_queue);
+/*I.S. : game_queue terdefinisi
+  F.S. : game_queue terdequeue dan dijalankan
+  Proses : mengeluarkan game dari queue dan menjalankannya
+*/
 
 void SKIPGAME(TabWord games, Queue *game_queue);
+/*I.S. : game_queue terdefinisi
+F.S. : mengskip n buah game sesuai langkah yang diinginkan dari queue dan menjalankan game jika ada di game_queue
+Proses :game_queue terdequeue sesuai berapa langkah skip yang diinginkan dan menjalankan game selanjutnya jika masih ada game di game_queue*/
 
 void CREATEGAME(TabWord *T);
 
