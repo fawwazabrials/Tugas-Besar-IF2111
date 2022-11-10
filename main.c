@@ -48,8 +48,8 @@ int main() {
         else if (ValidateCommand(command1, "LOAD")) { // INPUT ADALAH LOAD
             /* TODO : Tulis kode buat LOAD diatas sini, sebenernya tinggal 
              * copas SAVE aja tapi di STARTWORDFILE() nama filenya diganti 
-             * sesuai masukan user, masukan nama file ada di command2 */
-            
+             * sesuai masukan user, masukan path ada di command2 */
+            LOAD(command2, &games);
             printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
             loop = false;
         }
