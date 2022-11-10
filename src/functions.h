@@ -67,4 +67,9 @@ void separateSpace(char *str, char *str1, char *str2);
    I.S. : str terdefinisi, terdiri dari dua kata yang terpisahkan oleh spasi 
    F.S. : str1 dan str2 terdefinisi dan berisi kata yang telah dipisahkan */
 
+void splashScreen();
+/* Mengapus seluruh isi dari command line dan mencetak tulisan BNMO diatas CLI.
+   I.S. : Sembarang, command line bisa memiliki isi atau kosong 
+   F.S. : Di paling atas CLI ditampilkan tulisan BNMO dan sisanya dihapuskan */
+
 #endif

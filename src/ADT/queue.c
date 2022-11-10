@@ -97,6 +97,6 @@ void DisplayQueue(Queue q) {
 
     for (i = 0; i<length(q); i++) {
         printf("%d. ", i+1);
-        displayWord(q.buffer[i]);
+        displayWord(q.buffer[(IDX_HEAD(q) + i) % CAPACITY_QUEUE]);
     }
 }

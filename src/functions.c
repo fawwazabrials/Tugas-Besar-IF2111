@@ -33,7 +33,7 @@ int katatoint(Word W) {
     int i, x = 0;
 
     // ALGORITMA
-    if (isKataInt(W)) {
+    if (isKataInt(W) && W.Length > 0) {
         for (i=0; i<W.Length; i++) {
             x = (x*10) + (W.TabWord[i] - '0');
         } 
@@ -133,7 +133,7 @@ char* WordToString(Word W) {
 
 
 void clearScreen() {
-/* Mengapus seluruh isi dari command line. Hanya berguna untuk OS Linux. 
+/* Mengapus seluruh isi dari command line.
    I.S. : Sembarang, command line bisa memiliki isi atau kosong 
    F.S. : Command line kosong */
     // KAMUS LOKAL
@@ -196,4 +196,15 @@ void separateSpace(char *str, char *str1, char *str2) {
         i++;
     }
     *(str2 + i) = '\0';
+}
+
+void splashScreen() {
+/* Mengapus seluruh isi dari command line dan mencetak tulisan BNMO diatas CLI.
+   I.S. : Sembarang, command line bisa memiliki isi atau kosong 
+   F.S. : Di paling atas CLI ditampilkan tulisan BNMO dan sisanya dihapuskan */
+    // KAMUS LOKAL
+
+    // ALGORTIMA
+    clearScreen();
+    printf("============================================= BNMO =============================================\n\n");
 }
