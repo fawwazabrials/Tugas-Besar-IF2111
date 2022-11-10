@@ -4,7 +4,7 @@
 
 int main() {
     Matriks M;
-    int i;
+    int i, placeholder=0;
 
     MakeMatriks(4,4,&M);
     /* M.Mem[0][3] = 2;
@@ -24,9 +24,9 @@ int main() {
 
     displayMatriks(M);
 
-    for (i=0; i<3; i++) geserMatriksBawah(&M, false);
-    geserMatriksBawah(&M, true);
-    for (i=0; i<3; i++) geserMatriksBawah(&M, false);
+    for (i=0; i<3; i++) geserMatriksBawah(&M, false, &placeholder);
+    geserMatriksBawah(&M, true, &placeholder);
+    for (i=0; i<3; i++) geserMatriksBawah(&M, false, &placeholder);
 
     displayMatriks(M);
 }

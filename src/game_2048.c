@@ -1,7 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include "ADT/matriks.h"
+
 #include "game_2048.h"
 
 void run_2048() {

@@ -9,12 +9,12 @@
 #include "../functions.h"
 
 #define IDX_UNDEF -1
-#define CAPACITY 100
+#define CAPACITY_QUEUE 100
 
 /* Definisi elemen dan address */
 typedef Word ElTypeQueue;
 typedef struct {
-	ElTypeQueue buffer[CAPACITY]; 
+	ElTypeQueue buffer[CAPACITY_QUEUE]; 
 	int idxHead;
 	int idxTail;
 } Queue;
