@@ -225,7 +225,7 @@ void C_START (Word a,TabWord *T){
 
 void LOAD (Word command2, TabWord *T)
 {
-    int i, len;
+    int i, len=0;
     STARTWORDFILE(WordToString(command2));
     len = katatoint(currentWord);
     for (i = 1; i <= len; i++)

@@ -122,7 +122,7 @@ boolean ValidateCommand(Word W1, char* str) {
 
 char* WordToString(Word W) {
 /* Membuat string dari Word */
-    char *s = (char*) malloc (W.Length * sizeof(char));
+    char *s = (char*) malloc (W.Length+1 * sizeof(char));
     int i;
     for (i = 0; i < W.Length && W.TabWord[i] != '\0'; i++) {
         *(s+i) = W.TabWord[i];

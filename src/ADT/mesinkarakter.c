@@ -31,6 +31,8 @@ void STARTFILE(char* file_name) {
     static char path[150] = "..\\data\\";
     int i=0, len = 8;
 
+    RESETPITA();
+
     // ALGORITMA
     while (*file_name != '\0') {
         path[i+len] = *file_name;
@@ -38,8 +40,11 @@ void STARTFILE(char* file_name) {
         i++;
     } path[i+len] = '\0';
 
+    //printf("k = %s", path);
     pita = fopen(path,"r");
-    ADV();
+    if (pita != NULL) {
+        ADV();
+    } else fclose(pita);  
 }
 
 void START() {
