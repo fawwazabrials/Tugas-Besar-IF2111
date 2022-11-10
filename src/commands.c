@@ -96,7 +96,7 @@ void PLAYGAME(TabWord games, Queue *game_queue)
         
         else
         {
-            printf("gibran fasha\n");
+            run_random();
         }
     }
     else
