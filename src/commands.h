@@ -2,6 +2,9 @@
 #define MENU_COMMANDS_H
 
 #include "functions.h"
+#include "game_rng.h"
+#include "game_2048.h"
+#include "dinerdash.h"
 #include "ADT/array.h"
 #include "ADT/boolean.h"
 #include "ADT/mesinkarakter.h"
@@ -37,7 +40,7 @@ void SAVE(TabWord gl, Word filename);
 
 void help();
 
-void START(Word a,TabWord *T);
+void C_START(Word a,TabWord *T);
 
 void LOAD(Word command2, TabWord *T);
 

@@ -1,5 +1,5 @@
 main :
-	gcc -o a ../main.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/ADT/array.c ../src/ADT/queue.c ../src/ADT/matriks.c ../src/functions.c ../src/commands.c
+	gcc -o a ../main.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/ADT/array.c ../src/ADT/matriks.c ../src/ADT/q_dinerdash.c ../src/ADT/queue.c ../src/functions.c ../src/commands.c ../src/dinerdash.c ../src/game_2048.c ../src/game_rng.c   
 
 commands :
 	gcc -o a unit_tests/commandtest.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/ADT/array.c ../src/ADT/matriks.c ../src/ADT/queue.c ../src/functions.c ../src/commands.c

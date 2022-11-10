@@ -34,78 +34,75 @@ int main() {
     MakeEmpty(&games);
     CreateQueue(&antrian_game);
 
-    while (loop) { // Looping menerima input untuk command SAVE dan LOAD
+    while (loop) {
         printf("ENTER COMMAND : ");
         scan("%c %c", &command1, &command2, &inputint);
 
-        if (ValidateCommand(command1, "START")) { // INPUT ADALAH START
-            START(command1,&games);
+        if (ValidateCommand(command1, "START")) {           // INPUT ADALAH START
+            C_START(command1,&games);
             printf("File konfigurasi sistem berhasil dibaca. BNMO berhasil dijalankan.\n");
             loop = false;
             // DisplayArray(games);
         }
 
-        else if (ValidateCommand(command1, "LOAD")) { // INPUT ADALAH LOAD
-            /* TODO : Tulis kode buat LOAD diatas sini, sebenernya tinggal 
-             * copas SAVE aja tapi di STARTWORDFILE() nama filenya diganti 
-             * sesuai masukan user, masukan path ada di command2 */
+        else if (ValidateCommand(command1, "LOAD")) {       // INPUT ADALAH LOAD
             LOAD(command2, &games);
             printf("Save file berhasil dibaca. BNMO berhasil dijalankan.\n");
             loop = false;
         }
-        else if(ValidateCommand(command1,"HELP")){// INPUT ADALAH HELP
+
+        else if(ValidateCommand(command1,"HELP")){          // INPUT ADALAH HELP
             help();
         }
-        else if(ValidateCommand(command1,"QUIT")){// INPUT ADALAH QUIT
+
+        else if(ValidateCommand(command1,"QUIT")){          // INPUT ADALAH QUIT
             loop = false;
         }
 
-        else{ // INPUT GAJELAS 
+        else{                                               // INPUT GAJELAS 
             printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
         }
     }
+
     loop = true;
     if (!ValidateCommand(command1,"QUIT")){
         while(loop){
             printf("ENTER COMMAND : ");
             scan("%c %c %d", &command1, &command2, &inputint);
 
-            if(ValidateCommand(command1,"HELP")){// INPUT ADALAH HELP
+            if(ValidateCommand(command1,"HELP")){                                               // INPUT ADALAH HELP
                 help();
             }
-            else if(ValidateCommand(command1,"CREATE") && ValidateCommand(command2,"GAME")){// INPUT ADALAH CREATE GAME
+            else if(ValidateCommand(command1,"CREATE") && ValidateCommand(command2,"GAME")) {   // INPUT ADALAH CREATE GAME
                 CREATEGAME(&games);
             }
-            else if(ValidateCommand(command1,"LIST") && ValidateCommand(command2,"GAME")){// INPUT ADALAH LIST GAME
+            else if(ValidateCommand(command1,"LIST") && ValidateCommand(command2,"GAME")) {     // INPUT ADALAH LIST GAME
                 list_game(games);
             }
-            else if(ValidateCommand(command1,"DELETE") && ValidateCommand(command2,"GAME")){// INPUT ADALAH DELETE GAME
-                DELETEGAME(&games,antrian_game));
+            else if(ValidateCommand(command1,"DELETE") && ValidateCommand(command2,"GAME")) {   // INPUT ADALAH DELETE GAME
+                DELETEGAME(&games,antrian_game);
             }
-            else if(ValidateCommand(command1,"QUEUE") && ValidateCommand(command2,"GAME")){// INPUT ADALAH QUEUE GAME
+            else if(ValidateCommand(command1,"QUEUE") && ValidateCommand(command2,"GAME")) {    // INPUT ADALAH QUEUE GAME
                 QUEUEGAME(games,&antrian_game);
             }
-            else if(ValidateCommand(command1,"PLAY") && ValidateCommand(command2,"GAME")){// INPUT ADALAH PLAY GAME
+            else if(ValidateCommand(command1,"PLAY") && ValidateCommand(command2,"GAME")) {     // INPUT ADALAH PLAY GAME
                 PLAYGAME(games,&antrian_game);
             }
-            else if(ValidateCommand(command1,"SKIP") && ValidateCommand(command2,"GAME")){// INPUT ADALAH SKIP GAME
+            else if(ValidateCommand(command1,"SKIP") && ValidateCommand(command2,"GAME")) {     // INPUT ADALAH SKIP GAME
                 SKIPGAME(games,&antrian_game);
             }
-            else if(ValidateCommand(command1,"SAVE")){// INPUT ADALAH SAVE
-                SAVE(games;command2);
+            else if(ValidateCommand(command1,"SAVE")) {                                         // INPUT ADALAH SAVE
+                SAVE(games, command2);
             }
-            else if(ValidateCommand(command1,"QUIT")){// INPUT ADALAH QUIT
+            else if(ValidateCommand(command1,"QUIT")) {                                         // INPUT ADALAH QUIT
                 loop = false;
             }
-            else{// IMPUT GAK JELAS
-            printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
+            else{                                                                               // IMPUT GAK JELAS
+                printf("Command tidak dikenali, silahkan masukkan command yang valid.\n");
             }
         }
     }
-    if (ValidateCommand(command1,"QUIT")){// PROSES QUIT DARI BNMO  
-        quit();
-    }
-    return 0; // Reset true untuk menu
-    /* TODO : Taro looping menu dibawah ini, dalemnya validasi tiap command1 command2 
-     * apakah sama dengan command yg tersedia, kalo iya panggil prosedur commandnya */
+
+    // quit();
+    return 0;
 }
