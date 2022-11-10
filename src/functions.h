@@ -52,4 +52,19 @@ void clearScreen();
    I.S. : Sembarang, command line bisa memiliki isi atau kosong 
    F.S. : Command line kosong */
 
+int lengthString(char *str);
+/* Mengembalikan panjang string
+   I.S. : str terdefinisi
+   F.S. : Mengembalikan panjang string */
+
+boolean sameString(char* str1, char* str2);
+/* Mengembalikan true jika str1 dan str2 sama 
+   I.S. : str1 dan str2 terdefinisi 
+   F.S. Mengembalikan true jika str1 dan str2 sama */
+
+void separateSpace(char *str, char *str1, char *str2);
+/* Memisahkan string str menjadi dua string str1 dan str2 
+   I.S. : str terdefinisi, terdiri dari dua kata yang terpisahkan oleh spasi 
+   F.S. : str1 dan str2 terdefinisi dan berisi kata yang telah dipisahkan */
+
 #endif
