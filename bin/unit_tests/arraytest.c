@@ -20,7 +20,7 @@ int main() {
     w.TabWord[1] = 'i';
     printf("Test GetElmtIdx (input \"Hi\"; expected -999): %d\n",GetElmtIdx(T,w));
     SetEl (&T,1,w);
-    printf("Insert word \"Hi\" to T with SetEl.");
+    printf("Insert word \"Hi\" to T with SetEl.\n");
     printf("Test isEmpty (1 true 0 false, expected 0): %d\n",IsEmpty(T));
     printf("Test GetElmtIdx (input \"Hi\"; expected 1): %d\n",GetElmtIdx(T,w));
     printf("Test nbElmt (expected 1): %d\n",NbElmt(T));
@@ -39,7 +39,7 @@ int main() {
     printf("Test displayArray T2. Expected one word \"Hi\"\n");
     DisplayArray(T2);printf("\n");
     w2.TabWord[1] = 'u';
-    SetEl(&T,2,w2); printf("Test SetEl on T2. Input id 2, input word \"Hu\"\n");
+    SetEl(&T2,2,w2); printf("Test SetEl on T2. Input id 2, input word \"Hu\"\n");
     printf("Test nbElmt T2 (expected 2): %d\n",NbElmt(T));
     printf("Test displayArray T2. Expected two word \"Hi\" & \"Hu\" \n");
     DisplayArray(T2);printf("\n");
@@ -54,7 +54,7 @@ int main() {
     printf("Test isIdxValid T2 (input 101;1 true 0 false, expected 0): %d\n",IsIdxValid(T2,101));
     TabWord T3;
     T3.Neff = 100;
-    printf("Created T3 with full elements");
+    printf("Created T3 with full elements\n");
     printf("Test isFull T3 (1 true 0 false, expected 1): %d\n",IsFull(T));
     w2.TabWord[1] = 'a';
     InsertLast(&T,w2);printf("Test InsertLast on T. Input word \"Ha\"\n");
