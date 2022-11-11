@@ -24,7 +24,7 @@ void STARTFILE(char* file_name) {
    pada path ../data/file_name.
    Pita baca diambil dari fopen(path).
    I.S. : sembarang
-   F.S. : currenChar adalah karakter pertama pada pita
+   F.S. : currentChar adalah karakter pertama pada pita
           Jika currentChar != MARK maka EOP akan padam (false)
           Jika currentChar = MARK maka EOP akan menyala (true) */
     // KAMUS LOKAL
