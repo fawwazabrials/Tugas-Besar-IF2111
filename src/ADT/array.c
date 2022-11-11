@@ -32,7 +32,6 @@ void MakeEmpty (TabWord *T) {
 
     // ALGORITMA
     T->Neff = 0;
-    T->TI[IdxMax-IdxMin+1];
 }
 
 
