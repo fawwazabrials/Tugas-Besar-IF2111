@@ -15,6 +15,9 @@ void CreateQueueDD(Queue_DD *q) {
 /* - Index head bernilai IDX_UNDEF */
 /* - Index tail bernilai IDX_UNDEF */
 /* Proses : Melakukan alokasi, membuat sebuah q kosong */
+    // KAMUS LOKAL
+
+    // ALGORITMA
     IDX_HEAD_DD(*q) = IDX_UNDEF;
     IDX_TAIL_DD(*q) = IDX_UNDEF;
 }
@@ -22,16 +25,25 @@ void CreateQueueDD(Queue_DD *q) {
 /* ********* Prototype ********* */
 boolean isEmptyDD(Queue_DD q) {
 /* Mengirim true jika q kosong: lihat definisi di atas */
+    // KAMUS LOKAL
+
+    // ALGORITMA
     return (IDX_HEAD_DD(q) == IDX_UNDEF && IDX_TAIL_DD(q) == IDX_UNDEF);
 }
 boolean isFullDD(Queue_DD q) {
 /* Mengirim true jika tabel penampung elemen q sudah penuh */
 /* yaitu IDX_TAIL_DD akan selalu di belakang IDX_HEAD_DD dalam buffer melingkar*/
+    // KAMUS LOKAL
+
+    // ALGORITMA
     return (lengthDD(q) == CAPACITY_QUEUE_DD);
 }
 
 int lengthDD(Queue_DD q) {
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
+    // KAMUS LOKAL
+
+    // ALGORITMA
     if (isEmptyDD(q)) {
         return 0;
     } else {
@@ -44,6 +56,9 @@ void enqueueDD(Queue_DD *q, ElTypeQDD val) {
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
 /* F.S. val menjadi TAIL_DD yang baru, IDX_TAIL_DD "mundur" dalam buffer melingkar. */
+    // KAMUS LOKAL
+
+    // ALGORITMA
     if (isEmptyDD(*q)) {
         (*q).idxHeadQDD = 0;
         (*q).idxTailQDD = 0;
@@ -61,7 +76,10 @@ void dequeueDD(Queue_DD *q, ElTypeQDD *val) {
 /* I.S. q tidak mungkin kosong */
 /* F.S. val = nilai elemen HEAD_DD pd I.S., IDX_HEAD_DD "mundur";
         q mungkin kosong */
+    // KAMUS LOKAL
     *val = HEAD_DD(*q);
+
+    // ALGORITMA
     if (IDX_HEAD_DD(*q) == IDX_TAIL_DD(*q)) {
         IDX_HEAD_DD(*q) = IDX_UNDEF;
         IDX_TAIL_DD(*q) = IDX_UNDEF;
@@ -74,7 +92,10 @@ void ForceDeleteAt(Queue_DD *q, int i) {
 /* Menghapus elemen array secara paksa (bukan dequeueDD) */
 /* I.S. Queue_DD  terdefinisi dan tidak kosong */
 /* F.S. Elemen Queue_DD ke-i terhapus */
+    // KAMUS LOKAL
     Food val;
+
+    // ALGORITMA
     if (i == IDX_HEAD_DD(*q)) {
         dequeueDD(q, &val);
     } else {
@@ -109,6 +130,9 @@ M0      | 2              | 3         | 15000
 M1      | 3              | 1         | 15000
 M2      | 1              | 4         | 15000
 */
+    // KAMUS LOKAL
+
+    // ALGORITMA
     printf("Daftar Pesanan\t\t\t  Banyaknya pesanan: %d\n", lengthDD(q));
     printf("Makanan\t| Durasi memasak\t| Ketahanan\t| Harga\n");
     printf("--------------------------------------------------------\n");
@@ -139,6 +163,9 @@ M1      | 3
 Makanan | Sisa durasi memasak
 -----------------------------
 */
+    // KAMUS LOKAL
+
+    // ALGORITMA
     printf("Daftar Makanan yang sedang dimasak\n");
     printf("Makanan\t| Sisa durasi memasak\n");
     printf("-----------------------------\n");
@@ -166,6 +193,9 @@ M2      | 4
 Makanan | Sisa ketahanan makanan
 ---------------------------------
 */
+    // KAMUS LOKAL
+
+    // ALGORITMA
     printf("Daftar Makanan yang dapat disajikan\n");
     printf("Makanan | Sisa ketahanan memasak\n");
     printf("---------------------------------\n");

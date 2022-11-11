@@ -192,10 +192,10 @@ void DisplayArray (TabWord T) {
 /* Proses : Menuliskan isi tabel dengan traversal */
 /* I.S. T boleh kosong */
 /* F.S. Jika T tidak kosong : indeks dan elemen tabel ditulis berderet ke bawah */
-/* Jika isi tabel [1,2,3] maka akan diprint
-0:1
-1:2
-2:3
+/* Jika isi tabel ["HALO", "SAYA", "GAME"] maka akan diprint
+1. HALO
+2. SAYA
+3. GAME
 */
 /* Jika T kosong : Hanya menulis "Tabel kosong" */
 
@@ -213,19 +213,29 @@ void DisplayArray (TabWord T) {
 }
 
 void InsertLast (TabWord *T, ElTypeArray X) {
-    /* Memasukkan elemen ke akhir array */
-    /* I.S. T terdefinisi */
-    /* F.S. Apabila tidak penuh, T bertambah satu elemen di akhir */
+/* Memasukkan elemen ke akhir array */
+/* I.S. T terdefinisi */
+/* F.S. Apabila tidak penuh, T bertambah satu elemen di akhir */
+    // KAMUS LOKAL
+    int idxLast;
+
+    // ALGORITMA
     if (IsEmpty(*T)) {
         T->TI[IdxMin] = X;
     } else {
-        int idxLast = GetLastIdx(*T);
+        idxLast = GetLastIdx(*T);
         T->TI[idxLast + 1] = X;
         T->Neff++;
     }
 }
 
 void DeleteAt (TabWord *T, int id) {
+/* Menghapus elemen pada Array yang menempati indeks id
+   I.S. : T terdefinisi, tidak kosong
+   F.S. : Elemen ke-id di array dihapuskan */
+    // KAMUS LOKAL
+
+    // ALGORITMA
     for (int i=id;i<T->Neff;i++) {
         T->TI[i] = T->TI[i+1];
     }
