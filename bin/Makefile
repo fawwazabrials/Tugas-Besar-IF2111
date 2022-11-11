@@ -16,5 +16,8 @@ matriks :
 queue :
 	gcc -o a unit_tests/queuetest.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/ADT/queue.c ../src/functions.c
 
-mesin :
-	gcc -o a unit_tests/mesintest.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/functions.c
+mesinkata :
+	gcc -o a unit_tests/mesinkatatest.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/functions.c
+
+mesinkarakter :
+	gcc -o a unit_tests/mesinkatatest.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/functions.c

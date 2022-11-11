@@ -101,16 +101,21 @@ void DisplayArray (TabWord T);
 /* Proses : Menuliskan isi tabel dengan traversal */
 /* I.S. T boleh kosong */
 /* F.S. Jika T tidak kosong : indeks dan elemen tabel ditulis berderet ke bawah */
-/* Jika isi tabel [1,2,3] maka akan diprint
-0:1
-1:2
-2:3
+/* Jika isi tabel ["HALO", "SAYA", "GAME"] maka akan diprint
+1. HALO
+2. SAYA
+3. GAME
 */
 /* Jika T kosong : Hanya menulis "Tabel kosong" */
 
-/* INSERT & DELETE */
-void InsertLast (TabWord *T, ElTypeArray X); // Insert di akhir array
+void InsertLast (TabWord *T, ElTypeArray X);
+/* Memasukkan elemen ke akhir array */
+/* I.S. T terdefinisi */
+/* F.S. Apabila tidak penuh, T bertambah satu elemen di akhir */
 
-void DeleteAt (TabWord *T, int id); // Hapus elemen array T pada indeks ke-id. Array tidak kosong
+void DeleteAt (TabWord *T, int id);
+/* Menghapus elemen pada Array yang menempati indeks id
+   I.S. : T terdefinisi, tidak kosong
+   F.S. : Elemen ke-id di array dihapuskan */
 
 #endif
