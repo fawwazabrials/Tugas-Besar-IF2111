@@ -55,18 +55,18 @@ int main() {
     TabWord T3;
     T3.Neff = 100;
     printf("Created T3 with full elements\n");
-    printf("Test isFull T3 (1 true 0 false, expected 1): %d\n",IsFull(T));
+    printf("Test isFull T3 (1 true 0 false, expected 1): %d\n",IsFull(T3));
     w2.TabWord[1] = 'a';
     InsertLast(&T,w2);printf("Test InsertLast on T. Input word \"Ha\"\n");
     printf("Test nbElmt T (expected 2): %d\n",NbElmt(T));
-    printf("Test displayArray T. Expected two word \"Hi\" & \"Ha\" \n");
+    printf("Test displayArray T. Expected two word \"Hi\" & \"Ha\":\n");
     DisplayArray(T);printf("\n");
     w2 = GetElmt(T,2);
     printf("Test GetElmt T. Input idx 2. Expected word \"Ha\":\n");
     displayWord(w2);
-    DeleteAt(&T,1);printf("Test DeleteAt on T. Input idx 1. Expected T with one word \"Ha\"\n");
+    DeleteAt(&T,1);printf("Test DeleteAt on T. Input idx 1. Expected T with one word \"Ha\".\n");
     printf("Test nbElmt T (expected 1): %d\n",NbElmt(T));
-    printf("Test displayArray T. Expected one wprd \"Ha\" \n");
+    printf("Test displayArray T. Expected one word \"Ha\":\n");
     DisplayArray(T);printf("\n");
     return 0;
 }
