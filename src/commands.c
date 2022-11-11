@@ -5,7 +5,13 @@ Word ph1;       // placeholder for 'scan' function
 int ph2;        // placeholder for 'scan' function
 
 void QUEUEGAME(TabWord games, Queue* game_queue) {
+/* Memasukan game yang dipilih user ke dalam antrian game untuk dimainkan.
+   I.S. : games dan game_queue terdefinisi 
+   F.S. : Game yang dipilih oleh user akan masuk ke dalam game_queue*/
+    // KAMUS LOKAL
     int game_idx;
+
+    // ALGORITMA
 
     printf("Berikut adalah daftar antrian game-mu\n");
     DisplayQueue(*game_queue);
@@ -32,22 +38,24 @@ void QUEUEGAME(TabWord games, Queue* game_queue) {
 }
 
 void list_game(TabWord list){
-    /*
-    Proses  : Membaca listglobal yang berisi nama nama game
-              yang terdapat pada file
-    I.S     : listglobal yang sudah terdefenisi
-    F.S     : Menambilkan isi dari list ke layar
-    */
+/* Proses  : Membaca listglobal yang berisi nama nama game
+            yang terdapat pada file
+   I.S     : listglobal yang sudah terdefenisi
+   F.S     : Menambilkan isi dari list ke layar */
+   // KAMUS LOKAL
 
-   //Kamus Lokal
-
-   //Algoritma
+   // ALGORITMA
    printf("Berikut adalah daftar game yang tersedia\n");
    DisplayArray(list);
 }
 
-void PLAYGAME(TabWord games, Queue *game_queue)
-{   
+void PLAYGAME(TabWord games, Queue *game_queue) {
+/*I.S. : game_queue terdefinisi
+  F.S. : game_queue terdequeue dan dijalankan
+  Proses : mengeluarkan game dari queue dan menjalankannya */
+    // KAMUS LOKAL
+
+    // ALGORITMA 
     if (!isEmpty(*game_queue)) //kalo game_queue gk kosong
     {
         printf("Berikut adalah daftar Game-mu\n");
@@ -102,8 +110,13 @@ void PLAYGAME(TabWord games, Queue *game_queue)
     }
 }
 
-void SKIPGAME(TabWord games, Queue *game_queue)
-{
+void SKIPGAME(TabWord games, Queue *game_queue) {
+/*I.S. : game_queue terdefinisi
+F.S. : mengskip n buah game sesuai langkah yang diinginkan dari queue dan menjalankan game jika ada di game_queue
+Proses :game_queue terdequeue sesuai berapa langkah skip yang diinginkan dan menjalankan game selanjutnya jika masih ada game di game_queue*/
+    // KAMUS LOKAL
+
+    // ALGORITMA
     if (!isEmpty(*game_queue))
     {
         printf("Berikut adalah daftar Game-mu\n");
@@ -142,6 +155,12 @@ void SKIPGAME(TabWord games, Queue *game_queue)
 }
 
 void CREATEGAME(TabWord *T) {
+/* Menciptakan game baru yang bila dimainkan langsung menunjukan skor 
+   I.S. : Sembarang 
+   F.S. : Game tercipta dan masuk ke array game, nama game yang masuk sesuai dari input user */
+    // KAMUS LOKAL
+
+    // ALGORITMA
     printf("Masukkan nama game yang akan ditambahkan: ");
     scan("%s", &CCommand, &ph1, &ph2);
     InsertLast(T, CCommand);
@@ -149,6 +168,13 @@ void CREATEGAME(TabWord *T) {
 }
 
 void DELETEGAME (TabWord *gl, Queue gq) {
+/* Menghapus game yang ingin dihapus oleh user dengan syarat game harus hasil dari CREATE GAME
+   I.S. : Sembarang 
+   F.S. : Jika game merupakan hasil buatan user dari CREATE GAME, game berhasil dihapuskan 
+          Jika game merupakan game bawaan dari file konfigurasi, game gagal dihapus */
+    // KAMUS LOKAL
+
+    // ALGORITMA
     list_game(*gl); // Cetak daftar game
     // Input
     printf("\n");
@@ -170,8 +196,14 @@ void DELETEGAME (TabWord *gl, Queue gq) {
 }
 
 void SAVE(TabWord gl, Word filename) {
+/* Menyimpan isi dari Array game ke sebuah file '.txt' dengan nama file berupa input dari user
+   I.S. : Sembarang 
+   F.S. : File filename.txt berhasil tercipta di folder data dengan isinya adalah isi dari array game */
+    // KAMUS LOKAL
     char a[351] = "../data/";
     int i,j;
+
+    // ALGORITMA
     for (i=0;i<filename.Length;i++) {
         a[8+i] = filename.TabWord[i];
         a[9+i] = '\0';
@@ -192,6 +224,12 @@ void SAVE(TabWord gl, Word filename) {
 }
 
 void help() {
+/* Mencetak cara menuliskan command dan penjelasan dari command ke layar 
+   I.S. : Sembarang 
+   F.S. : Penjelasan seluruh command tercetak pada layar */
+    // KAMUS LOKAL
+
+    // ALGORITMA
     printf("============================== LIST COMMAND YANG VALID ============================== \n\n");
     printf("1.  START \t\t: Membaca file konfigurasi sistem. \n");
     printf("2.  LOAD <filename>\t: Membaca file berisi list game yang dapat dimainkan dan histori.\n");
@@ -210,22 +248,33 @@ void help() {
 
 }
 void C_START (Word a,TabWord *T){
+/* Membaca file config.txt pada folder data dan memasukan isinya ke Array games
+   I.S. : Sembarang
+   F.S. : Isi dari config.txt masuk ke Array game */
+    // KAMUS LOKAL
     int i,len;
-    
+
+    // ALGORITMA
     if (ValidateCommand(a, "START")) {
-            STARTWORDFILE("config.txt");
-            len = katatoint(currentWord);
-            for (i=1; i<=len; i++) {
-                ADV();
-                ADVWORDFILE();
-                SetEl(T, i, currentWord);
-            }
+        STARTWORDFILE("config.txt");
+        len = katatoint(currentWord);
+        for (i=1; i<=len; i++) {
+            ADV();
+            ADVWORDFILE();
+            SetEl(T, i, currentWord);
+        }
     }
 }
 
-void LOAD (Word command2, TabWord *T)
-{
+void LOAD (Word command2, TabWord *T) {
+/* Membaca file dengan nama yang diinginkan user pada folder data dan memasukan isinya ke Array games
+   I.S. : Sembarang
+   F.S. : Jika file berhasil dibaca, isi dari Array game berisikan isi file.txt
+          Jika file gagal dibaca, Array games tidak akan diisi dan memiliki Neff = 0 */
+    // KAMUS LOKAL
     int i, len=0;
+
+    // ALGORITMA
     STARTWORDFILE(WordToString(command2));
     len = katatoint(currentWord);
     for (i = 1; i <= len; i++)
