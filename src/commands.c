@@ -137,7 +137,7 @@ void SKIPGAME(TabWord games, Queue *game_queue)
 
     else
     {
-        printf("Antrian game-mu kosong, silahkan tambah game terlebih dahulu.\n");
+        printf("Antrian game-mu kosong, silakan tambah game terlebih dahulu.\n");
     }
 }
 
