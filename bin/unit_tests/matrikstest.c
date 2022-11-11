@@ -1,4 +1,4 @@
-#include "../../src/ADT/matriks.c"
+#include "../../src/ADT/matriks.h"
 #include "../../src/functions.h"
 #include <stdio.h>
 
@@ -95,10 +95,9 @@ int main() {
     printf("Sesudah\n");
     printf("Score = %d\n",score);
     displayMatriks(M);
-
-    for (i=0; i<3; i++) geserMatriksBawah(&M, false);
-    geserMatriksBawah(&M, true);
-    for (i=0; i<3; i++) geserMatriksBawah(&M, false);
+    for (i=0; i<3; i++) {geserMatriksBawah(&M,&score,false);
+    geserMatriksBawah(&M,&score,true);
+    }
 
     printf("\n");
     printf("Geser matriks ke kanan\n");
