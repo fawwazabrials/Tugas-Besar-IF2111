@@ -6,8 +6,8 @@ int main() {
     printf("Array ADT Driver\n");
     printf("Make empty List T.");
     MakeEmpty(&T);
-    printf("Test isEmpty (1 true 0 false, expected 1): %d\n",isEmpty(T));
-    printf("Test isFull (1 true 0 false, expected 0): %d\n",isFull(T));
+    printf("Test isEmpty (1 true 0 false, expected 1): %d\n",IsEmpty(T));
+    printf("Test isFull (1 true 0 false, expected 0): %d\n",IsFull(T));
     printf("Test nbElmt (expected 0): %d\n",NbElmt(T));
     printf("Test MaxNbEl (expected 100): %d\n",MaxNbEl(T));
     printf("Test GetFirstIdx (expected 1): %d\n",GetFirstIdx(T));
@@ -21,7 +21,7 @@ int main() {
     printf("Test GetElmtIdx (input \"Hi\"; expected -999): %d\n",GetElmtIdx(T,w));
     SetEl (&T,1,w);
     printf("Insert word \"Hi\" to T with SetEl.");
-    printf("Test isEmpty (1 true 0 false, expected 0): %d\n",isEmpty(T));
+    printf("Test isEmpty (1 true 0 false, expected 0): %d\n",IsEmpty(T));
     printf("Test GetElmtIdx (input \"Hi\"; expected 1): %d\n",GetElmtIdx(T,w));
     printf("Test nbElmt (expected 1): %d\n",NbElmt(T));
     printf("Test GetLastIdx (=nbElmt, expected 1): %d\n",GetLastIdx(T));
@@ -55,7 +55,7 @@ int main() {
     TabWord T3;
     T3.Neff = 100;
     printf("Created T3 with full elements");
-    printf("Test isFull T3 (1 true 0 false, expected 1): %d\n",isFull(T));
+    printf("Test isFull T3 (1 true 0 false, expected 1): %d\n",IsFull(T));
     w2.TabWord[1] = 'a';
     InsertLast(&T,w2);printf("Test InsertLast on T. Input word \"Ha\"\n");
     printf("Test nbElmt T (expected 2): %d\n",NbElmt(T));
