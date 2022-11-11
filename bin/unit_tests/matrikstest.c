@@ -96,17 +96,9 @@ int main() {
     printf("Score = %d\n",score);
     displayMatriks(M);
 
-    printf("\n");
-    printf("Geser matriks ke kiri\n");
-    printf("sebelum\n");
-    printf("Score = %d\n",score);
-    displayMatriks(M);
-    for(i=0;i<4;i++){
-        geserMatriksKiri(&M,&score,false);
-    }
-    printf("Sesudah\n");
-    printf("Score = %d\n",score);
-    displayMatriks(M);
+    for (i=0; i<3; i++) geserMatriksBawah(&M, false);
+    geserMatriksBawah(&M, true);
+    for (i=0; i<3; i++) geserMatriksBawah(&M, false);
 
     printf("\n");
     printf("Geser matriks ke kanan\n");

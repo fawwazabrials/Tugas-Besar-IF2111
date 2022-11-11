@@ -26,7 +26,7 @@ boolean isFull(Queue q) {
     // KAMUS LOKAL
 
     // AGLORITMA
-    return (length(q) == CAPACITY);
+    return (length(q) == CAPACITY_QUEUE);
 }
 /* Mengirim true jika tabel penampung elemen q sudah penuh */
 /* yaitu IDX_TAIL akan selalu di belakang IDX_HEAD dalam buffer melingkar*/
@@ -37,7 +37,7 @@ int length(Queue q) {
     // AGLORITMA
     if (isEmpty(q)) return 0;
     else if(IDX_TAIL(q) >= IDX_HEAD(q)) return IDX_TAIL(q) - IDX_HEAD(q) +1;
-    else return IDX_TAIL(q) + 1 + (CAPACITY - IDX_HEAD(q));
+    else return IDX_TAIL(q) + 1 + (CAPACITY_QUEUE - IDX_HEAD(q));
 }
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
 
@@ -46,7 +46,7 @@ boolean isInQueue(Queue q, Word w) {
     int i,j=IDX_HEAD(q);
     for (i=0;i<length(q);i++) {
         if (isKataEqual(q.buffer[j],w)) {r=true;}
-        j = (j+1) % CAPACITY;
+        j = (j+1) % CAPACITY_QUEUE;
     }
     return r;
 }
@@ -60,7 +60,7 @@ void enqueue(Queue *q, ElTypeQueue val) {
         IDX_HEAD(*q) = 0;
         IDX_TAIL(*q) = 0;  
     } else {
-        IDX_TAIL(*q) = (IDX_TAIL(*q) + 1) % CAPACITY;
+        IDX_TAIL(*q) = (IDX_TAIL(*q) + 1) % CAPACITY_QUEUE;
     }
 
     // copyWord(val, &TAIL(*q));
@@ -80,7 +80,7 @@ void dequeue(Queue *q, ElTypeQueue *val) {
         IDX_HEAD(*q) = IDX_UNDEF;
         IDX_TAIL(*q) = IDX_UNDEF;  
     } else {
-        IDX_HEAD(*q) = (IDX_HEAD(*q) + 1) % CAPACITY;
+        IDX_HEAD(*q) = (IDX_HEAD(*q) + 1) % CAPACITY_QUEUE;
     }
 }
 /* Proses: Menghapus val pada q dengan aturan FIFO */
@@ -97,6 +97,6 @@ void DisplayQueue(Queue q) {
 
     for (i = 0; i<length(q); i++) {
         printf("%d. ", i+1);
-        displayWord(q.buffer[i]);
+        displayWord(q.buffer[(IDX_HEAD(q) + i) % CAPACITY_QUEUE]);
     }
 }

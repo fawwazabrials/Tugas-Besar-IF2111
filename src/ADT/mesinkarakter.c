@@ -24,12 +24,14 @@ void STARTFILE(char* file_name) {
    pada path ../data/file_name.
    Pita baca diambil dari fopen(path).
    I.S. : sembarang
-   F.S. : currenChar adalah karakter pertama pada pita
+   F.S. : currentChar adalah karakter pertama pada pita
           Jika currentChar != MARK maka EOP akan padam (false)
           Jika currentChar = MARK maka EOP akan menyala (true) */
     // KAMUS LOKAL
     static char path[150] = "..\\data\\";
     int i=0, len = 8;
+
+    RESETPITA();
 
     // ALGORITMA
     while (*file_name != '\0') {
@@ -38,8 +40,11 @@ void STARTFILE(char* file_name) {
         i++;
     } path[i+len] = '\0';
 
+    //printf("k = %s", path);
     pita = fopen(path,"r");
-    ADV();
+    if (pita != NULL) {
+        ADV();
+    } else fclose(pita);  
 }
 
 void START() {

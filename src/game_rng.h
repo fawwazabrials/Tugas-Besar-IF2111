@@ -1,7 +1,7 @@
 /* File : game_rng.h */
 
-#ifndef RNG_GAME_H
-#define RNG_GAME_H
+#ifndef GAME_RNG_H
+#define GAME_RNG_H
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -1,7 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include "ADT/matriks.h"
+
 #include "game_2048.h"
 
 void run_2048() {
@@ -24,7 +22,7 @@ void run_2048() {
     waktu_awal = time(NULL);
 
     while (!isMatriksFull(board) && loop) {
-        clearScreen();
+        splashScreen();
         if (wrong) printf("Masukkan kode yang benar!");
         else { // GENERATE NEW RANDOM NUMBER ON POINT
             if (!undo) {
@@ -80,5 +78,5 @@ void run_2048() {
     }
 
     waktu_akhir = time(NULL);
-    printf("\n\nGAME OVER!\nSkor-mu adalah %d\nWaktu bermain %02d:%02d", score, (waktu_akhir-waktu_awal)/60, (waktu_akhir-waktu_awal)%60);
+    printf("\n\nGAME OVER!\nSkor-mu adalah %d\nWaktu bermain %02d:%02d\n\n", score, (waktu_akhir-waktu_awal)/60, (waktu_akhir-waktu_awal)%60);
 }

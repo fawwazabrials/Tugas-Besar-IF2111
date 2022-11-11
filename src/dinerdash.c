@@ -1,17 +1,5 @@
 #include <stdio.h>
 #include "dinerdash.h"
-#include "ADT/q_dinerdash.h"
-#include "ADT/q_dinerdash.c"                // Jangan lupa delete kalo udah selese
-#include "functions.c"               // Jangan lupa ganti jadi .h
-#include "ADT/mesinkarakter.h"
-#include "ADT/mesinkarakter.c"       // Jangan lupa delete kalo udah selese
-#include "ADT/mesinkata.h"
-#include "ADT/mesinkata.c"           // Jangan lupa delete kalo udah selese
-
-/*
-    TO DO :
-    * buat skema valid untuk cooking and serve (co: kalo mau COOK M1, M1 harus ada di daftar Pesanan)
-*/
 
 ListID ID() {
     /* Membuat list berisi ID makanan */
@@ -34,7 +22,7 @@ ListID ID() {
     return listID;
 }
 
-Food newOrder(Queue q, int angka) {
+Food newOrder(Queue_DD q, int angka) {
     /* Membuat Food baru untuk pesanan dengan increment */
     Food new;
     ListID listID = ID();
@@ -47,14 +35,14 @@ Food newOrder(Queue q, int angka) {
     return new;
 }
 
-void autoSubstract(Queue *q) {
+void autoSubstract(Queue_DD *q) {
     /* Mengurangi durasi memasak makanan atau durasi ketahanan makanan */
-    /* I.S. Queue dengan ElType = Food terdefinisi */
+    /* I.S. Queue_DD dengan ElTypeQDD = Food terdefinisi */
     /* F.S. Apabila durasi makanan lebih dari 0, maka akan durasi makanan berkurang 1 */
     /*      Apabila durasi makanan sama dengan 0, maka durasi ketahanan berkurang 1 sampai
             ketahanan makanan menjadi 0 */
-    int i = IDX_HEAD(*q);
-    while (i <= IDX_TAIL(*q)) {
+    int i = IDX_HEAD_DD(*q);
+    while (i <= IDX_TAIL_DD(*q)) {
         if (q->buffer[i].durasi > 0) {
             q->buffer[i].durasi--;
             if (q->buffer[i].durasi == 0) {
@@ -69,33 +57,33 @@ void autoSubstract(Queue *q) {
     }
 }
 
-void cooking(Queue QF, Queue *QC, char* commandID) {
-    /* Memasak makanan yang ada di Queue Pesanan */
-    /* I.S. Queue Food dan Cooked terdefinisi */
-    /* F.S. Food dengan commandID akan ter-enqueue ke Cooked */
-    int i = IDX_HEAD(QF);
-    while (i < IDX_TAIL(QF)) {
+void cooking(Queue_DD QF, Queue_DD *QC, char* commandID) {
+    /* Memasak makanan yang ada di Queue_DD Pesanan */
+    /* I.S. Queue_DD Food dan Cooked terdefinisi */
+    /* F.S. Food dengan commandID akan ter-enqueueDD ke Cooked */
+    int i = IDX_HEAD_DD(QF);
+    while (i < IDX_TAIL_DD(QF)) {
         if (sameString(QF.buffer[i].makanan, commandID)) {
-            enqueue(QC, QF.buffer[i]);
+            enqueueDD(QC, QF.buffer[i]);
         }
         i++;
     }
 }
 
-void serving(Queue *QS, Queue *QF, char* commandID, int *saldo) {
+void serving(Queue_DD *QS, Queue_DD *QF, char* commandID, int *saldo) {
     /* Menyajikan makanan */
-    /* I.S. Queue ReadyToServe terdefinisi */
-    /* F.S. Food di ReadyToServe ter-dequeue */
+    /* I.S. Queue_DD ReadyToServe terdefinisi */
+    /* F.S. Food di ReadyToServe ter-dequeueDD */
     Food val;
-    if (sameString((*QS).buffer[IDX_HEAD(*QS)].makanan, commandID)) {
-        if ((*QS).buffer[IDX_HEAD(*QS)].durasi == 0) {
-            dequeue(QS, &val);
+    if (sameString((*QS).buffer[IDX_HEAD_DD(*QS)].makanan, commandID)) {
+        if ((*QS).buffer[IDX_HEAD_DD(*QS)].durasi == 0) {
+            dequeueDD(QS, &val);
             printf("Berhasil menyajikan makanan %s\n", val.makanan);
             *saldo = *saldo + val.harga;
 
             // Search and Delete from Food (Treating it like a normal array)
-            int i = IDX_HEAD(*QF);
-            while (i <= IDX_TAIL(*QF)) {
+            int i = IDX_HEAD_DD(*QF);
+            while (i <= IDX_TAIL_DD(*QF)) {
                 if (sameString((*QF).buffer[i].makanan, commandID)) {
                     ForceDeleteAt(QF, i);
                 }
@@ -105,19 +93,19 @@ void serving(Queue *QS, Queue *QF, char* commandID, int *saldo) {
             printf("%s belum selesai dimasak\n", commandID);
         }
     } else {
-        printf("%s belum bisa disajikan karena %s belum selesai\n", commandID, HEAD(*QS));
+        printf("%s belum bisa disajikan karena %s belum selesai\n", commandID, HEAD_DD(*QS));
     }
 }
 
-void checkBasi(Queue *QC) {
+void checkBasi(Queue_DD *QC) {
     /* Mengecek apakah ada makanan yang sudah basi */
-    /* I.S. Queue Cooked terdefinisi */
-    /* F.S. Apabila ada makanan yang sudah basi, maka akan di-dequeue */
-    int i = IDX_HEAD(*QC);
-    if (! isEmpty(*QC)) {
-        while (i <= IDX_TAIL(*QC)) {
+    /* I.S. Queue_DD Cooked terdefinisi */
+    /* F.S. Apabila ada makanan yang sudah basi, maka akan di-dequeueDD */
+    int i = IDX_HEAD_DD(*QC);
+    if (! isEmptyDD(*QC)) {
+        while (i <= IDX_TAIL_DD(*QC)) {
             if ((*QC).buffer[i].ketahanan == -1) {
-                // dequeue(QC, &(*QC).buffer[i]);
+                // dequeueDD(QC, &(*QC).buffer[i]);
                 ForceDeleteAt(QC, i);
                 printf("Makanan %s sudah basi.\n", (*QC).buffer[i].makanan);
             }
@@ -127,18 +115,18 @@ void checkBasi(Queue *QC) {
 
 }
 
-void moveToServe(Queue *QC, Queue *QS) {
-    /* Memindahkan makanan yang sudah dimasak ke Queue ReadyToServe */
-    /* I.S. Queue Cooked dan ReadyToServe terdefinisi */
-    /* F.S. Apabila ada makanan yang sudah selesai dimasak, maka akan di-enqueue ke ReadyToServe */
-    int i = IDX_HEAD(*QC);
-    if (! isEmpty(*QC)) {
-        while (i <= IDX_TAIL(*QC)) {
+void moveToServe(Queue_DD *QC, Queue_DD *QS) {
+    /* Memindahkan makanan yang sudah dimasak ke Queue_DD ReadyToServe */
+    /* I.S. Queue_DD Cooked dan ReadyToServe terdefinisi */
+    /* F.S. Apabila ada makanan yang sudah selesai dimasak, maka akan di-enqueueDD ke ReadyToServe */
+    int i = IDX_HEAD_DD(*QC);
+    if (! isEmptyDD(*QC)) {
+        while (i <= IDX_TAIL_DD(*QC)) {
             Food val;
             if ((*QC).buffer[i].durasi == 0) {
                 val = (*QC).buffer[i];
-                enqueue(QS, val);
-                // dequeue(QC, &val);
+                enqueueDD(QS, val);
+                // dequeueDD(QC, &val);
                 ForceDeleteAt(QC, i);
             }
             i++;
@@ -146,11 +134,11 @@ void moveToServe(Queue *QC, Queue *QS) {
     }
 }
 
-boolean IsIn(Queue q, char* X) {
-/* Mengirimkan true apabila ada elemen X pada queue ber-ElType makanan. */
-    int i = IDX_HEAD(q);
+boolean IsIn(Queue_DD q, char* X) {
+/* Mengirimkan true apabila ada elemen X pada queue ber-ElTypeQDD makanan. */
+    int i = IDX_HEAD_DD(q);
     boolean found = false;
-    while (i <= IDX_TAIL(q) && ! found) {
+    while (i <= IDX_TAIL_DD(q) && ! found) {
         if (sameString(X, q.buffer[i].makanan)) {
             found = true;
         }
@@ -168,9 +156,9 @@ void dinerdash() {
     char* commandIDInput = (char*) malloc(100 * sizeof(char));
     char* command = (char*) malloc(100 * sizeof(char));
     char* commandID = (char*) malloc(100 * sizeof(char));
-    Queue food;
-    Queue cook;
-    Queue serve;
+    Queue_DD food;
+    Queue_DD cook;
+    Queue_DD serve;
     int round = 0;
     ListID listID = ID();
     Word inputWord;
@@ -179,16 +167,16 @@ void dinerdash() {
     boolean available;
 
     /* INISIALISASI ADT */
-    CreateQueue(&food);
-    CreateQueue(&cook);
-    CreateQueue(&serve);
+    CreateQueueDD(&food);
+    CreateQueueDD(&cook);
+    CreateQueueDD(&serve);
 
     /* INISIALISASI Food */
     /* Menyiapkan 3 pesanan dari 3 pelanggan */
     int jumlahPesanan = 3;
     for (int i = 0; i < jumlahPesanan; i++) {
         Food new = newOrder(food, i);
-        enqueue(&food, new);
+        enqueueDD(&food, new);
     }
 
     /* WELCOME SCREEN */
@@ -201,7 +189,7 @@ void dinerdash() {
     printf("|_____/|_|_| |_|\\___|_|    |_____/ \\__,_|___/_| |_|   \n\n\n");                                     
     printf("Selamat Datang di Diner Dash!\n\n");
     
-    /* Display Queue */
+    /* Display Queue_DD */
     printf("SALDO: %d\n\n", saldo);
     displayQueueFood(food);
     displayQueueCooked(cook);
@@ -224,7 +212,7 @@ void dinerdash() {
     }
 
     /* GAME LOOP */
-    while (length(food) <= 7 && countServe <= 15) {
+    while (lengthDD(food) <= 7 && countServe <= 15) {
         available = IsIn(food, commandID);
         /* Permainan selesai apabila antrian melebihi 7 pelanggan atau
         jumlah pelanggan yang sudah dilayani mencapai 15 pelanggan. */
@@ -233,13 +221,13 @@ void dinerdash() {
             /* MENAMBAHKAN PESANAN SECARA OTOMATIS */
             jumlahPesanan++;
             Food new = newOrder(food, jumlahPesanan-1);
-            enqueue(&food, new);
+            enqueueDD(&food, new);
 
             /* PENGURANGAN DURASI MEMASAK DAN KETAHANAN MAKANAN */
-            if (! isEmpty(cook)) {
+            if (! isEmptyDD(cook)) {
                 autoSubstract(&cook);
             }
-            if ( ! isEmpty(serve)) {
+            if ( ! isEmptyDD(serve)) {
                 autoSubstract(&serve);
             }
 
@@ -267,14 +255,14 @@ void dinerdash() {
 
         printf("\n======================== ROUND %d ========================\n\n", round);
 
-        /* Display Queue */
+        /* Display Queue_DD */
         printf("SALDO: %d\n\n", saldo);
         displayQueueFood(food);
         displayQueueCooked(cook);
         displayQueueRTS(serve);
 
         /* GAME OVER */
-        if (length(food) > 7) {
+        if (lengthDD(food) > 7) {
             printf("Game Over! Antrian pelanggan sudah melebihi 7 orang.\n");
             printf("Saldo akhir Anda adalah %d.\n", saldo);
             break;
@@ -300,9 +288,4 @@ void dinerdash() {
         }
     }
 
-}
-
-int main() {
-    dinerdash();
-    return 0;
 }

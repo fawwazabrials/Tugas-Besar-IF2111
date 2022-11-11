@@ -33,7 +33,7 @@ int katatoint(Word W) {
     int i, x = 0;
 
     // ALGORITMA
-    if (isKataInt(W)) {
+    if (isKataInt(W) && W.Length > 0) {
         for (i=0; i<W.Length; i++) {
             x = (x*10) + (W.TabWord[i] - '0');
         } 
@@ -122,7 +122,7 @@ boolean ValidateCommand(Word W1, char* str) {
 
 char* WordToString(Word W) {
 /* Membuat string dari Word */
-    char *s = (char*) malloc (W.Length * sizeof(char));
+    char *s = (char*) malloc (W.Length+1 * sizeof(char));
     int i;
     for (i = 0; i < W.Length && W.TabWord[i] != '\0'; i++) {
         *(s+i) = W.TabWord[i];
@@ -133,7 +133,7 @@ char* WordToString(Word W) {
 
 
 void clearScreen() {
-/* Mengapus seluruh isi dari command line. Hanya berguna untuk OS Linux. 
+/* Mengapus seluruh isi dari command line.
    I.S. : Sembarang, command line bisa memiliki isi atau kosong 
    F.S. : Command line kosong */
     // KAMUS LOKAL
@@ -148,9 +148,9 @@ void clearScreen() {
 
 
 int lengthString(char *str) {
-    /* Mengembalikan panjang string */
-    /* I.S. str terdefinisi */
-    /* F.S. Mengembalikan panjang string */
+/* Mengembalikan panjang string
+   I.S. : str terdefinisi
+   F.S. : Mengembalikan panjang string */
     int i = 0;
     while (*str != '\0') {
         i++;
@@ -160,9 +160,9 @@ int lengthString(char *str) {
 }
 
 boolean sameString(char* str1, char* str2) {
-    /* Mengembalikan true jika str1 dan str2 sama */
-    /* I.S. str1 dan str2 terdefinisi */
-    /* F.S. Mengembalikan true jika str1 dan str2 sama */
+/* Mengembalikan true jika str1 dan str2 sama 
+   I.S. : str1 dan str2 terdefinisi 
+   F.S. Mengembalikan true jika str1 dan str2 sama */
     if (lengthString(str1) != lengthString(str2)) {
         return false;
     } else {
@@ -178,9 +178,9 @@ boolean sameString(char* str1, char* str2) {
 }
 
 void separateSpace(char *str, char *str1, char *str2) {
-    /* Memisahkan string str menjadi dua string str1 dan str2 */
-    /* I.S. str terdefinisi, terdiri dari dua kata yang terpisahkan oleh spasi */
-    /* F.S. str1 dan str2 terdefinisi dan berisi kata yang telah dipisahkan */
+/* Memisahkan string str menjadi dua string str1 dan str2 
+   I.S. : str terdefinisi, terdiri dari dua kata yang terpisahkan oleh spasi 
+   F.S. : str1 dan str2 terdefinisi dan berisi kata yang telah dipisahkan */
     int i = 0;
     while (*str != ' ') {
         *(str1 + i) = *str;
@@ -196,4 +196,15 @@ void separateSpace(char *str, char *str1, char *str2) {
         i++;
     }
     *(str2 + i) = '\0';
+}
+
+void splashScreen() {
+/* Mengapus seluruh isi dari command line dan mencetak tulisan BNMO diatas CLI.
+   I.S. : Sembarang, command line bisa memiliki isi atau kosong 
+   F.S. : Di paling atas CLI ditampilkan tulisan BNMO dan sisanya dihapuskan */
+    // KAMUS LOKAL
+
+    // ALGORTIMA
+    clearScreen();
+    printf("============================================= BNMO =============================================\n\n");
 }
