@@ -25,6 +25,5 @@ int main()
         printf("%c", currentChar);
         ADV(); // Lanjut ke karakter berikutnya
     }
-    //gcc -o main src/ADT/mesinkarakter.c bin/unit_tests/test_mesinkarakter.c
     return 0;
 }
