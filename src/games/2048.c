@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "game_2048.h"
+#include "2048.h"
 
 void run_2048() {
 /* Implementasi permainan 2048 dalam C menggunakan ADT Matriks.

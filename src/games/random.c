@@ -1,4 +1,4 @@
-#include "game_random.h"
+#include "random.h"
 
 void run_random() {
 /* Bukan game beneran. Langsung mencetak skor yang berupa angka random ke layar.

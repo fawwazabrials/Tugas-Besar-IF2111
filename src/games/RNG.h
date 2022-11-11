@@ -5,6 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "../functions.h"
 
 /* TODO : ubah parameter ke ADT score waktu udh dibuat */
 void run_rng();

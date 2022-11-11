@@ -1,23 +1,20 @@
 main :
-	gcc -o a ../main.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/ADT/array.c ../src/ADT/matriks.c ../src/ADT/q_dinerdash.c ../src/ADT/queue.c ../src/functions.c ../src/commands.c ../src/dinerdash.c ../src/game_2048.c ../src/game_rng.c ../src/game_random.c   
-
-commands :
-	gcc -o a unit_tests/commandtest.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/ADT/array.c ../src/ADT/matriks.c ../src/ADT/queue.c ../src/functions.c ../src/commands.c
+	gcc -o BNMO ../main.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/ADT/array.c ../src/ADT/matriks.c ../src/ADT/q_dinerdash.c ../src/ADT/queue.c ../src/functions.c ../src/commands.c ../src/games/dinerdash.c ../src/games/2048.c ../src/games/RNG.c ../src/games/random.c   
 
 game :
-	gcc -o a unit_tests/gametest.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/ADT/array.c ../src/ADT/matriks.c ../src/ADT/queue.c ../src/functions.c ../src/game_rng.c ../src/game_2048.c ../src/dinerdash.c ../src/ADT/q_dinerdash.c ../src/game_random.c 
+	gcc -o gametest unit_tests/gametest.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/ADT/array.c ../src/ADT/matriks.c ../src/ADT/queue.c ../src/functions.c ../src/games/RNG.c ../src/games/2048.c ../src/games/dinerdash.c ../src/ADT/q_dinerdash.c ../src/gameS/random.c 
 
 array :
-	gcc -o a unit_tests/arraytest.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/ADT/array.c ../src/functions.c
+	gcc -o arraytest unit_tests/arraytest.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/ADT/array.c ../src/functions.c
 
 matriks :
-	gcc -o a unit_tests/matrikstest.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/ADT/matriks.c ../src/functions.c
+	gcc -o matrikstest unit_tests/matrikstest.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/ADT/matriks.c ../src/functions.c
 
 queue :
-	gcc -o a unit_tests/queuetest.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/ADT/queue.c ../src/functions.c
+	gcc -o queuetest unit_tests/queuetest.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/ADT/queue.c ../src/functions.c
 
 mesinkata :
-	gcc -o a unit_tests/mesinkatatest.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/functions.c
+	gcc -o mesinkatatest unit_tests/mesinkatatest.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/functions.c
 
 mesinkarakter :
-	gcc -o a unit_tests/mesinkatatest.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/functions.c
+	gcc -o mesinkaraktertest unit_tests/mesinkatatest.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/functions.c

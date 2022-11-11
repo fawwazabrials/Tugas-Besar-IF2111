@@ -2,10 +2,10 @@
 #define MENU_COMMANDS_H
 
 #include "functions.h"
-#include "game_rng.h"
-#include "game_2048.h"
-#include "game_random.h"
-#include "dinerdash.h"
+#include "games/RNG.h"
+#include "games/2048.h"
+#include "games/random.h"
+#include "games/dinerdash.h"
 #include "ADT/array.h"
 #include "ADT/boolean.h"
 #include "ADT/mesinkarakter.h"

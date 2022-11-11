@@ -1,8 +1,8 @@
-#include "functions.h"
-#include "ADT/boolean.h"
-#include "ADT/q_dinerdash.h"
-#include "ADT/mesinkarakter.h"
-#include "ADT/mesinkata.h"
+#include "../functions.h"
+#include "../ADT/boolean.h"
+#include "../ADT/q_dinerdash.h"
+#include "../ADT/mesinkarakter.h"
+#include "../ADT/mesinkata.h"
 
 typedef struct {
     char* ID;

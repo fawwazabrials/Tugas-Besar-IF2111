@@ -1,7 +1,6 @@
 /* File : game_rng.c */
 
-#include "game_rng.h"
-#include "functions.h"
+#include "RNG.h"
 
 /* TODO : ubah parameter ke ADT score waktu udh dibuat */
 

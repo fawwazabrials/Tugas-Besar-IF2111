@@ -1,7 +1,7 @@
 #include "../../src/functions.h"
-#include "../../src/game_rng.h"
-#include "../../src/dinerdash.h"
-#include "../../src/game_2048.h"
+#include "../../src/games/RNG.h"
+#include "../../src/games/dinerdash.h"
+#include "../../src/games/2048.h"
 
 int main() {
     Word c1, c2; int c3=-9999;

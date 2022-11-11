@@ -161,10 +161,13 @@ void CREATEGAME(TabWord *T) {
     // KAMUS LOKAL
 
     // ALGORITMA
-    printf("Masukkan nama game yang akan ditambahkan: ");
-    scan("%s", &CCommand, &ph1, &ph2);
-    InsertLast(T, CCommand);
-    printf("Game berhasil ditambahkan\n");
+    if (IsFull(*T)) printf("List game-mu penuh! Silahkan DELETE GAME terlebih dahulu.\n");
+    else {
+        printf("Masukkan nama game yang akan ditambahkan: ");
+        scan("%s", &CCommand, &ph1, &ph2);
+        InsertLast(T, CCommand);
+        printf("Game berhasil ditambahkan\n");
+    }
 }
 
 void DELETEGAME (TabWord *gl, Queue gq) {
