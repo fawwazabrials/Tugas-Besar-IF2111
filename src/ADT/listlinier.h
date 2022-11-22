@@ -10,7 +10,12 @@
 
 #define Nil NULL
 
-typedef int infotype;
+typedef struct { 
+	int X; /* absis   */
+	int Y; /* ordinat */
+} Point;
+
+typedef Point infotype;
 typedef struct tElmtlist *address;
 typedef struct tElmtlist { 
 	infotype info;
@@ -27,6 +32,10 @@ typedef struct {
 #define Info(P) (P)->info
 #define Next(P) (P)->next
 #define First(L) ((L).First)
+
+/* *** Notasi Akses: Selektor Point *** */
+#define Absis(Point) (Point).X
+#define Ordinat(Point) (Point).Y
 
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/
