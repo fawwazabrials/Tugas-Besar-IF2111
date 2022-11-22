@@ -7,24 +7,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// typedef int infotype;
-// typedef struct tElmtlist *address;
-// typedef struct tElmtlist { 
-// 	infotype info;
-// 	address next;
-// } ElmtList;
-// typedef struct {
-// 	address First;
-// } List;
-
-// /* Definisi list : */
-// /* List kosong : First(L) = Nil */
-// /* Setiap elemen dengan address P dapat diacu Info(P), Next(P) */
-// /* Elemen terakhir list : jika addressnya Last, maka Next(Last)=Nil */
-// #define Info(P) (P)->info
-// #define Next(P) (P)->next
-// #define First(L) ((L).First)
-
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/
 boolean IsEmpty (List L) {
@@ -40,14 +22,15 @@ void CreateEmpty (List *L) {
 }
 
 /****************** Manajemen Memori ******************/
-address Alokasi (infotype X) {
+address Alokasi (infotype X, infotype Y) {
 /* Mengirimkan address hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
-/* menghasilkan P, maka info(P)=X, Next(P)=Nil */
+/* menghasilkan P, maka Absis(P) = X, Ordinat(P) = Y Next(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
     address P = (address) malloc (sizeof(ElmtList));
     if (P != Nil) {
-        Info(P) = X;
+        Absis(Info(P)) = X;
+        Ordinat(Info(P)) = Y;
         Next(P) = Nil;
     }
     return P;
@@ -61,14 +44,14 @@ void Dealokasi (address *P) {
 }
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
-address Search (List L, infotype X){
-/* Mencari apakah ada elemen list dengan info(P)= X */
+address Search (List L, infotype X, infotype Y){
+/* Mencari apakah ada elemen list dengan Absis(P) = X dan Ordinat(P) = Y */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
     address P = First(L);
     boolean found = false;
     while (P!= Nil && ! found) {
-        if (Info(P) == X) {
+        if (Absis(Info(P)) == X && Ordinat(Info(P)) == Y) {
             found = true;
         } else {
             P = Next(P);
@@ -84,41 +67,43 @@ address Search (List L, infotype X){
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
-void InsVFirst (List *L, infotype X){
+void InsVFirst (List *L, infotype X, infotype Y){
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
-    address P = Alokasi(X);
+    address P = Alokasi(X, Y);
     InsertFirst(L, P);
 }
 
-void InsVLast (List *L, infotype X){
+void InsVLast (List *L, infotype X, infotype Y){
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
-    address P = Alokasi(X);
+    address P = Alokasi(X, Y);
     InsertLast(L, P);
 }
 
 /*** PENGHAPUSAN ELEMEN ***/
-void DelVFirst (List *L, infotype *X){
+void DelVFirst (List *L, infotype *X, infotype *Y){
 /* I.S. List L tidak kosong  */
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen pertama di-dealokasi */
     address P;
     DelFirst(L, &P);
-    *X = Info(P);
+    *X = Absis(Info(P));
+    *Y = Ordinat(Info(P));
     Dealokasi(&P);
 }
 
-void DelVLast (List *L, infotype *X){
+void DelVLast (List *L, infotype *X, infotype *Y){
 /* I.S. list tidak kosong */
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen terakhir di-dealokasi */
     address P;
     DelLast(L, &P);
-    *X = Info(P);
+    *X = Absis(Info(P));
+    *Y = Ordinat(Info(P));
     Dealokasi(&P);
 }
 
@@ -171,13 +156,13 @@ void DelFirst (List *L, address *P){
 
 }
 
-void DelP (List *L, infotype X){ 
+void DelP (List *L, infotype X, infotype Y){ 
 /* I.S. Sembarang */
 /* F.S. Jika ada elemen list beraddress P, dengan info(P)=X  */
 /* Maka P dihapus dari list dan di-dealokasi */
 /* Jika tidak ada elemen list dengan info(P)=X, maka list tetap */
 /* List mungkin menjadi kosong karena penghapusan */
-    address P = Search(*L, X);
+    address P = Search(*L, X, Y);
     if (P != Nil) {
         address Prec = First(*L);       // Prec = Loc di ppt
         if (Prec == P) {
@@ -232,12 +217,13 @@ void PrintInfo (List L){
     printf("[");
     if (! IsEmpty(L)) {
         address P = First(L);
-        printf("%d", Info(P));
-        P = Next(P);
-        while (P != Nil) {
-            printf(",%d", Info(P));
+        do {
+            printf("(%d,%d)", Absis(Info(P)), Ordinat(Info(P)));
             P = Next(P);
-        }
+            if (P != Nil) {
+                printf(",");
+            }
+        } while (P != Nil);
     }
     printf("]");
 
@@ -257,25 +243,28 @@ int NbElmt (List L){
 
 }
 
+/*** OPERASI HITUNGAN TERHADAP LIST LINIER ***/
 /*** Prekondisi untuk Max/Min/rata-rata : List tidak kosong ***/
-infotype Max (List L){ 
-/* Mengirimkan nilai info(P) yang maksimum */
+
+/* BERDASARKAN ABSIS */
+infotype MaxX (List L){ 
+/* Mengirimkan nilai absis info(P) yang maksimum */
     address P = First(L);
-    int maximum = Info(P);
+    int maximum = Absis(Info(P));
     while (P != Nil) {
-        if (Info(P) > maximum) {
-            maximum = Info(P);
+        if (Absis(Info(P)) > maximum) {
+            maximum = Absis(Info(P));
         }
         P = Next(P);
     }
     return maximum;
 }
 
-address AdrMax (List L){ 
-/* Mengirimkan address P, dengan info(P) yang bernilai maksimum */
+address AdrMaxX (List L){ 
+/* Mengirimkan address P, dengan absis info(P) yang bernilai maksimum */
     address P = First(L);
     while (P != Nil) {
-        if (Info(P) == Max(L)) {
+        if (Absis(Info(P)) == MaxX(L)) {
             return P;
         } else {
             P = Next(P);
@@ -284,24 +273,24 @@ address AdrMax (List L){
     return Nil;
 }
 
-infotype Min (List L){ 
-/* Mengirimkan nilai info(P) yang minimum */
+infotype MinX (List L){ 
+/* Mengirimkan nilai absis info(P) yang minimum */
     address P = First(L);
-    int minimum = Info(P);
+    int minimum = Ordinat(Info(P));
     while (P != Nil) {
-        if (Info(P) < minimum) {
-            minimum = Info(P);
+        if (Absis(Info(P)) < minimum) {
+            minimum = Absis(Info(P));
         }
         P = Next(P);
     }
     return minimum;
 }
 
-address AdrMin (List L){ 
-/* Mengirimkan address P, dengan info(P) yang bernilai minimum */
+address AdrMinX (List L){ 
+/* Mengirimkan address P, dengan absis info(P) yang bernilai minimum */
     address P = First(L);
     while (P != Nil) {
-        if (Info(P) == Min(L)) {
+        if (Absis(Info(P)) == MinX(L)) {
             return P;
         } else {
             P = Next(P);
@@ -310,12 +299,78 @@ address AdrMin (List L){
     return Nil;
 }
 
-float Average (List L){ 
-/* Mengirimkan nilai rata-rata info(P) */
+float AverageX (List L){ 
+/* Mengirimkan nilai rata-rata absis info(P) */
     float sum = 0;
     address P = First(L);
     while (P != Nil) {
-        sum = sum + Info(P);
+        sum = sum + Absis(Info(P));
+        P = Next(P);
+    }
+    return sum / (float) NbElmt(L);
+
+}
+
+/* BERDASARKAN ORDINAT */
+
+infotype MaxY (List L){ 
+/* Mengirimkan nilai ordinat info(P) yang maksimum */
+    address P = First(L);
+    int maximum = Ordinat(Info(P));
+    while (P != Nil) {
+        if (Ordinat(Info(P)) > maximum) {
+            maximum = Ordinat(Info(P));
+        }
+        P = Next(P);
+    }
+    return maximum;
+}
+
+address AdrMaxY (List L){ 
+/* Mengirimkan address P, dengan ordinat info(P) yang bernilai maksimum */
+    address P = First(L);
+    while (P != Nil) {
+        if (Ordinat(Info(P)) == MaxY(L)) {
+            return P;
+        } else {
+            P = Next(P);
+        }
+    }
+    return Nil;
+}
+
+infotype MinY (List L){ 
+/* Mengirimkan nilai ordinat info(P) yang minimum */
+    address P = First(L);
+    int minimum = Ordinat(Info(P));
+    while (P != Nil) {
+        if (Ordinat(Info(P)) < minimum) {
+            minimum = Ordinat(Info(P));
+        }
+        P = Next(P);
+    }
+    return minimum;
+}
+
+address AdrMinY (List L){ 
+/* Mengirimkan address P, dengan ordinat info(P) yang bernilai minimum */
+    address P = First(L);
+    while (P != Nil) {
+        if (Ordinat(Info(P)) == MinY(L)) {
+            return P;
+        } else {
+            P = Next(P);
+        }
+    }
+    return Nil;
+}
+
+float AverageY (List L){ 
+/* Mengirimkan nilai rata-rata ordinat info(P) */
+    float sum = 0;
+    address P = First(L);
+    while (P != Nil) {
+        sum = sum + Ordinat(Info(P));
         P = Next(P);
     }
     return sum / (float) NbElmt(L);
