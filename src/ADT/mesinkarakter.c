@@ -4,7 +4,7 @@
 
 char currentChar;
 boolean EOP;
-static FILE *pita;
+static FILE *pita = NULL;
 static int retval;
 
 void RESETPITA() {
@@ -15,7 +15,7 @@ void RESETPITA() {
     // KAMUS LOKAL
 
     // ALGORITMA
-    rewind(pita);
+    if (pita != NULL) rewind(pita);
 }
 
 void STARTFILE(char* file_name) {
@@ -28,7 +28,7 @@ void STARTFILE(char* file_name) {
           Jika currentChar != MARK maka EOP akan padam (false)
           Jika currentChar = MARK maka EOP akan menyala (true) */
     // KAMUS LOKAL
-    static char path[150] = "..\\data\\";
+    static char path[150] = "../data/";
     int i=0, len = 8;
 
     RESETPITA();
@@ -60,6 +60,7 @@ void START() {
 
     // ALGORITMA
     RESETPITA();
+
     pita = stdin;
     ADV();
 }

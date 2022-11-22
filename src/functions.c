@@ -14,7 +14,7 @@ unsigned randint(unsigned lower_bound, unsigned upper_bound) {
     // ALGORITMA
     x = (int*) malloc (sizeof(int));
     seed1 = time(NULL);
-    seed2 = ((unsigned) x);
+    seed2 = (unsigned) ((long) x);
     srand(seed1);
     seed3 = rand();
 
