@@ -208,3 +208,7 @@ void splashScreen() {
     clearScreen();
     printf("============================================= BNMO =============================================\n\n");
 }
+
+int mod (int x,int N) {
+    return (x % N + N) %N;
+}

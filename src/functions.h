@@ -72,4 +72,7 @@ void splashScreen();
    I.S. : Sembarang, command line bisa memiliki isi atau kosong 
    F.S. : Di paling atas CLI ditampilkan tulisan BNMO dan sisanya dihapuskan */
 
+int mod (int x,int N);
+
+
 #endif
