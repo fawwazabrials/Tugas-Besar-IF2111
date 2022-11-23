@@ -64,6 +64,10 @@ address Search (List L, infotype X, infotype Y);
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
 
+int indexOf(List L, infotype X, infotype Y);
+/* Mencari indeks keberapa sebuah elemen dengan absis X dan ordinat Y pada list 
+   Jika elemen tidak ada di dalam list, maka akan mengembalikan nilai -9999 */
+
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
 void InsVFirst (List *L, infotype X, infotype Y);

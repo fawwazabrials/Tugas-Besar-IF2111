@@ -65,6 +65,34 @@ address Search (List L, infotype X, infotype Y){
     
 }
 
+int indexOf(List L, infotype X, infotype Y) {
+/* Mencari indeks keberapa sebuah elemen dengan absis X dan ordinat Y pada list 
+   Jika elemen tidak ada di dalam list, maka akan mengembalikan nilai -9999 */
+    // KAMUS LOKAL
+    address P;
+    boolean found;
+    int idx;
+
+    // ALGORITMA
+    P = First(L);
+    idx = 0;
+    found = false;
+    while (P!= Nil && ! found) {
+        if (Absis(Info(P)) == X && Ordinat(Info(P)) == Y) {
+            found = true;
+        } else {
+            P = Next(P); idx++;
+        }
+    }
+
+    if (found) {
+        return idx;
+    } else {
+        return -9999;
+    }
+
+}
+
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
 void InsVFirst (List *L, infotype X, infotype Y){
