@@ -22,15 +22,15 @@ void CreateEmptyListL (List *L) {
 }
 
 /****************** Manajemen Memori ******************/
-address Alokasi (int X, int Y) {
+address Alokasi (infotype X, infotype Y) {
 /* Mengirimkan address hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
-/* menghasilkan P, maka info(P)=X, Next(P)=Nil */
+/* menghasilkan P, maka Absis(P) = X, Ordinat(P) = Y Next(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
     address P = (address) malloc (sizeof(ElmtList));
     if (P != Nil) {
-        InfoX(P) = X;
-        InfoY(P) = Y;
+        Absis(Info(P)) = X;
+        Ordinat(Info(P)) = Y;
         Next(P) = Nil;
     }
     return P;
@@ -44,14 +44,14 @@ void Dealokasi (address *P) {
 }
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
-address Search (List L, int X, int Y){
-/* Mencari apakah ada elemen list dengan info(P)= X */
+address Search (List L, infotype X, infotype Y){
+/* Mencari apakah ada elemen list dengan Absis(P) = X dan Ordinat(P) = Y */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
     address P = First(L);
     boolean found = false;
-    while (P != Nil && ! found) {
-        if (InfoX(P) == X && InfoY(P) == Y) {
+    while (P!= Nil && ! found) {
+        if (Absis(Info(P)) == X && Ordinat(Info(P)) == Y) {
             found = true;
         } else {
             P = Next(P);
@@ -65,43 +65,73 @@ address Search (List L, int X, int Y){
     
 }
 
+int indexOf(List L, infotype X, infotype Y) {
+/* Mencari indeks keberapa sebuah elemen dengan absis X dan ordinat Y pada list 
+   Jika elemen tidak ada di dalam list, maka akan mengembalikan nilai -9999 */
+    // KAMUS LOKAL
+    address P;
+    boolean found;
+    int idx;
+
+    // ALGORITMA
+    P = First(L);
+    idx = 0;
+    found = false;
+    while (P!= Nil && ! found) {
+        if (Absis(Info(P)) == X && Ordinat(Info(P)) == Y) {
+            found = true;
+        } else {
+            P = Next(P); idx++;
+        }
+    }
+
+    if (found) {
+        return idx;
+    } else {
+        return -9999;
+    }
+
+}
+
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
-void InsVFirst (List *L, int X, int Y) {
+void InsVFirst (List *L, infotype X, infotype Y){
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
     address P = Alokasi(X, Y);
-    InsertFirstListL(L, P);
+    InsertFirst(L, P);
 }
 
-void InsVLast (List *L, int X, int Y) {
+void InsVLast (List *L, infotype X, infotype Y){
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
     address P = Alokasi(X, Y);
-    InsertLastListL(L, P);
+    InsertLast(L, P);
 }
 
 /*** PENGHAPUSAN ELEMEN ***/
-void DelVFirst (List *L, int *X, int *Y) {
+void DelVFirst (List *L, infotype *X, infotype *Y){
 /* I.S. List L tidak kosong  */
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen pertama di-dealokasi */
     address P;
-    DelFirstListL(L, &P);
-    *X = InfoX(P); *Y = InfoY(P);
+    DelFirst(L, &P);
+    *X = Absis(Info(P));
+    *Y = Ordinat(Info(P));
     Dealokasi(&P);
 }
 
-void DelVLast (List *L, int *X, int *Y) {
+void DelVLast (List *L, infotype *X, infotype *Y){
 /* I.S. list tidak kosong */
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen terakhir di-dealokasi */
     address P;
-    DelLastListL(L, &P);
-    *X = InfoX(P); *Y = InfoY(P);
+    DelLast(L, &P);
+    *X = Absis(Info(P));
+    *Y = Ordinat(Info(P));
     Dealokasi(&P);
 }
 
@@ -154,7 +184,7 @@ void DelFirstListL (List *L, address *P){
 
 }
 
-void DelPListL (List *L, int X, int Y) { 
+void DelP (List *L, infotype X, infotype Y){ 
 /* I.S. Sembarang */
 /* F.S. Jika ada elemen list beraddress P, dengan info(P)=X  */
 /* Maka P dihapus dari list dan di-dealokasi */
@@ -214,12 +244,13 @@ void PrintInfoListL (List L){
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
     if (! IsListLEmpty(L)) {
         address P = First(L);
-        printf("(%d, %d)\n", InfoX(P), InfoY(P));
-        P = Next(P);
-        while (P != Nil) {
-            printf("(%d, %d)\n", InfoX(P), InfoY(P));
+        do {
+            printf("(%d,%d)", Absis(Info(P)), Ordinat(Info(P)));
             P = Next(P);
-        }
+            if (P != Nil) {
+                printf(",");
+            }
+        } while (P != Nil);
     }
 }
 
