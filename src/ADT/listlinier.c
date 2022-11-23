@@ -212,7 +212,7 @@ void DelLastListL (List *L, address *P){
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
 /* Last element baru adalah predesesor elemen terakhir yg lama, */
 /* jika ada */
-    if (Next(*P) == Nil) {
+    if (Next(First(*L)) == Nil) {
         *P = First(*L);
         CreateEmptyListL(L);
     } else {
