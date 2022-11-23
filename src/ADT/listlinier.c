@@ -100,7 +100,7 @@ void InsVFirst (List *L, infotype X, infotype Y){
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
     address P = Alokasi(X, Y);
-    InsertFirst(L, P);
+    InsertFirstListL(L, P);
 }
 
 void InsVLast (List *L, infotype X, infotype Y){
@@ -109,7 +109,7 @@ void InsVLast (List *L, infotype X, infotype Y){
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
     address P = Alokasi(X, Y);
-    InsertLast(L, P);
+    InsertLastListL(L, P);
 }
 
 /*** PENGHAPUSAN ELEMEN ***/
@@ -118,7 +118,7 @@ void DelVFirst (List *L, infotype *X, infotype *Y){
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen pertama di-dealokasi */
     address P;
-    DelFirst(L, &P);
+    DelFirstListL(L, &P);
     *X = Absis(Info(P));
     *Y = Ordinat(Info(P));
     Dealokasi(&P);
@@ -129,7 +129,7 @@ void DelVLast (List *L, infotype *X, infotype *Y){
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen terakhir di-dealokasi */
     address P;
-    DelLast(L, &P);
+    DelLastListL(L, &P);
     *X = Absis(Info(P));
     *Y = Ordinat(Info(P));
     Dealokasi(&P);
