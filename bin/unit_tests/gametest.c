@@ -2,7 +2,7 @@
 #include "../../src/games/RNG.h"
 #include "../../src/games/dinerdash.h"
 #include "../../src/games/2048.h"
-#include "../../src/games/snake_on_meteor.h"
+#include "../../src/games/snake.h"
 
 int main() {
     // Word c1, c2; int c3=-9999;
@@ -23,5 +23,5 @@ int main() {
     // }
     // return 0;
 
-    run_snake_on_meteor();
+    run_snake();
 }
