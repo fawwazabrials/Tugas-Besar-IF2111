@@ -12,8 +12,15 @@ typedef struct {
 	infotype Y;
 } Fruit;
 
+typedef struct {
+	infotype X;
+	infotype Y;
+} Meteor;
+
 #define buahX(buah) (buah).X
 #define buahY(buah) (buah).Y
+#define meteorX(meteor) (meteor).X
+#define meteorY(meteor) (meteor).Y
 
 void initializeSnake(List* snake);
 /* Inisialisasi awal permainan Snake On Meteor.
@@ -22,23 +29,18 @@ void initializeSnake(List* snake);
           - 2 buah badan setelahnya akan ditempatkan pada bidang horizontal
             head yang bisa memutar */
 
-void printSnakeBoard(List snake, Fruit buah);
+void printSnakeBoard(List snake, Fruit buah, Meteor meteor);
 /* Mencetak board game Snake On Meteor ke layar
    I.S. : Sembarang
    F.S. : Board tercetak pada layar */
 
-void addSnake(List* snake);
+void addSnake(List* snake, Meteor meteor);
 /* Menambah panjang snake sebanyak 1 badan 
    I.S. : Snake memiliki panjang minimal head-nya saja 
    F.S. : Snake bertambah panjang 1 dibagian tail dengan prioritas pertama ke 
           arah horizontal. Jika tidak memungkinkan ke horizontal, maka ke arah vertikal*/
 
-void addBuah(List snake ,Fruit* buah);
-/* Menambahkan buah pada board dengan posisi buah berupa Point random
-   I.S. : Sembarang
-   F.S. : Posisi X dan Y di-randomize dan buah tercipta */
-
-void addBuah(List snake ,Fruit* buah);
+void addBuah(List snake, Fruit* buah, Meteor meteor);
 /* Menambahkan buah pada board dengan posisi buah berupa Point random
    I.S. : Sembarang
    F.S. : Posisi X dan Y di-randomize dan buah tercipta */

@@ -8,7 +8,7 @@
 // 2. Tambahin obstacle(?)
 
 
-void printSnakeBoard(List snake, Fruit buah) {
+void printSnakeBoard(List snake, Fruit buah, Meteor meteor) {
 /* Mencetak board game Snake On Meteor ke layar
    I.S. : Sembarang
    F.S. : Board tercetak pada layar */
@@ -20,16 +20,17 @@ void printSnakeBoard(List snake, Fruit buah) {
         printf("_________________________________________\n\n|");
         for (j=0; j<5; j++) {
             // printf("(%d, %d)|", j, i);
-            if (Search(snake, j, i) != Nil) {
+            if (meteorX(meteor) == j && meteorY(meteor) == i) {
+                printf("%6c\t|", 'm');
+            }
+            else if (buahX(buah) == j && buahY(buah) == i) {
+                printf("%6c\t|", 'o');
+            }
+            else if (Search(snake, j, i) != Nil) {
                 idx = indexOf(snake, j, i);
                 if (idx == 0) printf("%6c\t|", 'H');
                 else printf("%6d\t|", idx);
             }
-
-            else if (buahX(buah) == j && buahY(buah) == i) {
-                printf("%6c\t|", 'o');
-            }
-
             else printf("      \t|");
         } printf("\n");
     } printf("_________________________________________\n\n");
@@ -43,16 +44,19 @@ void initializeSnake(List* snake) {
             head yang bisa memutar */
     // KAMUS LOKAL
     int x, y;
+    Meteor M;
 
     // ALGORITMA
+    meteorX(M) = -1; meteorY(M) = -1;
+
     CreateEmptyListL(snake);
     x = randint(0, 4); y = randint(0, 4);
     InsVLast(snake, x, y);              // insert head
-    addSnake(snake);    // insert badan 1
-    addSnake(snake);    // insert badan 2
+    addSnake(snake, M);    // insert badan 1
+    addSnake(snake, M);    // insert badan 2
 }
 
-void addSnake(List* snake) {
+void addSnake(List* snake, Meteor meteor) {
 /* Menambah panjang snake sebanyak 1 badan 
    I.S. : Snake memiliki panjang minimal head-nya saja 
    F.S. : Snake bertambah panjang 1 dibagian tail dengan prioritas pertama ke 
@@ -68,18 +72,18 @@ void addSnake(List* snake) {
     }
 
     tail = Info(P);
-    if (Absis(tail)+1<=4 && Search(*snake, Absis(tail)+1, Ordinat(tail)) == Nil) {
+    if (Absis(tail)+1<=4 && Search(*snake, Absis(tail)+1, Ordinat(tail)) == Nil && !(meteorX(meteor) == Absis(tail)+1 && meteorY(meteor) == Ordinat(tail))) {
         InsVLast(snake, Absis(tail)+1, Ordinat(tail));
-    } else if (Absis(tail)-1>=0 && Search(*snake, Absis(tail)-1, Ordinat(tail)) == Nil) {
+    } else if (Absis(tail)-1>=0 && Search(*snake, Absis(tail)-1, Ordinat(tail)) == Nil && !(meteorX(meteor) == Absis(tail)-1 && meteorY(meteor) == Ordinat(tail))) {
         InsVLast(snake, Absis(tail)-1, Ordinat(tail));
-    } else if (Ordinat(tail)+1 <= 4 && Search(*snake, Absis(tail), Ordinat(tail)+1) == Nil) {
+    } else if (Ordinat(tail)+1 <= 4 && Search(*snake, Absis(tail), Ordinat(tail)+1) == Nil && !(meteorX(meteor) == Absis(tail) && meteorY(meteor)+1 == Ordinat(tail))) {
         InsVLast(snake, Absis(tail), Ordinat(tail)+1);
-    } else if (Ordinat(tail)-1 >= 0 && Search(*snake, Absis(tail), Ordinat(tail)-1) == Nil) {
+    } else if (Ordinat(tail)-1 >= 0 && Search(*snake, Absis(tail), Ordinat(tail)-1) == Nil && !(meteorX(meteor) == Absis(tail) && meteorY(meteor)-1 == Ordinat(tail))) {
         InsVLast(snake, Absis(tail), Ordinat(tail)-1); 
     }
 }
 
-void addBuah(List snake ,Fruit* buah) {
+void addBuah(List snake, Fruit* buah, Meteor meteor) {
 /* Menambahkan buah pada board dengan posisi buah berupa Point random
    I.S. : Sembarang
    F.S. : Posisi X dan Y di-randomize dan buah tercipta */
@@ -87,62 +91,130 @@ void addBuah(List snake ,Fruit* buah) {
 
     // ALGORITMA
     buahX(*buah) = randint(0, 4); buahY(*buah) = randint(0, 4);
-    while (Search(snake, buahX(*buah), buahY(*buah)) != Nil) {
+    while (Search(snake, buahX(*buah), buahY(*buah)) != Nil && !(meteorX(meteor) == buahX(*buah) && meteorX(meteor) == buahY(*buah))) {
         buahX(*buah) = randint(0, 4); buahY(*buah) = randint(0, 4);
     }
 }
-
 
 int run_snake() {
 /* Implementasi game Snake On Meteor sesuai spesifikasi 
    panduan dengan menggunakan ADT list linier */
     // KAMUS LOKAL
     List snake;
-    boolean lose = false;
+    boolean lose = false, moved = false;
+    int score;
     Point kepala;
     address tempNode;
     Fruit buah;
+    Meteor meteor;
     // Variabel placeholder untuk input
     Word kode, command2;
     int inputint;
 
     // ALGORITMA
+    // Inisialisasi awal
     initializeSnake(&snake);
+    meteorX(meteor) = -1; meteorY(meteor) = -1;
+    buahX(buah) = -1; buahY(buah) = -1;
     
-    while (!lose) {
+    while (!lose && NbElmtListL(snake) > 0) {
         kepala = Info(First(snake));
-        if (Absis(kepala) == buahX(buah) && Ordinat(kepala) == buahY(buah)) {
-            addSnake(&snake);
-            addBuah(snake, &buah);
+
+        // logic buat nambahin buah & makan buah
+        if ((Absis(kepala) == buahX(buah) && Ordinat(kepala) == buahY(buah)) && !(meteorX(meteor) == buahX(buah) && meteorX(meteor) == buahY(buah))) {   // cek buah udah dimakan apa blom
+            addSnake(&snake, meteor);
+            addBuah(snake, &buah, meteor);
+        } else if (meteorX(meteor) == buahX(buah) && meteorX(meteor) == buahY(buah)) {
+            addBuah(snake, &buah, meteor);
         }
 
-        printSnakeBoard(snake, buah);
+        printSnakeBoard(snake, buah, meteor);
+
+        // logic cek meteor kena snek
+        if (moved) {
+            if (Search(snake, meteorX(meteor), meteorY(meteor)) != Nil) {
+                if (indexOf(snake, meteorX(meteor), meteorY(meteor)) == 0) {
+                    printf("Buset kepala kamu kena meteor!!!\n");
+                    lose = true;
+                } else {
+                    printf("Wah kamu kena meteor!\n");
+                    DelP(&snake, meteorX(meteor), meteorY(meteor));
+                }
+            } else {
+                printf("Selamat kamu gak kena meteor!\n");
+            }
+        }
 
         // Logic buat gerak2in snek
-        printf("MASUKKAN COMMAND : "); scan("%c", &kode, &command2, &inputint);
+        printf("Silahkan masukkan command: "); scan("%c", &kode, &command2, &inputint);
+
+        moved = false;
         if (ValidateCommand(kode, "W")) {
-            if (Search(snake, Absis(kepala), mod(Ordinat(kepala)-1, 5)) == Nil) { // cek diatasnya ada sesuatu gak
+            if (Search(snake, Absis(kepala), mod(Ordinat(kepala)-1, 5)) == Nil && !(meteorX(meteor) == Absis(kepala) && meteorY(meteor) == mod(Ordinat(kepala)-1, 5))) { // cek diatasnya ada sesuatu gak
                 InsVFirst(&snake, Absis(kepala), mod(Ordinat(kepala)-1, 5));
                 DelLastListL(&snake, &tempNode);
-            } else lose = true;
+                moved = true;
+            } 
+            else if (indexOf(snake, Absis(kepala), mod(Ordinat(kepala)-1, 5)) == 1) {
+                printf("Masukkan tidak valid!\n");
+            } 
+            else if (meteorX(meteor) == Absis(kepala) && meteorY(meteor) == mod(Ordinat(kepala)-1, 5)) {
+                printf("Meteor masih panas!\n");
+            }
+            else lose = true;
+
         } else if (ValidateCommand(kode, "A")) {
-            if (Search(snake, mod(Absis(kepala)-1, 5), Ordinat(kepala)) == Nil) { // cek diatasnya ada sesuatu gak
+            if (Search(snake, mod(Absis(kepala)-1, 5), Ordinat(kepala)) == Nil && !(meteorX(meteor) == mod(Absis(kepala)-1, 5) && meteorY(meteor) == Ordinat(kepala))) { // cek dikirinya ada sesuatu gak
                 InsVFirst(&snake, mod(Absis(kepala)-1, 5), Ordinat(kepala));
                 DelLastListL(&snake, &tempNode);
-            } else lose = true;
+                moved = true;
+            }  
+            else if (indexOf(snake, mod(Absis(kepala)-1, 5), Ordinat(kepala)) == 1) {
+                printf("Masukkan tidak valid!\n");
+            } 
+            else if (meteorX(meteor) == mod(Absis(kepala)-1, 5) && meteorY(meteor) == Ordinat(kepala)) {
+                printf("Meteor masih panas!\n");
+            }
+            else lose = true;
+
         } else if (ValidateCommand(kode, "S")) {
-            if (Search(snake, Absis(kepala), mod(Ordinat(kepala)+1, 5)) == Nil) { // cek diatasnya ada sesuatu gak
+            if (Search(snake, Absis(kepala), mod(Ordinat(kepala)+1, 5)) == Nil && !(meteorX(meteor) == Absis(kepala) && meteorY(meteor) == mod(Ordinat(kepala)+1, 5))) { // cek dibawahnya ada sesuatu gak
                 InsVFirst(&snake, Absis(kepala), mod(Ordinat(kepala)+1, 5));
                 DelLastListL(&snake, &tempNode);
-            } else lose = true;
+                moved = true;
+            }  
+            else if (snake, Absis(kepala), mod(Ordinat(kepala)+1, 5) == 1) {
+                printf("Masukkan tidak valid!\n");
+            } 
+            else if (meteorX(meteor) == Absis(kepala) && meteorY(meteor) == mod(Ordinat(kepala)+1, 5)) {
+                printf("Meteor masih panas!\n");
+            }
+            else lose = true;
+            
         } else if (ValidateCommand(kode, "D")) {
-            if (Search(snake, mod(Absis(kepala)+1, 5), Ordinat(kepala)) == Nil) { // cek diatasnya ada sesuatu gak
+            if (Search(snake, mod(Absis(kepala)+1, 5), Ordinat(kepala)) == Nil && !(meteorX(meteor) == mod(Absis(kepala)+1, 5) && meteorY(meteor) == Ordinat(kepala))) { // cek dikanannya ada sesuatu gak
                 InsVFirst(&snake, mod(Absis(kepala)+1, 5), Ordinat(kepala));
                 DelLastListL(&snake, &tempNode);
-            } else lose = true;
+                moved = true;
+            }  
+            else if (indexOf(snake, mod(Absis(kepala)+1, 5), Ordinat(kepala)) == 1) {
+                printf("Masukkan tidak valid!\n");
+            } 
+            else if (meteorX(meteor) == mod(Absis(kepala)+1, 5) && meteorY(meteor) == Ordinat(kepala)) {
+                printf("Meteor masih panas!\n");
+            }
+            else lose = true;
         } 
         
         else printf("Masukkan kode yang benar!\n\n");
 
+        // Logic buat jatohin meteor
+        if (moved) {
+            meteorX(meteor) = randint(0, 4); meteorY(meteor) = randint(0, 4);
+        }
     }
+
+    score = 2 * NbElmtListL(snake);
+    printf("---- GAME OVER ----\nSkor akhirmu adalah %d.\n", score);
+    return score;
 }
