@@ -1,7 +1,6 @@
 /* File : game_rng.c */
 
-#include "game_rng.h"
-#include "functions.h"
+#include "RNG.h"
 
 /* TODO : ubah parameter ke ADT score waktu udh dibuat */
 
@@ -40,7 +39,7 @@ void run_rng() {
         else printf("Lebih besar\n");
         tries++;
         printf("Tebakan : ");
-        scanf("%d", &in);
+        scan("%d", &temp1, &temp2, &in);
     }
 
     printf("Skor-mu adalah %d\n", 100 - 5*tries);

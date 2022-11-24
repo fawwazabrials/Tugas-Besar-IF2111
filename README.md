@@ -33,11 +33,13 @@ https://www.youtube.com/watch?v=a3ejgWLqelQ
 
     # Tersedia beberapa konfigurasi Makefile :
     # 1. Program utama : main
-    # 2. Program tests : game, commands, array, queue, mesin
+    # 2. Program tests : game, array, matriks, mesinkarakter, mesinkata, queue
     ```
     
 - Jalankan program yang telah tercompile
     ``` 
-    a.exe   # bila anda menggunakan windows 
-    ./a     # bila anda menggunakan non-Windows (MacOS, Ubuntu)    
+    BNMO.exe        # bila anda menggunakan windows 
+    ./BNMO          # bila anda menggunakan non-Windows (MacOS, Ubuntu)  
+
+    # Untuk program driver, dapat menjalankan sesuai nama file executable yang telah dibuat
     ```

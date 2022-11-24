@@ -1,7 +1,7 @@
 #ifndef GAME_RANDOM_H
 #define RNG_RANDOM_H
 
-#include "functions.h"
+#include "../functions.h"
 
 void run_random();
 /* Bukan game beneran. Langsung mencetak skor yang berupa angka random ke layar.

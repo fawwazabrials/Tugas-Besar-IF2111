@@ -18,10 +18,21 @@ void MakeMatriks (int NB, int NK, Matriks * M) {
     NKolEff(*M) = NK;
     for (i=0; i<NBrsEff(*M); i++) {
         for (j=0; j<NKolEff(*M); j++) {
-            Elmt(*M,i,j) = 0;
+            SetElmtMatriks(M, i, j, 0);
         }
     }
 } 
+
+void SetElmtMatriks (Matriks *M, int x, int y, int info) {
+/* PREKONDISI : Semua nilai yang masuk valid
+   Mengubah elemen ke (x, y) menjadi info 
+   I.S. : Matriks sembarang 
+   F.S. : Posisi (x,y) matriks berubah menjadi info */
+    // KAMUS LOKAL
+
+    // ALGORITMA
+    Elmt(*M,x,y) = info;
+}
 
 boolean isMatriksEmpty(Matriks M) {
 /* Mengembalikan true apabila matriks kosong. 
@@ -87,15 +98,20 @@ void displayMatriks(Matriks M) {
    I.S. : Sembarang
    F.S. : Seluruh isi matriks tercetak ke layar */
     // KAMUS LOKAL
-    int i, j;
+    int i, j, x;
 
     // ALGORITMA
     for (i=0; i<NBrsEff(M); i++) {
-        printf("_________________________________\n\n|");
+        // print garis
+        for (x=0; x<9+(NBrsEff(M)-1)*8; x++) printf("_");
+        printf("\n\n|");
         for (j=0; j<NKolEff(M); j++) {
-            printf("%6d\t|", Elmt(M,i,j));
+            if (Elmt(M,i,j) > 0) printf("%6d\t|", Elmt(M,i,j));
+            else printf("      \t|");
         } printf("\n");
-    } printf("_________________________________\n");
+    } 
+    for (x=0; x<9+(NBrsEff(M)-1)*8; x++) printf("_");
+    printf("\n");
 }
 
 

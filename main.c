@@ -118,6 +118,7 @@ int main() {
         }
     }
 
-    // quit();
+    // quit
+    printf("\n\nAnda keluar dari game BNMO.\nBye bye ...");
     return 0;
 }
