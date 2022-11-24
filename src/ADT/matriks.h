@@ -31,6 +31,12 @@ void MakeMatriks (int NB, int NK, Matriks * M);
    I.S. : NB dan NK adalah valid untuk memori matriks yang dibuat
    F.S. : Matriks M sesuai dengan definisi di atas terbentuk */
 
+void SetElmtMatriks (Matriks *M, int x, int y, int info);
+/* PREKONDISI : Semua nilai yang masuk valid
+   Mengubah elemen ke (x, y) menjadi info 
+   I.S. : Matriks sembarang 
+   F.S. : Posisi (x,y) matriks berubah menjadi info */
+
 boolean isMatriksEmpty(Matriks M);
 /* Mengembalikan true apabila matriks kosong. 
    Syarat dari matriks kosong adalah seluruh elemen dalam matriks bernilai 0. */

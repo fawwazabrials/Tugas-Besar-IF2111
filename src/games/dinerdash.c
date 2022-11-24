@@ -93,7 +93,7 @@ void serving(Queue_DD *QS, Queue_DD *QF, char* commandID, int *saldo) {
             printf("%s belum selesai dimasak\n", commandID);
         }
     } else {
-        printf("%s belum bisa disajikan karena %s belum selesai\n", commandID, HEAD_DD(*QS));
+        printf("%s belum bisa disajikan karena %s belum selesai\n", commandID, HEAD_DD(*QS).makanan);
     }
 }
 

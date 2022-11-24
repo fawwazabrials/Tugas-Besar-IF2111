@@ -1,12 +1,11 @@
-#include "../../src/ADT/listlinier.h"
 #include "../../src/ADT/listlinier.c"
 #include <stdio.h>
 
 int main() {
     printf("================== DRIVER LIST LINIER ==================\n");
     List L;
-    CreateEmpty(&L);
-    if (IsEmpty(L)) {
+    CreateEmptyListL(&L);
+    if (IsListLEmpty(L)) {
         printf("List kosong\n");
     }
     printf("Testing prosedur InsVFirst.\n");
@@ -14,7 +13,7 @@ int main() {
     InsVFirst(&L, 3, 4);
     InsVLast(&L, 5, 6);
     printf("Expected outcome: [(3,4),(1,2),(5,6)]\n");
-    PrintInfo(L);
+    PrintInfoListL(L);
 
     return 0;
 }
