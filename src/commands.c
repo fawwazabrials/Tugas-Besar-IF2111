@@ -287,3 +287,43 @@ void LOAD (Word command2, TabWord *T) {
             SetEl(T, i, currentWord);
         }
 }
+
+/*void HISTORY(Stack *game_history, int n)
+{
+    if (!IsEmpty(*game_history))
+    {
+        if (n < Top(*game_history))
+        {
+            printf("Berikut adalah daftar Game yang telah dimainkan\n");
+
+            int i;
+            infotype X; //hrs diupdate
+            Stack temp;
+            CreateEmpty(&temp);
+            for (i = 1; i <= n; i++)
+            {
+                printf("%d. ", i);
+                displayWord(InfoTop(*game_history));
+                printf("\n");
+                Pop(game_history, &X);
+                Push(&temp, X);
+            }
+            
+            for (i = 1; i <= n; i++)
+            {
+                Pop(&temp, &X);
+                Push(game_history, X);
+            }
+        }
+        else
+        {
+            printf("Berikut adalah daftar Game yang telah dimainkan\n");
+            DisplayStack(*game_history); //msh nunggu
+            printf("\n");
+        }
+    }
+    else
+    {
+        printf("Tidak ada permainan yang pernah dimainkan.\n");
+    }
+}*/ //msh nunggu adt stack
