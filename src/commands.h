@@ -11,6 +11,7 @@
 #include "ADT/mesinkarakter.h"
 #include "ADT/mesinkata.h"
 #include "ADT/queue.h"
+#include "ADT/stack.h"
 
 void QUEUEGAME(TabWord games, Queue* game_queue);
 /* Memasukan game yang dipilih user ke dalam antrian game untuk dimainkan.
