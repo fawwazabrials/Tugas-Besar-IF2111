@@ -12,25 +12,15 @@ typedef struct {
 	infotype Y;
 } Fruit;
 
-#define buahX(buah) (buah).X
-#define buahY(buah) (buah).Y
-
 typedef struct {
 	infotype X;
 	infotype Y;
 } Meteor;
 
-#define meteorX(meteor) (meteor).X
-#define meteorY(meteor) (meteor).Y
-
 typedef struct {
 	infotype X;
 	infotype Y;
 } Obstacle;
-
-#define obstacleX(obstacle) (obstacle).X
-#define obstacleY(obstacle) (obstacle).Y
-
 
 void initializeSnake(List* snake, Obstacle* ob);
 /* Inisialisasi awal permainan Snake On Meteor.

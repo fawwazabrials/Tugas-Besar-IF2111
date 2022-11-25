@@ -20,14 +20,14 @@ void printSnakeBoard(List snake, Fruit buah, Meteor meteor, Obstacle ob) {
         printf("_________________________________________\n\n|");
         for (j=0; j<5; j++) {
             // printf("(%d, %d)|", j, i);
-            if (meteorX(meteor) == j && meteorY(meteor) == i) {
+            if (Absis(meteor) == j && Ordinat(meteor) == i) {
                 printf("%6c\t|", 'm');
             }
-            else if (buahX(buah) == j && buahY(buah) == i) {
+            else if (Absis(buah) == j && Ordinat(buah) == i) {
                 printf("%6c\t|", 'o');
             }
-            else if (obstacleX(ob) == j && obstacleY(ob) == i) {
-                printf("||||||||");
+            else if (Absis(ob) == j && Ordinat(ob) == i) {
+                printf("TEMBOK\t|");
             }
             else if (Search(snake, j, i) != Nil) {
                 idx = indexOf(snake, j, i);
@@ -50,12 +50,12 @@ void initializeSnake(List* snake, Obstacle* ob) {
     Meteor M;
 
     // ALGORITMA
-    meteorX(M) = -1; meteorY(M) = -1;
-    obstacleX(*ob) = randint(0, 4); obstacleY(*ob) = randint(0, 4);
+    Absis(M) = -1; Ordinat(M) = -1;
+    Absis(*ob) = randint(0, 4); Ordinat(*ob) = randint(0, 4);
 
     CreateEmptyListL(snake);
     x = randint(0, 4); y = randint(0, 4);
-    while ((obstacleX(*ob) == x && obstacleY(*ob) == y)) {
+    while ((Absis(*ob) == x && Ordinat(*ob) == y)) {
         x = randint(0, 4); y = randint(0, 4);
     }
 
@@ -81,21 +81,25 @@ void addSnake(List* snake, Meteor meteor, Obstacle ob) {
 
     tail = Info(P);
     if (Absis(tail)+1<=4 && Search(*snake, Absis(tail)+1, Ordinat(tail)) == Nil 
-            && !(meteorX(meteor) == Absis(tail)+1 && meteorY(meteor) == Ordinat(tail))
-            && !(obstacleX(ob) == Absis(tail)+1 && obstacleY(meteor) == Ordinat(tail))) {
+            && !(Absis(meteor) == Absis(tail)+1 && Ordinat(meteor) == Ordinat(tail))
+            && !(Absis(ob) == Absis(tail)+1 && Ordinat(ob) == Ordinat(tail))) {
         InsVLast(snake, Absis(tail)+1, Ordinat(tail));
+        // printf("tambah kanan\n");
     } else if (Absis(tail)-1>=0 && Search(*snake, Absis(tail)-1, Ordinat(tail)) == Nil 
-                && !(meteorX(meteor) == Absis(tail)-1 && meteorY(meteor) == Ordinat(tail))
-                && !(obstacleX(ob) == Absis(tail)-1 && obstacleY(meteor) == Ordinat(tail)) ) {
+                && !(Absis(meteor) == Absis(tail)-1 && Ordinat(meteor) == Ordinat(tail))
+                && !(Absis(ob) == Absis(tail)-1 && Ordinat(ob) == Ordinat(tail))) {
         InsVLast(snake, Absis(tail)-1, Ordinat(tail));
+        // printf("tambah kir\n");
     } else if (Ordinat(tail)+1 <= 4 && Search(*snake, Absis(tail), Ordinat(tail)+1) == Nil 
-                && !(meteorX(meteor) == Absis(tail) && meteorY(meteor) == Ordinat(tail)+1)
-                && !(obstacleX(ob) == Absis(tail)+1 && obstacleY(meteor) == Ordinat(tail)+1)) {
+                && !(Absis(meteor) == Absis(tail) && Ordinat(meteor) == Ordinat(tail)+1)
+                && !(Absis(ob) == Absis(tail) && Ordinat(ob) == Ordinat(tail)+1)) {
         InsVLast(snake, Absis(tail), Ordinat(tail)+1);
+        // printf("tambah bawah\n");
     } else if (Ordinat(tail)-1 >= 0 && Search(*snake, Absis(tail), Ordinat(tail)-1) == Nil 
-                && !(meteorX(meteor) == Absis(tail) && meteorY(meteor) == Ordinat(tail)-1)
-                && !(obstacleX(ob) == Absis(tail) && obstacleY(meteor) == Ordinat(tail))-1) {
+                && !(Absis(meteor) == Absis(tail) && Ordinat(meteor) == Ordinat(tail)-1)
+                && !(Absis(ob) == Absis(tail) && Ordinat(ob) == Ordinat(tail)-1)) {
         InsVLast(snake, Absis(tail), Ordinat(tail)-1); 
+        // printf("tambah atas\n");
     }
 }
 
@@ -106,11 +110,11 @@ void addBuah(List snake, Fruit* buah, Meteor meteor, Obstacle ob) {
     // KAMUS LOKAL
 
     // ALGORITMA
-    buahX(*buah) = randint(0, 4); buahY(*buah) = randint(0, 4);
-    while (Search(snake, buahX(*buah), buahY(*buah)) != Nil 
-            && !(meteorX(meteor) == buahX(*buah) && meteorY(meteor) == buahY(*buah))
-            && !(obstacleX(ob) == buahX(*buah) && obstacleY(meteor) == buahY(*buah))) {
-        buahX(*buah) = randint(0, 4); buahY(*buah) = randint(0, 4);
+    Absis(*buah) = randint(0, 4); Ordinat(*buah) = randint(0, 4);
+    while (Search(snake, Absis(*buah), Ordinat(*buah)) != Nil 
+            || (Absis(meteor) == Absis(*buah) && Ordinat(meteor) == Ordinat(*buah))
+            || (Absis(ob) == Absis(*buah) && Ordinat(ob) == Ordinat(*buah))) {
+        Absis(*buah) = randint(0, 4); Ordinat(*buah) = randint(0, 4);
     }
 }
 
@@ -137,24 +141,24 @@ int run_snake() {
     // ALGORITMA
     // Inisialisasi awal
     initializeSnake(&snake, &obstacle);
-    meteorX(meteor) = -1; meteorY(meteor) = -1;
-    buahX(buah) = -1; buahY(buah) = -1;
+    Absis(meteor) = -1; Ordinat(meteor) = -1;
+    Absis(buah) = -1; Ordinat(buah) = -1;
     turn = 1;
     lose = false;
     
     // CORE GAMEPLAY LOOP
     while (!lose && NbElmtListL(snake) > 0) {
         kepala = Info(First(snake));
+        // PrintInfoListL(snake);
         if (moved) turn++;
-        clearScreen();
+        // clearScreen();
 
         // LOGIC MAKANAN
-        if ((Absis(kepala) == buahX(buah) 
-                && Ordinat(kepala) == buahY(buah)) 
-                && !(meteorX(meteor) == buahX(buah) && meteorX(meteor) == buahY(buah))) {   // cek buah udah dimakan apa blom
+        if ((Absis(kepala) == Absis(buah) && Ordinat(kepala) == Ordinat(buah)) 
+                && !(Absis(meteor) == Absis(buah) && Absis(meteor) == Ordinat(buah))) {   // cek buah udah dimakan apa blom
             addSnake(&snake, meteor, obstacle);
             addBuah(snake, &buah, meteor, obstacle);
-        } else if (meteorX(meteor) == buahX(buah) && meteorY(meteor) == buahY(buah)) { // cek buah kena meteor gak
+        } else if (Absis(meteor) == Absis(buah) && Ordinat(meteor) == Ordinat(buah)) { // cek buah kena meteor gak
             addBuah(snake, &buah, meteor, obstacle);
         }
 
@@ -162,17 +166,17 @@ int run_snake() {
         hit = false;
         hitHead = false;
         if (moved) {
-            meteorX(meteor) = randint(0, 4); meteorY(meteor) = randint(0, 4);   // taro meteor di posisi random yang bukan obstacle
-            while (meteorX(meteor) == obstacleX(obstacle) && meteorY(meteor) == obstacleY(obstacle)) {
-                meteorX(meteor) = randint(0, 4); meteorY(meteor) = randint(0, 4);
+            Absis(meteor) = randint(0, 4); Ordinat(meteor) = randint(0, 4);   // taro meteor di posisi random yang bukan obstacle
+            while (Absis(meteor) == Absis(obstacle) && Ordinat(meteor) == Ordinat(obstacle)) {
+                Absis(meteor) = randint(0, 4); Ordinat(meteor) = randint(0, 4);
             }
-            if (Search(snake, meteorX(meteor), meteorY(meteor)) != Nil) {   // check hit meteor
+            if (Search(snake, Absis(meteor), Ordinat(meteor)) != Nil) {   // check hit meteor
                 hit = true;
-                if (indexOf(snake, meteorX(meteor), meteorY(meteor)) == 0) {
+                if (indexOf(snake, Absis(meteor), Ordinat(meteor)) == 0) {
                     hitHead = true;
                     lose = true;
                 } else {
-                    DelP(&snake, meteorX(meteor), meteorY(meteor));
+                    DelP(&snake, Absis(meteor), Ordinat(meteor));
                 }
             }
         }
@@ -206,50 +210,50 @@ int run_snake() {
         moveBody = false;
         if (ValidateCommand(kode, "W")) {
             if (Search(snake, Absis(kepala), mod(Ordinat(kepala)-1, 5)) == Nil 
-                    && !(meteorX(meteor) == Absis(kepala) && meteorY(meteor) == mod(Ordinat(kepala)-1, 5))
-                    && !(obstacleX(obstacle) == Absis(kepala) && obstacleY(obstacle) == mod(Ordinat(kepala)-1, 5))) { // cek diatasnya ada sesuatu gak
+                    && !(Absis(meteor) == Absis(kepala) && Ordinat(meteor) == mod(Ordinat(kepala)-1, 5))
+                    && !(Absis(obstacle) == Absis(kepala) && Ordinat(obstacle) == mod(Ordinat(kepala)-1, 5))) { // cek diatasnya ada sesuatu gak
                 InsVFirst(&snake, Absis(kepala), mod(Ordinat(kepala)-1, 5));
                 DelLastListL(&snake, &tempNode);
                 moved = true;
             } 
             else if (indexOf(snake, Absis(kepala), mod(Ordinat(kepala)-1, 5)) == 1) moveBody = true;
-            else if (meteorX(meteor) == Absis(kepala) && meteorY(meteor) == mod(Ordinat(kepala)-1, 5)) moveMeteor = true;
+            else if (Absis(meteor) == Absis(kepala) && Ordinat(meteor) == mod(Ordinat(kepala)-1, 5)) moveMeteor = true;
             else lose = true;
 
         } else if (ValidateCommand(kode, "A")) {
             if (Search(snake, mod(Absis(kepala)-1, 5), Ordinat(kepala)) == Nil 
-                    && !(meteorX(meteor) == mod(Absis(kepala)-1, 5) && meteorY(meteor) == Ordinat(kepala))
-                    && !(obstacleX(obstacle) == mod(Absis(kepala)-1, 5) && obstacleY(obstacle) == Ordinat(kepala))) { // cek dikirinya ada sesuatu gak
+                    && !(Absis(meteor) == mod(Absis(kepala)-1, 5) && Ordinat(meteor) == Ordinat(kepala))
+                    && !(Absis(obstacle) == mod(Absis(kepala)-1, 5) && Ordinat(obstacle) == Ordinat(kepala))) { // cek dikirinya ada sesuatu gak
                 InsVFirst(&snake, mod(Absis(kepala)-1, 5), Ordinat(kepala));
                 DelLastListL(&snake, &tempNode);
                 moved = true;
             }  
             else if (indexOf(snake, mod(Absis(kepala)-1, 5), Ordinat(kepala)) == 1) moveBody = true;
-            else if (meteorX(meteor) == mod(Absis(kepala)-1, 5) && meteorY(meteor) == Ordinat(kepala)) moveMeteor = true;
+            else if (Absis(meteor) == mod(Absis(kepala)-1, 5) && Ordinat(meteor) == Ordinat(kepala)) moveMeteor = true;
             else lose = true;
 
         } else if (ValidateCommand(kode, "S")) {
             if (Search(snake, Absis(kepala), mod(Ordinat(kepala)+1, 5)) == Nil 
-                    && !(meteorX(meteor) == Absis(kepala) && meteorY(meteor) == mod(Ordinat(kepala)+1, 5))
-                    && !(obstacleX(obstacle) == Absis(kepala) && obstacleY(obstacle) == mod(Ordinat(kepala)+1, 5))) { // cek dibawahnya ada sesuatu gak
+                    && !(Absis(meteor) == Absis(kepala) && Ordinat(meteor) == mod(Ordinat(kepala)+1, 5))
+                    && !(Absis(obstacle) == Absis(kepala) && Ordinat(obstacle) == mod(Ordinat(kepala)+1, 5))) { // cek dibawahnya ada sesuatu gak
                 InsVFirst(&snake, Absis(kepala), mod(Ordinat(kepala)+1, 5));
                 DelLastListL(&snake, &tempNode);
                 moved = true;
             }  
             else if (snake, Absis(kepala), mod(Ordinat(kepala)+1, 5) == 1) moveBody = true;
-            else if (meteorX(meteor) == Absis(kepala) && meteorY(meteor) == mod(Ordinat(kepala)+1, 5)) moveMeteor = true;
+            else if (Absis(meteor) == Absis(kepala) && Ordinat(meteor) == mod(Ordinat(kepala)+1, 5)) moveMeteor = true;
             else lose = true;
             
         } else if (ValidateCommand(kode, "D")) {
             if (Search(snake, mod(Absis(kepala)+1, 5), Ordinat(kepala)) == Nil 
-                    && !(meteorX(meteor) == mod(Absis(kepala)+1, 5) && meteorY(meteor) == Ordinat(kepala))
-                    && !(obstacleX(obstacle) == mod(Absis(kepala)+1, 5) && obstacleY(obstacle) == Ordinat(kepala))) { // cek dikanannya ada sesuatu gak
+                    && !(Absis(meteor) == mod(Absis(kepala)+1, 5) && Ordinat(meteor) == Ordinat(kepala))
+                    && !(Absis(obstacle) == mod(Absis(kepala)+1, 5) && Ordinat(obstacle) == Ordinat(kepala))) { // cek dikanannya ada sesuatu gak
                 InsVFirst(&snake, mod(Absis(kepala)+1, 5), Ordinat(kepala));
                 DelLastListL(&snake, &tempNode);
                 moved = true;
             }  
             else if (indexOf(snake, mod(Absis(kepala)+1, 5), Ordinat(kepala)) == 1) moveBody = true;
-            else if (meteorX(meteor) == mod(Absis(kepala)+1, 5) && meteorY(meteor) == Ordinat(kepala)) moveMeteor = true;
+            else if (Absis(meteor) == mod(Absis(kepala)+1, 5) && Ordinat(meteor) == Ordinat(kepala)) moveMeteor = true;
             else lose = true;
         } 
     }
