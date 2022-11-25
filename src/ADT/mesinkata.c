@@ -194,3 +194,15 @@ void displayWord(Word W) {
         printf("%c", W.TabWord[i]);
     } printf("\n");
 }
+
+int WordToInt(Word W) 
+{
+/* Mengembalikan nilai integer dari Word W */
+    // KAMUS LOKAL
+    int i, res=0;
+
+    // ALGORITMA
+    for (i=0; i<W.Length; i++) {
+        res = res*10 + (W.TabWord[i] - '0');
+    } return res;
+}

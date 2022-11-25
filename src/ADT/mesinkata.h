@@ -94,4 +94,6 @@ void displayWord(Word W);
    I.S. : sembarang
    F.S. : Seluruh isi dalam Word telah ditampilkan pada layar */
 
+int WordToInt(Word W);
+/* Mengembalikan nilai integer dari Word W */
 #endif
