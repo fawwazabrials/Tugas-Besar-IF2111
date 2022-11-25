@@ -3,9 +3,7 @@
 #include <stdio.h>
 #include "boolean.h"
 
-/* MODUL Map
-Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
-*/
+/* MODUL Map */
 
 // #define false 0
 // #define true 1
@@ -68,5 +66,9 @@ void Delete(Map *M, keytype k);
 
 boolean IsMember(Map M, keytype k);
 /* Mengembalikan true jika k adalah member dari M */
+
+void MakeEmptyMapList (Map M[], int L);
+/* Membuat seluruh elemen array of map M dengan jumlah elemen L menjadi Map kosong */
+
 
 #endif
