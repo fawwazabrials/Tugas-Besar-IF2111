@@ -4,15 +4,15 @@
 #include "stack.h"
 #include <stdio.h>
 
-void CreateEmpty(Stack *S) {
+void CreateEmptyStack(Stack *S) {
  S->TOP = StackNil;
 }
 
-boolean IsEmpty(Stack S) {
+boolean IsEmptyStack(Stack S) {
  return (Top(S) == StackNil);
 }
 
-boolean IsFull(Stack S) {
+boolean IsFullStack(Stack S) {
  return (Top(S)+1 == StackMaxEl);
 }
 
