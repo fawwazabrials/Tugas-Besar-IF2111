@@ -3,6 +3,7 @@
 #include "../../src/games/dinerdash.h"
 #include "../../src/games/2048.h"
 #include "../../src/games/snake.h"
+#include "../../src/games/towerofhanoi.h"
 
 int main() {
     // Word c1, c2; int c3=-9999;
@@ -23,5 +24,5 @@ int main() {
     // }
     // return 0;
 
-    run_snake();
+    towerofhanoi();
 }
