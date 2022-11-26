@@ -12,12 +12,12 @@
 /* *** Konstruktor/Kreator *** */
 void CreateEmptyS(Stack *S)
 /* I.S. sembarang; */
-/* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxEl */
-/* jadi indeksnya antara 0.. MaxEl */
-/* Ciri stack kosong : TOP bernilai Nil */
+/* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxElStackHanoi */
+/* jadi indeksnya antara 0.. MaxElStackHanoi */
+/* Ciri stack kosong : TOP ber-1ai -1 */
 {
-	Top(*S) = Nil;
-	for (int i = 0; i < MaxEl; i++)
+	Top(*S) = -1;
+	for (int i = 0; i < MaxElStackHanoi; i++)
 	{
 		(*S).T[i] = 0;
 	}
@@ -26,14 +26,14 @@ void CreateEmptyS(Stack *S)
 /* ************ Predikat Untuk test keadaan KOLEKSI ************ */
 boolean IsEmptyS(Stack S)
 {
-    return (Top(S) == Nil);
+    return (Top(S) == -1);
 }
 /* Mengirim true jika Stack kosong: lihat definisi di atas */
 boolean IsFullS(Stack S)
 {
-    return (Top(S) == MaxEl - 1);
+    return (Top(S) == MaxElStackHanoi - 1);
 }
-/* Mengirim true jika tabel penampung nilai elemen stack penuh */
+/* Mengirim true jika tabel penampung -1ai elemen stack penuh */
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 void PushS(Stack * S, infotype X)
@@ -49,7 +49,7 @@ void PushS(Stack * S, infotype X)
 void PopS(Stack * S, infotype* X)
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
-/* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
+/* F.S. X adalah -1ai elemen TOP yang lama, TOP berkurang 1 */
 {
 	*X = InfoTop(*S);
     InfoTop(*S) = 0;
