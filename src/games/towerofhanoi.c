@@ -1,5 +1,18 @@
 #include "towerofhanoi.h"
 //gcc -o toh towerofhanoi.c ../ADT/stackofhanoi.c ../ADT/mesinkata.c ../ADT/mesinkarakter.c
+// ./toh
+
+boolean isNumber(Word W) 
+{
+    // KAMUS LOKAL
+    int i;
+
+    // ALGORITMA
+    for (i = 0; i < W.Length; i++) {
+        if (W.TabWord[i] < '0' || W.TabWord[i] > '9') return false;
+    }
+    return true;
+}
 
 float minmove(float n)
 /*Menghasilkan langkah paling optimal berdasarkan n disk*/
@@ -28,7 +41,9 @@ void printtower(int n, Stack A, Stack B, Stack C)
 {
     for (int i = 0; i < n; i++)
     {
-        int value1 = A.T[n-i-1], value2 = B.T[n-i-1], value3 = C.T[n-i-1];
+        int value1 = A.T[n-i-1];
+        int value2 = B.T[n-i-1];
+        int value3 = C.T[n-i-1];
         if (value1 != 0)
         {
             printblank(n-value1);
@@ -90,6 +105,7 @@ void towerofhanoi() //Bismillah Bisa :D halo aku gibran
     //Membuat Stack Kosong (Isi semua elemen 0 dengan Top(*S) = n-1)
     Stack A, B, C, win; //tower A, B, C, dan win
     int score, temp1, temp2, value1, value2, value3;
+    boolean valid = false;
 
     CreateEmptyS(&A);
     CreateEmptyS(&B);
@@ -103,41 +119,28 @@ void towerofhanoi() //Bismillah Bisa :D halo aku gibran
     printf("  |  |  |     ||  `  '  ||   [_ |    \\     |     ||   _]     |  |  ||  _  ||  |  ||     ||  | \n");
     printf("  |  |  |     | \\      / |     ||  .  \\    |     ||  |       |  |  ||  |  ||  |  ||     ||  | \n");
     printf("  |__|   \\___/   \\_/\\_/  |_____||__|\\_|     \\___/ |__|       |__|__||__|__||__|__| \\___/|____|\n");
-    printf("\n");
-
-    //Menerima masukan jumlah disk
-    printf("Masukan Jumlah Piringan: ");
-    int n;
-    STARTWORD();
     printf("\n\n");
-    n = WordToInt(currentWord);
-
-    boolean valid = false;
+    printf("Selamat datang di permainan Tower of Hanoi!\n");
+    //Menerima masukan jumlah disk
+    int n;
     while (!valid)
     {
-        for (int i = 0; i < currentWord.Length; i++)
+        printf("Masukan jumlah piringan : ");
+        STARTWORD();
+        printf("\n\n");
+        if (!isNumber(currentWord))
         {
-            if (currentWord.TabWord[i] > '9' || currentWord.TabWord[i] < '0')
-            {
-                valid = false;
-                break; 
-            }
-            else
-            {
-                valid = true;
-            }
+            printf("Masukan salah, silakan masukan kembali jumlah piringan.\n");
         }
-        
-        if (!valid)
+        else
         {
-            printf("Masukan tidak valid\n");
-            printf("Masukan jumlah piringan: ");
-            STARTWORD();
-            printf("\n\n");
             n = WordToInt(currentWord);
+            ADVWORD();
+            if (EndWord && n > 0) valid = true;
+            else printf("Masukan salah, silakan masukan kembali jumlah piringan.\n");
+
         }
     }
-
 
     for(int i = n; i > 0; i--)
     {
@@ -153,6 +156,7 @@ void towerofhanoi() //Bismillah Bisa :D halo aku gibran
         printtower(n, A, B, C);
         printf("TIANG ASAL: ");
         STARTWORD();
+
         if (currentWord.TabWord[0] == 'A')
         {
             temp1 = 1;
@@ -165,6 +169,9 @@ void towerofhanoi() //Bismillah Bisa :D halo aku gibran
         {
             temp1 = 3;
         }
+        ADVWORD();
+        if (!EndWord) temp1 = 0;
+
         printf("TIANG TUJUAN: ");
         STARTWORD();
         printf("\n");
@@ -180,6 +187,9 @@ void towerofhanoi() //Bismillah Bisa :D halo aku gibran
         {
             temp2 = 3;
         }
+        ADVWORD();
+        if (!EndWord) temp2 = 0;
+
         value1 = getTop(A);
         value2 = getTop(B);
         value3 = getTop(C);
@@ -195,7 +205,7 @@ void towerofhanoi() //Bismillah Bisa :D halo aku gibran
                 }
                 else
                 {
-                    printf("Tidak bisa dipindahkan. Piringan yang di bawah tidak boleh lebih kecil daripada piringan yang ada di atasnya.\n");
+                    printf("Tidak bisa dipindahkan.\n");
                 }
                 
             }
@@ -209,7 +219,7 @@ void towerofhanoi() //Bismillah Bisa :D halo aku gibran
                 }
                 else
                 {
-                    printf("Tidak bisa dipindahkan. Piringan yang di bawah tidak boleh lebih kecil daripada piringan yang ada di atasnya.\n");
+                    printf("Tidak bisa dipindahkan.\n");
                 }
             }
             else
@@ -228,7 +238,7 @@ void towerofhanoi() //Bismillah Bisa :D halo aku gibran
                 }
                 else
                 {
-                    printf("Tidak bisa dipindahkan. Piringan yang di bawah tidak boleh lebih kecil daripada piringan yang ada di atasnya.\n");
+                    printf("Tidak bisa dipindahkan.\n");
                 }
                 
             }
@@ -242,7 +252,7 @@ void towerofhanoi() //Bismillah Bisa :D halo aku gibran
                 }
                 else
                 {
-                    printf("Tidak bisa dipindahkan. Piringan yang di bawah tidak boleh lebih kecil daripada piringan yang ada di atasnya.\n");
+                    printf("Tidak bisa dipindahkan.\n");
                 }
             }
             else
@@ -262,7 +272,7 @@ void towerofhanoi() //Bismillah Bisa :D halo aku gibran
                 }
                 else
                 {
-                    printf("Tidak bisa dipindahkan. Piringan yang di bawah tidak boleh lebih kecil daripada piringan yang ada di atasnya.\n");
+                    printf("Tidak bisa dipindahkan.\n");
                 }
                 
             }
@@ -276,7 +286,7 @@ void towerofhanoi() //Bismillah Bisa :D halo aku gibran
                 }
                 else
                 {
-                    printf("Tidak bisa dipindahkan. Piringan yang di bawah tidak boleh lebih kecil daripada piringan yang ada di atasnya.\n");
+                    printf("Tidak bisa dipindahkan.\n");
                 }
                 
             }
@@ -292,12 +302,12 @@ void towerofhanoi() //Bismillah Bisa :D halo aku gibran
     }
     printtower(n, A, B, C);
     score = ((minmove(n) / countmoves) * 10 * n/5); //Menghitung skor akhir
-    printf("Selamat anda berhasil menyelesaikan permainan ini!\n");
-    printf("Score: %d\n", score);
+    printf("Selamat!!! Anda telah menyelesaikan tantangan Tower of Hanoi :D\n");
+    printf("Skor Anda adalah : %d\n", score);
 }
 
-/*int main()
+int main()
 {
     towerofhanoi();
     return 0;
-}*/
+}
