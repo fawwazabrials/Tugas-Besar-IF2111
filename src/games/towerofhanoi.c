@@ -306,8 +306,8 @@ void towerofhanoi() //Bismillah Bisa :D halo aku gibran
     printf("Skor Anda adalah : %d\n", score);
 }
 
-int main()
+/*int main()
 {
     towerofhanoi();
     return 0;
-}
+}*/
