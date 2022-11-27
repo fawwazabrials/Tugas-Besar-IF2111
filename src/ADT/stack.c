@@ -26,4 +26,5 @@ void Pop(Stack * S, int* X) {
  S->TOP--;
 }
 
+
 //int main () {}

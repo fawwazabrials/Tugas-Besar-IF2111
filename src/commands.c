@@ -288,42 +288,94 @@ void LOAD (Word command2, TabWord *T) {
         }
 }
 
-/*void HISTORY(Stack *game_history, int n)
+void HISTORY(Stack *game_history, int n) //*game_history adalah stack yang berisi ID dari game yang sudah dimainkan
 {
-    if (!IsEmpty(*game_history))
+    if (!IsEmptyStack(*game_history))
     {
-        if (n < Top(*game_history))
+        if (n <= Top(*game_history)) //5 <= 6, 6 <= 6
         {
-            printf("Berikut adalah daftar Game yang telah dimainkan\n");
+            printf("Berikut adalah daftar Game yang telah dimainkan :\n");
 
             int i;
-            infotype X; //hrs diupdate
-            Stack temp;
-            CreateEmpty(&temp);
-            for (i = 1; i <= n; i++)
-            {
-                printf("%d. ", i);
-                displayWord(InfoTop(*game_history));
-                printf("\n");
-                Pop(game_history, &X);
-                Push(&temp, X);
-            }
+            int idgame; //variabel untuk menyimpan ID game yang sudah dimainkan
+            Stack temp; //Stack sementara untuk menyimpan ID game yang sudah dimainkan
+            temp = *game_history; //Mengisi stack sementara dengan stack game_history
             
             for (i = 1; i <= n; i++)
             {
-                Pop(&temp, &X);
-                Push(game_history, X);
+                Pop(&temp, &idgame);
+                printf("%d. ", i);
+                if (idgame == 1)
+                {
+                    printf("RNG\n");
+                }
+                else if (idgame == 2)
+                {
+                    printf("Diner DASH\n");
+                }
+                else if (idgame == 3)
+                {
+                    printf("DINOSAUR IN EARTH\n");
+                }
+                else if (idgame == 4)
+                {
+                    printf("RISEWOMAN\n");
+                }
+
+                else if (idgame == 5)
+                {
+                    printf("EIFFEL TOWER\n");
+                }
+
+                else if (idgame == 6)
+                {
+                    printf("2048\n");
+                }
             }
         }
         else
         {
-            printf("Berikut adalah daftar Game yang telah dimainkan\n");
-            DisplayStack(*game_history); //msh nunggu
-            printf("\n");
+            printf("Berikut adalah daftar Game yang telah dimainkan :\n");
+            int i;
+            int idgame; //variabel untuk menyimpan ID game yang sudah dimainkan
+            Stack temp; //Stack sementara untuk menyimpan ID game yang sudah dimainkan
+            temp = *game_history; //Mengisi stack sementara dengan stack game_history
+
+            for (i = 1; i <= Top(*game_history) + 1; i++)
+            {
+                Pop(&temp, &idgame);
+                printf("%d. ", i);
+                if (idgame == 1)
+                {
+                    printf("RNG\n");
+                }
+                else if (idgame == 2)
+                {
+                    printf("Diner DASH\n");
+                }
+                else if (idgame == 3)
+                {
+                    printf("DINOSAUR IN EARTH\n");
+                }
+                else if (idgame == 4)
+                {
+                    printf("RISEWOMAN\n");
+                }
+
+                else if (idgame == 5)
+                {
+                    printf("EIFFEL TOWER\n");
+                }
+
+                else if (idgame == 6)
+                {
+                    printf("2048\n");
+                }
+            }
         }
     }
     else
     {
         printf("Tidak ada permainan yang pernah dimainkan.\n");
     }
-}*/ //msh nunggu adt stack
+}

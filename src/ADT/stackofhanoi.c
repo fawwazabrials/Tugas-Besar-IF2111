@@ -64,6 +64,7 @@ int getTop(Stack S)
         return InfoTop(S);
     }
 }
+
 boolean isStackEqual(Stack a, Stack b)
 {
 	if (Top(a) != Top(b))
