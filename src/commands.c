@@ -381,5 +381,19 @@ void HISTORY(Stack *game_history, int n) //*game_history adalah stack yang beris
 }
 
 void SCOREBOARD (Map M[], TabWord gl) {
+    for (int i = 1; i <= gl.Neff; i++) {
+        printf("*** SCOREBOARD ");
+        displayWord(gl.TI[i]);
+        printf(" ***\n");
+        if (M[i].Count == 0) {
+            printf("--- Scoreboard kosong 😔 main yuk! ---\n");
+        } else {
+            for (int j=1; j<=M[i].Count; j++) {
+                printtf(" (%d) ",j);
+                displayWord(M[i].Elements[j].Key);
+                printf(" : %d\n",M[i].Elements[j].Value);
+            }
+        }
+    }
     return;
 }
