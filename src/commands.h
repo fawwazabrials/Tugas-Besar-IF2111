@@ -66,7 +66,7 @@ void LOAD(Word command2, TabWord *T);
    F.S. : Jika file berhasil dibaca, isi dari Array game berisikan isi file.txt
           Jika file gagal dibaca, Array games tidak akan diisi dan memiliki Neff = 0 */
 
-void SCOREBOARD (Map M, TabWord gl);
+void SCOREBOARD (Map M[], TabWord gl);
 /* Menampilkan scoreboard setiap permainan */
 
 #endif

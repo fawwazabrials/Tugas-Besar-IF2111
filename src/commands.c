@@ -380,6 +380,6 @@ void HISTORY(Stack *game_history, int n) //*game_history adalah stack yang beris
     }
 }
 
-void SCOREBOARD (Map M, TabWord gl) {
+void SCOREBOARD (Map M[], TabWord gl) {
     return;
 }
