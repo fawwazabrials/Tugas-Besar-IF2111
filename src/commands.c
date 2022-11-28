@@ -379,3 +379,7 @@ void HISTORY(Stack *game_history, int n) //*game_history adalah stack yang beris
         printf("Tidak ada permainan yang pernah dimainkan.\n");
     }
 }
+
+void SCOREBOARD (Map M, TabWord gl) {
+    return;
+}
