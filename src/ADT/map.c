@@ -53,7 +53,7 @@ valuetype ValueMap(Map M, keytype k){
 /* Jika tidak ada key k pada M, akan mengembalikan Undefined */
 
 void InsertMap(Map *M, keytype k, valuetype v){
-    if(!IsMember(*M,k)){
+    if(!IsMemberMap(*M,k)){
         (*M).Count +=1;
         ((*M).Elements[(*M).Count]).Key= k;
         ((*M).Elements[(*M).Count]).Value= v;
@@ -70,7 +70,7 @@ void DeleteMap(Map *M, keytype k){
     boolean found;
     
     //Algoritma
-    if(IsMember(*M,k)){
+    if(IsMemberMap(*M,k)){
         for(i=0;i<((*M).Count);i++){
             if( isKataEqual(M->Elements[i].Key, k) ){
                 found = true;
@@ -112,6 +112,6 @@ void MakeEmptyMapList (Map M[], int L) {
     /* I.S. Sembarang */
     /* F.S. Seluruh elemen array of Map M menjadi Map kosong.*/
     for (int i=0; i<L; i++) {
-        CreateEmpty(&M[i]);
+        CreateEmptyMap(&M[i]);
     }
 }

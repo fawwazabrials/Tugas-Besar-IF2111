@@ -14,6 +14,7 @@ int main() {
 
     TabWord games;              // Array untuk menyimpan game yang tersedia
     Queue antrian_game;         // Queue untuk menyimpan antrian game ketika BNMO berjalan
+    Map scoreboards[101];       // List of map untuk menyimpan scoreboard setiap game
 
     boolean loop= true;
     int i, len;
@@ -35,6 +36,7 @@ int main() {
 
     MakeEmpty(&games);
     CreateQueue(&antrian_game);
+    MakeEmptyMapList (scoreboards, 101);
 
     while (loop) {
         printf("\n---- ENTER COMMAND : ");
