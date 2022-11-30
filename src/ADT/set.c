@@ -26,7 +26,7 @@ boolean IsFullSet(Set S){
 
 /* ********** Operator Dasar Set ********* */
 void InsertSetElmt(Set *S, int Elmt){
-        if (!IsMember(*S,Elmt)){
+        if (!IsMemberSet(*S,Elmt)){
             (*S).Elements[(*S).Count]= Elmt;
             (*S).Count +=1;
         }
@@ -42,7 +42,7 @@ void DeleteSetElmt(Set *S, int Elmt){
     boolean found;
     //Algoritma
     i= 0;
-    if (IsMember(*S, Elmt)) {
+    if (IsMemberSet(*S, Elmt)) {
         for (i = 0; i < (*S).Count; i++) {
             if ((*S).Elements[i] == Elmt && (i != ((*S).Count) - 1)) {
                 found = true;
