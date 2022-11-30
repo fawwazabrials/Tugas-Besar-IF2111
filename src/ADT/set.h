@@ -10,7 +10,6 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 #define Nil 0
 #define MaxEl 100
 
-typedef char infotype;
 typedef int address;
 
 typedef struct
@@ -41,19 +40,19 @@ boolean IsFullSet(Set S);
 /* Ciri Set penuh : count bernilai MaxEl */
 
 /* ********** Operator Dasar Set ********* */
-void InsertSetElmt(Set *S, int Elmt);
+void InsertSetElmt(Set *S, char Elmt);
 /* Menambahkan Elmt sebagai elemen Set S. */
 /* I.S. S mungkin kosong, S tidak penuh
         S mungkin sudah beranggotakan Elmt */
 /* F.S. Elmt menjadi anggota dari S. Jika Elmt sudah merupakan anggota, operasi tidak dilakukan */
 
-void DeleteSetElmt(Set *S, int Elmt);
+void DeleteSetElmt(Set *S, char Elmt);
 /* Menghapus Elmt dari Set S. */
 /* I.S. S tidak kosong
         Elmt mungkin anggota / bukan anggota dari S */
 /* F.S. Elmt bukan anggota dari S */
 
-boolean IsMemberSet(Set S, int Elmt);
+boolean IsMemberSet(Set S, char Elmt);
 /* Mengembalikan true jika Elmt adalah member dari S */
 
 #endif

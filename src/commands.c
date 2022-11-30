@@ -211,7 +211,7 @@ void DELETEGAME (TabWord *gl, Queue gq) {
     return;
 }
 
-void SAVE(TabWord gl, Word filename, Stack history, Map[] scoreboard) {
+void SAVE(TabWord gl, Word filename, Stack history, Map scoreboard[]) {
 /* Menyimpan isi dari Array game ke sebuah file '.txt' dengan nama file berupa input dari user
    I.S. : Sembarang 
    F.S. : File filename.txt berhasil tercipta di folder data dengan isinya adalah isi dari array game */
@@ -443,9 +443,10 @@ void SCOREBOARD (Map M[], TabWord gl) {
 void RESETSCOREBOARD(Map M[], TabWord gl){
 /* Melakukan reset pada salah satu game atau semua game di scoreboard. */
 /* I.S. Scoreboard terdefinisi */
-/* F.S. */
+/* F.S. Elemen-elemen pada salah satu atau semua scoreboard dihapus */
+    // KAMUS LOKAL
     int scoreidx, i;
-
+    // ALGORITMA
     printf("DAFTAR SCOREBOARD:\n");
     printf("0. ALL\n");
     DisplayArray(gl);
