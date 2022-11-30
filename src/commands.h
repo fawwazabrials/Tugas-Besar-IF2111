@@ -68,6 +68,12 @@ void LOAD(Word command2, TabWord *T);
    F.S. : Jika file berhasil dibaca, isi dari Array game berisikan isi file.txt
           Jika file gagal dibaca, Array games tidak akan diisi dan memiliki Neff = 0 */
 
+void HISTORY(TabWord games, Stack *game_history, int n);
+/* Menampilkan n langkah terakhir dari game yang sedang dimainkan
+   I.S. : Sembarang
+   F.S. : Jika game_history tidak kosong, n langkah terakhir dari game yang sedang dimainkan akan ditampilkan
+          Jika game_history kosong, tidak ada perubahan pada layar */
+
 void SCOREBOARD (Map M[], TabWord gl);
 /* Menampilkan scoreboard setiap permainan */
 
