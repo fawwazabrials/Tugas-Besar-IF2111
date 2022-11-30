@@ -47,7 +47,7 @@ void DELETEGAME(TabWord *gl, Queue gq);
    F.S. : Jika game merupakan hasil buatan user dari CREATE GAME, game berhasil dihapuskan 
           Jika game merupakan game bawaan dari file konfigurasi, game gagal dihapus */
 
-void SAVE(TabWord gl, Word filename);
+void SAVE(TabWord gl, Word filename, Stack history, Map[] scoreboard);
 /* Menyimpan isi dari Array game ke sebuah file '.txt' dengan nama file berupa input dari user
    I.S. : Sembarang 
    F.S. : File filename.txt berhasil tercipta di folder data dengan isinya adalah isi dari array game */

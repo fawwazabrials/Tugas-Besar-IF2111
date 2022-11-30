@@ -211,13 +211,14 @@ void DELETEGAME (TabWord *gl, Queue gq) {
     return;
 }
 
-void SAVE(TabWord gl, Word filename) {
+void SAVE(TabWord gl, Word filename, Stack history, Map[] scoreboard) {
 /* Menyimpan isi dari Array game ke sebuah file '.txt' dengan nama file berupa input dari user
    I.S. : Sembarang 
    F.S. : File filename.txt berhasil tercipta di folder data dengan isinya adalah isi dari array game */
     // KAMUS LOKAL
     char a[351] = "../data/";
-    int i,j;
+    int i,j,k;
+    Word w;
 
     // ALGORITMA
     for (i=0;i<filename.Length;i++) {
@@ -233,6 +234,30 @@ void SAVE(TabWord gl, Word filename) {
             saveLine[j+1] = 0;
         }
         fprintf(saveFile,"%s\n",saveLine);
+    }
+    if (history.TOP < 1) {
+        fprintf(saveFile,"0\n");
+    } else {
+        fprintf(saveFile,"%d\n",history.TOP);
+        while (!(IsEmptyStack(history))) {
+            Pop(&history,&i);
+            for (j=0;j<gl.TI[i].Length;j++) {
+                saveLine[j] = gl.TI[i].TabWord[j];
+                saveLine[j+1] = 0;
+            }
+            fprintf(saveFile,"%s\n",saveLine);
+        }
+    }
+    for (i=1;i<=gl.Neff;i++) {
+        fprintf(saveFile,"%d\n",scoreboard[i].Count);
+        for (j=1;j<=scoreboard[i].Count;j++) {
+            for (k=0;k<scoreboard[i].Elements[j].Key.Length;k++) {
+                saveLine[k] = scoreboard[i].Elements[j].Key.TabWord[k];
+                saveLine[k+1] = 0;
+            }
+            fprintf(saveFile,"%s",saveLine);
+            fprintf(saveFile," %d\n",scoreboard[i].Elements[j].Value);
+        }
     }
     fclose(saveFile);
     printf("Save file berhasil disimpan.\n");
