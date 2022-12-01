@@ -60,7 +60,7 @@ void InsertMap(Map *M, keytypeMap k, valuetypeMap v){
         if (IsEmptyMap(*M)) {
             M->Elements[1] = el;
         } else {
-            for (int i=1;i<=M->Count;i++) {
+            /*for (int i=1;i<=M->Count;i++) {
                 loc = i;
                 if (M->Elements[i].Value < v) {
                     for (int j=M->Count;j>=i;j++) {
@@ -69,7 +69,8 @@ void InsertMap(Map *M, keytypeMap k, valuetypeMap v){
                     break;
                 }
             }
-            M->Elements[loc] = el;
+            M->Elements[loc] = el;*/
+            M->Elements[M->Count+1] = el;
         }
         (*M).Count +=1;
     }
