@@ -68,6 +68,7 @@ void PLAYGAME(TabWord games, Queue *game_queue, Stack *history, Map scoreboard[]
         if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 1)     // RNG
         {
             printf("Loading RNG ...\n\n");
+            score = run_rng();
 
         }
 
