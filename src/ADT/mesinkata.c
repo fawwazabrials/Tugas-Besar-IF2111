@@ -90,14 +90,18 @@ void STARTWORDFILE(char* path) {
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
     // KAMUS LOKAL
+    boolean success;
 
     // ALGORITMA
     ResetCurrentWord();
-    STARTFILE(path);
-    if (currentChar == MARK) EndWord = true;
-    else {
-        EndWord = false;
-        CopyWordWithBlanks();
+    STARTFILE(path, &success);
+
+    if (success) {
+        if (currentChar == MARK) EndWord = true;
+        else {
+            EndWord = false;
+            CopyWordWithBlanks();
+        }
     }
 }
 
