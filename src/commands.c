@@ -112,7 +112,7 @@ void PLAYGAME(TabWord games, Queue *game_queue, Stack *history, Map scoreboard[]
         scan("%c",&name,&w2,&inint);
         gameid = GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]);
         // Insert nama ke scoreboard
-        if (!(IsMemberMap(&scoreboard[gameid], name))) {
+        if (!(IsMemberMap(scoreboard[gameid], name))) {
             InsertMap(&scoreboard[gameid],name,score);
         } else {
             printf("Nama yang dimasukkan tidak valid.\n");
@@ -129,7 +129,7 @@ void PLAYGAME(TabWord games, Queue *game_queue, Stack *history, Map scoreboard[]
     }
 }
 
-void SKIPGAME(TabWord games, Queue *game_queue, int n) {
+void SKIPGAME(TabWord games, Queue *game_queue, int n, Stack *history, Map scoreboard[]) {
 /*I.S. : game_queue terdefinisi
 F.S. : mengskip n buah game sesuai langkah yang diinginkan dari queue dan menjalankan game jika ada di game_queue
 Proses :game_queue terdequeue sesuai berapa langkah skip yang diinginkan dan menjalankan game selanjutnya jika masih ada game di game_queue*/
@@ -153,7 +153,7 @@ Proses :game_queue terdequeue sesuai berapa langkah skip yang diinginkan dan men
                 dequeue(game_queue,&gamename);
             }
 
-            PLAYGAME(games, game_queue); 
+            PLAYGAME(games, game_queue, history, scoreboard); 
         }
         else
         {

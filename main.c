@@ -108,7 +108,7 @@ int main() {
             }
             else if(ValidateCommand(command1,"SKIP") && ValidateCommand(command2,"GAME")) {     // INPUT ADALAH SKIP GAME
                 splashScreen();
-                SKIPGAME(games,&antrian_game, inputint);
+                SKIPGAME(games,&antrian_game, inputint, &history, scoreboards);
             }
             else if(ValidateCommand(command1,"SAVE")) {                                         // INPUT ADALAH SAVE
                 splashScreen();
