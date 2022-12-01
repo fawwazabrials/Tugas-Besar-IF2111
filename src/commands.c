@@ -450,28 +450,33 @@ void RESETSCOREBOARD(Map M[], TabWord gl){
 /* F.S. Elemen-elemen pada salah satu atau semua scoreboard dihapus */
     // KAMUS LOKAL
     int scoreidx, i;
+
     // ALGORITMA
     printf("DAFTAR SCOREBOARD:\n");
     printf("0. ALL\n");
     DisplayArray(gl);
 
     printf("SCOREBOARD YANG INGIN DIHAPUS: ");
-    STARTWORD();
-    scoreidx = katatoint(currentWord);
+    scan("%d", &CCommand, &ph1, &scoreidx);
 
-    if (IsIdxEff(gl, scoreidx)) {
-        if (scoreidx == 0) {
-            printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD ALL (YA/TIDAK)?\n");
-        } else {
-            printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD ");
-            displayWord(gl.TI[scoreidx], false);
-            printf(" (YA/TIDAK)?");
-        }
-        STARTWORD();
-        if (ValidateCommand(currentWord, "YA")) {
+    if (scoreidx == 0) {
+        printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SEMUA SCOREBOARD (YA/TIDAK)? ");
+    }
+    else if (IsIdxEff(gl, scoreidx)) {
+        printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD ");
+        displayWord(gl.TI[scoreidx], false);
+        printf(" (YA/TIDAK)? ");
+
+    } else {
+        printf("Indeks tidak terdapat pada list game.\n");
+        return;
+    }
+
+    scan("%c", &CCommand, &ph1, &scoreidx);
+        if (ValidateCommand(CCommand, "YA")) {
             if (scoreidx == 0) {
-                // Reset All
-                MakeEmptyMapList(M, gl.Neff);
+                MakeEmptyMapList(M, 101);
+                printf("Scoreboard berhasil direset.\n");
             } else {
                 // Reset Salah Satu Game
                 if (M[scoreidx].Count > 0) {
@@ -479,14 +484,11 @@ void RESETSCOREBOARD(Map M[], TabWord gl){
                     printf("Scoreboard berhasil direset.\n");
                 }              
             }
-        } else if (ValidateCommand(currentWord, "TIDAK")) {
+        } else if (ValidateCommand(CCommand, "TIDAK")) {
             printf("Scoreboard tidak jadi direset.\n");
         } else {
             printf("Command tidak valid. Scoreboard tidak jadi direset.\n");
         }
-    } else {
-        printf("Indeks tidak terdapat pada list game.\n");
-    }
 
     return;
     
