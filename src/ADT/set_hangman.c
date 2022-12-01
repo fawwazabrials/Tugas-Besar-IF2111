@@ -26,7 +26,7 @@ boolean IsFullSeth(Seth S){
 /* Ciri Seth penuh : count bernilai MaxElseth */
 
 /* ********** Operator Dasar Seth ********* */
-void InsertSeth(Seth *S, infotypeSeth Elmt){
+void InsertSethElmt(Seth *S, infotypeSeth Elmt){
         if (!IsMemberSeth(*S,Elmt)){
             (*S).Elements[(*S).Count]= Elmt;
             (*S).Count +=1;

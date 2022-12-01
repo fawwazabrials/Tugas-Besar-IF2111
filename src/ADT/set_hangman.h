@@ -1,5 +1,5 @@
-#ifndef set_H
-#define set_H
+#ifndef SET_HANGMAN_H
+#define SET_HANGMAN_H
 #include <stdio.h>
 #include "boolean.h"
 #include "mesinkata.h"
