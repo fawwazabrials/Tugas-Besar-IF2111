@@ -5,7 +5,10 @@ int run_random() {
    I.S. : Sembarang
    F.S. : Skor berupa integer random tercetak ke layar */
     // KAMUS LOKAL
-
+    int skor;
     // ALGORITMA
-    printf("GAME OVER!\n\nSkor-mu adalah %d\n", randint(0, 5000));
+    skor = randint(0, 5000);
+    printf("GAME OVER!\n\nSkor-mu adalah %d\n", skor);
+    return skor;
+
 }
