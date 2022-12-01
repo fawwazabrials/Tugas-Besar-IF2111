@@ -9,6 +9,7 @@
 #include <math.h>
 #include "ADT/mesinkata.h"
 #include "ADT/mesinkarakter.h"
+#include "ADT/map.h"
 
 #define MAX_INT 2147483647
 
@@ -74,5 +75,7 @@ void splashScreen();
 
 int mod (int x,int N);
 
+void MakeEmptyMapList (Map M[], int L);
+/* Membuat seluruh elemen array of map M dengan jumlah elemen L menjadi Map kosong */
 
 #endif

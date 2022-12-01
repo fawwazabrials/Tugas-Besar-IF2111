@@ -68,8 +68,5 @@ void DeleteMap(Map *M, keytypeMap k);
 boolean IsMemberMap(Map M, keytypeMap k);
 /* Mengembalikan true jika k adalah member dari M */
 
-void MakeEmptyMapList (Map M[], int L);
-/* Membuat seluruh elemen array of map M dengan jumlah elemen L menjadi Map kosong */
-
 
 #endif

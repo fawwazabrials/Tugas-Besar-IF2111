@@ -106,12 +106,3 @@ boolean IsMemberMap(Map M, keytypeMap k){
     return(found);
 }
 /* Mengembalikan true jika k adalah member dari M */
-
-
-void MakeEmptyMapList (Map M[], int L) {
-    /* I.S. Sembarang */
-    /* F.S. Seluruh elemen array of Map M menjadi Map kosong.*/
-    for (int i=0; i<L; i++) {
-        CreateEmptyMap(&M[i]);
-    }
-}
