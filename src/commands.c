@@ -78,7 +78,7 @@ void PLAYGAME(TabWord games, Queue *game_queue) {
         else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 3) // HANGMAN
         {
             printf("Loading HANGMAN ...\n\n");
-            dinerdash();
+            // hangman();
         }
 
         else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 4) // TOWER OF HANOI
@@ -113,7 +113,7 @@ void PLAYGAME(TabWord games, Queue *game_queue) {
     }
 }
 
-void SKIPGAME(TabWord games, Queue *game_queue) {
+void SKIPGAME(TabWord games, Queue *game_queue, int n) {
 /*I.S. : game_queue terdefinisi
 F.S. : mengskip n buah game sesuai langkah yang diinginkan dari queue dan menjalankan game jika ada di game_queue
 Proses :game_queue terdequeue sesuai berapa langkah skip yang diinginkan dan menjalankan game selanjutnya jika masih ada game di game_queue*/
@@ -127,7 +127,6 @@ Proses :game_queue terdequeue sesuai berapa langkah skip yang diinginkan dan men
         printf("\n");
 
         ADVWORD();
-        int n = currentWord.TabWord[0] - '0';
         ElTypeQueue gamename; //tempat sampah pas dequeue
 
         if (n < length(*game_queue))
@@ -425,7 +424,7 @@ void RESETSCOREBOARD(Map M[], TabWord gl){
             } else {
                 // Reset Salah Satu Game
                 if (M[scoreidx].Count > 0) {
-                    M[scoreidx].Count = Nil;
+                    M[scoreidx].Count = NilMap;
                     printf("Scoreboard berhasil direset.\n");
                 }              
             }

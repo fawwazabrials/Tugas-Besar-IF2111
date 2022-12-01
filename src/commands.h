@@ -6,7 +6,7 @@
 #include "games/2048.h"
 #include "games/random.h"
 #include "games/dinerdash.h"
-#include "games/hangman.h"
+// #include "games/hangman.h"
 #include "games/towerofhanoi.h"
 #include "games/snake.h"
 #include "ADT/array.h"
@@ -34,7 +34,7 @@ void PLAYGAME(TabWord games, Queue *game_queue);
   F.S. : game_queue terdequeue dan dijalankan
   Proses : mengeluarkan game dari queue dan menjalankannya */
 
-void SKIPGAME(TabWord games, Queue *game_queue);
+void SKIPGAME(TabWord games, Queue *game_queue, int n);
 /*I.S. : game_queue terdefinisi
 F.S. : mengskip n buah game sesuai langkah yang diinginkan dari queue dan menjalankan game jika ada di game_queue
 Proses :game_queue terdequeue sesuai berapa langkah skip yang diinginkan dan menjalankan game selanjutnya jika masih ada game di game_queue*/
