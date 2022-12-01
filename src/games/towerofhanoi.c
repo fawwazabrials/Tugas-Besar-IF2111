@@ -100,7 +100,7 @@ void printtower(int n, StackHanoi A, StackHanoi B, StackHanoi C)
     printf("\n\n");
 }
 
-void towerofhanoi() //Bismillah Bisa :D halo aku gibran
+int towerofhanoi() //Bismillah Bisa :D halo aku gibran
 {  
     //Membuat StackHanoi Kosong (Isi semua elemen 0 dengan Top(*S) = n-1)
     StackHanoi A, B, C, win; //tower A, B, C, dan win
@@ -304,6 +304,7 @@ void towerofhanoi() //Bismillah Bisa :D halo aku gibran
     score = ((minmove(n) / countmoves) * 10 * n/5); //Menghitung skor akhir
     printf("Selamat!!! Anda telah menyelesaikan tantangan Tower of Hanoi :D\n");
     printf("Skor Anda adalah : %d\n", score);
+    return score;
 }
 
 /*int main()

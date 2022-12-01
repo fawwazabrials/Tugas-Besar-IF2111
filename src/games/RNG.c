@@ -4,7 +4,7 @@
 
 /* TODO : ubah parameter ke ADT score waktu udh dibuat */
 
-void run_rng() {
+int run_rng() {
 /* PROSES : Sistem akan men-generate angka random dan pemain harus menebak angka tersebut. 
  *          Tiap kali input, sistem akan mencetak ke layar apakah tebakan lebih besar, 
  *          lebih kecil, atau sudah benar. Angka random akan berada diantara 0 - 100 (inklusif)
@@ -43,4 +43,5 @@ void run_rng() {
     }
 
     printf("Skor-mu adalah %d\n", 100 - 5*tries);
+    return (100 - 5* tries);
 }
