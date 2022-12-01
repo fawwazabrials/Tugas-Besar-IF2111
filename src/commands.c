@@ -49,12 +49,13 @@ void list_game(TabWord list){
    DisplayArray(list);
 }
 
-void PLAYGAME(TabWord games, Queue *game_queue) {
+void PLAYGAME(TabWord games, Queue *game_queue, Stack history, Map scoreboard[]) {
 /*I.S. : game_queue terdefinisi
   F.S. : game_queue terdequeue dan dijalankan
   Proses : mengeluarkan game dari queue dan menjalankannya */
     // KAMUS LOKAL
-    int score;
+    int inint, score=0, gameid;
+    Word name,w2;
 
     // ALGORITMA 
     if (!isEmpty(*game_queue)) //kalo game_queue gk kosong
@@ -73,7 +74,7 @@ void PLAYGAME(TabWord games, Queue *game_queue) {
         else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 2) // Diner DASH
         {
             printf("Loading Diner Dash ...\n\n");
-            dinerdash();
+            score = dinerdash();
         }
 
         else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 3) // HANGMAN
@@ -85,30 +86,40 @@ void PLAYGAME(TabWord games, Queue *game_queue) {
         else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 4) // TOWER OF HANOI
         {
             printf("Loading TOWER OF HANOI ...\n\n");
-            towerofhanoi();
+            score = towerofhanoi();
         }
         else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 5) // SNAKE ON METEOR
         {
             printf("Loading SNAKE ON METEOR ...\n\n");
-            run_snake();
+            score = run_snake();
         }
         
         else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 6) // 2048
         {
             printf("Loading 2048 ...\n\n");
-            run_2048(); 
+            score = run_2048(); 
         }
         
         else // Game Random
         {
             printf("Loading "); displayWord(HEAD((*game_queue)), false); printf(" ... \n\n");
-            run_random();
+            score = run_random();
         }
 
+        // Input nama
+        printf("Masukkan nama Anda:\n");
+        scan("%c",&name,&w2,&inint);
+        gameid = GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]);
+        // Insert nama ke scoreboard
+        if (!(IsMemberMap(&scoreboard[gameid], name))) {
+            InsertMap(&scoreboard[gameid],name,score);
+        } else {
+            printf("Nama yang dimasukkan tidak valid.\n");
+        }
+        // Masukkan game ke history
+        Push(&history,gameid);
+        // Hapus game dari queue
         dequeue(game_queue, &gamename);
-        // LOGIC MINTA NAMA
-
-        // KALO NAMA VALID INSERT KE SCOREBOARD
     }
     else
     {

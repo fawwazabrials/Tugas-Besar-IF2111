@@ -29,8 +29,8 @@ void list_game (TabWord list);
    I.S     : listglobal yang sudah terdefenisi
    F.S     : Menambilkan isi dari list ke layar */
 
-void PLAYGAME(TabWord games, Queue *game_queue);
-/*I.S. : game_queue terdefinisi
+void PLAYGAME(TabWord games, Queue *game_queue, Stack history, Map scoreboard[]);
+/*I.S. : game_queue, games, history, scoreboard[] terdefinisi
   F.S. : game_queue terdequeue dan dijalankan
   Proses : mengeluarkan game dari queue dan menjalankannya */
 
