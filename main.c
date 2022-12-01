@@ -54,7 +54,7 @@ int main() {
         }
 
         else if (ValidateCommand(command1, "LOAD")) {       // INPUT ADALAH LOAD
-            LOAD(command2, &games);
+            LOAD(command2, &games, &history, scoreboards);
             if (games.Neff == 0) printf("Save file tidak ditemukan, silahkan masukkan nama file yang benar.\n");
             else {
                 splashScreen();
@@ -121,7 +121,7 @@ int main() {
                 RESETSCOREBOARD(scoreboards, games);
             }
             else if(ValidateCommand(command1,"HISTORY")) {
-                HISTORY(games, &history, inputint);
+                HISTORY(games, &history, katatoint(command2));
             }
             else if(ValidateCommand(command1,"RESET") && ValidateCommand(command2, "HISTORY")) {
                 RESETHISTORY(&history);
