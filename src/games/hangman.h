@@ -12,7 +12,7 @@
 #include "../ADT/mesinkata.h"
 
 
-void run_hangman();
+int run_hangman();
 /* PROSES : Sistem akan menampilkan secara acak kata yang terdapat pada list
             yang sudah disediakan. pemaian akan menginput sebuah huruf
             jika tebakan benar akan menampilkan hutruf tersebut jika tidak akan 
