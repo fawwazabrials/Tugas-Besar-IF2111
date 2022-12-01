@@ -57,7 +57,9 @@ void InsertMap(Map *M, keytypeMap k, valuetypeMap v);
 /* Menambahkan Elmt sebagai elemen Map M. */
 /* I.S. M mungkin kosong, M tidak penuh
         M mungkin sudah beranggotakan v dengan key k */
-/* F.S. v menjadi anggota dari M dengan key k. Jika k sudah ada, operasi tidak dilakukan */
+/* F.S. v menjadi anggota dari M dengan key k, terurut secara menurun berdasarkan value,
+        jika ada anggota M lain dengan value yang sama, elemen yang lebih baru diletakkan belakangan.
+        Jika k sudah ada, operasi tidak dilakukan */
 
 void DeleteMap(Map *M, keytypeMap k);
 /* Menghapus Elmt dari Map M. */

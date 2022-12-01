@@ -53,16 +53,32 @@ valuetypeMap ValueMap(Map M, keytypeMap k){
 /* Jika tidak ada key k pada M, akan mengembalikan Undefined */
 
 void InsertMap(Map *M, keytypeMap k, valuetypeMap v){
+    infotypeMap el;
+    el.Key =k; el.Value = v;
+    int loc;
     if(!IsMemberMap(*M,k)){
-        (*M).Count +=1;
-        ((*M).Elements[(*M).Count]).Key= k;
-        ((*M).Elements[(*M).Count]).Value= v;
+        if (IsEmptyMap(*M)) {
+            M->Elements[1] = el;
+        } else {
+            for (loc=1;loc<=M->Count;loc++) {
+                if (M->Elements[loc].Value < v) {
+                    for (int j=M->Count;j>=loc;j--) {
+                        M->Elements[j+1] = M->Elements[j];
+                    }
+                    break;
+                }
+            }
+            M->Elements[loc] = el;
+        }
+        M->Count += 1;
     }
 }
 /* Menambahkan Elmt sebagai elemen Map M. */
 /* I.S. M mungkin kosong, M tidak penuh
         M mungkin sudah beranggotakan v dengan key k */
-/* F.S. v menjadi anggota dari M dengan key k. Jika k sudah ada, operasi tidak dilakukan */
+/* F.S. v menjadi anggota dari M dengan key k, terurut secara menurun berdasarkan value,
+        jika ada anggota M lain dengan value yang sama, elemen yang lebih baru diletakkan belakangan.
+        Jika k sudah ada, operasi tidak dilakukan */
 
 void DeleteMap(Map *M, keytypeMap k){
     //Kamus Lokal

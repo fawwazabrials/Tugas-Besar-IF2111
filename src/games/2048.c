@@ -2,7 +2,7 @@
 
 #include "2048.h"
 
-void run_2048() {
+int run_2048() {
 /* Implementasi permainan 2048 dalam C menggunakan ADT Matriks.
    I.S. : Sembarang
    F.S. : Game selesai dan skor akhir pemain ditampilkan pada layar */
@@ -79,4 +79,6 @@ void run_2048() {
 
     waktu_akhir = time(NULL);
     printf("\n\nGAME OVER!\nSkor-mu adalah %d\nWaktu bermain %02d:%02d\n\n", score, (waktu_akhir-waktu_awal)/60, (waktu_akhir-waktu_awal)%60);
+    return score;
+
 }

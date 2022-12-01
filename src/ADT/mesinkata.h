@@ -89,7 +89,7 @@ boolean isKataEqual(Word W1, Word W2);
 boolean isKataInt(Word W);
 /* Mengembalikan true apabila seluruh isi Word berupa numerik */
 
-void displayWord(Word W);
+void displayWord(Word W, boolean newLine);
 /* Menampilkan isi Word ke layar.
    I.S. : sembarang
    F.S. : Seluruh isi dalam Word telah ditampilkan pada layar */

@@ -49,11 +49,13 @@ void list_game(TabWord list){
    DisplayArray(list);
 }
 
-void PLAYGAME(TabWord games, Queue *game_queue) {
+void PLAYGAME(TabWord games, Queue *game_queue, Stack *history, Map scoreboard[]) {
 /*I.S. : game_queue terdefinisi
   F.S. : game_queue terdequeue dan dijalankan
   Proses : mengeluarkan game dari queue dan menjalankannya */
     // KAMUS LOKAL
+    int inint, score=0, gameid;
+    Word name,w2;
 
     // ALGORITMA 
     if (!isEmpty(*game_queue)) //kalo game_queue gk kosong
@@ -66,13 +68,14 @@ void PLAYGAME(TabWord games, Queue *game_queue) {
         if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 1)     // RNG
         {
             printf("Loading RNG ...\n\n");
-            run_rng();
+            score = run_rng();
+
         }
 
         else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 2) // Diner DASH
         {
             printf("Loading Diner Dash ...\n\n");
-            dinerdash();
+            score = dinerdash();
         }
 
         else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 3) // HANGMAN
@@ -84,26 +87,39 @@ void PLAYGAME(TabWord games, Queue *game_queue) {
         else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 4) // TOWER OF HANOI
         {
             printf("Loading TOWER OF HANOI ...\n\n");
-            towerofhanoi();
+            score = towerofhanoi();
         }
         else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 5) // SNAKE ON METEOR
         {
             printf("Loading SNAKE ON METEOR ...\n\n");
-            run_snake();
+            score = run_snake();
         }
         
         else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 6) // 2048
         {
             printf("Loading 2048 ...\n\n");
-            run_2048(); 
+            score = run_2048(); 
         }
         
         else // Game Random
         {
-            printf("Loading "); displayWord(HEAD((*game_queue))); printf(" ... \n\n");
-            run_random();
+            printf("Loading "); displayWord(HEAD((*game_queue)), false); printf(" ... \n\n");
+            score = run_random();
         }
 
+        // Input nama
+        printf("Masukkan nama Anda: ");
+        scan("%c",&name,&w2,&inint);
+        gameid = GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]);
+        // Insert nama ke scoreboard
+        if (!(IsMemberMap(scoreboard[gameid], name))) {
+            InsertMap(&scoreboard[gameid],name,score);
+        } else {
+            printf("Nama yang dimasukkan sudah ada pada scoreboard.\n");
+        }
+        // Masukkan game ke history
+        Push(history,gameid);
+        // Hapus game dari queue
         dequeue(game_queue, &gamename);
     }
     else
@@ -113,7 +129,7 @@ void PLAYGAME(TabWord games, Queue *game_queue) {
     }
 }
 
-void SKIPGAME(TabWord games, Queue *game_queue, int n) {
+void SKIPGAME(TabWord games, Queue *game_queue, int n, Stack *history, Map scoreboard[]) {
 /*I.S. : game_queue terdefinisi
 F.S. : mengskip n buah game sesuai langkah yang diinginkan dari queue dan menjalankan game jika ada di game_queue
 Proses :game_queue terdequeue sesuai berapa langkah skip yang diinginkan dan menjalankan game selanjutnya jika masih ada game di game_queue*/
@@ -137,7 +153,7 @@ Proses :game_queue terdequeue sesuai berapa langkah skip yang diinginkan dan men
                 dequeue(game_queue,&gamename);
             }
 
-            PLAYGAME(games, game_queue); 
+            PLAYGAME(games, game_queue, history, scoreboard); 
         }
         else
         {
@@ -185,13 +201,11 @@ void CREATEGAME(TabWord *T) {
     }
 }
 
-void DELETEGAME (TabWord *gl, Queue gq) {
+void DELETEGAME (TabWord *gl, Queue gq, Stack *history, Map scoreboard[]) {
 /* Menghapus game yang ingin dihapus oleh user dengan syarat game harus hasil dari CREATE GAME
    I.S. : Sembarang 
    F.S. : Jika game merupakan hasil buatan user dari CREATE GAME, game berhasil dihapuskan 
           Jika game merupakan game bawaan dari file konfigurasi, game gagal dihapus */
-    // KAMUS LOKAL
-
     // ALGORITMA
     list_game(*gl); // Cetak daftar game
     // Input
@@ -204,6 +218,25 @@ void DELETEGAME (TabWord *gl, Queue gq) {
         if ((ph2<=6)||(isInQueue(gq,gl->TI[ph2]))) {
             printf("Game gagal dihapus.\n");
         } else {
+            // Hapus dari history
+            int z;
+            Stack temp; CreateEmptyStack(&temp);
+            while (!(IsEmptyStack(*history))) {
+                Pop(history,&z);
+                if (z!=ph2) {
+                    Push(&temp,z);
+                }
+            }
+            while (!(IsEmptyStack(temp))) {
+                Pop(&temp,&z);
+                Push(history,z);
+            }
+            // Hapus dari scoreboard
+            for (int i=ph2;i<gl->Neff;i++) {
+                scoreboard[ph2] = scoreboard[ph2+1];
+            }
+            CreateEmptyMap(&scoreboard[gl->Neff]);
+            // Hapus dari daftar game
             DeleteAt(gl,ph2);
             printf("Game berhasil dihapus.\n");
         }
@@ -273,28 +306,28 @@ void help() {
     // KAMUS LOKAL
 
     // ALGORITMA
-    printf("============================== LIST COMMAND YANG VALID ============================== \n\n");
-    printf("1.  START \t\t: Membaca file konfigurasi sistem. \n");
-    printf("2.  LOAD <filename>\t: Membaca file berisi list game yang dapat dimainkan dan histori.\n");
-    printf("3.  SAVE <filename>\t: Menyimpan state game pada suatu file .txt.\n");
+    printf("\n================================ LIST COMMAND YANG VALID ================================ \n");
+    printf("1.  START \t\t  : Membaca file konfigurasi sistem. \n");
+    printf("2.  LOAD <filename>\t  : Membaca file berisi list game yang dapat dimainkan dan histori.\n");
+    printf("3.  SAVE <filename>\t  : Menyimpan state game pada suatu file .txt.\n");
     printf("4.  CREATE GAME \t  : Menambahkan game baru pada daftar game\n");
     printf("5.  LIST GAME \t\t  : Menampilkan daftar game pada sistem\n");
     printf("6.  DELETE GAME \t  : Menghapus sebuah game dari daftar game.\n");
-    printf("\t\t\t  (*) Game yang dihapus hanya game yang dibuat pengguna secara custom.\n");
-    printf("\t\t\t  (*) 5 game pertama pada file konfigurasi tidak dapat dihapus.\n");
-    printf("\t\t\t  (*) Game yang di dalam queue game saat ini tidak dapat dihapus.\n");
-    printf("7.  QUEUE GAME \t\t : Mendaftarkan permainan ke dalam list.\n");
+    printf("\t\t\t    *) Game yang dihapus hanya game yang dibuat pengguna secara custom.\n");
+    printf("\t\t\t    *) 5 game pertama pada file konfigurasi tidak dapat dihapus.\n");
+    printf("\t\t\t    *) Game yang di dalam queue game saat ini tidak dapat dihapus.\n");
+    printf("7.  QUEUE GAME \t\t  : Mendaftarkan permainan ke dalam list.\n");
     printf("8.  PLAY GAME \t\t  : Memainkan game dengan urutan pertama di antrian.\n");
-    printf("9.  SKIP GAME <n>\t : Melewatkan permainan sebanyak <n>.\n");
-    printf("10. SCOREBOARD \t\t : Menampilkan scoreboard masing-masing game.\n");
-    printf("11. RESET SCOREBOARD: Melakukan reset pada scoreboard.\n");
-    printf("12. HISTORY <n>\t\t : Menampilkan history/riwayat permainan.\n");
-    printf("13. RESET HISTORY\t : Melakukan reset pada history.\n");
-    printf("14. QUIT \t\t: Keluar dari program.\n");
-    printf("15. HELP \t\t: Mengeluarkan list ini.\n");
+    printf("9.  SKIP GAME <n>\t  : Melewatkan permainan sebanyak <n>.\n");
+    printf("10. SCOREBOARD \t\t  : Menampilkan scoreboard masing-masing game.\n");
+    printf("11. RESET SCOREBOARD\t  : Melakukan reset pada scoreboard.\n");
+    printf("12. HISTORY <n>\t\t  : Menampilkan history/riwayat permainan.\n");
+    printf("13. RESET HISTORY\t  : Melakukan reset pada history.\n");
+    printf("14. QUIT \t\t  : Keluar dari program.\n");
+    printf("15. HELP \t\t  : Mengeluarkan list ini.\n");
 
 }
-void C_START (Word a,TabWord *T){
+void C_START (Word a, TabWord *T){
 /* Membaca file config.txt pada folder data dan memasukan isinya ke Array games
    I.S. : Sembarang
    F.S. : Isi dari config.txt masuk ke Array game */
@@ -302,34 +335,72 @@ void C_START (Word a,TabWord *T){
     int i,len;
 
     // ALGORITMA
-    if (ValidateCommand(a, "START")) {
-        STARTWORDFILE("config.txt");
-        len = katatoint(currentWord);
-        for (i=1; i<=len; i++) {
-            ADV();
-            ADVWORDFILE();
-            SetEl(T, i, currentWord);
-        }
+    STARTWORDFILE("config.txt");
+    len = katatoint(currentWord);
+    for (i=1; i<=len; i++) {
+        ADV();
+        ADVWORDFILE();
+        SetEl(T, i, currentWord);
     }
 }
 
-void LOAD (Word command2, TabWord *T) {
+void LOAD (Word command2, TabWord *T, Stack *history, Map scoreboard[]) {
 /* Membaca file dengan nama yang diinginkan user pada folder data dan memasukan isinya ke Array games
    I.S. : Sembarang
    F.S. : Jika file berhasil dibaca, isi dari Array game berisikan isi file.txt
           Jika file gagal dibaca, Array games tidak akan diisi dan memiliki Neff = 0 */
     // KAMUS LOKAL
-    int i, len=0;
+    int i, j, k, skor, len=0;
+    boolean space=false;
+    Word nama;
 
     // ALGORITMA
     STARTWORDFILE(WordToString(command2));
     len = katatoint(currentWord);
-    for (i = 1; i <= len; i++)
-        {
+    if (len > 0) {  // Cek File exist apa enggak.
+        for (i = 1; i <= len; i++) {
             ADV();
             ADVWORDFILE();
             SetEl(T, i, currentWord);
         }
+
+        ADV();
+        ADVWORDFILE();
+        len = katatoint(currentWord);
+        for (i = 1; i <= len; i++) {
+            ADV();
+            ADVWORDFILE();
+            Push(history, GetElmtIdx(*T, currentWord));
+        }
+
+        for (j=1; j <= T->Neff; j++) {
+            ADV();
+            ADVWORDFILE();
+            // printf("k = "); displayWord(currentWord, true);
+            len = katatoint(currentWord);
+            for (i = 1; i <= len; i++) {
+                ADV();
+                ADVWORDFILE();
+                space = false;
+                skor = 0;
+                nama.Length = 0;
+                for (k=0; k<currentWord.Length; k++) {
+                    if (currentWord.TabWord[k] == ' ') {
+                        space = true; k++;
+                    }
+                    
+                    if (!space) {
+                        nama.TabWord[k] = currentWord.TabWord[k];
+                        nama.Length++;
+                    } else {
+                        skor = skor*10 + (currentWord.TabWord[k]);
+                    }
+                }
+
+                InsertMap(&scoreboard[j], nama, skor);
+            }
+        }
+    }
 }
 
 void HISTORY(TabWord games, Stack *game_history, int n) //*game_history adalah stack yang berisi ID dari game yang sudah dimainkan
@@ -347,14 +418,13 @@ void HISTORY(TabWord games, Stack *game_history, int n) //*game_history adalah s
             for (int i = 0; i < n; i++)
             {
                 printf("%d. ", i + 1);
-                displayWord(games.TI[InfoTop(temp)]); // Mencetak nama game yang sudah dimainkan
-                printf("\n");
+                displayWord(games.TI[InfoTop(temp)], true); // Mencetak nama game yang sudah dimainkan
                 Pop(&temp, &trash);
             }
         }
         else
         {
-            printf("Berikut adalah daftar Game yang telah dimainkan :\n");
+            printf("Berikut adalah daftar Game yang telah dimainkann :\n");
 
             int trash;            // variabel untuk menyimpan ID game yang sudah dimainkan
             Stack temp;           // Stack sementara untuk menyimpan ID game yang sudah dimainkan
@@ -363,8 +433,7 @@ void HISTORY(TabWord games, Stack *game_history, int n) //*game_history adalah s
             for (int j = 0; j <= Top(*game_history); j++)
             {
                 printf("%d. ", j + 1);
-                displayWord(games.TI[InfoTop(temp)]); // Mencetak nama game yang sudah dimainkan
-                printf("\n");
+                displayWord(games.TI[InfoTop(temp)], true); // Mencetak nama game yang sudah dimainkan
                 Pop(&temp, &trash);
             }
         }
@@ -377,15 +446,15 @@ void HISTORY(TabWord games, Stack *game_history, int n) //*game_history adalah s
 
 void SCOREBOARD (Map M[], TabWord gl) {
     for (int i = 1; i <= gl.Neff; i++) {
-        printf("*** SCOREBOARD ");
-        displayWord(gl.TI[i]);
+        printf("\n*** SCOREBOARD ");
+        displayWord(gl.TI[i], false);
         printf(" ***\n");
         if (M[i].Count == 0) {
             printf("--- Scoreboard kosong 😔 main yuk! ---\n");
         } else {
             for (int j=1; j<=M[i].Count; j++) {
                 printf(" (%d) ",j);
-                displayWord(M[i].Elements[j].Key);
+                displayWord(M[i].Elements[j].Key, false);
                 printf(" : %d\n",M[i].Elements[j].Value);
             }
         }
@@ -393,49 +462,54 @@ void SCOREBOARD (Map M[], TabWord gl) {
     return;
 }
 
+
 void RESETSCOREBOARD(Map M[], TabWord gl){
 /* Melakukan reset pada salah satu game atau semua game di scoreboard. */
 /* I.S. Scoreboard terdefinisi */
 /* F.S. Elemen-elemen pada salah satu atau semua scoreboard dihapus */
     // KAMUS LOKAL
     int scoreidx, i;
+
     // ALGORITMA
     printf("DAFTAR SCOREBOARD:\n");
     printf("0. ALL\n");
     DisplayArray(gl);
 
     printf("SCOREBOARD YANG INGIN DIHAPUS: ");
-    STARTWORD();
-    scoreidx = katatoint(currentWord);
+    scan("%d", &CCommand, &ph1, &scoreidx);
 
-    if (IsIdxEff(gl, scoreidx)) {
-        if (scoreidx == 0) {
-            printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD ALL (YA/TIDAK)?\n");
-        } else {
-            printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD ");
-            displayWord(gl.TI[scoreidx]);
-            printf(" (YA/TIDAK)?");
-        }
-        STARTWORD();
-        if (ValidateCommand(currentWord, "YA")) {
+    if (scoreidx == 0) {
+        printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SEMUA SCOREBOARD (YA/TIDAK)? ");
+    }
+    else if (IsIdxEff(gl, scoreidx)) {
+        printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD ");
+        displayWord(gl.TI[scoreidx], false);
+        printf(" (YA/TIDAK)? ");
+
+    } else {
+        printf("Indeks tidak terdapat pada list game.\n");
+        return;
+    }
+
+    scan("%c", &CCommand, &ph1, &scoreidx);
+        if (ValidateCommand(CCommand, "YA")) {
             if (scoreidx == 0) {
-                // Reset All
-                MakeEmptyMapList(M, gl.Neff);
+                MakeEmptyMapList(M, 101);
+                printf("Scoreboard berhasil direset.\n");
             } else {
                 // Reset Salah Satu Game
                 if (M[scoreidx].Count > 0) {
                     M[scoreidx].Count = NilMap;
                     printf("Scoreboard berhasil direset.\n");
-                }              
+                } else {
+                    printf("Scoreboard masih kosong.\n");
+                }             
             }
-        } else if (ValidateCommand(currentWord, "TIDAK")) {
+        } else if (ValidateCommand(CCommand, "TIDAK")) {
             printf("Scoreboard tidak jadi direset.\n");
         } else {
             printf("Command tidak valid. Scoreboard tidak jadi direset.\n");
         }
-    } else {
-        printf("Indeks tidak terdapat pada list game.\n");
-    }
 
     return;
     

@@ -18,7 +18,7 @@ void RESETPITA();
    I.S. : sembarang
    F.S. : pita kosong (NULL) */
 
-void STARTFILE(char* file_name);
+void STARTFILE(char* file_name, boolean *success);
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Pita yang akan diambil adalah pita yang berada di dalam file
    pada path ../data/file_name.

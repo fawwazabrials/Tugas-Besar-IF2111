@@ -1,6 +1,6 @@
 #include "hangman.h"
 
-void run_hangman(){
+int run_hangman(){
     //kamus lokal
     int life,idx,i,tertebak,score,command3;
     char* list_kata[10];
@@ -105,6 +105,7 @@ void run_hangman(){
         printf("Coba lagi dilain kesempatan untuk menyelesaikan permainan ini\n");
     }
     printf("Score anda adalah %d\n",score);
+    return score;
 }
 
 void hangman(int life){

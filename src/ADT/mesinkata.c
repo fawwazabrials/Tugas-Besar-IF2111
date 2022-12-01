@@ -90,14 +90,18 @@ void STARTWORDFILE(char* path) {
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
     // KAMUS LOKAL
+    boolean success;
 
     // ALGORITMA
     ResetCurrentWord();
-    STARTFILE(path);
-    if (currentChar == MARK) EndWord = true;
-    else {
-        EndWord = false;
-        CopyWordWithBlanks();
+    STARTFILE(path, &success);
+
+    if (success) {
+        if (currentChar == MARK) EndWord = true;
+        else {
+            EndWord = false;
+            CopyWordWithBlanks();
+        }
     }
 }
 
@@ -182,7 +186,7 @@ boolean isKataInt(Word W) {
     } return true;
 }
 
-void displayWord(Word W) {
+void displayWord(Word W, boolean newLine) {
 /* Menampilkan isi Word ke layar.
    I.S. : sembarang
    F.S. : Seluruh isi dalam Word telah ditampilkan pada layar */
@@ -192,7 +196,9 @@ void displayWord(Word W) {
     // ALGORITMA
     for (i=0; i<W.Length; i++) {
         printf("%c", W.TabWord[i]);
-    } printf("\n");
+    } 
+
+    if (newLine) printf("\n");
 }
 
 int WordToInt(Word W) 

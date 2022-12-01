@@ -54,7 +54,7 @@ int main() {
         }
 
         else if (ValidateCommand(command1, "LOAD")) {       // INPUT ADALAH LOAD
-            LOAD(command2, &games);
+            LOAD(command2, &games, &history, scoreboards);
             if (games.Neff == 0) printf("Save file tidak ditemukan, silahkan masukkan nama file yang benar.\n");
             else {
                 splashScreen();
@@ -96,7 +96,7 @@ int main() {
             }
             else if(ValidateCommand(command1,"DELETE") && ValidateCommand(command2,"GAME")) {   // INPUT ADALAH DELETE GAME
                 splashScreen();
-                DELETEGAME(&games,antrian_game);
+                DELETEGAME(&games,antrian_game,&history,scoreboards);
             }
             else if(ValidateCommand(command1,"QUEUE") && ValidateCommand(command2,"GAME")) {    // INPUT ADALAH QUEUE GAME
                 splashScreen();
@@ -104,11 +104,11 @@ int main() {
             }
             else if(ValidateCommand(command1,"PLAY") && ValidateCommand(command2,"GAME")) {     // INPUT ADALAH PLAY GAME
                 splashScreen();
-                PLAYGAME(games,&antrian_game);
+                PLAYGAME(games,&antrian_game,&history,scoreboards);
             }
             else if(ValidateCommand(command1,"SKIP") && ValidateCommand(command2,"GAME")) {     // INPUT ADALAH SKIP GAME
                 splashScreen();
-                SKIPGAME(games,&antrian_game, inputint);
+                SKIPGAME(games,&antrian_game, inputint, &history, scoreboards);
             }
             else if(ValidateCommand(command1,"SAVE")) {                                         // INPUT ADALAH SAVE
                 splashScreen();
@@ -121,7 +121,7 @@ int main() {
                 RESETSCOREBOARD(scoreboards, games);
             }
             else if(ValidateCommand(command1,"HISTORY")) {
-                HISTORY(games, &history, inputint);
+                HISTORY(games, &history, katatoint(command2));
             }
             else if(ValidateCommand(command1,"RESET") && ValidateCommand(command2, "HISTORY")) {
                 RESETHISTORY(&history);

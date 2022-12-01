@@ -29,12 +29,12 @@ void list_game (TabWord list);
    I.S     : listglobal yang sudah terdefenisi
    F.S     : Menambilkan isi dari list ke layar */
 
-void PLAYGAME(TabWord games, Queue *game_queue);
-/*I.S. : game_queue terdefinisi
+void PLAYGAME(TabWord games, Queue *game_queue, Stack *history, Map scoreboard[]);
+/*I.S. : game_queue, games, history, scoreboard[] terdefinisi
   F.S. : game_queue terdequeue dan dijalankan
   Proses : mengeluarkan game dari queue dan menjalankannya */
 
-void SKIPGAME(TabWord games, Queue *game_queue, int n);
+void SKIPGAME(TabWord games, Queue *game_queue, int n, Stack *history, Map scoreboard[]);
 /*I.S. : game_queue terdefinisi
 F.S. : mengskip n buah game sesuai langkah yang diinginkan dari queue dan menjalankan game jika ada di game_queue
 Proses :game_queue terdequeue sesuai berapa langkah skip yang diinginkan dan menjalankan game selanjutnya jika masih ada game di game_queue*/
@@ -44,7 +44,7 @@ void CREATEGAME(TabWord *T);
    I.S. : Sembarang 
    F.S. : Game tercipta dan masuk ke array game, nama game yang masuk sesuai dari input user */
 
-void DELETEGAME(TabWord *gl, Queue gq);
+void DELETEGAME (TabWord *gl, Queue gq, Stack *history, Map scoreboard[]);
 /* Menghapus game yang ingin dihapus oleh user dengan syarat game harus hasil dari CREATE GAME
    I.S. : Sembarang 
    F.S. : Jika game merupakan hasil buatan user dari CREATE GAME, game berhasil dihapuskan 
@@ -65,7 +65,7 @@ void C_START(Word a,TabWord *T);
    I.S. : Sembarang
    F.S. : Isi dari config.txt masuk ke Array game */
 
-void LOAD(Word command2, TabWord *T);
+void LOAD (Word command2, TabWord *T, Stack *history, Map score[]);
 /* Membaca file dengan nama yang diinginkan user pada folder data dan memasukan isinya ke Array games
    I.S. : Sembarang
    F.S. : Jika file berhasil dibaca, isi dari Array game berisikan isi file.txt
