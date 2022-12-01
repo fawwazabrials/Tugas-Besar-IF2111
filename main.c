@@ -96,7 +96,7 @@ int main() {
             }
             else if(ValidateCommand(command1,"DELETE") && ValidateCommand(command2,"GAME")) {   // INPUT ADALAH DELETE GAME
                 splashScreen();
-                DELETEGAME(&games,antrian_game);
+                DELETEGAME(&games,antrian_game,&history,scoreboards);
             }
             else if(ValidateCommand(command1,"QUEUE") && ValidateCommand(command2,"GAME")) {    // INPUT ADALAH QUEUE GAME
                 splashScreen();
