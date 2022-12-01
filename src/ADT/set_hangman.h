@@ -1,5 +1,5 @@
-#ifndef SET_HANGMAN_H
-#define SET_HANGMAN_H
+#ifndef SETH_H
+#define SETH_H
 #include <stdio.h>
 #include "boolean.h"
 #include "mesinkata.h"
@@ -12,7 +12,7 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 #define MaxElSeth 100
 
 typedef int addressSeth;
-typedef char* infotypeSeth;
+typedef char infotypeSeth;
 
 typedef struct
 {
