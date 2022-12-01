@@ -207,7 +207,7 @@ void DisplayArray (TabWord T) {
     else {
         for (i=IdxMin; i<=GetLastIdx(T); i++) {
             printf("%d. ", i);
-            displayWord(GetElmt(T, i));
+            displayWord(GetElmt(T, i), true);
         }
     }
 }

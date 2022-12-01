@@ -65,7 +65,7 @@ void C_START(Word a,TabWord *T);
    I.S. : Sembarang
    F.S. : Isi dari config.txt masuk ke Array game */
 
-void LOAD(Word command2, TabWord *T);
+void LOAD (Word command2, TabWord *T, Stack *history, Map score[]);
 /* Membaca file dengan nama yang diinginkan user pada folder data dan memasukan isinya ke Array games
    I.S. : Sembarang
    F.S. : Jika file berhasil dibaca, isi dari Array game berisikan isi file.txt

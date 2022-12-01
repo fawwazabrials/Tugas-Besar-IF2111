@@ -54,6 +54,7 @@ void PLAYGAME(TabWord games, Queue *game_queue) {
   F.S. : game_queue terdequeue dan dijalankan
   Proses : mengeluarkan game dari queue dan menjalankannya */
     // KAMUS LOKAL
+    int score;
 
     // ALGORITMA 
     if (!isEmpty(*game_queue)) //kalo game_queue gk kosong
@@ -66,7 +67,7 @@ void PLAYGAME(TabWord games, Queue *game_queue) {
         if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 1)     // RNG
         {
             printf("Loading RNG ...\n\n");
-            run_rng();
+
         }
 
         else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 2) // Diner DASH
@@ -100,11 +101,14 @@ void PLAYGAME(TabWord games, Queue *game_queue) {
         
         else // Game Random
         {
-            printf("Loading "); displayWord(HEAD((*game_queue))); printf(" ... \n\n");
+            printf("Loading "); displayWord(HEAD((*game_queue)), false); printf(" ... \n\n");
             run_random();
         }
 
         dequeue(game_queue, &gamename);
+        // LOGIC MINTA NAMA
+
+        // KALO NAMA VALID INSERT KE SCOREBOARD
     }
     else
     {
@@ -294,7 +298,7 @@ void help() {
     printf("15. HELP \t\t  : Mengeluarkan list ini.\n");
 
 }
-void C_START (Word a,TabWord *T){
+void C_START (Word a, TabWord *T){
 /* Membaca file config.txt pada folder data dan memasukan isinya ke Array games
    I.S. : Sembarang
    F.S. : Isi dari config.txt masuk ke Array game */
@@ -302,34 +306,70 @@ void C_START (Word a,TabWord *T){
     int i,len;
 
     // ALGORITMA
-    if (ValidateCommand(a, "START")) {
-        STARTWORDFILE("config.txt");
-        len = katatoint(currentWord);
-        for (i=1; i<=len; i++) {
-            ADV();
-            ADVWORDFILE();
-            SetEl(T, i, currentWord);
-        }
+    STARTWORDFILE("config.txt");
+    len = katatoint(currentWord);
+    for (i=1; i<=len; i++) {
+        ADV();
+        ADVWORDFILE();
+        SetEl(T, i, currentWord);
     }
 }
 
-void LOAD (Word command2, TabWord *T) {
+void LOAD (Word command2, TabWord *T, Stack *history, Map scoreboard[]) {
 /* Membaca file dengan nama yang diinginkan user pada folder data dan memasukan isinya ke Array games
    I.S. : Sembarang
    F.S. : Jika file berhasil dibaca, isi dari Array game berisikan isi file.txt
           Jika file gagal dibaca, Array games tidak akan diisi dan memiliki Neff = 0 */
     // KAMUS LOKAL
-    int i, len=0;
+    int i, j, k, skor, len=0;
+    boolean space=false;
+    Word nama;
 
     // ALGORITMA
     STARTWORDFILE(WordToString(command2));
     len = katatoint(currentWord);
-    for (i = 1; i <= len; i++)
-        {
+    for (i = 1; i <= len; i++) {
+        ADV();
+        ADVWORDFILE();
+        SetEl(T, i, currentWord);
+    }
+
+    ADV();
+    ADVWORDFILE();
+    len = katatoint(currentWord);
+    for (i = 1; i <= len; i++) {
+        ADV();
+        ADVWORDFILE();
+        Push(history, GetElmtIdx(*T, currentWord));
+    }
+
+    for (j=1; j <= T->Neff; j++) {
+        ADV();
+        ADVWORDFILE();
+        // printf("k = "); displayWord(currentWord, true);
+        len = katatoint(currentWord);
+        for (i = 1; i <= len; i++) {
             ADV();
             ADVWORDFILE();
-            SetEl(T, i, currentWord);
+            space = false;
+            skor = 0;
+            nama.Length = 0;
+            for (k=0; k<currentWord.Length; k++) {
+                if (currentWord.TabWord[k] == ' ') {
+                    space = true; k++;
+                }
+                
+                if (!space) {
+                    nama.TabWord[k] = currentWord.TabWord[k];
+                    nama.Length++;
+                } else {
+                    skor = skor*10 + (currentWord.TabWord[k]);
+                }
+            }
+
+            InsertMap(&scoreboard[j], nama, skor);
         }
+    }
 }
 
 void HISTORY(TabWord games, Stack *game_history, int n) //*game_history adalah stack yang berisi ID dari game yang sudah dimainkan
@@ -347,14 +387,13 @@ void HISTORY(TabWord games, Stack *game_history, int n) //*game_history adalah s
             for (int i = 0; i < n; i++)
             {
                 printf("%d. ", i + 1);
-                displayWord(games.TI[InfoTop(temp)]); // Mencetak nama game yang sudah dimainkan
-                printf("\n");
+                displayWord(games.TI[InfoTop(temp)], true); // Mencetak nama game yang sudah dimainkan
                 Pop(&temp, &trash);
             }
         }
         else
         {
-            printf("Berikut adalah daftar Game yang telah dimainkan :\n");
+            printf("Berikut adalah daftar Game yang telah dimainkann :\n");
 
             int trash;            // variabel untuk menyimpan ID game yang sudah dimainkan
             Stack temp;           // Stack sementara untuk menyimpan ID game yang sudah dimainkan
@@ -363,8 +402,7 @@ void HISTORY(TabWord games, Stack *game_history, int n) //*game_history adalah s
             for (int j = 0; j <= Top(*game_history); j++)
             {
                 printf("%d. ", j + 1);
-                displayWord(games.TI[InfoTop(temp)]); // Mencetak nama game yang sudah dimainkan
-                printf("\n");
+                displayWord(games.TI[InfoTop(temp)], true); // Mencetak nama game yang sudah dimainkan
                 Pop(&temp, &trash);
             }
         }
@@ -378,20 +416,21 @@ void HISTORY(TabWord games, Stack *game_history, int n) //*game_history adalah s
 void SCOREBOARD (Map M[], TabWord gl) {
     for (int i = 1; i <= gl.Neff; i++) {
         printf("*** SCOREBOARD ");
-        displayWord(gl.TI[i]);
+        displayWord(gl.TI[i], false);
         printf(" ***\n");
         if (M[i].Count == 0) {
             printf("--- Scoreboard kosong 😔 main yuk! ---\n");
         } else {
             for (int j=1; j<=M[i].Count; j++) {
                 printf(" (%d) ",j);
-                displayWord(M[i].Elements[j].Key);
-                printf(" : %d\n",M[i].Elements[j].Value);
+                displayWord(M[i].Elements[j].Key, false);
+                printf(" : %d\n\n",M[i].Elements[j].Value);
             }
         }
     }
     return;
 }
+
 
 void RESETSCOREBOARD(Map M[], TabWord gl){
 /* Melakukan reset pada salah satu game atau semua game di scoreboard. */
@@ -413,7 +452,7 @@ void RESETSCOREBOARD(Map M[], TabWord gl){
             printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD ALL (YA/TIDAK)?\n");
         } else {
             printf("APAKAH KAMU YAKIN INGIN MELAKUKAN RESET SCOREBOARD ");
-            displayWord(gl.TI[scoreidx]);
+            displayWord(gl.TI[scoreidx], false);
             printf(" (YA/TIDAK)?");
         }
         STARTWORD();

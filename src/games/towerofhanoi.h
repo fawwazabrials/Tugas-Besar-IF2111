@@ -21,7 +21,7 @@ void printstars(int n);
 void printtower(int n, StackHanoi A, StackHanoi B, StackHanoi C);
 /*Mencetak tumpukan tower*/
 
-void towerofhanoi();
+int towerofhanoi();
 /*Main program*/
 
 #endif

@@ -182,7 +182,7 @@ boolean isKataInt(Word W) {
     } return true;
 }
 
-void displayWord(Word W) {
+void displayWord(Word W, boolean newLine) {
 /* Menampilkan isi Word ke layar.
    I.S. : sembarang
    F.S. : Seluruh isi dalam Word telah ditampilkan pada layar */
@@ -192,7 +192,9 @@ void displayWord(Word W) {
     // ALGORITMA
     for (i=0; i<W.Length; i++) {
         printf("%c", W.TabWord[i]);
-    } printf("\n");
+    } 
+
+    if (newLine) printf("\n");
 }
 
 int WordToInt(Word W) 

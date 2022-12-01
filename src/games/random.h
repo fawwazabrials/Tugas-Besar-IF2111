@@ -1,5 +1,5 @@
 #ifndef GAME_RANDOM_H
-#define RNG_RANDOM_H
+#define GAME_RANDOM_H
 
 #include "../functions.h"
 
