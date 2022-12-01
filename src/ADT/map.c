@@ -60,19 +60,17 @@ void InsertMap(Map *M, keytypeMap k, valuetypeMap v){
         if (IsEmptyMap(*M)) {
             M->Elements[1] = el;
         } else {
-            /*for (int i=1;i<=M->Count;i++) {
-                loc = i;
-                if (M->Elements[i].Value < v) {
-                    for (int j=M->Count;j>=i;j++) {
+            for (loc=1;loc<=M->Count;loc++) {
+                if (M->Elements[loc].Value < v) {
+                    for (int j=M->Count;j>=loc;j--) {
                         M->Elements[j+1] = M->Elements[j];
                     }
                     break;
                 }
             }
-            M->Elements[loc] = el;*/
-            M->Elements[M->Count+1] = el;
+            M->Elements[loc] = el;
         }
-        (*M).Count +=1;
+        M->Count += 1;
     }
 }
 /* Menambahkan Elmt sebagai elemen Map M. */
