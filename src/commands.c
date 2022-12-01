@@ -49,7 +49,7 @@ void list_game(TabWord list){
    DisplayArray(list);
 }
 
-void PLAYGAME(TabWord games, Queue *game_queue, Stack history, Map scoreboard[]) {
+void PLAYGAME(TabWord games, Queue *game_queue, Stack *history, Map scoreboard[]) {
 /*I.S. : game_queue terdefinisi
   F.S. : game_queue terdequeue dan dijalankan
   Proses : mengeluarkan game dari queue dan menjalankannya */
@@ -117,7 +117,7 @@ void PLAYGAME(TabWord games, Queue *game_queue, Stack history, Map scoreboard[])
             printf("Nama yang dimasukkan tidak valid.\n");
         }
         // Masukkan game ke history
-        Push(&history,gameid);
+        Push(history,gameid);
         // Hapus game dari queue
         dequeue(game_queue, &gamename);
     }

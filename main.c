@@ -104,7 +104,7 @@ int main() {
             }
             else if(ValidateCommand(command1,"PLAY") && ValidateCommand(command2,"GAME")) {     // INPUT ADALAH PLAY GAME
                 splashScreen();
-                PLAYGAME(games,&antrian_game);
+                PLAYGAME(games,&antrian_game,&history,scoreboards);
             }
             else if(ValidateCommand(command1,"SKIP") && ValidateCommand(command2,"GAME")) {     // INPUT ADALAH SKIP GAME
                 splashScreen();
