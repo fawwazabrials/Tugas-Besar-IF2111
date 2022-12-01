@@ -85,7 +85,7 @@ void RESETSCOREBOARD (Map M[], TabWord gl);
 /* I.S. Scoreboard terdefinisi */
 /* F.S. Elemen-elemen pada salah satu atau semua scoreboard dihapus */
 
-void RESETHISTORY(Stack *game_history);
+void RESETHISTORY(Stack *game_history, TabWord games);
 /* Melakukan reset pada stack history game yang pernah dimainkan
    I.S. : Sembarang, user sudah memilih YA
    F.S. : Stack game_history tidak memiliki elemen lagi */
