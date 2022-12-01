@@ -5,8 +5,8 @@
 /* ID dimulai dari 1 */
 /* Elemen bertipe integer */
 
-#ifndef stackt_H
-#define stackt_H
+#ifndef STACK_H
+#define STACK_H
 
 #include "boolean.h"
 
