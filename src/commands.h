@@ -6,7 +6,7 @@
 #include "games/2048.h"
 #include "games/random.h"
 #include "games/dinerdash.h"
-// #include "games/hangman.h"
+#include "games/hangman.h"
 #include "games/towerofhanoi.h"
 #include "games/snake.h"
 #include "ADT/array.h"

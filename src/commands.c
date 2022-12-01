@@ -81,7 +81,7 @@ void PLAYGAME(TabWord games, Queue *game_queue, Stack *history, Map scoreboard[]
         else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 3) // HANGMAN
         {
             printf("Loading HANGMAN ...\n\n");
-            // hangman();
+            score = run_hangman();
         }
 
         else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 4) // TOWER OF HANOI
