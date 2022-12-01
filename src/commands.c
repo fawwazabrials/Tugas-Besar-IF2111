@@ -340,46 +340,48 @@ void LOAD (Word command2, TabWord *T, Stack *history, Map scoreboard[]) {
     // ALGORITMA
     STARTWORDFILE(WordToString(command2));
     len = katatoint(currentWord);
-    for (i = 1; i <= len; i++) {
-        ADV();
-        ADVWORDFILE();
-        SetEl(T, i, currentWord);
-    }
+    if (len > 0) {  // Cek File exist apa enggak.
+        for (i = 1; i <= len; i++) {
+            ADV();
+            ADVWORDFILE();
+            SetEl(T, i, currentWord);
+        }
 
-    ADV();
-    ADVWORDFILE();
-    len = katatoint(currentWord);
-    for (i = 1; i <= len; i++) {
         ADV();
         ADVWORDFILE();
-        Push(history, GetElmtIdx(*T, currentWord));
-    }
-
-    for (j=1; j <= T->Neff; j++) {
-        ADV();
-        ADVWORDFILE();
-        // printf("k = "); displayWord(currentWord, true);
         len = katatoint(currentWord);
         for (i = 1; i <= len; i++) {
             ADV();
             ADVWORDFILE();
-            space = false;
-            skor = 0;
-            nama.Length = 0;
-            for (k=0; k<currentWord.Length; k++) {
-                if (currentWord.TabWord[k] == ' ') {
-                    space = true; k++;
-                }
-                
-                if (!space) {
-                    nama.TabWord[k] = currentWord.TabWord[k];
-                    nama.Length++;
-                } else {
-                    skor = skor*10 + (currentWord.TabWord[k]);
-                }
-            }
+            Push(history, GetElmtIdx(*T, currentWord));
+        }
 
-            InsertMap(&scoreboard[j], nama, skor);
+        for (j=1; j <= T->Neff; j++) {
+            ADV();
+            ADVWORDFILE();
+            // printf("k = "); displayWord(currentWord, true);
+            len = katatoint(currentWord);
+            for (i = 1; i <= len; i++) {
+                ADV();
+                ADVWORDFILE();
+                space = false;
+                skor = 0;
+                nama.Length = 0;
+                for (k=0; k<currentWord.Length; k++) {
+                    if (currentWord.TabWord[k] == ' ') {
+                        space = true; k++;
+                    }
+                    
+                    if (!space) {
+                        nama.TabWord[k] = currentWord.TabWord[k];
+                        nama.Length++;
+                    } else {
+                        skor = skor*10 + (currentWord.TabWord[k]);
+                    }
+                }
+
+                InsertMap(&scoreboard[j], nama, skor);
+            }
         }
     }
 }
