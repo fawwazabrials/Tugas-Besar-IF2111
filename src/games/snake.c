@@ -35,7 +35,7 @@ void moveSnake(List *snake, Point meteor, Point buah, Point obstacle, int X, int
    I.S. : Lose bernilai false
    F.S. : Snake bergerak ke arah X dan Y */
     // KAMUS LOKAL
-    address temp;
+    addressLL temp;
 
     // ALGORITMA
     if (!cekAdaSnake(*snake, X, Y)
@@ -60,12 +60,12 @@ boolean addSnake(List *snake, Point meteor, Point buah, Point obstacle) {
    F.S. : Snake bertambah panjang 1 dibagian tail dengan urutan prioritas, yaitu :
           1. Kiri, 2. Atas, 3. Kanan, 4. Bawah. Snake dapat bertambah dengan menembus board*/
     // KAMUS LOKAL
-    address P;
+    addressLL P;
     int X, Y;
 
     // ALGORITMA
     P = First(*snake);
-    while (Next(P) != Nil) {    // Assign P sebagai Tail dari snake
+    while (Next(P) != NilLL) {    // Assign P sebagai Tail dari snake
         P = Next(P);
     }
 
@@ -170,7 +170,7 @@ boolean cekAdaSnake(List snake, int X, int Y) {
     // KAMUS LOKAL
 
     // ALGORITMA
-    return (Search(snake, X, Y) != Nil);
+    return (Search(snake, X, Y) != NilLL);
 }
 
 
