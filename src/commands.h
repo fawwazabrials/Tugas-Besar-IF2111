@@ -6,6 +6,9 @@
 #include "games/2048.h"
 #include "games/random.h"
 #include "games/dinerdash.h"
+#include "games/hangman.h"
+#include "games/towerofhanoi.h"
+#include "games/snake.h"
 #include "ADT/array.h"
 #include "ADT/boolean.h"
 #include "ADT/mesinkarakter.h"
@@ -81,5 +84,10 @@ void RESETSCOREBOARD (Map M[], TabWord gl);
 /* Melakukan reset pada salah satu game atau semua game di scoreboard. */
 /* I.S. Scoreboard terdefinisi */
 /* F.S. Elemen-elemen pada salah satu atau semua scoreboard dihapus */
+
+void RESETHISTORY(Stack *game_history);
+/* Melakukan reset pada stack history game yang pernah dimainkan
+   I.S. : Sembarang, user sudah memilih YA
+   F.S. : Stack game_history tidak memiliki elemen lagi */
 
 #endif
