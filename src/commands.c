@@ -415,7 +415,7 @@ void HISTORY(TabWord games, Stack *game_history, int n) //*game_history adalah s
 
 void SCOREBOARD (Map M[], TabWord gl) {
     for (int i = 1; i <= gl.Neff; i++) {
-        printf("*** SCOREBOARD ");
+        printf("\n*** SCOREBOARD ");
         displayWord(gl.TI[i], false);
         printf(" ***\n");
         if (M[i].Count == 0) {
@@ -424,7 +424,7 @@ void SCOREBOARD (Map M[], TabWord gl) {
             for (int j=1; j<=M[i].Count; j++) {
                 printf(" (%d) ",j);
                 displayWord(M[i].Elements[j].Key, false);
-                printf(" : %d\n\n",M[i].Elements[j].Value);
+                printf(" : %d\n",M[i].Elements[j].Value);
             }
         }
     }
