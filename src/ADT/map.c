@@ -58,7 +58,7 @@ void InsertMap(Map *M, keytypeMap k, valuetypeMap v){
     int loc;
     if(!IsMemberMap(*M,k)){
         if (IsEmptyMap(*M)) {
-            M->Elements[M->Count] = el;
+            M->Elements[M->Count+1] = el;
         } else {
             for (loc=1;loc<=M->Count;loc++) {
                 if (M->Elements[loc].Value < v) {
@@ -111,7 +111,7 @@ boolean IsMemberMap(Map M, keytypeMap k){
     //Algoritma
     i=0;
     found = false;
-    while(i < M.Count && !found){
+    while(i <= M.Count && !found){
         if( isKataEqual(M.Elements[i].Key, k) ){
             found = true;
         }
