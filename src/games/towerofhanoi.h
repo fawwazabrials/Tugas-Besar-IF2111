@@ -18,7 +18,7 @@ void printblank(int n);
 void printstars(int n);
 /*Mencetak bintang sebanyak n*/
 
-void printtower(int n, Stack A, Stack B, Stack C);
+void printtower(int n, StackHanoi A, StackHanoi B, StackHanoi C);
 /*Mencetak tumpukan tower*/
 
 void towerofhanoi();

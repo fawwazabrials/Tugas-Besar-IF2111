@@ -37,7 +37,7 @@ void printstars(int n)
     }
 }
 
-void printtower(int n, Stack A, Stack B, Stack C)
+void printtower(int n, StackHanoi A, StackHanoi B, StackHanoi C)
 {
     for (int i = 0; i < n; i++)
     {
@@ -102,8 +102,8 @@ void printtower(int n, Stack A, Stack B, Stack C)
 
 void towerofhanoi() //Bismillah Bisa :D halo aku gibran
 {  
-    //Membuat Stack Kosong (Isi semua elemen 0 dengan Top(*S) = n-1)
-    Stack A, B, C, win; //tower A, B, C, dan win
+    //Membuat StackHanoi Kosong (Isi semua elemen 0 dengan Top(*S) = n-1)
+    StackHanoi A, B, C, win; //tower A, B, C, dan win
     int score, temp1, temp2, value1, value2, value3;
     boolean valid = false;
 

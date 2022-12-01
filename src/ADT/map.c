@@ -1,7 +1,7 @@
 #include "stdio.h"
 #include "map.h"
 
-/* Definisi Map M kosong : M.Count = Nil */
+/* Definisi Map M kosong : M.Count = NilMap */
 /* M.Count = jumlah element Map */
 /* M.Elements = tempat penyimpanan element Map */
 
@@ -9,27 +9,27 @@
 
 /* *** Konstruktor/Kreator *** */
 void CreateEmptyMap(Map *M){
-    (*M).Count = Nil;
+    (*M).Count = NilMap;
 }
 /* I.S. Sembarang */
 /* F.S. Membuat sebuah Map M kosong berkapasitas MaxEl */
-/* Ciri Map kosong : count bernilai Nil */
+/* Ciri Map kosong : count berNilMapai NilMap */
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
 boolean IsEmptyMap(Map M){
-    return((M).Count == Nil);
+    return((M).Count == NilMap);
 }
 /* Mengirim true jika Map M kosong*/
-/* Ciri Map kosong : count bernilai Nil */
+/* Ciri Map kosong : count berNilMapai NilMap */
 
 boolean IsFullMap(Map M){
     return((M).Count == MaxEl);
 }
 /* Mengirim true jika Map M penuh */
-/* Ciri Map penuh : count bernilai MaxEl */
+/* Ciri Map penuh : count berNilMapai MaxEl */
 
 /* ********** Operator Dasar Map ********* */
-valuetype ValueMap(Map M, keytype k){
+valuetypeMap ValueMap(Map M, keytypeMap k){
     int i;
     boolean found;
     i=0;
@@ -49,10 +49,10 @@ valuetype ValueMap(Map M, keytype k){
         return(Undefined);
     }
 }
-/* Mengembalikan nilai value dengan key k dari M */
+/* Mengembalikan NilMapai value dengan key k dari M */
 /* Jika tidak ada key k pada M, akan mengembalikan Undefined */
 
-void InsertMap(Map *M, keytype k, valuetype v){
+void InsertMap(Map *M, keytypeMap k, valuetypeMap v){
     if(!IsMemberMap(*M,k)){
         (*M).Count +=1;
         ((*M).Elements[(*M).Count]).Key= k;
@@ -64,7 +64,7 @@ void InsertMap(Map *M, keytype k, valuetype v){
         M mungkin sudah beranggotakan v dengan key k */
 /* F.S. v menjadi anggota dari M dengan key k. Jika k sudah ada, operasi tidak dilakukan */
 
-void DeleteMap(Map *M, keytype k){
+void DeleteMap(Map *M, keytypeMap k){
     //Kamus Lokal
     int i;
     boolean found;
@@ -88,7 +88,7 @@ void DeleteMap(Map *M, keytype k){
         element dengan key k mungkin anggota / bukan anggota dari M */
 /* F.S. element dengan key k bukan anggota dari M */
 
-boolean IsMemberMap(Map M, keytype k){
+boolean IsMemberMap(Map M, keytypeMap k){
     //Kamus Lokal
     int i;
     boolean found;
