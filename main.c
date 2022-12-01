@@ -124,7 +124,7 @@ int main() {
                 HISTORY(games, &history, katatoint(command2));
             }
             else if(ValidateCommand(command1,"RESET") && ValidateCommand(command2, "HISTORY")) {
-                RESETHISTORY(&history);
+                RESETHISTORY(&history, games);
             }
             else if(ValidateCommand(command1,"QUIT")) {                                         // INPUT ADALAH QUIT
                 loop = false;
