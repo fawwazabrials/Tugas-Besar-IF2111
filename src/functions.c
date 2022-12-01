@@ -217,6 +217,6 @@ void MakeEmptyMapList (Map M[], int L) {
     /* I.S. Sembarang */
     /* F.S. Seluruh elemen array of Map M menjadi Map kosong.*/
     for (int i=0; i<L; i++) {
-        CreateEmptyMap(&M[i]);
+        M[i].Count = NilMap;
     }
 }
