@@ -273,25 +273,25 @@ void help() {
     // KAMUS LOKAL
 
     // ALGORITMA
-    printf("============================== LIST COMMAND YANG VALID ============================== \n\n");
-    printf("1.  START \t\t: Membaca file konfigurasi sistem. \n");
-    printf("2.  LOAD <filename>\t: Membaca file berisi list game yang dapat dimainkan dan histori.\n");
-    printf("3.  SAVE <filename>\t: Menyimpan state game pada suatu file .txt.\n");
+    printf("\n================================ LIST COMMAND YANG VALID ================================ \n");
+    printf("1.  START \t\t  : Membaca file konfigurasi sistem. \n");
+    printf("2.  LOAD <filename>\t  : Membaca file berisi list game yang dapat dimainkan dan histori.\n");
+    printf("3.  SAVE <filename>\t  : Menyimpan state game pada suatu file .txt.\n");
     printf("4.  CREATE GAME \t  : Menambahkan game baru pada daftar game\n");
     printf("5.  LIST GAME \t\t  : Menampilkan daftar game pada sistem\n");
     printf("6.  DELETE GAME \t  : Menghapus sebuah game dari daftar game.\n");
-    printf("\t\t\t  (*) Game yang dihapus hanya game yang dibuat pengguna secara custom.\n");
-    printf("\t\t\t  (*) 5 game pertama pada file konfigurasi tidak dapat dihapus.\n");
-    printf("\t\t\t  (*) Game yang di dalam queue game saat ini tidak dapat dihapus.\n");
-    printf("7.  QUEUE GAME \t\t : Mendaftarkan permainan ke dalam list.\n");
+    printf("\t\t\t    *) Game yang dihapus hanya game yang dibuat pengguna secara custom.\n");
+    printf("\t\t\t    *) 5 game pertama pada file konfigurasi tidak dapat dihapus.\n");
+    printf("\t\t\t    *) Game yang di dalam queue game saat ini tidak dapat dihapus.\n");
+    printf("7.  QUEUE GAME \t\t  : Mendaftarkan permainan ke dalam list.\n");
     printf("8.  PLAY GAME \t\t  : Memainkan game dengan urutan pertama di antrian.\n");
-    printf("9.  SKIP GAME <n>\t : Melewatkan permainan sebanyak <n>.\n");
-    printf("10. SCOREBOARD \t\t : Menampilkan scoreboard masing-masing game.\n");
-    printf("11. RESET SCOREBOARD: Melakukan reset pada scoreboard.\n");
-    printf("12. HISTORY <n>\t\t : Menampilkan history/riwayat permainan.\n");
-    printf("13. RESET HISTORY\t : Melakukan reset pada history.\n");
-    printf("14. QUIT \t\t: Keluar dari program.\n");
-    printf("15. HELP \t\t: Mengeluarkan list ini.\n");
+    printf("9.  SKIP GAME <n>\t  : Melewatkan permainan sebanyak <n>.\n");
+    printf("10. SCOREBOARD \t\t  : Menampilkan scoreboard masing-masing game.\n");
+    printf("11. RESET SCOREBOARD\t  : Melakukan reset pada scoreboard.\n");
+    printf("12. HISTORY <n>\t\t  : Menampilkan history/riwayat permainan.\n");
+    printf("13. RESET HISTORY\t  : Melakukan reset pada history.\n");
+    printf("14. QUIT \t\t  : Keluar dari program.\n");
+    printf("15. HELP \t\t  : Mengeluarkan list ini.\n");
 
 }
 void C_START (Word a,TabWord *T){
