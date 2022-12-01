@@ -18,7 +18,7 @@ void RESETPITA() {
     if (pita != NULL) rewind(pita);
 }
 
-void STARTFILE(char* file_name) {
+void STARTFILE(char* file_name, boolean *success) {
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Pita yang akan diambil adalah pita yang berada di dalam file
    pada path ../data/file_name.
@@ -43,8 +43,11 @@ void STARTFILE(char* file_name) {
     //printf("k = %s", path);
     pita = fopen(path,"r");
     if (pita != NULL) {
+        *success = true;
         ADV();
-    } else fclose(pita);  
+    } else {
+        *success = false;
+    }
 }
 
 void START() {
