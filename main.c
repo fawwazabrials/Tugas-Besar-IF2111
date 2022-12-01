@@ -3,6 +3,7 @@
 #include "src/ADT/mesinkarakter.h"
 #include "src/ADT/mesinkata.h"
 #include "src/ADT/array.h"
+#include "src/ADT/stack.h"
 #include "src/ADT/queue.h"
 #include "src/functions.h"
 #include "src/commands.h"
@@ -107,11 +108,23 @@ int main() {
             }
             else if(ValidateCommand(command1,"SKIP") && ValidateCommand(command2,"GAME")) {     // INPUT ADALAH SKIP GAME
                 splashScreen();
-                SKIPGAME(games,&antrian_game);
+                SKIPGAME(games,&antrian_game, inputint);
             }
             else if(ValidateCommand(command1,"SAVE")) {                                         // INPUT ADALAH SAVE
                 splashScreen();
                 SAVE(games, command2, history, scoreboards);
+            }
+            else if(ValidateCommand(command1,"SCOREBOARD")) {
+                SCOREBOARD(scoreboards, games);
+            }
+            else if(ValidateCommand(command1,"RESET") && ValidateCommand(command2, "SCOREBOARD")) {
+                RESETSCOREBOARD(scoreboards, games);
+            }
+            else if(ValidateCommand(command1,"HISTORY")) {
+                HISTORY(games, &history, inputint);
+            }
+            else if(ValidateCommand(command1,"RESET") && ValidateCommand(command2, "HISTORY")) {
+                RESETHISTORY(&history);
             }
             else if(ValidateCommand(command1,"QUIT")) {                                         // INPUT ADALAH QUIT
                 loop = false;
