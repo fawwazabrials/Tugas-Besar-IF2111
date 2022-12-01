@@ -499,7 +499,9 @@ void RESETSCOREBOARD(Map M[], TabWord gl){
                 if (M[scoreidx].Count > 0) {
                     M[scoreidx].Count = NilMap;
                     printf("Scoreboard berhasil direset.\n");
-                }              
+                } else {
+                    printf("Scoreboard masih kosong.\n");
+                }             
             }
         } else if (ValidateCommand(CCommand, "TIDAK")) {
             printf("Scoreboard tidak jadi direset.\n");
