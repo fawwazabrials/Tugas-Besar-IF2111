@@ -48,5 +48,5 @@ void moveToServe(Queue_DD *QC, Queue_DD *QS);
 boolean IsIn(Queue_DD q, char* X);
 /* Mengirimkan true apabila ada elemen X pada queue ber-ElTypeQDD makanan. */
 
-void dinerdash();
+int dinerdash();
 /* Game Diner Dash */

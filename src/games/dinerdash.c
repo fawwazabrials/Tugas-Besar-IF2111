@@ -95,6 +95,7 @@ void serving(Queue_DD *QS, Queue_DD *QF, char* commandID, int *saldo) {
     } else {
         printf("%s belum bisa disajikan karena %s belum selesai\n", commandID, HEAD_DD(*QS).makanan);
     }
+
 }
 
 void checkBasi(Queue_DD *QC) {
@@ -104,7 +105,7 @@ void checkBasi(Queue_DD *QC) {
     int i = IDX_HEAD_DD(*QC);
     if (! isEmptyDD(*QC)) {
         while (i <= IDX_TAIL_DD(*QC)) {
-            if ((*QC).buffer[i].ketahanan == -1) {
+            if ((*QC).buffer[i].ketahanan == 0) {
                 // dequeueDD(QC, &(*QC).buffer[i]);
                 ForceDeleteAt(QC, i);
                 printf("Makanan %s sudah basi.\n", (*QC).buffer[i].makanan);
@@ -147,7 +148,7 @@ boolean IsIn(Queue_DD q, char* X) {
     return found;
 }
 
-void dinerdash() {
+int dinerdash() {
     /* DEKLARASI VARIABEL DAN ADT */
     int saldo = 0;
     int countServe = 0;
@@ -200,20 +201,38 @@ void dinerdash() {
     printf("MASUKKAN COMMAND (COOK/SERVE/SKIP): \n");
     scan("%s", &inputWord, &placeholder1, &placeholder2);
     inputCommand = WordToString(inputWord);
-    separateSpace(inputCommand, command, commandID);
+    if (inputCommand[0] == 'S' && inputCommand[1] == 'K' && inputCommand[2] == 'I' && inputCommand[3] == 'P') {
+        command[0] = 'S';
+        command[1] = 'K';
+        command[2] = 'I';
+        command[3] = 'P';
+        command[4] = '\0';
+    } else {
+        separateSpace(inputCommand, command, commandID);
+    }
 
     /* VALIDASI INPUT COMMAND */
     while (! sameString(command, "COOK") && ! sameString(command, "SERVE") && ! sameString(command, "SKIP")) {
-        printf("Command tidak valid.\n");
         printf("MASUKKAN COMMAND (COOK/SERVE/SKIP): \n");
         scan("%s", &inputWord, &placeholder1, &placeholder2);
         inputCommand = WordToString(inputWord);
-        separateSpace(inputCommand, command, commandID);
+        if (inputCommand[0] == 'S' && inputCommand[1] == 'K' && inputCommand[2] == 'I' && inputCommand[3] == 'P') {
+            command[0] = 'S';
+            command[1] = 'K';
+            command[2] = 'I';
+            command[3] = 'P';
+            command[4] = '\0';
+            printf("Anda memasukkan Skip.");
+        } else {
+            separateSpace(inputCommand, command, commandID);
+        }
     }
 
     /* GAME LOOP */
     while (lengthDD(food) <= 7 && countServe <= 15) {
-        available = IsIn(food, commandID);
+        if (! sameString(command, "SKIP")) {
+            available = IsIn(food, commandID);
+        }
         /* Permainan selesai apabila antrian melebihi 7 pelanggan atau
         jumlah pelanggan yang sudah dilayani mencapai 15 pelanggan. */
 
@@ -240,11 +259,14 @@ void dinerdash() {
             /* PENYOCOKAN DENGAN COMMAND */
             if (sameString(command, "COOK")) {
                 cooking(food, &cook, commandID);
+                round++;
             } else if (sameString(command, "SERVE")) {
                 serving(&serve, &food, commandID, &saldo);
                 countServe++;
+                round++;
             } else if (sameString(command, "SKIP")) {
-                printf("ROUND KE-%d DI SKIP.\n", round);
+                printf("Anda melakukan SKIP.\n");
+                available = true;
             }
 
             /* PENAMBAHAN BABAK */
@@ -276,16 +298,38 @@ void dinerdash() {
         printf("MASUKKAN COMMAND (COOK/SERVE/SKIP): \n");
         scan("%s", &inputWord, &placeholder1, &placeholder2);
         inputCommand = WordToString(inputWord);
-        separateSpace(inputCommand, command, commandID);
+        if (inputCommand[0] == 'S' && inputCommand[1] == 'K' && inputCommand[2] == 'I' && inputCommand[3] == 'P') {
+            command[0] = 'S';
+            command[1] = 'K';
+            command[2] = 'I';
+            command[3] = 'P';
+            command[4] = '\0';
+            printf("Anda memasukkan Skip.\n");
+            available = true;
+        } else {
+            separateSpace(inputCommand, command, commandID);
+        }
 
         /* VALIDASI INPUT COMMAND */
         while (! sameString(command, "COOK") && ! sameString(command, "SERVE") && ! sameString(command, "SKIP")) {
-            printf("Command tidak valid.\n");
             printf("MASUKKAN COMMAND (COOK/SERVE/SKIP): \n");
             scan("%s", &inputWord, &placeholder1, &placeholder2);
             inputCommand = WordToString(inputWord);
-            separateSpace(inputCommand, command, commandID);
+            if (inputCommand[0] == 'S' && inputCommand[1] == 'K' && inputCommand[2] == 'I' && inputCommand[3] == 'P') {
+                command[0] = 'S';
+                command[1] = 'K';
+                command[2] = 'I';
+                command[3] = 'P';
+                command[4] = '\0';
+                printf("Anda memasukkan Skip.\n");
+                available = true;
+            } else {
+                separateSpace(inputCommand, command, commandID);
+            }
         }
+
     }
+
+    return saldo;
 
 }
