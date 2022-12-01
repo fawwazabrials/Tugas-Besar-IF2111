@@ -44,7 +44,7 @@ void CREATEGAME(TabWord *T);
    I.S. : Sembarang 
    F.S. : Game tercipta dan masuk ke array game, nama game yang masuk sesuai dari input user */
 
-void DELETEGAME(TabWord *gl, Queue gq);
+void DELETEGAME (TabWord *gl, Queue gq, Stack *history, Map scoreboard[]);
 /* Menghapus game yang ingin dihapus oleh user dengan syarat game harus hasil dari CREATE GAME
    I.S. : Sembarang 
    F.S. : Jika game merupakan hasil buatan user dari CREATE GAME, game berhasil dihapuskan 

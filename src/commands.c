@@ -201,13 +201,11 @@ void CREATEGAME(TabWord *T) {
     }
 }
 
-void DELETEGAME (TabWord *gl, Queue gq) {
+void DELETEGAME (TabWord *gl, Queue gq, Stack *history, Map scoreboard[]) {
 /* Menghapus game yang ingin dihapus oleh user dengan syarat game harus hasil dari CREATE GAME
    I.S. : Sembarang 
    F.S. : Jika game merupakan hasil buatan user dari CREATE GAME, game berhasil dihapuskan 
           Jika game merupakan game bawaan dari file konfigurasi, game gagal dihapus */
-    // KAMUS LOKAL
-
     // ALGORITMA
     list_game(*gl); // Cetak daftar game
     // Input
@@ -220,6 +218,25 @@ void DELETEGAME (TabWord *gl, Queue gq) {
         if ((ph2<=6)||(isInQueue(gq,gl->TI[ph2]))) {
             printf("Game gagal dihapus.\n");
         } else {
+            // Hapus dari history
+            int z;
+            Stack temp; CreateEmptyStack(&temp);
+            while (!(IsEmptyStack(*history))) {
+                Pop(history,&z);
+                if (z!=ph2) {
+                    Push(&temp,z);
+                }
+            }
+            while (!(IsEmptyStack(temp))) {
+                Pop(&temp,&z);
+                Push(history,z);
+            }
+            // Hapus dari scoreboard
+            for (int i=ph2;i<gl->Neff;i++) {
+                scoreboard[ph2] = scoreboard[ph2+1];
+            }
+            CreateEmptyMap(&scoreboard[gl->Neff]);
+            // Hapus dari daftar game
             DeleteAt(gl,ph2);
             printf("Game berhasil dihapus.\n");
         }
