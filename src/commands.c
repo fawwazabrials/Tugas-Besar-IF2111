@@ -63,39 +63,42 @@ void PLAYGAME(TabWord games, Queue *game_queue) {
         printf("\n");
 
         ElTypeQueue gamename; //Tempat sampah pas dequeue
-        if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 1)
+        if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 1)     // RNG
         {
             printf("Loading RNG ...\n\n");
             run_rng();
         }
 
-        else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 2)
+        else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 2) // Diner DASH
         {
             printf("Loading Diner Dash ...\n\n");
-            dinerdash(); //ganti nama prosedur gamenya kalo dah jadi
+            dinerdash();
         }
 
-        else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 3)
+        else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 3) // HANGMAN
         {
-            printf("Game DINOSAUR IN EARTH masih dalam maintenance, belum dapat dimainkan.\nSilakan pilih game lain.\n\n");
+            printf("Loading HANGMAN ...\n\n");
+            dinerdash();
         }
 
-        else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 4)
+        else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 4) // TOWER OF HANOI
         {
-            printf("Game RISEWOMAN masih dalam maintenance, belum dapat dimainkan.\nSilakan pilih game lain.\n\n");
+            printf("Loading TOWER OF HANOI ...\n\n");
+            towerofhanoi();
         }
-        else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 5)
+        else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 5) // SNAKE ON METEOR
         {
-            printf("Game EIFFEL TOWER masih dalam maintenance, belum dapat dimainkan.\nSilakan pilih game lain.\n\n");
+            printf("Loading SNAKE ON METEOR ...\n\n");
+            run_snake();
         }
         
-        else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 6)
+        else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 6) // 2048
         {
             printf("Loading 2048 ...\n\n");
             run_2048(); 
         }
         
-        else
+        else // Game Random
         {
             printf("Loading "); displayWord(HEAD((*game_queue))); printf(" ... \n\n");
             run_random();
@@ -437,4 +440,14 @@ void RESETSCOREBOARD(Map M[], TabWord gl){
 
     return;
     
+}
+
+void RESETHISTORY(Stack *game_history) {
+/* Melakukan reset pada stack history game yang pernah dimainkan
+   I.S. : Sembarang, user sudah memilih YA
+   F.S. : Stack game_history tidak memiliki elemen lagi */
+    // KAMUS LOKAL
+
+    // ALGORITMA
+    CreateEmptyStack(game_history);
 }
