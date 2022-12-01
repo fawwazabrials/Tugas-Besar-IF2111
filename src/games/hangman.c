@@ -1,17 +1,29 @@
+/*gcc -o toh hangman.c ../ADT/set_hangman.c ../ADT/array.c ../functions.c ../ADT/mesinkarakter.c ../ADT/mesinkata.c*/
+
 #include "hangman.h"
 
 int run_hangman(){
     //kamus lokal
-    int life,idx,i,tertebak,score,command3;
-    char* list_kata[10];
-    Set input,passed,cek;
+    int life,i,tertebak,score,command3;
+    unsigned idx;
+    Seth input /*inputan user*/,passed/*kata yang sudah di gunakan*/,cek/*cek jawaban*/;
     boolean valididx,validanswer,continue_game ,continue_tebak_kata;
-    char *kata, *temp, tebakan, string_idx;
+    char *kata;
     Word command1,command2;
+    char *tebakan, string_idx;
 
     //Algoritma
-    CreateEmpty(&passed);
-    list_kata ={"Ayam","Babi","Alstrukdat","Arsikom","Cicak","botol","laptop","ikan","helm","router"};
+    printf(" ___  __    ____    ____     ____      __  __  __     ____    ____          \n");
+    printf("|   |   |  /    |  /    \\   /    \\    /  \\/  \\/  \\   /    |  /    \\   \n");
+    printf("|   |   | |  O  | |   _  | |   O  |  |    _   _   | |  O  | |   _  |        \n");
+    printf("|       | |     | |   |  | |    ___  |    |   |   | |     | |   |  |        \n");
+    printf("|       | |  |  | |   |  | |      |  |    |   |   | |  |  | |   |  |        \n");
+    printf("|   |   | |  |  | |   |  | |      |  |    |   |   | |  |  | |   |  |        \n");
+    printf("|___|___| |__|__| |___|__| \\______|  |____|___|___| |__|__| |___|__|       \n");
+    
+
+    CreateEmptySeth(&passed);
+    char* list_kata [][20] ={"Ayam","Babi","Alstrukdat","Arsikom","Cicak","botol","laptop","ikan","helm","router"};
     life =10;
     tertebak=0;
     score = 0;
@@ -25,19 +37,19 @@ int run_hangman(){
             
             idx = randint(0, 5000) % 10;
             string_idx = '0'+ idx;
-            if(!IsMemberSet(passed,(string_idx))){
-                InsertSetElmt(&passed,string_idx);
+            if(!IsMemberSeth(passed,&(string_idx))){
+                InsertSethElmt(&passed,&string_idx);
                 valididx = true;
             }
         }
-        kata= list_kata[idx];
-        CreateEmpty(&cek);
+        kata = list_kata[idx][20];
+        CreateEmptySeth(&cek);
         i=0;
         while (kata[i] != '\0'){
-            InsertSetElmt(&cek,kata[i]);
+            InsertSethElmt(&cek,&kata[i]);
             i++;
         }
-        CreateEmpty(&input);
+        CreateEmptySeth(&input);
         continue_tebak_kata = true;
         //looping tebak tebakanss
         while (life > 0 && continue_tebak_kata){
@@ -48,8 +60,8 @@ int run_hangman(){
             
             while (kata[i] != '\0'){
                 
-                if(IsMemberSet(input,kata[i])){
-                    printf("%c",kata[i]);
+                if(IsMemberSeth(input,&kata[i])){
+                    printf("%c",kata[i] );
                 }
                 else{
                     printf("_");
@@ -62,22 +74,25 @@ int run_hangman(){
             
             printf("Masukkan Tebakan : ");
             scan("%c",&command1,&command2,&command3);
-            temp = WordToString(command1);
-            tebakan = temp[0] ;
-            
-            if(IsMemberSet(cek,tebakan)){
-                InsertSetElmt(&input,tebakan);
+            tebakan = WordToString(command1);
+            if(command1.Length != 1){
+                printf("Inputan salah");
             }
             else{
-                life --;
-            }
-            i=0;
-            continue_tebak_kata = false;
-            while(kata[i] != '\0'){
-                if(!IsMemberSet(input,kata[i])){
-                    continue_tebak_kata = true;
+                if(IsMemberSeth(cek,tebakan)){
+                    InsertSethElmt(&input,tebakan);
                 }
-                i++;
+                else{
+                    life --;
+                }
+                i=0;
+                continue_tebak_kata = false;
+                while(kata[i] != '\0'){
+                    if(!IsMemberSeth(input,&kata[i])){
+                        continue_tebak_kata = true;
+                    }
+                    i++;
+                }
             }
         }
         i=0;
@@ -105,6 +120,7 @@ int run_hangman(){
         printf("Coba lagi dilain kesempatan untuk menyelesaikan permainan ini\n");
     }
     printf("Score anda adalah %d\n",score);
+
     return score;
 }
 

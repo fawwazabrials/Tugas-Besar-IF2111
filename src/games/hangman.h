@@ -5,14 +5,14 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../ADT/set.h"
+#include "../ADT/set_hangman.h"
 #include "../functions.h"
 #include "../ADT/boolean.h"
 #include "../ADT/mesinkarakter.h"
 #include "../ADT/mesinkata.h"
 
 
-int run_hangman();
+void run_hangman();
 /* PROSES : Sistem akan menampilkan secara acak kata yang terdapat pada list
             yang sudah disediakan. pemaian akan menginput sebuah huruf
             jika tebakan benar akan menampilkan hutruf tersebut jika tidak akan 
