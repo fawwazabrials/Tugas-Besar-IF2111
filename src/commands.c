@@ -515,12 +515,24 @@ void RESETSCOREBOARD(Map M[], TabWord gl){
     
 }
 
-void RESETHISTORY(Stack *game_history) {
+void RESETHISTORY(Stack *game_history, TabWord games) {
 /* Melakukan reset pada stack history game yang pernah dimainkan
    I.S. : Sembarang, user sudah memilih YA
    F.S. : Stack game_history tidak memiliki elemen lagi */
     // KAMUS LOKAL
 
     // ALGORITMA
-    CreateEmptyStack(game_history);
+    printf("\nAPAKAH KAMU YAKIN INGIN MELAKUKAN RESET HISTORY (YA/TIDAK)? ");
+    scan("%c", &CCommand, &ph1, &ph2);
+
+    if (ValidateCommand(CCommand, "YA")) {
+        CreateEmptyStack(game_history);
+        printf("\nHistory berhasil di-reset.\n");
+    } else if (ValidateCommand(CCommand, "TIDAK")) {
+        printf("\nHistory tidak jadi di-reset. Berikut adalah daftar Game yang telah dimainkan :\n");
+        HISTORY(games, game_history, 150);
+    } else {
+        printf("\nCommand tidak valid. History tidak jadi di-reset. Berikut adalah daftar Game yang telah dimainkan :\n");
+        HISTORY(games, game_history, 150);
+    }
 }
