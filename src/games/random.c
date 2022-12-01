@@ -1,6 +1,6 @@
 #include "random.h"
 
-void run_random() {
+int run_random() {
 /* Bukan game beneran. Langsung mencetak skor yang berupa angka random ke layar.
    I.S. : Sembarang
    F.S. : Skor berupa integer random tercetak ke layar */
