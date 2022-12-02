@@ -1,11 +1,10 @@
 /* LABTEK HUNT */
 #include "labtekhunt.h"
-#include "../functions.c"
-#include "../ADT/tree.c"
-#include "../ADT/mesinkarakter.c"
-#include "../ADT/mesinkata.c"
 
 void bomb(int *skor, int *health) {
+    /* I.S. Pemain bertemu bomb. Skor dan health terdefinisi */
+    /* F.S. Skor dan health berkurang. */
+    /* Muncul teks saat pemain bertemu bomb. */
     printf("Sekeliling pandangan Anda menjadi gelap. Sayup-sayup terdengar suara berupa bisikan lirih...\n");
     printf("'Mengapa saya masuk STI?'\n");
     printf("Anda pun tidak sadar bahwa suara itu muncul dari Anda sendiri...\n");
@@ -39,6 +38,9 @@ void bomb(int *skor, int *health) {
 }
 
 void treasure(int *skor) {
+    /* I.S. Pemain bertemu treasure. Skor terdefinisi */
+    /* F.S. Skor bertambah. */
+    /* Muncul teks saat pemain bertemu treasure. */
     printf("Wow. Wow.. WOWWWWWWW!\n");
     printf("Anda menemukan TREASURE!!!!!\n");
     printf("Anda pun mengambil treasure tersebut dan memasukkannya dengan bahagia ke dalam tas.\n");
@@ -48,10 +50,13 @@ void treasure(int *skor) {
 }
 
 boolean endLabtekHunt(int health, Tree P) {
+    /* Game berakhir saat di akhir Tree atau health kurang dari 0. */
     return (health <= 0 ||  isTreeEmpty(P));
 }
 
 int run_labtekhunt() {
+    /* GAME LABTEK HUNT */
+
     // KAMUS LOKAL
     Tree p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13;
     Tree loc, parent;
@@ -184,10 +189,10 @@ int run_labtekhunt() {
 
             nextStep = WordToInt(currentWord);
             if (nextStep == 1) {
-                if ((First(loc)) != NULL) {
-                    if (Status(First(loc)) != true) {
+                if ((FirstC(loc)) != NULL) {
+                    if (Status(FirstC(loc)) != true) {
                         printf("Anda memilih opsi 1! Let's hope that was the right choice.\n");
-                        loc = First(loc);
+                        loc = FirstC(loc);
                         Status(loc) = true;
                     } else {
                         printf("Anda memasuki ruangan, tapi Anda rasa...\n");
@@ -200,10 +205,10 @@ int run_labtekhunt() {
                     bomb(&skor, &health);
                 }
             } else if (nextStep == 2) {
-                if ((Second(loc)) != NULL) {
-                    if (Status(Second(loc)) != true) {
+                if ((SecondC(loc)) != NULL) {
+                    if (Status(SecondC(loc)) != true) {
                         printf("Anda memilih opsi 2! Let's hope that was the right choice.\n");
-                        loc = Second(loc);
+                        loc = SecondC(loc);
                         Status(loc) = true;
                     } else {
                         printf("Anda memasuki ruangan, tapi Anda rasa...\n");
@@ -216,10 +221,10 @@ int run_labtekhunt() {
                     bomb(&skor, &health);
                 }
             } else if (nextStep == 3) {
-                if ((Third(loc)) != NULL) {
-                    if (Status(Third(loc)) != true) {
+                if ((ThirdC(loc)) != NULL) {
+                    if (Status(ThirdC(loc)) != true) {
                         printf("Anda memilih opsi 3! Let's hope that was the right choice.\n");
-                        loc = Third(loc);
+                        loc = ThirdC(loc);
                         Status(loc) = true;
                     } else {
                         printf("Anda memasuki ruangan, tapi Anda rasa...\n");
@@ -262,8 +267,4 @@ int run_labtekhunt() {
         return skor;
     }
 
-}
-
-int main(){
-    run_labtekhunt();
 }

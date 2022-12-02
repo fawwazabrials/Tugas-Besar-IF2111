@@ -16,13 +16,11 @@ typedef struct treeNode {
 } TreeNode;
 
 /* SELEKTOR */
-
 #define InfoRoot(p) (p)->infoTree
-#define First(p) (p)->firstChild
-#define Second(p) (p)->secondChild
-#define Third(p) (p)->thirdChild
+#define FirstC(p) (p)->firstChild
+#define SecondC(p) (p)->secondChild
+#define ThirdC(p) (p)->thirdChild
 #define Status(p) (p)->visited
-#define Parent(p) (p)->parent
 
 typedef AddressTree Tree;
 
@@ -68,6 +66,10 @@ A
   C
     E
 */
+
+Tree GetParent(Tree currentNode, int val, Tree parent);
+/* Mengembalikan parent dari suatu Node berisikan val */
+/* Syarat: Tree tidak kosong */
 
 
 #endif

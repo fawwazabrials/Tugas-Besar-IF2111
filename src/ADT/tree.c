@@ -13,9 +13,9 @@ AddressTree newTreeNode(TreeElType val) {
     p = (AddressTree) malloc(sizeof(TreeNode));
     if (p != NULL) {
         InfoRoot(p) = val;
-        First(p) = NULL;
-        Second(p) = NULL;
-        Third(p) = NULL;
+        FirstC(p) = NULL;
+        SecondC(p) = NULL;
+        ThirdC(p) = NULL;
         Status(p) = false;
     }
     return p;
@@ -35,9 +35,9 @@ void CreateTree(TreeElType root, Tree first, Tree second, Tree third, Tree *p) {
 /* Menghasilkan sebuah pohon ternary p, dari akar,*/
     *p = newTreeNode(root);
     if (*p != NULL) {
-        First(*p) = first;
-        Second(*p) = second;
-        Third(*p) = third;
+        FirstC(*p) = first;
+        SecondC(*p) = second;
+        ThirdC(*p) = third;
     }
 }
 
@@ -48,7 +48,7 @@ boolean isTreeEmpty (Tree p) {
 
 boolean isOneElmt (Tree p) {
 /* Mengirimkan true jika p tidak kosong dan hanya terdiri atas 1 elemen */
-    return (!isTreeEmpty(p) && isTreeEmpty(First(p)) && isTreeEmpty(Second(p)) && isTreeEmpty(Third(p)));
+    return (!isTreeEmpty(p) && isTreeEmpty(FirstC(p)) && isTreeEmpty(SecondC(p)) && isTreeEmpty(ThirdC(p)));
 }
 
 void printTree(Tree p, int h, int startlevel) {
@@ -75,9 +75,9 @@ A
             printf(" ");
         }
         printf("%d\n", InfoRoot(p));
-        printTree(First(p), h, startlevel+1);
-        printTree(Second(p), h, startlevel+1);
-        printTree(Third(p), h, startlevel+1);
+        printTree(FirstC(p), h, startlevel+1);
+        printTree(SecondC(p), h, startlevel+1);
+        printTree(ThirdC(p), h, startlevel+1);
     }
 }
 
@@ -91,9 +91,9 @@ Tree GetParent(Tree currentNode, int val, Tree parent) {
     if (InfoRoot(currentNode) == val) {
         return parent;
     } else {
-        a = GetParent(First(currentNode), val, currentNode);
-        b = GetParent(Second(currentNode), val, currentNode);
-        c = GetParent(Third(currentNode), val, currentNode);
+        a = GetParent(FirstC(currentNode), val, currentNode);
+        b = GetParent(SecondC(currentNode), val, currentNode);
+        c = GetParent(ThirdC(currentNode), val, currentNode);
         if (a != NULL) {
             return a;
         } else if (b != NULL) {

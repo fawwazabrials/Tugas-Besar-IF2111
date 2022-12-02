@@ -1,5 +1,4 @@
 #include "../../src/ADT/tree.h"
-#include "../../src/ADT/tree.c"
 
 int main() {
     Tree p1, p2, p3, p4, p5, p6, p7, p8;
@@ -21,4 +20,5 @@ int main() {
 
     Tree parent = GetParent(p3, 8, NULL);
     printf("Parent dari %d adalah %d.\n", InfoRoot(p5), InfoRoot(parent));
+    
 }
