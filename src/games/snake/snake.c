@@ -295,7 +295,7 @@ int run_snake() {
         boolean lose, kenaObstacle, kenaBadan;
         boolean moved, moveMeteor, moveBody;
         boolean hit, hitHead;
-        int turn;
+        int turn, score;
 
     // ALGORITMA
     initializeSnake(&snake, &obstacle, &buah);
@@ -362,16 +362,18 @@ int run_snake() {
         }
     }
 
+    score = NbElmtListL(snake)*2;
     printf("\n--------- GAME OVER ---------\n");
     if (kenaObstacle) {
         printf("Bruh, kamu kena obstacle!\n");
     } else if (hitHead) {
         printf("Buset! Kepala kamu kena meteor!!\n");
+        score = (NbElmtListL(snake)-1)*2;
     } else if (kenaBadan) {
         printf("Yaahhh, gaada tempat ya? Kok bisa nabrak badan sendiri.\n");
     }
-    printf("\nSkor akhir kamu adalah %d\n", NbElmtListL(snake)*2);
-    return (NbElmtListL(snake)*2);
+    printf("\nSkor akhir kamu adalah %d\n", score);
+    return (score);
 }
 
 
