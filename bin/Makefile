@@ -11,7 +11,7 @@ map :
 	gcc -o maptest ../src/ADT/map/maptest.c ../src/ADT/mesinkata/mesinkata.c ../src/ADT/mesinkarakter/mesinkarakter.c ../src/ADT/map/map.c ../src/functions.c -lm
 
 matriks :
-	gcc -o matrikstest ../src/ADT/matriks/matrikstest.c ../src/ADT/mesinkata/mesinkata.c ../src/ADT/mesinkarakter/mesinkarakter.c ../src/ADT/matriksmatriks.c ../src/ADT/map/map.c ../src/functions.c -lm
+	gcc -o matrikstest ../src/ADT/matriks/matrikstest.c ../src/ADT/mesinkata/mesinkata.c ../src/ADT/mesinkarakter/mesinkarakter.c ../src/ADT/matriks/matriks.c ../src/ADT/map/map.c ../src/functions.c -lm
 
 mesinkarakter :
 	gcc -o mesinkaraktertest ../src/ADT/mesinkata/mesinkatatest.c ../src/ADT/mesinkata/mesinkata.c ../src/ADT/mesinkarakter/mesinkarakter.c ../src/ADT/map/map.c ../src/functions.c -lm
@@ -20,7 +20,7 @@ mesinkata :
 	gcc -o mesinkatatest ../src/ADT/mesinkata/mesinkatatest.c ../src/ADT/mesinkata/mesinkata.c ../src/ADT/mesinkarakter/mesinkarakter.c ../src/ADT/map/map.c ../src/functions.c -lm
 
 queue :
-	gcc -o queuetest ../src/ADT/queue/queuetest.c ../src/ADT/mesinkata/mesinkata.c ../src/ADT/mesinkarakter/mesinkarakter.c ../src/ADT/queue/queue.c ../src/ADT/map/map.c ../src/functions.c -lm
+	gcc -o queuetest ../src/ADT/queue/queuetest.c ../src/ADT/mesinkata/mesinkata.c ../src/ADT/mesinkarakter/mesinkarakter.c ../src/ADT/queue/queue.c ../src/ADT/queue/q_dinerdash.c ../src/ADT/map/map.c ../src/functions.c -lm
 
 set :
 	gcc -o settest ../src/ADT/set/settest.c ../src/ADT/set/set.c ../src/ADT/mesinkata/mesinkata.c ../src/ADT/mesinkarakter/mesinkarakter.c -lm
