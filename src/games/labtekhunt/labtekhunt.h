@@ -1,11 +1,11 @@
 /* LABTEK HUNT */
 #include <stdio.h>
 #include <stdlib.h>
-#include "../functions.h"
-#include "../ADT/tree.h"
-#include "../ADT/boolean.h"
-#include "../ADT/mesinkarakter.h"
-#include "../ADT/mesinkata.h"
+#include "../../functions.h"
+#include "../../ADT/tree/tree.h"
+#include "../../ADT/boolean/boolean.h"
+#include "../../ADT/mesinkarakter/mesinkarakter.h"
+#include "../../ADT/mesinkata/mesinkata.h"
 
 void bomb(int *skor, int *health);
 /* I.S. Pemain bertemu bomb. Skor dan health terdefinisi */
