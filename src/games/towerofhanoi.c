@@ -2,7 +2,7 @@
 //gcc -o toh towerofhanoi.c ../ADT/stackofhanoi.c ../ADT/mesinkata.c ../ADT/mesinkarakter.c
 // ./toh
 
-boolean isNumber(Word W) 
+boolean isNumber(Word W) //ngecek katanya itu number atau bkn
 {
     // KAMUS LOKAL
     int i;
@@ -21,7 +21,7 @@ float minmove(float n)
     return pow(2, n)-1;
 }
 
-void printblank(int n)
+void printblank(int n) //ngeprint spasi
 {
     for (int i = 0; i < n; i++)
     {
@@ -29,7 +29,7 @@ void printblank(int n)
     }
 }
 
-void printstars(int n)
+void printstars(int n) //ngeprint bintang
 {
     for (int i = 0; i < n; i++)
     {
@@ -37,7 +37,7 @@ void printstars(int n)
     }
 }
 
-void printtower(int n, StackHanoi A, StackHanoi B, StackHanoi C)
+void printtower(int n, StackHanoi A, StackHanoi B, StackHanoi C) //buat ngeprint tiang beserta disknya
 {
     for (int i = 0; i < n; i++)
     {
@@ -100,7 +100,7 @@ void printtower(int n, StackHanoi A, StackHanoi B, StackHanoi C)
     printf("\n\n");
 }
 
-int towerofhanoi() //Bismillah Bisa :D halo aku gibran
+int towerofhanoi() //Bismillah Bisa
 {  
     //Membuat StackHanoi Kosong (Isi semua elemen 0 dengan Top(*S) = n-1)
     StackHanoi A, B, C, win; //tower A, B, C, dan win
