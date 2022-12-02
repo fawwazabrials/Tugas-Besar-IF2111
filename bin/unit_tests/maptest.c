@@ -3,14 +3,14 @@
 
 int main () {
     Map M;
-    CreateEmptyMap(&1);
+    CreateEmptyMap(&M);
     printf("---Driver ADT Map---\n");
     printf("Cek apakah map kosong (1=ya,0=tidak,target=1): %d\n",IsEmptyMap(M));
     printf("Cek apakah map penuh (1=ya,0=tidak,target=0): %d\n",IsFullMap(M));
-    printf("Masukkan sebuah kata lalu tekan enter: ");STARTWORD():
+    printf("Masukkan sebuah kata lalu tekan enter: ");STARTWORD();
     printf("Cek apakah ada elemen dengan key \"");
         displayWord(currentWord,false);
-        printf("\" (1=ya,0=tidak,target=0): %d\n",IsMemberMap(M));
+        printf("\" (1=ya,0=tidak,target=0): %d\n",IsMemberMap(M,currentWord));
     printf("Cek nilai elemen dengan key \"");
         displayWord(currentWord,false);
         printf("\" jika key ada (target=-999 [tidak ditemukan]): %d\n",ValueMap(M,currentWord));
@@ -20,27 +20,27 @@ int main () {
     InsertMap(&M,currentWord,7);
     printf("Cek apakah ada elemen dengan key \"");
         displayWord(currentWord,false);
-        printf("\" (1=ya,0=tidak,target=1): %d\n",IsMemberMap(M));
+        printf("\" (1=ya,0=tidak,target=1): %d\n",IsMemberMap(M,currentWord));
     printf("Cek nilai elemen dengan key \"");
         displayWord(currentWord,false);
-        printf("\" jika key ada (target=7): %d\n",Value(M,currentWord));
-    printf("Masukkan sebuah kata lalu tekan enter: ");ADVWORD():
+        printf("\" jika key ada (target=7): %d\n",ValueMap(M,currentWord));
+    printf("Masukkan sebuah kata lalu tekan enter: ");ADVWORD();
     printf("Memasukkan elemen dengan key \"");
         displayWord(currentWord,false);
         printf("\" dan value 71.\n");
     InsertMap(&M,currentWord,71);
     printf("Cek apakah ada elemen dengan key \"");
         displayWord(currentWord,false);
-        printf("\" (1=ya,0=tidak,target=1): %d\n",IsMemberMap(M));
+        printf("\" (1=ya,0=tidak,target=1): %d\n",IsMemberMap(M,currentWord));
     printf("Cek nilai elemen dengan key \"");
         displayWord(currentWord,false);
-        printf("\" jika key ada (target=71): %d\n",Value(M,currentWord));
+        printf("\" jika key ada (target=71): %d\n",ValueMap(M,currentWord));
     printf("Memasukkan elemen dengan key \"");
         displayWord(currentWord,true);
     DeleteMap(&M,currentWord);
     printf("Cek apakah ada elemen dengan key \"");
         displayWord(currentWord,false);
-        printf("\" (1=ya,0=tidak,target=0): %d\n",IsMemberMap(M));
+        printf("\" (1=ya,0=tidak,target=0): %d\n",IsMemberMap(M,currentWord));
     printf("Cek nilai elemen dengan key \"");
         displayWord(currentWord,false);
         printf("\" jika key ada (target=-999 [tidak ditemukan]): %d\n",ValueMap(M,currentWord));
