@@ -32,9 +32,11 @@ void bomb(int *skor, int *health) {
     printf("      `._###############_,'            \n");       
     printf("         `--..#####..--'                \n");
 
-    *skor = *skor - 50;
     *health = *health - 50;
     printf("Health anda sekarang adalah %d.\n", *health);
+    if (*health == 50) {
+        printf("Hati-hati! Jangan sampai kena bomb lagi.\n");
+    }
 }
 
 void treasure(int *skor) {
@@ -101,9 +103,9 @@ int run_labtekhunt() {
         printf("You've asked for help!\n");
         printf("\n====================================== HELP ======================================\n\n");
         printf("Objektif Anda adalah mencari semua harta karun dan menghindari bomb yang tersebar pada ruangan-ruangan.\n");
-        printf("Ada 4 treasure dan 2 bomb yang tersebar. \n Jika Anda terkena 1 bomb, health dan skor Anda berkurang. Jika Anda terkena 2 bomb, maka GAME OVER.\n");
+        printf("Ada 4 treasure dan 2 bomb yang tersebar. \n Jika Anda terkena 1 bomb, health Anda berkurang. Jika Anda terkena 2 bomb, maka GAME OVER.\n");
         printf("Anda bisa NAIK ke lantai setelahnya atau masuk ke ruangan-ruangan lain.\n");
-        printf("Sehabis naik ke lantai setelahnya, Anda tidak bisa kembali ke lantai sebelumnya.\n(Misal, Anda sudah di Lt. 2, maka tidak bisa ke Lt. 1.\n");
+        printf("Sehabis naik ke lantai setelahnya, Anda tidak bisa kembali ke lantai sebelumnya.\n(Misal, Anda sudah di Lt. 2, maka tidak bisa ke Lt. 1.)\n");
         printf("Anda hanya bisa memasuki sebuah ruangan sekali.\n");
         printf("Semoga mengerti! Kalau tidak, ya nasib.\n");
         printf("Jangan sampai memasukkan angka selain yang ada, atau terima konsekuensinya!\n");
