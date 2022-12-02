@@ -30,7 +30,7 @@ int main() {
     Word w2;
     w2 = GetElmt(T,1);
     printf("Test GetElmt T. Input idx 1. Expected word \"Hi\":\n");
-    displayWord(w2);
+    displayWord(w2, true);
     printf("Test SetTab from T to T2.\n");
     TabWord T2;
     SetTab(T,&T2);
@@ -63,7 +63,7 @@ int main() {
     DisplayArray(T);printf("\n");
     w2 = GetElmt(T,2);
     printf("Test GetElmt T. Input idx 2. Expected word \"Ha\":\n");
-    displayWord(w2);
+    displayWord(w2, true);
     DeleteAt(&T,1);printf("Test DeleteAt on T. Input idx 1. Expected T with one word \"Ha\".\n");
     printf("Test nbElmt T (expected 1): %d\n",NbElmt(T));
     printf("Test displayArray T. Expected one word \"Ha\":\n");
