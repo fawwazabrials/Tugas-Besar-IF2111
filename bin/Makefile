@@ -18,3 +18,6 @@ mesinkata :
 
 mesinkarakter :
 	gcc -o mesinkaraktertest unit_tests/mesinkatatest.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/functions.c -lm
+
+map :
+	gcc -o maptest unit_tests/maptest.c ../src/ADT/mesinkata.c ../src/ADT/mesinkarakter.c ../src/functions.c ../src/ADT/map.c -lm
