@@ -4,9 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "../ADT/matriks.h"
-#include "../ADT/boolean.h"
-#include "../functions.h"
+#include "../../ADT/matriks/matriks.h"
+#include "../../ADT/boolean/boolean.h"
+#include "../../functions.h"
 
 int run_2048();
 /* Implementasi permainan 2048 dalam C menggunakan ADT Matriks.
