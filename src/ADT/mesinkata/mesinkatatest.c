@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../src/ADT/mesinkarakter.h"
-#include "../../src/ADT/mesinkata.h"
-#include "../../src/functions.h"
+#include "../../functions.h"
+#include "../mesinkarakter/mesinkarakter.h"
+#include "mesinkata.h"
 
 int main() {
     printf("------- Testing 1 : Menguji STARTWORD, ADVWORD, dan CopyWord -------\n");
@@ -15,7 +15,7 @@ int main() {
     printf("TESTING\nMESIN\nKATA\n");
     printf("--- Result :\n");
     while (!EndWord) {
-        displayWord(currentWord);
+        displayWord(currentWord, true);
         ADVWORD();
     }
 
@@ -25,7 +25,7 @@ int main() {
     ResetCurrentWord(currentWord);
     printf("--- Result :\n");
     printf("length = %d\nkata = \n", currentWord.Length);
-    displayWord(currentWord);
+    displayWord(currentWord, true);
 
     printf("\n------- Testing 3 : Menguji STARTLINE dan CopyWordWithBlanks -------\n");
     printf("Ketik ""TESTING START LINE"" ke CLI\n\n");
@@ -33,12 +33,12 @@ int main() {
     printf("--- Expected result :\n");
     printf("TESTING START LINE\n");
     printf("--- Result :\n");
-    displayWord(currentWord);
+    displayWord(currentWord, true);
 
     printf("\n------- Testing 4 : Menguji STARTWORFILE -------\n");
     printf("--- Expected result : TESTING MESIN KATA BACA DARI FILE\n");
     STARTWORDFILE("mesinkatatest.c");
-    printf("--- Result : "); displayWord(currentWord);
+    printf("--- Result : "); displayWord(currentWord, true);
 
 
     // Buat kata untuk testing isKataEqual
@@ -54,7 +54,7 @@ int main() {
     printf("Comparing ""HAI"" with ""HAI""\n");
     printf("--- Expected result : isSame = 1\n");
     printf("--- Result : isSame = %u\n", isKataEqual(W1, W2));
-    displayWord(W1);displayWord(W2);
+    displayWord(W1, true);displayWord(W2, true);
     printf("Comparing ""HAI"" with ""HELLO""\n");
     printf("--- Expected result : isSame = 0\n");
     printf("--- Result : isSame = %u\n", isKataEqual(W1, W3));
