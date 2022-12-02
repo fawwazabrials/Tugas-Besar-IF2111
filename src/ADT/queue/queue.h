@@ -4,8 +4,8 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include "boolean/boolean.h"
-#include "mesinkata/mesinkata.h"
+#include "../boolean/boolean.h"
+#include "../mesinkata/mesinkata.h"
 #include "../functions.h"
 
 #define IDX_UNDEF -1
