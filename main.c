@@ -115,15 +115,19 @@ int main() {
                 SAVE(games, command2, history, scoreboards);
             }
             else if(ValidateCommand(command1,"SCOREBOARD")) {
+                splashScreen();
                 SCOREBOARD(scoreboards, games);
             }
             else if(ValidateCommand(command1,"RESET") && ValidateCommand(command2, "SCOREBOARD")) {
+                splashScreen();
                 RESETSCOREBOARD(scoreboards, games);
             }
             else if(ValidateCommand(command1,"HISTORY")) {
+                splashScreen();
                 HISTORY(games, &history, katatoint(command2));
             }
             else if(ValidateCommand(command1,"RESET") && ValidateCommand(command2, "HISTORY")) {
+                splashScreen();
                 RESETHISTORY(&history, games);
             }
             else if(ValidateCommand(command1,"QUIT")) {                                         // INPUT ADALAH QUIT
