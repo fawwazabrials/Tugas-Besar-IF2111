@@ -126,9 +126,19 @@ void PLAYGAME(TabWord games, Queue *game_queue, Stack *history, Map scoreboard[]
         } while (IsMemberMap(scoreboard[gameid], name));
 
         // Insert nama ke scoreboard
-        InsertMap(&scoreboard[gameid],name,score);
+        if (IsFullMap(scoreboard[gameid])) {
+            printf("Wah scoreboard game "); displayWord((*game_queue).buffer[(*game_queue).idxHead], false); printf(" udah penuh nih! COba RESET SCOREBOARD dulu.\n");
+        } else {
+            InsertMap(&scoreboard[gameid],name,score);
+        }
+
         // Masukkan game ke history
-        Push(history,gameid);
+        if (IsFullStack(*history)) {
+            printf("History kamu sudah penuh! Hapus history dulu yuk ;)\n");
+        } else {
+            Push(history,gameid);
+        }
+        
         // Hapus game dari queue
         dequeue(game_queue, &gamename);
     }
