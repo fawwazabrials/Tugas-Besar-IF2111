@@ -12,7 +12,7 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 #define MaxElSeth 100
 
 typedef int addressSeth;
-typedef char* infotypeSeth;
+typedef char infotypeSeth;
 
 typedef struct
 {
