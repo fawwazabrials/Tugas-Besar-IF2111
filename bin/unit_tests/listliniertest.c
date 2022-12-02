@@ -1,4 +1,4 @@
-#include "../../src/ADT/listlinier.c"
+#include "../../src/ADT/listlinier.h"
 #include <stdio.h>
 
 int main() {
