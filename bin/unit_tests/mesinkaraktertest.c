@@ -6,6 +6,7 @@
 
 int main()
 {   
+    printf("====================== DRIVER MESINKARAKTER ======================\n");
     STARTFILE("test1.txt"); // Start reading from file
     while (!EOP)
     {
