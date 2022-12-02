@@ -317,21 +317,25 @@ void hangman(int life)
         printf("//        \\\\                          \n");
         break;
     default:
-        printf("   __________________________           \n");
-        printf("   |    |___________________|           \n");
-        printf("   |    |                               \n");
-        printf("   |    |                               \n");
-        printf("   |    |                               \n");
-        printf("   |    |                               \n");
-        printf("   |    |                               \n");
-        printf("   |    |                               \n");
-        printf("   |____|                               \n");
-        printf("   //  \\\\                             \n");
-        printf("  //    \\\\                            \n");
-        printf(" //      \\\\                           \n");
-        printf("//        \\\\                          \n");
+    printf("   __________________________           \n");
+    printf("   |    |___________________|           \n");
+    printf("   |    |                               \n");
+    printf("   |    |                               \n");
+    printf("   |    |                               \n");
+    printf("   |    |                               \n");
+    printf("   |    |                               \n");
+    printf("   |    |                               \n");
+    printf("   |____|                               \n");
+    printf("   //  \\\\                             \n");
+    printf("  //    \\\\                            \n");
+    printf(" //      \\\\                           \n");
+    printf("//        \\\\                          \n");
         break;
     }
 }
 
 
+int main(){
+    run_hangman();
+    return 0;
+}
