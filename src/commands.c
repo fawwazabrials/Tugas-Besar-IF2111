@@ -202,8 +202,8 @@ void CREATEGAME(TabWord *T) {
             printf("Game telah ada di list.\n");
         } else {
             InsertLast(T, CCommand);
+            printf("Game berhasil ditambahkan\n");
         }
-        printf("Game berhasil ditambahkan\n");
     }
 }
 
