@@ -89,9 +89,11 @@ int run_labtekhunt() {
     printf("Welcome to Labtek Hunt!\n");
     printf("Dapatkah Anda menemukan semua harta karun di Labtek V atau apakah Anda akan bertemu dengan bomb?\n");
     printf("Ketik START untuk memulai game, HELP untuk melihat instruksi, atau EXIT.\n");
+    printf("=== Masukkan command: ");
     STARTWORD();
     while (! ValidateCommand(currentWord, "START") && ! ValidateCommand(currentWord, "HELP") && ! ValidateCommand(currentWord, "EXIT")) {
         printf("INPUT SALAH! Ketik START untuk memulai game, HELP untuk melihat instruksi, atau EXIT.\n");
+        printf("=== Masukkan command: ");
         STARTWORD();
     }
 
@@ -103,7 +105,9 @@ int run_labtekhunt() {
         printf("Anda bisa NAIK ke lantai setelahnya atau masuk ke ruangan-ruangan lain.\n");
         printf("Sehabis naik ke lantai setelahnya, Anda tidak bisa kembali ke lantai sebelumnya.\n(Misal, Anda sudah di Lt. 2, maka tidak bisa ke Lt. 1.\n");
         printf("Semoga mengerti! Kalau tidak, ya nasib.\n");
-        printf("Sekarang, ketik START untuk memulai game, atau EXIT untuk keluar.\n");
+        printf("Jangan sampai memasukkan angka selain yang ada, atau terima konsekuensinya!\n");
+        printf("Sekarang, ketik START untuk memulai game, atau EXIT untuk keluar.\n\n");
+        printf("=== Masukkan command: ");
         STARTWORD();
     }
 
@@ -149,6 +153,7 @@ int run_labtekhunt() {
                     printf("1. MASUK ke sekre.\n");
                     printf("2. MASUK ke laboratorium IRK.\n");
                     printf("3. MASUK ke ruangan multimedia.\n");
+                    printf("999. SELESAI.\n");
                     break;
                 case 5:
                     printf("Ruang 9301.\n");
@@ -183,7 +188,7 @@ int run_labtekhunt() {
             STARTWORD();
             while (! isKataInt(currentWord)) {
                 printf("Masukkan integer, bukan kata!\n");
-                printf("\nMasukkan INPUT: ");
+                printf("\n---> Masukkan INPUT: ");
                 STARTWORD();
             }
 
@@ -236,6 +241,11 @@ int run_labtekhunt() {
                     printf("Anda mencoba memasuki area terlarang?!!\n");
                     bomb(&skor, &health);
                 }
+            } else if (nextStep == 999) {
+                printf("Anda sudah merasa cukup dengan petualangan Anda.\n");
+                printf("It was a fun adventure, traveller, but we must part our ways here...\n");
+                printf("Shall we meet again?\n");
+                break;
             } else {
                 printf("Anda membuka pintu-pintu lain secara paksa, dan langsung melangkahkan kaki..\n");
                 printf("Sayangnya, pintu-pintu tersebut tidak mengarah ke mana pun, dan Anda pun merasakan bumi\n");

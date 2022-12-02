@@ -207,6 +207,8 @@ int dinerdash() {
         command[2] = 'I';
         command[3] = 'P';
         command[4] = '\0';
+        printf("Anda memasukkan Skip.");
+        available = true;
     } else {
         separateSpace(inputCommand, command, commandID);
     }
@@ -223,6 +225,7 @@ int dinerdash() {
             command[3] = 'P';
             command[4] = '\0';
             printf("Anda memasukkan Skip.");
+            available = true;
         } else {
             separateSpace(inputCommand, command, commandID);
         }
