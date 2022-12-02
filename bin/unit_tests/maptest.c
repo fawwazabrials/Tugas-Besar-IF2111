@@ -35,8 +35,9 @@ int main () {
     printf("Cek nilai elemen dengan key \"");
         displayWord(currentWord,false);
         printf("\" jika key ada (target=71): %d\n",ValueMap(M,currentWord));
-    printf("Memasukkan elemen dengan key \"");
+    printf("Menghapus elemen dengan key \"");
         displayWord(currentWord,true);
+        printf("\"\n");
     DeleteMap(&M,currentWord);
     printf("Cek apakah ada elemen dengan key \"");
         displayWord(currentWord,false);
