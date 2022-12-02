@@ -5,8 +5,9 @@
 #ifndef STACK_HANOI_H
 #define STACK_HANOI_H
 
-#include "boolean.h"
-#include "mesinkata.h"
+ #include <stdio.h>
+#include "../boolean/boolean.h"
+#include "../mesinkata/mesinkata.h"
 
 #define MaxElStackHanoi 100
 /* Nil adalah StackHanoi dengan elemen kosong . */

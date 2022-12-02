@@ -8,7 +8,7 @@
 #ifndef STACK_H
 #define STACK_H
 
-#include "boolean.h"
+#include "../boolean/boolean.h"
 
 #define StackNil -1
 #define StackMaxEl 150

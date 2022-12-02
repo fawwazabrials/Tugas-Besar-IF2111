@@ -1,4 +1,4 @@
-#include "../../src/ADT/stack.c"
+#include "stack.c"
 #include <stdio.h>
 
 int main()

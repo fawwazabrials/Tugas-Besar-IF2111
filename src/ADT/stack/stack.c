@@ -1,6 +1,5 @@
 // Implementasi stack
 
-#include "boolean.h"
 #include "stack.h"
 #include <stdio.h>
 

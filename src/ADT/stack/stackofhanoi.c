@@ -5,7 +5,6 @@
  * Topik praktikum: Pra Praktikum 7
  * Deskripsi: Implementasi StackHanoi.h
  */
- #include <stdio.h>
  #include "stackofhanoi.h"
  
 /* ************ Prototype ************ */
