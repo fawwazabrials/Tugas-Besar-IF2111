@@ -1,6 +1,6 @@
-#include "boolean.h"
-#include "mesinkata.h"
-#include "../functions.h"
+#include "../boolean/boolean.h"
+#include "../mesinkata/mesinkata.h"
+#include "../../functions.h"
 
 #ifndef ARRAY_H
 #define ARRAY_H

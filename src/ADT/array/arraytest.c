@@ -1,4 +1,4 @@
-#include "../../src/ADT/array.h"
+#include "array.h"
 
 int main() {
     TabWord T;
