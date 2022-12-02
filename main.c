@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "src/ADT/mesinkarakter.h"
-#include "src/ADT/mesinkata.h"
-#include "src/ADT/array.h"
-#include "src/ADT/stack.h"
-#include "src/ADT/queue.h"
+#include "src/ADT/mesinkarakter/mesinkarakter.h"
+#include "src/ADT/mesinkata/mesinkata.h"
+#include "src/ADT/array/array.h"
+#include "src/ADT/stack/stack.h"
+#include "src/ADT/queue/queue.h"
 #include "src/functions.h"
 #include "src/commands.h"
 

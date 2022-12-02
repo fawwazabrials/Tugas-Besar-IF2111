@@ -7,9 +7,9 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
-#include "ADT/mesinkata.h"
-#include "ADT/mesinkarakter.h"
-#include "ADT/map.h"
+#include "ADT/mesinkata/mesinkata.h"
+#include "ADT/mesinkarakter/mesinkarakter.h"
+#include "ADT/map/map.h"
 
 #define MAX_INT 2147483647
 
