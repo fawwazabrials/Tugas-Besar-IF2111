@@ -351,8 +351,3 @@ void hangman(int life)
         break;
     }
 }
-
-int main(){
-    run_hangman();
-    return 0;
-}

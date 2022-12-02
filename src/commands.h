@@ -9,6 +9,7 @@
 #include "games/hangman.h"
 #include "games/towerofhanoi.h"
 #include "games/snake.h"
+#include "games/labtekhunt.h"
 #include "ADT/array.h"
 #include "ADT/boolean.h"
 #include "ADT/mesinkarakter.h"

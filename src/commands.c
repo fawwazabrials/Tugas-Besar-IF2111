@@ -100,6 +100,12 @@ void PLAYGAME(TabWord games, Queue *game_queue, Stack *history, Map scoreboard[]
             printf("Loading 2048 ...\n\n");
             score = run_2048(); 
         }
+
+        else if (GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]) == 7) // LABTEK HUNT
+        {
+            printf("Loading LABTEK HUNT ...\n\n");
+            score = run_labtekhunt(); 
+        }
         
         else // Game Random
         {
@@ -215,7 +221,7 @@ void DELETEGAME (TabWord *gl, Queue gq, Stack *history, Map scoreboard[]) {
     printf("\n");
     // Proses
     if (IsIdxEff(*gl,ph2)) {
-        if ((ph2<=6)||(isInQueue(gq,gl->TI[ph2]))) {
+        if ((ph2<=7)||(isInQueue(gq,gl->TI[ph2]))) {
             printf("Game gagal dihapus.\n");
         } else {
             // Hapus dari history

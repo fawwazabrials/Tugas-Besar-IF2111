@@ -33,7 +33,7 @@ int main() {
     dequeue(&Q, &deq);
 
     printf("\nKata yang di-dequeue adalah ");
-    displayWord(deq);
+    displayWord(deq, true);
     printf("\n");
 
     DisplayQueue(Q);
