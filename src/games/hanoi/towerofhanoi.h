@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "../ADT/stackofhanoi.h"
+#include "../../ADT/stack/stackofhanoi.h"
 
 boolean isNumber(Word W);
 /*Mengecek apakah kata W merupakan angka*/
