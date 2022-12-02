@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "set.c"
-#include "../mesinkata/mesinkata.c"
-#include "../mesinkarakter/mesinkarakter.c"
+#include "set.h"
+#include "../mesinkata/mesinkata.h"
+#include "../mesinkarakter/mesinkarakter.h"
 
 int main()
 {
