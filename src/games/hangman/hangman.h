@@ -5,11 +5,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../ADT/set_hangman.h"
-#include "../functions.h"
-#include "../ADT/boolean.h"
-#include "../ADT/mesinkarakter.h"
-#include "../ADT/mesinkata.h"
+#include "../../functions.h"
+#include "../../ADT/set/set_hangman.h"
+#include "../../ADT/boolean/boolean.h"
+#include "../../ADT/mesinkarakter/mesinkarakter.h"
+#include "../../ADT/mesinkata/mesinkata.h"
 
 
 int run_hangman();
