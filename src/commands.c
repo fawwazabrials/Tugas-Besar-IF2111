@@ -114,17 +114,31 @@ void PLAYGAME(TabWord games, Queue *game_queue, Stack *history, Map scoreboard[]
         }
 
         // Input nama
-        printf("Masukkan nama Anda: ");
-        scan("%c",&name,&w2,&inint);
         gameid = GetElmtIdx(games, (*game_queue).buffer[(*game_queue).idxHead]);
+
+        do {
+            printf("Masukkan nama Anda: ");
+            scan("%c",&name,&w2,&inint);
+            
+            if (IsMemberMap(scoreboard[gameid], name)) {
+                printf("Nama yang dimasukkan sudah ada pada scoreboard.\n");
+            }
+        } while (IsMemberMap(scoreboard[gameid], name));
+
         // Insert nama ke scoreboard
-        if (!(IsMemberMap(scoreboard[gameid], name))) {
-            InsertMap(&scoreboard[gameid],name,score);
+        if (IsFullMap(scoreboard[gameid])) {
+            printf("Wah scoreboard game "); displayWord((*game_queue).buffer[(*game_queue).idxHead], false); printf(" udah penuh nih! COba RESET SCOREBOARD dulu.\n");
         } else {
-            printf("Nama yang dimasukkan sudah ada pada scoreboard.\n");
+            InsertMap(&scoreboard[gameid],name,score);
         }
+
         // Masukkan game ke history
-        Push(history,gameid);
+        if (IsFullStack(*history)) {
+            printf("History kamu sudah penuh! Hapus history dulu yuk ;)\n");
+        } else {
+            Push(history,gameid);
+        }
+        
         // Hapus game dari queue
         dequeue(game_queue, &gamename);
     }
