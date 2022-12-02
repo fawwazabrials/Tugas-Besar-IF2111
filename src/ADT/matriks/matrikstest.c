@@ -1,5 +1,5 @@
-#include "../../src/ADT/matriks.h"
-#include "../../src/functions.h"
+#include "matriks.h"
+#include "../../functions.h"
 #include <stdio.h>
 
 int main() {
