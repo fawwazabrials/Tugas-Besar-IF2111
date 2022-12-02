@@ -14,6 +14,7 @@ void initializeSnake(List* snake, Point* ob, Point* buah) {
     Point kepala, temp;
 
     // ALGORITMA
+    CreateEmptyListL(snake);
     createPoint(&temp);
     addObstacle(ob);            // Bikin obstacle
     randomizePoint(&kepala);    // Randomize titik untuk kepala, asal bukan di obstacle
