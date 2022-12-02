@@ -33,7 +33,7 @@ void bomb(int *skor, int *health) {
     printf("         `--..#####..--'                \n");
 
     *health = *health - 50;
-    printf("Health anda sekarang adalah %d.\n", *health);
+    printf("\nHealth anda sekarang adalah %d.\n", *health);
     if (*health == 50) {
         printf("Hati-hati! Jangan sampai kena bomb lagi.\n");
     }
@@ -91,11 +91,11 @@ int run_labtekhunt() {
     printf("Welcome to Labtek Hunt!\n");
     printf("Dapatkah Anda menemukan semua harta karun di Labtek V atau apakah Anda akan bertemu dengan bomb?\n");
     printf("Ketik START untuk memulai game, HELP untuk melihat instruksi, atau EXIT.\n");
-    printf("=== Masukkan command: ");
+    printf("\n=== Masukkan command: ");
     STARTWORD();
     while (! ValidateCommand(currentWord, "START") && ! ValidateCommand(currentWord, "HELP") && ! ValidateCommand(currentWord, "EXIT")) {
         printf("INPUT SALAH! Ketik START untuk memulai game, HELP untuk melihat instruksi, atau EXIT.\n");
-        printf("=== Masukkan command: ");
+        printf("\n=== Masukkan command: ");
         STARTWORD();
     }
 
@@ -110,7 +110,7 @@ int run_labtekhunt() {
         printf("Semoga mengerti! Kalau tidak, ya nasib.\n");
         printf("Jangan sampai memasukkan angka selain yang ada, atau terima konsekuensinya!\n");
         printf("Sekarang, ketik START untuk memulai game, atau EXIT untuk keluar.\n\n");
-        printf("=== Masukkan command: ");
+        printf("\n=== Masukkan command: ");
         STARTWORD();
     }
 
@@ -264,7 +264,7 @@ int run_labtekhunt() {
                 loc = GetParent(p0, InfoRoot(loc), NULL);
             } else if (InfoRoot(loc) != 1 && InfoRoot(loc) != 2 && InfoRoot(loc) != 3 && InfoRoot(loc) != 4) {
                 printf("Anda masuk ke dalam ruangan, tetapi Anda tidak menemukan apa-apa.\n");
-                printf("Anda pun keluar ruangan, sedikit dongkol karena telah wasting time.");
+                printf("Anda pun keluar ruangan, sedikit dongkol karena telah wasting time.\n");
                 loc = GetParent(p0, InfoRoot(loc), NULL);
             }
             round++;
