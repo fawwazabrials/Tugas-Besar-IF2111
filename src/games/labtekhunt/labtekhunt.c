@@ -32,9 +32,11 @@ void bomb(int *skor, int *health) {
     printf("      `._###############_,'            \n");       
     printf("         `--..#####..--'                \n");
 
-    *skor = *skor - 50;
     *health = *health - 50;
-    printf("Health anda sekarang adalah %d.\n", *health);
+    printf("\nHealth anda sekarang adalah %d.\n", *health);
+    if (*health == 50) {
+        printf("Hati-hati! Jangan sampai kena bomb lagi.\n");
+    }
 }
 
 void treasure(int *skor) {
@@ -89,11 +91,11 @@ int run_labtekhunt() {
     printf("Welcome to Labtek Hunt!\n");
     printf("Dapatkah Anda menemukan semua harta karun di Labtek V atau apakah Anda akan bertemu dengan bomb?\n");
     printf("Ketik START untuk memulai game, HELP untuk melihat instruksi, atau EXIT.\n");
-    printf("=== Masukkan command: ");
+    printf("\n=== Masukkan command: ");
     STARTWORD();
     while (! ValidateCommand(currentWord, "START") && ! ValidateCommand(currentWord, "HELP") && ! ValidateCommand(currentWord, "EXIT")) {
         printf("INPUT SALAH! Ketik START untuk memulai game, HELP untuk melihat instruksi, atau EXIT.\n");
-        printf("=== Masukkan command: ");
+        printf("\n=== Masukkan command: ");
         STARTWORD();
     }
 
@@ -101,13 +103,14 @@ int run_labtekhunt() {
         printf("You've asked for help!\n");
         printf("\n====================================== HELP ======================================\n\n");
         printf("Objektif Anda adalah mencari semua harta karun dan menghindari bomb yang tersebar pada ruangan-ruangan.\n");
-        printf("Ada 4 treasure dan 2 bomb yang tersebar. \n Jika Anda terkena 1 bomb, health dan skor Anda berkurang. Jika Anda terkena 2 bomb, maka GAME OVER.\n");
+        printf("Ada 4 treasure dan 2 bomb yang tersebar. \n Jika Anda terkena 1 bomb, health Anda berkurang. Jika Anda terkena 2 bomb, maka GAME OVER.\n");
         printf("Anda bisa NAIK ke lantai setelahnya atau masuk ke ruangan-ruangan lain.\n");
-        printf("Sehabis naik ke lantai setelahnya, Anda tidak bisa kembali ke lantai sebelumnya.\n(Misal, Anda sudah di Lt. 2, maka tidak bisa ke Lt. 1.\n");
+        printf("Sehabis naik ke lantai setelahnya, Anda tidak bisa kembali ke lantai sebelumnya.\n(Misal, Anda sudah di Lt. 2, maka tidak bisa ke Lt. 1.)\n");
+        printf("Anda hanya bisa memasuki sebuah ruangan sekali.\n");
         printf("Semoga mengerti! Kalau tidak, ya nasib.\n");
         printf("Jangan sampai memasukkan angka selain yang ada, atau terima konsekuensinya!\n");
         printf("Sekarang, ketik START untuk memulai game, atau EXIT untuk keluar.\n\n");
-        printf("=== Masukkan command: ");
+        printf("\n=== Masukkan command: ");
         STARTWORD();
     }
 
@@ -261,7 +264,7 @@ int run_labtekhunt() {
                 loc = GetParent(p0, InfoRoot(loc), NULL);
             } else if (InfoRoot(loc) != 1 && InfoRoot(loc) != 2 && InfoRoot(loc) != 3 && InfoRoot(loc) != 4) {
                 printf("Anda masuk ke dalam ruangan, tetapi Anda tidak menemukan apa-apa.\n");
-                printf("Anda pun keluar ruangan, sedikit dongkol karena telah wasting time.");
+                printf("Anda pun keluar ruangan, sedikit dongkol karena telah wasting time.\n");
                 loc = GetParent(p0, InfoRoot(loc), NULL);
             }
             round++;
