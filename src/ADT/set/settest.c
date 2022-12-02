@@ -1,7 +1,7 @@
-#include "../../src/ADT/set.c"
-#include "../../src/ADT/mesinkata.c"
-#include "../../src/ADT/mesinkarakter.c"
 #include <stdio.h>
+#include "set.c"
+#include "../mesinkata/mesinkata.c"
+#include "../mesinkarakter/mesinkarakter.c"
 
 int main()
 {

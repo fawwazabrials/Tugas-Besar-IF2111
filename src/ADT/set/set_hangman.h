@@ -1,8 +1,8 @@
 #ifndef SETH_H
 #define SETH_H
 #include <stdio.h>
-#include "boolean.h"
-#include "mesinkata.h"
+#include "../boolean/boolean.h"
+#include "../mesinkata/mesinkata.h"
 
 /* MODUL Seth
 Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
