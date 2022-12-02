@@ -39,12 +39,12 @@ void bomb(int *skor, int *health) {
 }
 
 void treasure(int *skor) {
-        printf("Wow. Wow.. WOW!\n");
-        printf("Anda menemukan TREASURE !!!!!\n");
-        printf("Anda pun mengambil treasure tersebut dan memasukkannya dengan hati bahagia ke dalam tas.\n");
-        *skor = *skor + 100;
-        printf("Skor Anda sekarang adalah %d.\n", *skor);
-        printf("Anda pun keluar dari ruangan.\n");
+    printf("Wow. Wow.. WOWWWWWWW!\n");
+    printf("Anda menemukan TREASURE!!!!!\n");
+    printf("Anda pun mengambil treasure tersebut dan memasukkannya dengan bahagia ke dalam tas.\n");
+    *skor = *skor + 100;
+    printf("Skor Anda bertambah menjadi %d.\n", *skor);
+    printf("Anda keluar dari ruangan.\n");
 }
 
 boolean endLabtekHunt(int health, Tree P) {
@@ -249,12 +249,10 @@ int run_labtekhunt() {
                 printf("Anda pun keluar ruangan, sedikit dongkol karena telah wasting time.");
                 loc = GetParent(p0, InfoRoot(loc), NULL);
             }
-
             round++;
         }
 
         printf("\nGAME OVER.\nSkor anda adalah %d.\n", skor);
-        
         return skor;
     }
 
