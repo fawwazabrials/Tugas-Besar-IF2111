@@ -3,9 +3,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../ADT/listlinier.h"
-#include "../ADT/boolean.h"
-#include "../functions.h"
+#include "../../functions.h"
+#include "../../ADT/listlinier/listlinier.h"
+#include "../../ADT/boolean/boolean.h"
 
 #define boardMinimumIdx 0
 #define boardMaximumIdx 4
