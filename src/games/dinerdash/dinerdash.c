@@ -111,8 +111,8 @@ void checkBasi(Queue_DD *QC) {
         while (i <= IDX_TAIL_DD(*QC)) {
             if ((*QC).buffer[i].ketahanan == 0) {
                 // dequeueDD(QC, &(*QC).buffer[i]);
-                ForceDeleteAt(QC, i);
                 printf("Makanan %s sudah basi.\n", (*QC).buffer[i].makanan);
+                ForceDeleteAt(QC, i);
             }
             i++;
         }
