@@ -109,9 +109,9 @@ boolean IsMemberMap(Map M, keytypeMap k){
     int i;
     boolean found;
     //Algoritma
-    i=0;
+    i=1;
     found = false;
-    while(i < M.Count && !found){
+    while(i <= M.Count && !found){
         if( isKataEqual(M.Elements[i].Key, k) ){
             found = true;
         }
