@@ -1,4 +1,4 @@
-#include "../../src/ADT/map.h"
+#include "map.h"
 #include <stdio.h>
 
 int main () {
