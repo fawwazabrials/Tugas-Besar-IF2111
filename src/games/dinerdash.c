@@ -75,25 +75,29 @@ void serving(Queue_DD *QS, Queue_DD *QF, char* commandID, int *saldo) {
     /* I.S. Queue_DD ReadyToServe terdefinisi */
     /* F.S. Food di ReadyToServe ter-dequeueDD */
     Food val;
-    if (sameString((*QS).buffer[IDX_HEAD_DD(*QS)].makanan, commandID)) {
-        if ((*QS).buffer[IDX_HEAD_DD(*QS)].durasi == 0) {
-            dequeueDD(QS, &val);
+    int idx;
+    boolean found;
+    if (sameString((*QF).buffer[IDX_HEAD_DD(*QF)].makanan, commandID)) {
+        // Find the Food in Serving Queue
+        idx = IDX_HEAD_DD(*QS);
+        found = false;
+        while (idx <= IDX_TAIL_DD(*QS) && ! found) {
+            if (sameString((*QS).buffer[idx].makanan, commandID)) {
+                found = true;
+            }
+            idx++;
+        }
+        if (QS->buffer[idx].durasi == 0) {
+            ForceDeleteAt(QS, idx);
+            // Dequeue from Food Queue
+            dequeueDD(QF, &val);
             printf("Berhasil menyajikan makanan %s\n", val.makanan);
             *saldo = *saldo + val.harga;
-
-            // Search and Delete from Food (Treating it like a normal array)
-            int i = IDX_HEAD_DD(*QF);
-            while (i <= IDX_TAIL_DD(*QF)) {
-                if (sameString((*QF).buffer[i].makanan, commandID)) {
-                    ForceDeleteAt(QF, i);
-                }
-                i++;
-            }
         } else {
             printf("%s belum selesai dimasak\n", commandID);
         }
     } else {
-        printf("%s belum bisa disajikan karena %s belum selesai\n", commandID, HEAD_DD(*QS).makanan);
+        printf("%s belum bisa disajikan karena %s belum selesai\n", commandID, HEAD_DD(*QF).makanan);
     }
 
 }
