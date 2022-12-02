@@ -1,7 +1,7 @@
 #ifndef TREE_H
 #define TREE_H
 
-#include "boolean.h"
+#include "../boolean/boolean.h"
 #define NilTree NULL
 
 typedef int TreeElType;

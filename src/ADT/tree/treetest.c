@@ -1,4 +1,6 @@
-#include "../../src/ADT/tree.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "tree.h"
 
 int main() {
     Tree p1, p2, p3, p4, p5, p6, p7, p8;
