@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../src/ADT/mesinkarakter.c"
-#include "../../src/ADT/mesinkarakter.h"
-#include "../../src/commands.h"
+#include "mesinkarakter.h"
 
 int main()
 {   
+    boolean success;
+
     printf("====================== DRIVER MESINKARAKTER ======================\n");
-    STARTFILE("test1.txt"); // Start reading from file
+    STARTFILE("test1.txt", &success); // Start reading from file
     while (!EOP)
     {
         printf("%c", currentChar);
