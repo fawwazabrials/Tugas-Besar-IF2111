@@ -104,6 +104,7 @@ int run_hangman()
             printf("Masukkan Tebakan : ");
             scan("%c", &command1, &command2, &command3);
             tebakan = WordToString(command1);
+            clearScreen();
             if (command1.Length != 1)
             {
                 valid_input =false;
@@ -318,7 +319,7 @@ void hangman(int life)
         printf("//        \\\\                          \n");
         break;
     case 0:
-        printf("GAME OVER");
+        printf("GAME OVER\n");
         printf("   __________________________           \n");
         printf("   |    |___________________|           \n");
         printf("   |    |          ___||___             \n");
@@ -329,7 +330,7 @@ void hangman(int life)
         printf("   |    |          // || \\\\           \n");
         printf("   |____|             ||                \n");
         printf("   //  \\\\           //  \\\\          \n");
-        printf("  //    \\\\         //     \\\\        \n");
+        printf("  //    \\\\         //    \\\\        \n");
         printf(" //      \\\\                           \n");
         printf("//        \\\\                          \n");
         break;
@@ -351,3 +352,7 @@ void hangman(int life)
     }
 }
 
+int main(){
+    run_hangman();
+    return 0;
+}
