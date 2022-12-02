@@ -6,10 +6,10 @@
 int run_hangman()
 {
     // kamus lokal
-    int life, i, tertebak, score, command3,j;
+    int life, i, tertebak, score, command3, j;
     unsigned idx;
     Seth input /*inputan user*/, passed /*kata yang sudah di gunakan*/, cek /*cek jawaban*/;
-    boolean valididx, validanswer, continue_game, continue_tebak_kata;
+    boolean valididx, validanswer, continue_game, continue_tebak_kata,valid_input;
     char *kata;
     Word command1, command2;
     char *tebakan, string_idx;
@@ -29,7 +29,8 @@ int run_hangman()
     tertebak = 0;
     score = 0;
     continue_game = true;
-    j=0;
+    j = 0;
+    valid_input = true;
 
     while (life > 0 && continue_game)
     {
@@ -39,7 +40,7 @@ int run_hangman()
         while (!valididx)
         {
 
-            idx = randint(0,5000)%10;
+            idx = randint(0, 5000) % 10;
             string_idx = '0' + idx;
             if (!IsMemberSeth(passed, string_idx))
             {
@@ -59,9 +60,12 @@ int run_hangman()
         continue_tebak_kata = true;
         // looping tebak tebakanss
         while (life > 0 && continue_tebak_kata)
-        { 
-            printf("STAGE %d\n",j+1);
+        {
+            printf("STAGE %d\n", j + 1);
             hangman(life);
+            if(!valid_input){
+                printf("Inputan sebelumnya salah\n");
+            }
             printf("Kata tebakan : ");
             i = 0;
 
@@ -76,51 +80,64 @@ int run_hangman()
                 {
                     printf("_");
                 }
-                if (kata[i+1] == '\0')
+                if (kata[i + 1] == '\0')
                 {
                     printf("\n");
                 }
                 i++;
             }
-            printf ("tebakan sebelumnya : ");
-            i=0;
-            if (IsEmptySeth(input)){
+            printf("tebakan sebelumnya : ");
+            i = 0;
+            if (IsEmptySeth(input))
+            {
                 printf("\n");
             }
-            for(i=0;i< input.Count;i++){
-                printf("%c",input.Elements[i]);
-                if(i == input.Count -1){
+            for (i = 0; i < input.Count; i++)
+            {
+                printf("%c", input.Elements[i]);
+                if (i == input.Count - 1)
+                {
                     printf("\n");
                 }
             }
-            printf("kesempatan : %d \n",life);
+            printf("kesempatan : %d \n", life);
             printf("Masukkan Tebakan : ");
             scan("%c", &command1, &command2, &command3);
             tebakan = WordToString(command1);
             if (command1.Length != 1)
             {
-                printf("Inputan salah\n");
+                valid_input =false;
             }
             else
             {
-                if (*tebakan >= 65 && *tebakan <= 90)
+                if ((*tebakan >= 65 && *tebakan <= 90) || (*tebakan >= 97 && *tebakan <= 122))
                 {
-                    *tebakan = *tebakan + 32;
-                }
-                if (!IsMemberSeth(cek, *tebakan))
-                {
-                    life--;
-                }
-                InsertSethElmt(&input, *tebakan);
-                i = 0;
-                continue_tebak_kata = false;
-                while (kata[i] != '\0')
-                {
-                    if (!IsMemberSeth(input, kata[i]))
+                    valid_input =true;
+                    if (*tebakan >= 65 && *tebakan <= 90)
                     {
-                        continue_tebak_kata = true;
+                        *tebakan = *tebakan + 32;
                     }
-                    i++;
+                    if (!IsMemberSeth(input, *tebakan))
+                    {
+                        if (!IsMemberSeth(cek, *tebakan))
+                        {
+                            life--;
+                        }
+                        InsertSethElmt(&input, *tebakan);
+                        i = 0;
+                        continue_tebak_kata = false;
+                        while (kata[i] != '\0')
+                        {
+                            if (!IsMemberSeth(input, kata[i]))
+                            {
+                                continue_tebak_kata = true;
+                            }
+                            i++;
+                        }
+                    }
+                }
+                else{
+                    valid_input =false;
                 }
             }
         }
@@ -317,25 +334,20 @@ void hangman(int life)
         printf("//        \\\\                          \n");
         break;
     default:
-    printf("   __________________________           \n");
-    printf("   |    |___________________|           \n");
-    printf("   |    |                               \n");
-    printf("   |    |                               \n");
-    printf("   |    |                               \n");
-    printf("   |    |                               \n");
-    printf("   |    |                               \n");
-    printf("   |    |                               \n");
-    printf("   |____|                               \n");
-    printf("   //  \\\\                             \n");
-    printf("  //    \\\\                            \n");
-    printf(" //      \\\\                           \n");
-    printf("//        \\\\                          \n");
+        printf("   __________________________           \n");
+        printf("   |    |___________________|           \n");
+        printf("   |    |                               \n");
+        printf("   |    |                               \n");
+        printf("   |    |                               \n");
+        printf("   |    |                               \n");
+        printf("   |    |                               \n");
+        printf("   |    |                               \n");
+        printf("   |____|                               \n");
+        printf("   //  \\\\                             \n");
+        printf("  //    \\\\                            \n");
+        printf(" //      \\\\                           \n");
+        printf("//        \\\\                          \n");
         break;
     }
 }
 
-
-int main(){
-    run_hangman();
-    return 0;
-}
