@@ -4,7 +4,7 @@
 #ifndef Q_DINERDASH_H
 #define Q_DINERDASH_H
 
-#include "boolean.h"
+#include "boolean/boolean.h"
 
 #define IDX_UNDEF -1
 #define CAPACITY_QUEUE_DD 20

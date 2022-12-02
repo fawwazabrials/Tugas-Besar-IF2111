@@ -1,7 +1,7 @@
-#include "../../src/ADT/queue.h"
-#include "../../src/ADT/q_dinerdash.h"
-#include "../../src/ADT/mesinkarakter.h"
-#include "../../src/ADT/mesinkata.h"
+#include "queue.h"
+#include "q_dinerdash.h"
+#include "../mesinkarakter/mesinkarakter.h"
+#include "../mesinkata/mesinkata.h"
 
 int main() {
     printf("====================== DRIVER QUEUE ======================\n");
