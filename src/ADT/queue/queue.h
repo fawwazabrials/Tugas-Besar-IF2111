@@ -6,7 +6,7 @@
 
 #include "../boolean/boolean.h"
 #include "../mesinkata/mesinkata.h"
-#include "../functions.h"
+#include "../../functions.h"
 
 #define IDX_UNDEF -1
 #define CAPACITY_QUEUE 100
