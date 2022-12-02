@@ -1,4 +1,4 @@
-#include "listlinier.c"
+#include "listlinier.h"
 #include <stdio.h>
 
 int main() {
